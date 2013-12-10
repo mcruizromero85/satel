@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nombre: MyString
+  juego: MyString
+  vacantes: 1
+  cierre_inscripcion: 2013-12-10
+
+two:
+  nombre: MyString
+  juego: MyString
+  vacantes: 1
+  cierre_inscripcion: 2013-12-10

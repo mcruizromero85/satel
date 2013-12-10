@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @torneo.nombre %>
+</p>
+
+<p>
+  <strong>Juego:</strong>
+  <%= @torneo.juego %>
+</p>
+
+<p>
+  <strong>Vacantes:</strong>
+  <%= @torneo.vacantes %>
+</p>
+
+<p>
+  <strong>Cierre inscripcion:</strong>
+  <%= @torneo.cierre_inscripcion %>
+</p>
+
+<%= link_to 'Edit', edit_torneo_path(@torneo) %> |
+<%= link_to 'Back', torneos_path %>

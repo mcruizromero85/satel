@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Satel</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<header id="header">
+    <nav class="navbar" role="navigation">
+  <div class="container">
+
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+
+      <img alt="Satel logo" class="logo-main" src="<%= image_path("logo.png") %>">
+</a>    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="navbar-collapse navbar-ex1-collapse in" style="height: auto;">
+      <ul class="nav nav-pills navbar-left">
+        <li><a href="/organizarTorneo">Organizar un Torneo</a></li>
+        <li><a href="/buscarTorneos">Buscar m&aacute;s torneos</a></li>        
+      </ul>
+      <ul class="nav nav-pills navbar-right">
+        <li class="active"><a href="/ingresar">Ingresar</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
+</nav>
+  </header>
+
+
+<%= yield %>
+<footer id="footer">
+  <div class="container"><hr>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Acerca de</h3>
+      <p>
+        Somos Satel(nombre temporal) y brindamos una plataforma de gestión de torneos en línea para e-sports.
+      </p>
+    </div>
+    <div class="col-md-3">
+      <h3>Satel(nombre temporal)</h3>
+      <ul class="list-unstyled">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/organizarTorneo">Organizar un torneo</a></li>
+        <li><a href="/buscarTorneos">Buscar m&aacute;s torneos</a></li>
+        <li><a href="http://facebook/satel/">FanPage</a></li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      <h3>Contacto</h3>
+      <div id="contacto">
+        <a target="_blank" href="mailto:satel@gmail.com"><i class="fa fa-envelope"></i>satel@gmail.com</a>
+      </div>
+      <div id="social">
+        <a target="_blank" href="https://www.facebook.com/satel">
+          <span class="fa-stack facebook">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        <a target="_blank" href="https://twitter.com/satel">
+          <span class="fa-stack twitter">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        <a target="_blank" rel="publisher" href="https://plus.google.com/satel/posts">
+          <span class="fa-stack google">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+          </span>
+        </a>
+        </div>
+    </div>
+  </div>
+</div>
+</footer>
+</body>
+</html>

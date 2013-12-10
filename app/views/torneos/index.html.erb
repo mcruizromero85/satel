@@ -1,0 +1,56 @@
+<div class="marketing">
+  <div class="container">
+    <div class="row">
+      <div class="text-center">
+          <div class="tile">
+            <h3><i class="fa fa-users"></i>&nbsp;Noticias del fanpage de la web</h3>
+          </div>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="text-center">
+          <div class="tile">
+            <h3>Participa en todos los torneos que puedas</h3>
+             <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th class="header">Nombre</th>
+                    <th class="header">Juego</th>
+                    <th class="header">Vacantes</th>
+                    <th class="header">Cierre inscripcion</th>
+                     <th class="header">Acci&oacute;n</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @torneos.each do |torneo| %>
+                    <tr>
+                      <td><%= torneo.nombre %></td>
+                      <td><%= torneo.juego %></td>
+                      <td><%= torneo.vacantes %></td>
+                      <td><%= torneo.cierre_inscripcion %></td>
+                      <td>
+                       
+                          <ul class="btnInscribir">
+                            <li class="active"><a href="/ingresar">Inscribirme</a></li>
+                          </ul>
+                       
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+      </div>
+  </div>
+
+
+</div>
+
+<br>
+
+
