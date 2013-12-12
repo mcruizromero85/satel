@@ -4,7 +4,7 @@ class TorneosController < ApplicationController
   # GET /torneos
   # GET /torneos.json
   def index
-    @torneos = Torneo.all
+    @torneos = Torneo.all.order(:cierre_inscripcion)
   end
 
   # GET /torneos/1
