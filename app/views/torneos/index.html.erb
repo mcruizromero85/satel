@@ -30,7 +30,7 @@
                       <td><%= torneo.nombre %></td>
                       <td><%= torneo.juego %></td>
                       <td><%= torneo.vacantes %></td>
-                      <td><%= torneo.cierre_inscripcion %></td>
+                      <td><%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo.cierre_inscripcion.to_time) %></td>
                       <td>
                        
                           <ul class="btnInscribir">

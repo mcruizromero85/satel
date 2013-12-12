@@ -20,6 +20,14 @@ describe TorneosHelper do
     expect(TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(Time.at(fecha_actual_con_milisegundos + (60 * 60 * 48)))).to eq "2d"
   end
 
+  it 'should return 2d if the tournament start in 2 days with 11 hours, 40 minutes and 5 seconds' do
+    expect(TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(Time.at(fecha_actual_con_milisegundos + (60 * 60 * 59) + 2405))).to eq "2d"
+  end
+
+  it 'should return 3d if the tournament start in 2 days with 18 hours, 30 minutes and 15 seconds' do
+    expect(TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(Time.at(fecha_actual_con_milisegundos + (60 * 60 * 66) + 1815))).to eq "3d"
+  end
+
   it 'should return 3d if the tournament start in 3 days' do
     expect(TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(Time.at(fecha_actual_con_milisegundos + (60 * 60 * 72)))).to eq "3d"
   end
@@ -36,11 +44,11 @@ describe TorneosHelper do
     expect(TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(Time.at(fecha_actual_con_milisegundos + (60 * 60 * 840)))).to eq "35d"
   end
 
-  it 'should return 1d 12h if the tournament start in 36 hours' do
-    expect(TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(Time.at(fecha_actual_con_milisegundos + (60 * 60 * 36)))).to eq "1d 12h"
+  it 'should return 1d 11h if the tournament start in 36 hours' do
+    expect(TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(Time.at(fecha_actual_con_milisegundos + (60 * 60 * 35)))).to eq "1d 11h"
   end
 
-  it 'should return 1d 12h if the tournament start in 36 hours' do
+  it 'should return 1d 3h if the tournament start in 27 hours' do
     expect(TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(Time.at(fecha_actual_con_milisegundos + (60 * 60 * 27)))).to eq "1d 3h"
   end
 
