@@ -50,3 +50,9 @@ group :production, :staging do
 end
 
 gem 'newrelic_rpm'
+gem "capybara"
+gem "capybara-webkit"
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0.beta'
+end
