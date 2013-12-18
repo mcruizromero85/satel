@@ -22,7 +22,12 @@
 
 <p>
   <strong>Cierre inscripcion:</strong>
-  <%= @torneo.cierre_inscripcion %>
+  <%= @torneo.cierre_inscripcion_fecha %>
+</p>
+
+<p>
+  <strong>Cierre inscripcion:</strong>
+  <%= @torneo.cierre_inscripcion_tiempo %>
 </p>
 
 <%= link_to 'Edit', edit_torneo_path(@torneo) %> |

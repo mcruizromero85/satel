@@ -1,0 +1,37 @@
+<%= form_for(@prueba) do |f| %>
+  <% if @prueba.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@prueba.errors.count, "error") %> prohibited this prueba from being saved:</h2>
+
+      <ul>
+      <% @prueba.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :cadena %><br>
+    <%= f.text_field :cadena %>
+  </div>
+  <div class="field">
+    <%= f.label :entero %><br>
+    <%= f.number_field :entero %>
+  </div>
+  <div class="field">
+    <%= f.label :decimal %><br>
+    <%= f.text_field :decimal %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha %><br>
+    <%= f.date_select :fecha %>
+  </div>
+  <div class="field">
+    <%= f.label :time %><br>
+    <%= f.time_select :time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

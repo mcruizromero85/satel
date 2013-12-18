@@ -1,20 +1,20 @@
 class TorneosController < ApplicationController
   before_action :set_torneo, only: [:show, :edit, :update, :destroy]
 
-  # GET /torneos
-  # GET /torneos.json
+  # GET /torneos GET /torneos.json
   def index
-    @torneos = Torneo.all.order(:cierre_inscripcion).limit(20)
+    @torneos = Torneo.all.order(:cierre_inscripcion_fecha,:cierre_inscripcion_tiempo).limit(20).where("date(cierre_inscripcion_fecha) > date(:fecha_actual) or ( cierre_inscripcion_tiempo > time :hora_actual and date(cierre_inscripcion_fecha) = date(:fecha_actual) )",{fecha_actual: Time.new, hora_actual:Time.new.strftime("%T")})
   end
 
   # GET /torneos/1
   # GET /torneos/1.json
   def show
   end
-
+attr_writer :attr_names
   # GET /torneos/new
   def new
     @torneo = Torneo.new
+
   end
 
   # GET /torneos/1/edit
@@ -69,6 +69,6 @@ class TorneosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def torneo_params
-      params.require(:torneo).permit(:nombre, :juego, :vacantes, :cierre_inscripcion)
+      params.require(:torneo).permit(:nombre, :juego, :vacantes, :cierre_inscripcion_fecha, :cierre_inscripcion_tiempo)
     end
 end

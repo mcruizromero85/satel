@@ -24,8 +24,12 @@
     <%= f.number_field :vacantes %>
   </div>
   <div class="field">
-    <%= f.label :cierre_inscripcion %><br>
-    <%= f.date_select :cierre_inscripcion %>
+    <%= f.label :cierre_inscripcion_fecha %><br>
+    <%= f.date_select :cierre_inscripcion_fecha %>
+  </div>
+  <div class="field">
+    <%= f.label :cierre_inscripcion_tiempo %><br>
+    <%= f.time_select :cierre_inscripcion_tiempo %>
   </div>
   <div class="actions">
     <%= f.submit %>

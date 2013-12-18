@@ -1,4 +1,6 @@
 Satel::Application.routes.draw do
+  resources :pruebas
+
   resources :torneos
   root 'torneos#index'
   # The priority is based upon order of creation: first created -> highest priority.

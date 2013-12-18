@@ -1,0 +1,35 @@
+<h1>Listing pruebas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cadena</th>
+      <th>Entero</th>
+      <th>Decimal</th>
+      <th>Fecha</th>
+      <th>Time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pruebas.each do |prueba| %>
+      <tr>
+        <td><%= prueba.cadena %></td>
+        <td><%= prueba.entero %></td>
+        <td><%= prueba.decimal %></td>
+        <td><%= prueba.fecha %></td>
+        <td><%= prueba.time %></td>
+        <td><%= link_to 'Show', prueba %></td>
+        <td><%= link_to 'Edit', edit_prueba_path(prueba) %></td>
+        <td><%= link_to 'Destroy', prueba, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Prueba', new_prueba_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cadena:</strong>
+  <%= @prueba.cadena %>
+</p>
+
+<p>
+  <strong>Entero:</strong>
+  <%= @prueba.entero %>
+</p>
+
+<p>
+  <strong>Decimal:</strong>
+  <%= @prueba.decimal %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @prueba.fecha %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @prueba.time %>
+</p>
+
+<%= link_to 'Edit', edit_prueba_path(@prueba) %> |
+<%= link_to 'Back', pruebas_path %>

@@ -2,6 +2,7 @@ module TorneosHelper
 	require 'active_support/core_ext/date'
 
 	def self.obtenerFormatoCuentaRegresivaHastaLaFecha(fecha_cierre_inscripcion)
+
 		diferencia_segundos_cierre_inscripcion_y_hoy=fecha_cierre_inscripcion.to_i - Time.new.to_i
 		formatoCuentaRegresiva=""
 		diferenciaDias=0
@@ -20,18 +21,18 @@ module TorneosHelper
 			if formatoCuentaRegresiva != "" then 
 				formatoCuentaRegresiva+=" "
 			end	
-			difrenciaHoras = (diferencia_segundos_cierre_inscripcion_y_hoy / 60 / 60   )			
-			diferencia_segundos_cierre_inscripcion_y_hoy -= difrenciaHoras *  una_hora_en_segundos
-			formatoCuentaRegresiva += difrenciaHoras.to_s + "h"
+			difrenciaHoras = (diferencia_segundos_cierre_inscripcion_y_hoy * 1.0 / 60 / 60   )
+			diferencia_segundos_cierre_inscripcion_y_hoy -= (difrenciaHoras.floor *  una_hora_en_segundos)
+			formatoCuentaRegresiva += difrenciaHoras.round.to_s + "h"
 		end
 
 		if diferencia_segundos_cierre_inscripcion_y_hoy > 60 && diferenciaDias < 1 then
 			if formatoCuentaRegresiva != "" then 
 				formatoCuentaRegresiva+=" "
 			end	
-			diferenciaMinutos = diferencia_segundos_cierre_inscripcion_y_hoy / 60 
-			diferencia_segundos_cierre_inscripcion_y_hoy -= diferenciaMinutos * 60 
-			formatoCuentaRegresiva += diferenciaMinutos.to_s + "m"
+			diferenciaMinutos = diferencia_segundos_cierre_inscripcion_y_hoy * 1.0 / 60 
+			diferencia_segundos_cierre_inscripcion_y_hoy -= ( diferenciaMinutos.floor * 60 )
+			formatoCuentaRegresiva += diferenciaMinutos.round.to_s + "m"
 		end
 
 		if diferencia_segundos_cierre_inscripcion_y_hoy > 0 && diferenciaDias < 1 then

@@ -4,8 +4,8 @@ class CreateTorneos < ActiveRecord::Migration
       t.string :nombre
       t.string :juego
       t.integer :vacantes
-      t.date :cierre_inscripcion
-
+      t.date :cierre_inscripcion_fecha
+      t.time :cierre_inscripcion_tiempo
       t.timestamps
     end
   end
