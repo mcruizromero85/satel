@@ -42,12 +42,6 @@ feature "US00 Portada de presentación, torneos cercanos a iniciar" do
     expect(page).to have_content '1d 11h'
   end
 
-  scenario "Dado que existe un torneo con fecha de cierre de inscripción a 12335 segundos, el formato que debe mostrarse es '3h 25m 35s'" do
-    registrar_torneo_con_cierre_inscripcion_en_base_a_duracion(12335)        
-    visit "/"
-    expect(page).to have_content '3h 25m' # se retira segundos para considerar el delay que demora ir entre el registro y el homepage
-  end
-
   scenario "Dado que existe un torneo con fecha de cierre de inscripción a 59 horas, el formato que debe mostrarse es '2d'" do
     registrar_torneo_con_cierre_inscripcion_en_base_a_duracion(60 * 60 * 59)        
     visit "/"
@@ -78,12 +72,12 @@ feature "US00 Portada de presentación, torneos cercanos a iniciar" do
     registrar_torneo_con_cierre_inscripcion_en_base_a_duracion(60 * 60 * 24 * -1)
     registrar_torneo_con_cierre_inscripcion_en_base_a_duracion(60 * 60 * 24 * -1)
     visit "/"
+    expect(page).to have_content 'En estos momentos no existen torneos disponibles'
+  end
 
-    if find("#torneosPortada").all('tr').count == 0 then
-      expect(page).to have_content ''
-    elsif 
-      expect(page).to have_content 'Texto artificio para forzar fail al test'
-    end
+  scenario "Dado que no existen torneos registrados o el cierre de inscripción ya paso, entonces debe mostrarse el siguiente mensaje 'En estos momentos no existen torneos disponibles para inscribirse, organiza el tuyo!!, <link con texto 'organizar mi torneo'>+" do
+    visit "/"
+      expect(page).to have_content 'En estos momentos no existen torneos disponibles para inscribirse, organiza el tuyo!!, organizar mi torneo'
   end
 
 

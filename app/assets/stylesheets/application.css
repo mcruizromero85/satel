@@ -11,7 +11,14 @@
  *= require_self
  *= require_tree .
  */
+.header{
+    color: #FFFFFF;
+}
 
+
+.enlacesCabecera a:focus{
+    color: #FFFFFF;    
+}
 
 .flag {
     background: url("/assets/flags-212334345623bb71d34e75b11ea2d808.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
@@ -103,7 +110,7 @@ header .navbar-collapse .navbar-right .avatar {
     background-color: #EEEEEE;
 }
 .tile {
-    background-color: #F8F8F8;
+    background-color: #505050;
     border-radius: 6px;
     margin-bottom: 10px;
     padding: 30px;
@@ -155,12 +162,12 @@ a:link i:hover {
     width: auto;
 }
 #footer h3 {
-    color: #333333;
+    color: #FFFFFF;
     font-size: 15px;
     margin-top: 0;
 }
 #footer a {
-    color: #333333;
+    color: #FFFFFF;
     text-decoration: none;
 }
 #footer a:hover {
@@ -188,7 +195,7 @@ a:link i:hover {
     padding-right: 10px;
 }
 a {
-    color: #808080;
+    color: #FFFFFF;
     text-decoration: none;
 }
 a:hover {
@@ -935,8 +942,7 @@ html {
     font-size: 62.5%;
 }
 body {
-    background-color: #FFFFFF;
-    color: #333333;
+    background: none repeat scroll 0 0 #333333;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857;
@@ -1071,6 +1077,7 @@ h2, .h2 {
 }
 h3, .h3 {
     font-size: 24px;
+    color: #FFFFFF;
 }
 h4, .h4 {
     font-size: 18px;
@@ -1816,10 +1823,10 @@ th {
     border: 1px solid #DDDDDD;
 }
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-    background-color: #F9F9F9;
+    background-color: #484848 ;
 }
 .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
-    background-color: #F5F5F5;
+    background-color: #050505;
 }
 table col[class^="col-"] {
     display: table-column;
@@ -2876,8 +2883,8 @@ button.close {
 .nav-pills > li + li {
     margin-left: 2px;
 }
-.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-    background-color: #428BCA;
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: #444444;
     color: #FFFFFF;
 }
 
@@ -2900,7 +2907,7 @@ button.close {
 }
 
 .btnInscribir > li.active > a, .btnInscribir > li.active > a:hover, .btnInscribir > li.active > a:focus {
-    background-color: #444444;
+    background-color: #333333;
     color: #FFFFFF;
 }
 
@@ -2970,8 +2977,8 @@ button.close {
     margin-top: -1px;
 }
 .navbar {
-    background-color: #F8F8F8;
-    border: 1px solid #E7E7E7;
+    background-color: #222222;
+    border: 1px solid #222222;
     margin-bottom: 20px;
     min-height: 50px;
     position: relative;
@@ -6101,6 +6108,7 @@ th.hidden-print, td.hidden-print {
     background: url("images/ui-bg_flat_0_aaaaaa_40x100.png") repeat-x scroll 50% 50% #AAAAAA;
     opacity: 0.3;
 }
+
 .ui-widget-shadow {
     background: url("images/ui-bg_flat_0_aaaaaa_40x100.png") repeat-x scroll 50% 50% #AAAAAA;
     border-radius: 8px;
@@ -6108,3 +6116,4 @@ th.hidden-print, td.hidden-print {
     opacity: 0.3;
     padding: 8px;
 }
+

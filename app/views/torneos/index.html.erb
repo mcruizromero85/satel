@@ -8,11 +8,28 @@
       </div>
   </div>
 
+
+
+
+
+
   <div class="row">
       <div class="text-center">
           <div class="tile">
             <h3>Participa en todos los torneos que puedas</h3>
              <div class="table-responsive">
+              <% if @torneos.empty? then %>
+                <h4>En estos momentos no existen torneos disponibles para inscribirse, organiza el tuyo!!, <a href="torneos/new" >organizar mi torneo</a></h4>
+              <% else %>
+
+              <script type="text/javascript">
+
+                function generarContadorPorTorneo(idTorneo,fecha_cierre_inscripcion){
+                  $('#countdown_'+idTorneo).countdown({until: fecha_cierre_inscripcion, format: 'dhmS',expiryText: "<font color='red'>Inscripciones Cerradas</font>" }); 
+                }
+
+              </script>
+
               <table class="table table-bordered table-hover table-striped tablesorter">
                 <thead>
                   <tr>
@@ -30,7 +47,19 @@
                       <td><%= torneo.nombre %></td>
                       <td><%= torneo.juego %></td>
                       <td><%= torneo.vacantes %></td>
-                      <td><%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo.cierre_inscripcion) %></td>
+                      <td>
+                        <% 
+                        un_dias_en_segundos=60 * 60 * 24
+                        if torneo.cierre_inscripcion.to_i - Time.new.to_i >= un_dias_en_segundos then %>  
+                          <%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo.cierre_inscripcion) %>
+                        <% else %>
+                          <div id='countdown_<%=torneo.id%>'></div>
+                          <script type="text/javascript">
+                            generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion.strftime('%s').to_i * 1000 %>));
+                          </script>
+
+                        <% end %>
+                      </td>
                       <td>
                        
                           <ul class="btnInscribir">
@@ -42,6 +71,9 @@
                   <% end %>
                 </tbody>
               </table>
+
+              <% end %>
+
             </div>
 
           </div>
