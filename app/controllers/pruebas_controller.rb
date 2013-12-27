@@ -69,6 +69,6 @@ class PruebasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prueba_params
-      params.require(:prueba).permit(:cadena, :entero, :decimal, :fecha, :time)
+      params.require(:prueba).permit(:titulo, :descripcion, :formato, :modalidad, :juego_id, :modalidad_reporte_victoria, :vacantes, :cierre_inscripcion_fecha, :cierre_inscripcion_tiempo, :cierre_check_in_fecha, :cierre_check_in_tiempo, :inicio_torneo_fecha, :inicio_torneo_tiempo)
     end
 end

@@ -23,7 +23,7 @@ describe PruebasController do
   # This should return the minimal set of attributes required to create a valid
   # Prueba. As you add validations to Prueba, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "cadena" => "MyString" } }
+  let(:valid_attributes) { { "titulo" => "MyString" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -85,14 +85,14 @@ describe PruebasController do
       it "assigns a newly created but unsaved prueba as @prueba" do
         # Trigger the behavior that occurs when invalid params are submitted
         Prueba.any_instance.stub(:save).and_return(false)
-        post :create, {:prueba => { "cadena" => "invalid value" }}, valid_session
+        post :create, {:prueba => { "titulo" => "invalid value" }}, valid_session
         expect(assigns(:prueba)).to be_a_new(Prueba)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Prueba.any_instance.stub(:save).and_return(false)
-        post :create, {:prueba => { "cadena" => "invalid value" }}, valid_session
+        post :create, {:prueba => { "titulo" => "invalid value" }}, valid_session
         expect(response).to render_template("new")
       end
     end
@@ -106,8 +106,8 @@ describe PruebasController do
         # specifies that the Prueba created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        expect_any_instance_of(Prueba).to receive(:update).with({ "cadena" => "MyString" })
-        put :update, {:id => prueba.to_param, :prueba => { "cadena" => "MyString" }}, valid_session
+        expect_any_instance_of(Prueba).to receive(:update).with({ "titulo" => "MyString" })
+        put :update, {:id => prueba.to_param, :prueba => { "titulo" => "MyString" }}, valid_session
       end
 
       it "assigns the requested prueba as @prueba" do
@@ -128,7 +128,7 @@ describe PruebasController do
         prueba = Prueba.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Prueba.any_instance.stub(:save).and_return(false)
-        put :update, {:id => prueba.to_param, :prueba => { "cadena" => "invalid value" }}, valid_session
+        put :update, {:id => prueba.to_param, :prueba => { "titulo" => "invalid value" }}, valid_session
         expect(assigns(:prueba)).to eq(prueba)
       end
 
@@ -136,7 +136,7 @@ describe PruebasController do
         prueba = Prueba.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Prueba.any_instance.stub(:save).and_return(false)
-        put :update, {:id => prueba.to_param, :prueba => { "cadena" => "invalid value" }}, valid_session
+        put :update, {:id => prueba.to_param, :prueba => { "titulo" => "invalid value" }}, valid_session
         expect(response).to render_template("edit")
       end
     end

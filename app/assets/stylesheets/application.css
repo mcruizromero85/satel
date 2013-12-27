@@ -15,9 +15,95 @@
     color: #FFFFFF;
 }
 
+.ui-datepicker table {
+    background-color: #FFFFFF;
+}
+
+.datepicker {
+    float: left;    
+    margin-right: 15px;
+}
+
+.labelFormulario{
+    font-size: 18px;
+    height: 45px;    
+    padding: 10px 16px;
+    float: left;
+    width: 250px;
+}
+.ui-widget {
+    font-size: 18px;
+    height: 45px;
+}
+
+.ui-button-text {
+    font-size: 18px;
+    height: 45px;
+}
 
 .enlacesCabecera a:focus{
     color: #FFFFFF;    
+}
+
+.checkbox_tipotorneo{
+    width: 127.5px;
+    height: 84px;
+    background: transparent url(/assets/tipotorneo.png) no-repeat 0 50%
+}
+.checked_tipotorneo{
+    background: transparent url(/assets/tipotorneo.png) no-repeat 100% 50%
+}
+
+.checkbox_formatoIndividual{
+    width: 127.5px;
+    height: 84px;
+    background: transparent url(/assets/formatoIndividual.png) no-repeat 0 50%
+}
+.checked_formatoIndividual{
+    background: transparent url(/assets/formatoIndividual.png) no-repeat 100% 50%
+}
+
+.checkbox_seleccionStarcraft2{
+    width: 127.5px;
+    height: 84px;
+    background: transparent url(/assets/seleccionStarcraft2.png) no-repeat 0 50%;
+    float: left;
+    margin-right: 15px;
+}
+.checked_seleccionStarcraft2{
+    background: transparent url(/assets/seleccionStarcraft2.png) no-repeat 100% 50%
+}
+
+.checkbox_seleccionLol{
+    width: 127.5px;
+    height: 84px;
+    background: transparent url(/assets/seleccionLoL.png) no-repeat 0 50%;
+    float: left;
+    margin-right: 15px;
+}
+.checked_seleccionLol{
+    background: transparent url(/assets/seleccionLoL.png) no-repeat 100% 50%
+}
+
+.checkbox_seleccionDota2{
+    width: 127.5px;
+    height: 84px;
+    background: transparent url(/assets/seleccionDota2.png) no-repeat 0 50%;
+    float: left;
+    margin-right: 15px;
+}
+.checked_seleccionDota2{
+    background: transparent url(/assets/seleccionDota2.png) no-repeat 100% 50%
+}
+
+.checkbox_seleccionOtros{
+    width: 127.5px;
+    height: 84px;
+    background: transparent url(/assets/seleccionOtros.png) no-repeat 0 50%;
+    float: left;
+}
+.checked_seleccionOtros{
+    background: transparent url(/assets/seleccionOtros.png) no-repeat 100% 50%
 }
 
 .flag {
@@ -1081,6 +1167,7 @@ h3, .h3 {
 }
 h4, .h4 {
     font-size: 18px;
+    font-weight: bold;
 }
 h5, .h5 {
     font-size: 14px;
@@ -1275,8 +1362,8 @@ pre code {
     clear: both;
 }
 .row {
-    margin-left: -15px;
-    margin-right: -15px;
+   # margin-left: -15px;
+   # margin-right: -15px;
 }
 .row:before, .row:after {
     content: " ";
@@ -1887,7 +1974,7 @@ legend {
 }
 label {
     display: inline-block;
-    font-weight: bold;
+    font-weight: normal;
     margin-bottom: 5px;
 }
 input[type="search"] {
@@ -1931,7 +2018,6 @@ input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focu
     padding: 6px 12px;
     transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
     vertical-align: middle;
-    width: 100%;
 }
 .form-control:focus {
     border-color: #66AFE9;

@@ -3,11 +3,19 @@
 <table>
   <thead>
     <tr>
-      <th>Cadena</th>
-      <th>Entero</th>
-      <th>Decimal</th>
-      <th>Fecha</th>
-      <th>Time</th>
+      <th>Titulo</th>
+      <th>Descripcion</th>
+      <th>Formato</th>
+      <th>Modalidad</th>
+      <th>Juego</th>
+      <th>Modalidad reporte victoria</th>
+      <th>Vacantes</th>
+      <th>Cierre inscripcion fecha</th>
+      <th>Cierre inscripcion tiempo</th>
+      <th>Cierre check in fecha</th>
+      <th>Cierre check in tiempo</th>
+      <th>Inicio torneo fecha</th>
+      <th>Inicio torneo tiempo</th>
       <th></th>
       <th></th>
       <th></th>
@@ -17,11 +25,19 @@
   <tbody>
     <% @pruebas.each do |prueba| %>
       <tr>
-        <td><%= prueba.cadena %></td>
-        <td><%= prueba.entero %></td>
-        <td><%= prueba.decimal %></td>
-        <td><%= prueba.fecha %></td>
-        <td><%= prueba.time %></td>
+        <td><%= prueba.titulo %></td>
+        <td><%= prueba.descripcion %></td>
+        <td><%= prueba.formato %></td>
+        <td><%= prueba.modalidad %></td>
+        <td><%= prueba.juego_id %></td>
+        <td><%= prueba.modalidad_reporte_victoria %></td>
+        <td><%= prueba.vacantes %></td>
+        <td><%= prueba.cierre_inscripcion_fecha %></td>
+        <td><%= prueba.cierre_inscripcion_tiempo %></td>
+        <td><%= prueba.cierre_check_in_fecha %></td>
+        <td><%= prueba.cierre_check_in_tiempo %></td>
+        <td><%= prueba.inicio_torneo_fecha %></td>
+        <td><%= prueba.inicio_torneo_tiempo %></td>
         <td><%= link_to 'Show', prueba %></td>
         <td><%= link_to 'Edit', edit_prueba_path(prueba) %></td>
         <td><%= link_to 'Destroy', prueba, method: :delete, data: { confirm: 'Are you sure?' } %></td>

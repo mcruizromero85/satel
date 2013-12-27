@@ -11,14 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218025241) do
+ActiveRecord::Schema.define(version: 20131224000829) do
 
   create_table "pruebas", force: true do |t|
-    t.string   "cadena"
-    t.integer  "entero"
-    t.decimal  "decimal"
-    t.date     "fecha"
-    t.time     "time"
+    t.string   "titulo"
+    t.string   "descripcion"
+    t.string   "formato"
+    t.string   "modalidad"
+    t.integer  "juego_id"
+    t.string   "modalidad_reporte_victoria"
+    t.integer  "vacantes"
+    t.date     "cierre_inscripcion_fecha"
+    t.time     "cierre_inscripcion_tiempo"
+    t.date     "cierre_check_in_fecha"
+    t.time     "cierre_check_in_tiempo"
+    t.date     "inicio_torneo_fecha"
+    t.string   "inicio_torneo_tiempo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

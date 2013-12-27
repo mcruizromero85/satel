@@ -1,3 +1,56 @@
+<script type="text/javascript">
+
+//<![CDATA[ 
+$(window).load(function(){
+
+    $( "#radioVacantes" ).buttonset();
+    
+    $(function() {
+      $( "#fechaInicioTorneo" ).datepicker({ dateFormat: "dd/mm/yy" });
+    });
+
+    $(function() {
+      $( "#fechaInicioRonda1" ).datepicker({ dateFormat: "dd/mm/yy" });
+    });
+
+    $('#horaInicioTorneo').timepicker({
+      showPeriod: true,
+      showLeadingZero: true
+    });
+
+  $(".checkbox_tipotorneo").click(function(){
+      $(this).toggleClass('checked_tipotorneo')
+  });
+
+  $(".checkbox_formatoIndividual").click(function(){
+      $(this).toggleClass('checked_formatoIndividual')
+  });
+
+  $(".checkbox_seleccionStarcraft2").click(function(){
+      $(this).toggleClass('checked_seleccionStarcraft2')
+  });
+
+  $(".checkbox_seleccionLol").click(function(){
+    $(this).toggleClass('checked_seleccionLol')
+  });
+
+  $(".checkbox_seleccionDota2").click(function(){
+    $(this).toggleClass('checked_seleccionDota2')
+  });
+
+    $(".checkbox_seleccionOtros").click(function(){
+    $(this).toggleClass('checked_seleccionOtros')
+  });
+
+});//]]>  
+
+function abrirCombo(combo){
+  $( combo).addClass( "open" );
+}
+
+
+</script>
+
 <%= form_for(@prueba) do |f| %>
   <% if @prueba.errors.any? %>
     <div id="error_explanation">
@@ -12,26 +65,136 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :cadena %><br>
-    <%= f.text_field :cadena %>
+    <label class="labelFormulario">Título </label>    
+    <input id="prueba_titulo"  class="string required form-control input-lg" placeholder="Título de tu torneo" type="text" name="prueba[titulo]" maxlength="200" size="85" >
   </div>
   <div class="field">
-    <%= f.label :entero %><br>
-    <%= f.number_field :entero %>
+      <label class="labelFormulario">P&aacute;gina web</label>
+    <input id="prueba_linktorneo"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="prueba[linktorneo]" maxlength="200" size="85" >
+  </div>
+   <!-- 
+  <div >
+    <h4>Formato</h4>
+  </div>
+ 
+    <div class="field">
+      <div class="checkbox_formatoIndividual">
+      </div>
+    </div> 
+  -->
+
+     <!-- 
+    <div class="checkbox_seleccionLol"></div>
+     <div class="checkbox_seleccionDota2"></div>
+     <div class="checkbox_seleccionOtros"></div>
+  
+  </div> -->
+  <br/>
+  <div class="field">
+    <label class="labelFormulario">Vacantes</label>    
+    <div id="radioVacantes">
+      <input type="radio" id='radioVacantes1' name='radioVacantes'><label for="radioVacantes1">4</label>
+      <input type="radio" id="radioVacantes2" name='radioVacantes' checked='8'><label for="radioVacantes2">8</label>
+      <input type="radio" id="radioVacantes3" name='radioVacantes'><label for="radioVacantes3">16</label>
+      <input type="radio" id="radioVacantes4" name='radioVacantes'><label for="radioVacantes4">32</label>
+      <input type="radio" id="radioVacantes5" name='radioVacantes'><label for="radioVacantes5">64</label>
+  </div>
   </div>
   <div class="field">
-    <%= f.label :decimal %><br>
-    <%= f.text_field :decimal %>
+    <label class="labelFormulario">Fecha inicio torneo</label>
+    <input type="text" id="fechaInicioTorneo"  class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" > 
+    <input type="text" id="horaInicioTorneo"  class="string required form-control input-lg" placeholder="Hora Inicio del torneo" >
+  </div>  
+  <div class="field">
+    <label class="labelFormulario">Fecha cierre inscripci&oacute;n e inicio check-in </label>
+    <input type="text" id="fechaInicioCheckIn"  class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in" readonly="true" > 
+    <input type="text" id="horaInicioCheckIn"  class="string required form-control input-lg" placeholder="Hora Inicio check-in" readonly="true" >
+  </div>  
+  <br/>
+  <h4 class="text-center"><b>Fecha de Rondas y modo de ganar</b></h4>
+
+   <div class="field">
+      <table class="table table-bordered table-hover table-striped tablesorter">
+      <thead>
+        <tr>
+          <td class="header">Ronda</td>
+          <td class="header">Fecha de inicio</td>
+          <td class="header">Hora de inicio</td>
+          <td class="header">Modo de ganar</td>
+          <td class="header">Descripci&oacute;n adicional</td>
+          <td class="header">Horas entre rondas</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ronda 1</td>
+          <td><input type="text" id="fechaInicioRonda1"  class="string required form-control input-lg datepicker" placeholder="Fecha inicio ronda 1" > </td>
+          <td><input type="text" id="horaInicioRonda1"  class="string required form-control input-lg" placeholder="Hora inicio ronda 1" ></td>
+          <td><div class="btn-group" onclick="javascript:abrirCombo(this);">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+                <i class="fa fa-flag"></i>
+                 País
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">                  
+                  <li>
+                  <a href="/comunidades?pais=Argentina">
+                  <label class="flag flag-argentina" title="Argentina"></label>
+                   Argentina
+                  </a>
+                  </li>
+                  <li>
+                  <a href="/comunidades?pais=Bolivia">
+                  <label class="flag flag-bolivia" title="Bolivia"></label>
+                   Bolivia
+                  </a>
+                  </li>
+                </ul>  
+                </div>
+                <div class="btn-group ocultar"> </div>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>  
+
+      </tbody>
+    </table>
+   </div>
+   <div class="field">
+
+   </div>
+  <!-- 
+  <div class="field">
+    <%= f.label :cierre_inscripcion_fecha %><br>
+    <%= f.date_select :cierre_inscripcion_fecha %>
   </div>
   <div class="field">
-    <%= f.label :fecha %><br>
-    <%= f.date_select :fecha %>
+    <%= f.label :cierre_inscripcion_tiempo %><br>
+    <%= f.time_select :cierre_inscripcion_tiempo %>
   </div>
   <div class="field">
-    <%= f.label :time %><br>
-    <%= f.time_select :time %>
+    <%= f.label :cierre_check_in_fecha %><br>
+    <%= f.date_select :cierre_check_in_fecha %>
   </div>
+  <div class="field">
+    <%= f.label :cierre_check_in_tiempo %><br>
+    <%= f.time_select :cierre_check_in_tiempo %>
+  </div>
+  <div class="field">
+    <%= f.label :inicio_torneo_fecha %><br>
+    <%= f.date_select :inicio_torneo_fecha %>
+  </div>
+  -->
+
+  <!--
+  <div >
+    <h4>Juego</h4>
+  </div>
+  <div class="row">
+    <div class="checkbox_seleccionStarcraft2"></div>
   <div class="actions">
+     -->
     <%= f.submit %>
   </div>
+
 <% end %>
