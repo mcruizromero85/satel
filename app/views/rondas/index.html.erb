@@ -1,0 +1,35 @@
+<h1>Listing rondas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numero</th>
+      <th>Inicio fecha</th>
+      <th>Inicio tiempo</th>
+      <th>Modo ganar</th>
+      <th>Torneo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rondas.each do |ronda| %>
+      <tr>
+        <td><%= ronda.numero %></td>
+        <td><%= ronda.inicio_fecha %></td>
+        <td><%= ronda.inicio_tiempo %></td>
+        <td><%= ronda.modo_ganar %></td>
+        <td><%= ronda.torneo_id %></td>
+        <td><%= link_to 'Show', ronda %></td>
+        <td><%= link_to 'Edit', edit_ronda_path(ronda) %></td>
+        <td><%= link_to 'Destroy', ronda, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ronda', new_ronda_path %>

@@ -1,3 +1,93 @@
+<script type="text/javascript">
+    function reemplazarCon(cadena,key,value) {
+      var s = cadena;
+      var reg = new RegExp("\\{" + key + "\\}", "gm");             
+        s = s.replace(reg, value);
+        return s;
+    }
+
+
+//<![CDATA[ 
+$(window).load(function(){
+
+    $( "#vacantes" ).buttonset();
+    
+    $(function() {
+      $( "#torneo_inicio_torneo_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
+    });
+
+
+    $('#torneo_inicio_torneo_tiempo').timepicker({
+      showPeriod: true,
+      showLeadingZero: true
+    });
+
+    cargarRegistroDeRondas(8);
+ 
+
+});//]]>  
+
+function sincronizarConFechaCheckIn(){
+
+  var fechaActual = new Date();
+  var torneo_inicio_torneo_fecha = document.getElementById('torneo_inicio_torneo_fecha').value;
+  var torneo_inicio_torneo_tiempo = document.getElementById('torneo_inicio_torneo_tiempo').value;
+
+  var parts = torneo_inicio_torneo_fecha.split('/');
+  var partsTime = torneo_inicio_torneo_tiempo.split(':');
+
+  var condicional24Horas = partsTime[1].substring(3,5);
+
+  if (condicional24Horas=='PM'){
+    partsTime[0]=(partsTime[0]*1.0)+12;
+  }
+
+  var inicioTorneo=new Date(parts[2],parts[1]-1,parts[0],partsTime[0],partsTime[1].substring(0,2));
+
+  var difference=inicioTorneo-fechaActual;
+
+  if (difference > 0 && ( difference / (1000*60*60) <= 1 )) {
+    $('#mensajeError').html('El inicio del torneo debe ser mayor a 1 hora desde la fecha actual');
+  }else if (difference / (1000*60*60) <= 0){
+    $('#mensajeError').html('El inicio del torneo es menor a la fecha actual');
+  }else{    
+    $('#torneo_cierre_inscripcion_fecha').val($('#torneo_inicio_torneo_fecha').val());
+    $('#torneo_cierre_inscripcion_tiempo').val($('#torneo_inicio_torneo_tiempo').val());
+  }
+  
+}
+
+function cargarRegistroDeRondas(vacantes){
+   $("#rondas").find("tr").remove();
+  var numeroRondas=Math.log(vacantes) / Math.log(2);
+
+ 
+  for (var i=0;i<numeroRondas;i++){
+     var rowTemplate = "<tr><td>{0}</td><td><input type='hidden' id='ronda{7}_numero' name='ronda{7}[numero]' value='{7}' /> <input type='text' id='{1}'' name='{2}' class='string required form-control input-lg datepicker' placeholder='Fecha inicio {0}' /> </td><td><input type='text' id='{3}' name='{4}' class='string required form-control input-lg' placeholder='Hora inicio {0}' /></td><td><select id='{5}' name='{6}' class='string required form-control input-lg' ><option value='1'>Mejor de 1</option><option value='3'>Mejor de 3</option><option value='5'>Mejor de 5</option></select></td><td></td></tr>";
+    contador=i+1;
+    rowTemplate = reemplazarCon(rowTemplate,0,"Ronda "+contador);
+    rowTemplate = reemplazarCon(rowTemplate,1,"ronda"+contador+"_inicio_fecha");
+    rowTemplate = reemplazarCon(rowTemplate,2,"ronda"+contador+"[inicio_fecha]");
+    rowTemplate = reemplazarCon(rowTemplate,3,"ronda"+contador+"_inicio_tiempo");
+    rowTemplate = reemplazarCon(rowTemplate,4,"ronda"+contador+"[inicio_tiempo]");
+    rowTemplate = reemplazarCon(rowTemplate,5,"ronda"+contador+"_modo_ganar");
+    rowTemplate = reemplazarCon(rowTemplate,6,"ronda"+contador+"[modo_ganar]");
+    rowTemplate = reemplazarCon(rowTemplate,7,contador);
+
+    
+    $("#rondas").append(rowTemplate);
+    $( "#ronda"+contador+"_inicio_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
+    
+    $("#ronda"+contador+"_inicio_tiempo").timepicker({
+      showPeriod: true,
+      showLeadingZero: true
+    });
+  }      
+  
+}
+
+</script>
+<span id="mensajeError"></span>
 <%= form_for(@torneo) do |f| %>
   <% if @torneo.errors.any? %>
     <div id="error_explanation">
@@ -12,26 +102,58 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :nombre %><br>
-    <%= f.text_field :nombre %>
+    <label class="labelFormulario">Título </label>    
+    <input id="torneo_titulo"  class="string required form-control input-lg" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" size="85" >
   </div>
   <div class="field">
-    <%= f.label :juego %><br>
-    <%= f.text_field :juego %>
+      <label class="labelFormulario">P&aacute;gina web</label>
+    <input id="torneo_paginaweb"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" size="85" >
+  </div>
+
+  <br/>
+  <div class="field">
+    <label class="labelFormulario">Vacantes</label>    
+    <div id="vacantes">
+      <input type="radio" id='torneo_vacantes1' name='torneo[vacantes]' value="4" onclick="javascript:cargarRegistroDeRondas(4)" ><label for="torneo_vacantes1">4</label>
+      <input type="radio" id="torneo_vacantes2" name='torneo[vacantes]' value="8" onclick="javascript:cargarRegistroDeRondas(8)" checked='checked' ><label for="torneo_vacantes2">8</label>
+      <input type="radio" id="torneo_vacantes3" name='torneo[vacantes]' value="16" onclick="javascript:cargarRegistroDeRondas(16)" ><label for="torneo_vacantes3">16</label>
+      <input type="radio" id="torneo_vacantes4" name='torneo[vacantes]' value="32" onclick="javascript:cargarRegistroDeRondas(32)"><label for="torneo_vacantes4">32</label>
+      <input type="radio" id="torneo_vacantes5" name='torneo[vacantes]' value="64" onclick="javascript:cargarRegistroDeRondas(64)" ><label for="torneo_vacantes5">64</label>
+  </div>
   </div>
   <div class="field">
-    <%= f.label :vacantes %><br>
-    <%= f.number_field :vacantes %>
-  </div>
+    <label class="labelFormulario">Fecha inicio torneo</label>
+    <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" > 
+    <input type="text" id="torneo_inicio_torneo_tiempo" name="torneo[inicio_torneo_tiempo]" class="string required form-control input-lg" placeholder="Hora Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();">
+  </div>  
   <div class="field">
-    <%= f.label :cierre_inscripcion_fecha %><br>
-    <%= f.date_select :cierre_inscripcion_fecha %>
-  </div>
-  <div class="field">
-    <%= f.label :cierre_inscripcion_tiempo %><br>
-    <%= f.time_select :cierre_inscripcion_tiempo %>
-  </div>
-  <div class="actions">
+    <label class="labelFormulario">Fecha cierre inscripci&oacute;n e inicio check-in </label>
+    <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in" readonly="true" > 
+    <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in" readonly="true" >
+  </div>  
+  <br/>
+  <h4 class="text-center"><b>Fecha de Rondas y modo de ganar</b></h4>
+
+   <div class="field">
+      <table class="table table-bordered table-hover table-striped tablesorter">
+      <thead>
+        <tr>
+          <td class="header">Ronda</td>
+          <td class="header">Fecha de inicio</td>
+          <td class="header">Hora de inicio</td>
+          <td class="header">Modo de ganar</td>
+          <td class="header">Horas entre rondas</td>
+        </tr>
+      </thead>
+      <tbody id="rondas">
+      </tbody>
+    </table>
+   </div>
+   <div class="field">
+
+   </div>
+ 
     <%= f.submit %>
   </div>
+
 <% end %>

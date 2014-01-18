@@ -44,8 +44,13 @@ $(window).load(function(){
 
 });//]]>  
 
-function abrirCombo(combo){
-  $( combo).addClass( "open" );
+function controlarCombo(combo){
+  if ($( combo).hasClass( "open" )){
+    $( combo).removeClass( "open" );
+  }else{
+    $( combo).addClass( "open" );
+  }
+  
 }
 
 
@@ -72,23 +77,7 @@ function abrirCombo(combo){
       <label class="labelFormulario">P&aacute;gina web</label>
     <input id="prueba_linktorneo"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="prueba[linktorneo]" maxlength="200" size="85" >
   </div>
-   <!-- 
-  <div >
-    <h4>Formato</h4>
-  </div>
- 
-    <div class="field">
-      <div class="checkbox_formatoIndividual">
-      </div>
-    </div> 
-  -->
 
-     <!-- 
-    <div class="checkbox_seleccionLol"></div>
-     <div class="checkbox_seleccionDota2"></div>
-     <div class="checkbox_seleccionOtros"></div>
-  
-  </div> -->
   <br/>
   <div class="field">
     <label class="labelFormulario">Vacantes</label>    
@@ -121,7 +110,6 @@ function abrirCombo(combo){
           <td class="header">Fecha de inicio</td>
           <td class="header">Hora de inicio</td>
           <td class="header">Modo de ganar</td>
-          <td class="header">Descripci&oacute;n adicional</td>
           <td class="header">Horas entre rondas</td>
         </tr>
       </thead>
@@ -130,30 +118,13 @@ function abrirCombo(combo){
           <td>Ronda 1</td>
           <td><input type="text" id="fechaInicioRonda1"  class="string required form-control input-lg datepicker" placeholder="Fecha inicio ronda 1" > </td>
           <td><input type="text" id="horaInicioRonda1"  class="string required form-control input-lg" placeholder="Hora inicio ronda 1" ></td>
-          <td><div class="btn-group" onclick="javascript:abrirCombo(this);">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
-                <i class="fa fa-flag"></i>
-                 País
-                <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">                  
-                  <li>
-                  <a href="/comunidades?pais=Argentina">
-                  <label class="flag flag-argentina" title="Argentina"></label>
-                   Argentina
-                  </a>
-                  </li>
-                  <li>
-                  <a href="/comunidades?pais=Bolivia">
-                  <label class="flag flag-bolivia" title="Bolivia"></label>
-                   Bolivia
-                  </a>
-                  </li>
-                </ul>  
-                </div>
-                <div class="btn-group ocultar"> </div>
+          <td>
+            <select name="modoGanar" class="string required form-control input-lg" >
+              <option value="1">Mejor de 1</option>
+              <option value="3">Mejor de 3</option>
+              <option value="5">Mejor de 5</option>
+            </select>
           </td>
-          <td></td>
           <td></td>
         </tr>  
 

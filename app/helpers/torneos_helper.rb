@@ -1,6 +1,10 @@
 module TorneosHelper
 	require 'active_support/core_ext/date'
 
+	def self.obtener_rondas_por_vacantes vacantes
+		Math.log(vacantes, 2).ceil
+	end
+
 	def self.obtenerFormatoCuentaRegresivaHastaLaFecha(fecha_cierre_inscripcion)
 
 		diferencia_segundos_cierre_inscripcion_y_hoy=fecha_cierre_inscripcion.to_i - Time.new.to_i		

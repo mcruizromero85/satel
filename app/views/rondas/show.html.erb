@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @ronda.numero %>
+</p>
+
+<p>
+  <strong>Inicio fecha:</strong>
+  <%= @ronda.inicio_fecha %>
+</p>
+
+<p>
+  <strong>Inicio tiempo:</strong>
+  <%= @ronda.inicio_tiempo %>
+</p>
+
+<p>
+  <strong>Modo ganar:</strong>
+  <%= @ronda.modo_ganar %>
+</p>
+
+<p>
+  <strong>Torneo:</strong>
+  <%= @ronda.torneo_id %>
+</p>
+
+<%= link_to 'Edit', edit_ronda_path(@ronda) %> |
+<%= link_to 'Back', rondas_path %>

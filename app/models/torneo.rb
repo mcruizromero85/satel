@@ -4,4 +4,6 @@ class Torneo < ActiveRecord::Base
 		tiempo=self.cierre_inscripcion_tiempo
 		Time.local(fecha.year ,fecha.month,fecha.day,tiempo.hour,tiempo.min,tiempo.sec)
 	end
+
+	has_many :rondas
 end

@@ -34,7 +34,6 @@
                 <thead>
                   <tr>
                     <th class="header">Nombre</th>
-                    <th class="header">Juego</th>
                     <th class="header">Vacantes</th>
                     <th class="header">Cierre inscripcion</th>
                      <th class="header">Acci&oacute;n</th>
@@ -44,8 +43,7 @@
                 <tbody id="torneosPortada">
                   <% @torneos.each do |torneo| %>
                     <tr>
-                      <td><%= torneo.nombre %></td>
-                      <td><%= torneo.juego %></td>
+                      <td><%= torneo.titulo %></td>
                       <td><%= torneo.vacantes %></td>
                       <td>
                         <% 

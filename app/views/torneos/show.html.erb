@@ -1,40 +1,74 @@
-  <div class="row">
-      <div class="text-center">
-          <div class="tile">
-            <h3>Edita tu torneo</h3>
+  <div class="container">
+    <div class="row">
+        <div >
+            <div class="tile">
+              <h3 class="text-center">Registra tu torneo</h3>
+               <div class="table-responsive">
 
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @torneo.nombre %>
-</p>
+  <div class="field">
+    <label class="labelFormulario">Título </label>    
+    <div><%= @torneo.titulo %></div>
+  </div>
+  <div class="field">
+      <label class="labelFormulario">P&aacute;gina web</label>
+      <div><%= @torneo.paginaweb %></div>
+  </div>
 
-<p>
-  <strong>Juego:</strong>
-  <%= @torneo.juego %>
-</p>
+  <br/>
+  <div class="field">
+    <label class="labelFormulario">Vacantes</label>    
+    <div id="vacantes">
+       <%= @torneo.vacantes %>
+  </div>
+  </div>
+  <div class="field">
+    <label class="labelFormulario">Fecha inicio torneo</label>
+    <%= @torneo.cierre_inscripcion_fecha %> <%= @torneo.cierre_inscripcion_tiempo %>    
+  </div>  
+  <div class="field">
+    <label class="labelFormulario">Fecha cierre inscripci&oacute;n e inicio check-in </label>
+    <%= @torneo.cierre_inscripcion_fecha %> <%= @torneo.cierre_inscripcion_tiempo %>
+  </div>  
+  <br/>
+  <h4 class="text-center"><b>Fecha de Rondas y modo de ganar</b></h4>
 
-<p>
-  <strong>Vacantes:</strong>
-  <%= @torneo.vacantes %>
-</p>
+   <div class="field">
+      <table class="table table-bordered table-hover table-striped tablesorter">
+      <thead>
+        <tr>
+          <td class="header">Ronda</td>
+          <td class="header">Fecha de inicio</td>
+          <td class="header">Hora de inicio</td>
+          <td class="header">Modo de ganar</td>
+          <td class="header">Horas entre rondas</td>
+        </tr>
+      </thead>
+      <tbody id="rondas">
+        <% @torneo.rondas.each do |ronda| %>
+        <tr>
+          <td><%=ronda.numero%></td>
+          <td><%=ronda.inicio_fecha%></td>
+          <td><%=ronda.inicio_tiempo%></td>
+          <td><%=ronda.modo_ganar%>
+          </td>
+          <td></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+   </div>
+   <div class="field">
 
-<p>
-  <strong>Cierre inscripcion:</strong>
-  <%= @torneo.cierre_inscripcion_fecha %>
-</p>
+   </div>
+ 
+    
+  </div>
 
-<p>
-  <strong>Cierre inscripcion:</strong>
-  <%= @torneo.cierre_inscripcion_tiempo %>
-</p>
 
-<%= link_to 'Edit', edit_torneo_path(@torneo) %> |
-<%= link_to 'Back', torneos_path %>
+              </div>
 
             </div>
-
-          </div>
-      </div>
+        </div>
+    </div>
   </div>

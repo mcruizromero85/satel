@@ -1,0 +1,37 @@
+<%= form_for(@ronda) do |f| %>
+  <% if @ronda.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ronda.errors.count, "error") %> prohibited this ronda from being saved:</h2>
+
+      <ul>
+      <% @ronda.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :numero %><br>
+    <%= f.number_field :numero %>
+  </div>
+  <div class="field">
+    <%= f.label :inicio_fecha %><br>
+    <%= f.date_select :inicio_fecha %>
+  </div>
+  <div class="field">
+    <%= f.label :inicio_tiempo %><br>
+    <%= f.time_select :inicio_tiempo %>
+  </div>
+  <div class="field">
+    <%= f.label :modo_ganar %><br>
+    <%= f.text_field :modo_ganar %>
+  </div>
+  <div class="field">
+    <%= f.label :torneo_id %><br>
+    <%= f.number_field :torneo_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

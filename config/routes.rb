@@ -1,4 +1,6 @@
 Satel::Application.routes.draw do
+  resources :rondas
+
   resources :pruebas
 
   resources :torneos

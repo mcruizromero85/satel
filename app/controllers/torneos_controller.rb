@@ -1,6 +1,6 @@
 class TorneosController < ApplicationController
   before_action :set_torneo, only: [:show, :edit, :update, :destroy]
-
+  require_relative '../../app/helpers/torneos_helper'
   # GET /torneos GET /torneos.json
   def index
     @torneos = Torneo.all.order(:cierre_inscripcion_fecha,:cierre_inscripcion_tiempo).limit(20).where("date(cierre_inscripcion_fecha) > date(:fecha_actual) or ( cierre_inscripcion_tiempo > time :hora_actual and date(cierre_inscripcion_fecha) = date(:fecha_actual) )",{fecha_actual: Time.new, hora_actual:Time.new.strftime("%T")})
@@ -25,6 +25,20 @@ attr_writer :attr_names
   # POST /torneos.json
   def create
     @torneo = Torneo.new(torneo_params)
+
+    vacantes = torneo_params[:vacantes]
+
+    rondas_contador = TorneosHelper.obtener_rondas_por_vacantes(vacantes.to_i)
+
+    for i in 1..rondas_contador
+      ronda=Ronda.new(params["ronda"+i.to_s].permit(:numero,:inicio_fecha,:inicio_tiempo,:modo_ganar))
+      ronda.torneo = @torneo
+      ronda.save
+    end
+
+
+    #ronda = Ronda.new
+    #params
 
     respond_to do |format|
       if @torneo.save
@@ -69,6 +83,6 @@ attr_writer :attr_names
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def torneo_params
-      params.require(:torneo).permit(:nombre, :juego, :vacantes, :cierre_inscripcion_fecha, :cierre_inscripcion_tiempo)
+      params.require(:torneo).permit(:titulo, :paginaweb, :vacantes, :cierre_inscripcion_fecha, :cierre_inscripcion_tiempo, :inicio_torneo_fecha, :inicio_torneo_tiempo)
     end
 end
