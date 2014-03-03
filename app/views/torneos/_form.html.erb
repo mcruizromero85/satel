@@ -91,7 +91,7 @@ function cargarRegistroDeRondas(vacantes){
 <%= form_for(@torneo) do |f| %>
   <% if @torneo.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@torneo.errors.count, "error") %> prohibited this torneo from being saved:</h2>
+      <h2><%= pluralize(@torneo.errors.count, "error") %> No permite registrar el torneo:</h2>
 
       <ul>
       <% @torneo.errors.full_messages.each do |msg| %>
