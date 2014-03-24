@@ -1,10 +1,21 @@
 Satel::Application.routes.draw do
+
+  resources :gamers
+
+  resources :inscripcions
+
+  get '/torneos/preparar/:id' => 'torneos#preparar'
+
+  get '/torneos/simular_llaves/:id' => 'torneos#simular_llaves'
+
   resources :rondas
 
   resources :pruebas
-
+  
   resources :torneos
   root 'torneos#index'
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

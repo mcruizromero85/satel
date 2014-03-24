@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230234849) do
+ActiveRecord::Schema.define(version: 20140323192709) do
+
+  create_table "gamers", force: true do |t|
+    t.string   "nick"
+    t.string   "correo"
+    t.string   "nombres"
+    t.string   "apellidos"
+    t.date     "fecha_ultimo_login"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "inscripcions", force: true do |t|
+    t.date     "fecha_inscripcion"
+    t.time     "hora_inscripcion"
+    t.string   "estado_confirmacion"
+    t.integer  "peso_participacion"
+    t.integer  "gamer_id"
+    t.integer  "torneo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pruebas", force: true do |t|
     t.string   "titulo"

@@ -1,5 +1,5 @@
 class TorneosController < ApplicationController
-  before_action :set_torneo, only: [:show, :edit, :update, :destroy]
+  before_action :set_torneo, only: [:preparar,:show, :edit, :update, :destroy]
   require_relative '../../app/helpers/torneos_helper'
 
   # GET /torneos GET /torneos.json
@@ -15,7 +15,12 @@ attr_writer :attr_names
   # GET /torneos/new
   def new
     @torneo = Torneo.new
+  end
 
+  def preparar
+  end
+
+  def simular_llaves
   end
 
   # GET /torneos/1/edit
@@ -57,9 +62,10 @@ attr_writer :attr_names
   # PATCH/PUT /torneos/1
   # PATCH/PUT /torneos/1.json
   def update
+
     respond_to do |format|
       if @torneo.update(torneo_params)
-        format.html { redirect_to @torneo, notice: 'Torneo was successfully updated.' }
+        format.html { render action: 'simular_llaves', notice: 'Torneo was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

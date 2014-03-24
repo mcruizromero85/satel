@@ -1,0 +1,35 @@
+<h1>Listing gamers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nick</th>
+      <th>Correo</th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Fecha ultimo login</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gamers.each do |gamer| %>
+      <tr>
+        <td><%= gamer.nick %></td>
+        <td><%= gamer.correo %></td>
+        <td><%= gamer.nombres %></td>
+        <td><%= gamer.apellidos %></td>
+        <td><%= gamer.fecha_ultimo_login %></td>
+        <td><%= link_to 'Show', gamer %></td>
+        <td><%= link_to 'Edit', edit_gamer_path(gamer) %></td>
+        <td><%= link_to 'Destroy', gamer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gamer', new_gamer_path %>

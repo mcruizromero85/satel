@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nick:</strong>
+  <%= @gamer.nick %>
+</p>
+
+<p>
+  <strong>Correo:</strong>
+  <%= @gamer.correo %>
+</p>
+
+<p>
+  <strong>Nombres:</strong>
+  <%= @gamer.nombres %>
+</p>
+
+<p>
+  <strong>Apellidos:</strong>
+  <%= @gamer.apellidos %>
+</p>
+
+<p>
+  <strong>Fecha ultimo login:</strong>
+  <%= @gamer.fecha_ultimo_login %>
+</p>
+
+<%= link_to 'Edit', edit_gamer_path(@gamer) %> |
+<%= link_to 'Back', gamers_path %>

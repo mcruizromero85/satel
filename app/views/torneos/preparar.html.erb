@@ -1,0 +1,50 @@
+<script type="text/javascript">
+$(window).load(function(){
+
+    $( "#tipo_generacion" ).buttonset();
+
+});//]]>  
+</script>
+
+  <div class="container">
+    <div class="row">
+        <div >
+            <div class="tile">
+              <h3 class="text-center">Prepara tu torneo antes de iniciar</h3>
+               <div class="table-responsive">          
+                <%= form_for @torneo do |f|   %>
+
+                  <div id="tipo_generacion">
+                    <input type="radio" id='torneo_tipo_generacion_aleatorio' name='torneo[tipo_generacion]' value="A" checked='checked' ><label for="torneo_tipo_generacion_aleatorio">Aleatorio</label>
+                    <input type="radio" id="torneo_tipo_generacion_cabezas" name='torneo[tipo_generacion]' value="C"  ><label for="torneo_tipo_generacion_cabezas">Cabezas de serie</label>
+                  </div>
+
+                  <%= f.submit %>
+                 
+              <table class="table table-bordered table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th class="header">Gamer</th>
+                    <th class="header">Fecha De Inscripci&oacute;n</th>
+                  </tr>
+                </thead>
+
+                <tbody id="torneosPortada">
+
+                  <% @torneo.inscripcions.each do |inscripcion| %>
+                    <tr>
+                      <td><%= inscripcion.gamer.nick %></td>
+                      <td><%= inscripcion.fecha_inscripcion %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+
+          <%= link_to 'Back', torneos_path %>
+   <% end %>
+              </div>
+
+            </div>
+        </div>
+    </div>
+  </div>

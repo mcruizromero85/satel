@@ -9,4 +9,5 @@ class Torneo < ActiveRecord::Base
 	end
 
 	has_many :rondas
+	has_many :inscripcions
 end

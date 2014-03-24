@@ -1,0 +1,37 @@
+<h1>Listing inscripcions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fecha inscripcion</th>
+      <th>Hora inscripcion</th>
+      <th>Estado confirmacion</th>
+      <th>Peso participacion</th>
+      <th>Gamer</th>
+      <th>Torneo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inscripcions.each do |inscripcion| %>
+      <tr>
+        <td><%= inscripcion.fecha_inscripcion %></td>
+        <td><%= inscripcion.hora_inscripcion %></td>
+        <td><%= inscripcion.estado_confirmacion %></td>
+        <td><%= inscripcion.peso_participacion %></td>
+        <td><%= inscripcion.gamer_id %></td>
+        <td><%= inscripcion.torneo_id %></td>
+        <td><%= link_to 'Show', inscripcion %></td>
+        <td><%= link_to 'Edit', edit_inscripcion_path(inscripcion) %></td>
+        <td><%= link_to 'Destroy', inscripcion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Inscripcion', new_inscripcion_path %>

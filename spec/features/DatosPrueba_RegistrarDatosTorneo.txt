@@ -1,3 +1,3 @@
 Torneo Bloodzone de Starcraft 2,Torneo Registrado correctamente
 Torneo xyz, El torneo debe tener como mínimo 30 caracteres y como máximo 100
-,El título es un dato obligatorio
+aa,El título es un dato obligatorio
