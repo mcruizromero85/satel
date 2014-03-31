@@ -63,6 +63,11 @@ attr_writer :attr_names
   # PATCH/PUT /torneos/1.json
   def update
 
+    @torneo.inscripcions.each do | inscripcion | 
+      inscripcion.peso_participacion =params["inscripcion"+inscripcion.id.to_s].permit(:peso_participacion)[:peso_participacion]
+      inscripcion.save
+    end
+
     respond_to do |format|
       if @torneo.update(torneo_params)
         format.html { render action: 'simular_llaves', notice: 'Torneo was successfully updated.' }

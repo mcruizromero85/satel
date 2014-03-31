@@ -6203,3 +6203,32 @@ th.hidden-print, td.hidden-print {
     padding: 8px;
 }
 
+.inscripciones { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+.inscripciones li {
+ margin: 0 3px 3px 0;
+ color: #FFFFFF; 
+ background: #484848;
+ height: 25px;
+ border: 0 none;
+ height: 34.5px;
+}
+
+#inscritos li:hover {
+    background-color: #050505;
+}
+
+.inscripciones li .columna_inscritos_nick {
+    border-style: solid; border-width: 1px 0px 1px 1px; float: left; width: 35% ;   padding: 8px;
+}
+.inscripciones li .columna_inscritos_fecha {
+    border-style: solid; border-width: 1px 1px 1px 1px; float: left; width: 65%;   padding: 8px;
+}
+.inscripciones li .columna_inscritos_nick_cabecera {
+    border-style: solid; border-width: 1px 0px 1px 1px; float: left; width: 35% ;   padding: 8px; text-align: center;
+}
+.inscripciones li .columna_inscritos_fecha_cabecera {
+    border-style: solid; border-width: 1px 1px 1px 1px; float: left; width: 65%;   padding: 8px; text-align: center;
+}
+
+
+    

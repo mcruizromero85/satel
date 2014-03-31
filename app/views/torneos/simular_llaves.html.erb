@@ -1,10 +1,24 @@
           <script type="text/javascript">
             var minimalData = {
             teams : [
-              ["Kripty", "Locopiedra"], /* first matchup */
-              ["Otaru", "Brucefulus"], /* second matchup */
-              ["Sidvicious", "Solmyr"], /* second matchup */
-              ["Kodo", "Tdk[lol]"] /* second matchup */
+              <% contador=0 %>
+              <%   cantidad_inscripciones=@torneo.inscripcions.count %>
+              <%   @torneo.inscripcions.order(:peso_participacion).each do |inscripcion| %>
+                <% if contador == 0 then %>                
+                  ["<%= inscripcion.gamer.nick %>"  
+                <% else %>  
+                  "<%= inscripcion.gamer.nick %>"  
+                <% end if %>
+                
+                <% if contador % 2 != 0 && contador!=cantidad_inscripciones then %>              
+                  ,              
+                <% elsif contador % 2 == 0 && cantidad_inscripciones != contador then %>              
+                  ],[ 
+                <% else  %>  
+                  ]
+                <% end if %>
+                <% contador=contador+1 %>
+              <% end %>
             ],
 
             }
@@ -16,11 +30,10 @@
 
 <div class="container">
   <div class="row">
-    
+
       <div class="tile" style="height: 456px;">
                    
            <h3 class="text-center">Prepara tu torneo antes de iniciar</h3>
-          
 
           <div id="llaves" class="table-responsive" ></div>
        
