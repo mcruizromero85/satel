@@ -63,6 +63,8 @@ attr_writer :attr_names
   # PATCH/PUT /torneos/1.json
   def update
 
+    print 
+
     @torneo.inscripcions.each do | inscripcion | 
       inscripcion.peso_participacion =params["inscripcion"+inscripcion.id.to_s].permit(:peso_participacion)[:peso_participacion]
       inscripcion.save

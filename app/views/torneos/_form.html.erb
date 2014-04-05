@@ -1,4 +1,11 @@
 <script type="text/javascript">
+
+    
+
+    $(function() {
+      $( "#vacantes" ).buttonset();
+    });
+
     function reemplazarCon(cadena,key,value) {
       var s = cadena;
       var reg = new RegExp("\\{" + key + "\\}", "gm");             
@@ -6,11 +13,6 @@
         return s;
     }
 
-
-//<![CDATA[ 
-$(window).load(function(){
-
-    $( "#vacantes" ).buttonset();
     
     $(function() {
       $( "#torneo_inicio_torneo_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
@@ -23,9 +25,7 @@ $(window).load(function(){
     });
 
     cargarRegistroDeRondas(8);
- 
 
-});//]]>  
 
 function sincronizarConFechaCheckIn(){
 
