@@ -1,0 +1,2 @@
+module EncuentrosHelper
+end

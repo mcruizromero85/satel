@@ -63,12 +63,24 @@ attr_writer :attr_names
   # PATCH/PUT /torneos/1.json
   def update
 
-    print 
+    
+    #obtener_posicion_de_ronda_por_ranking
 
     @torneo.inscripcions.each do | inscripcion | 
       inscripcion.peso_participacion =params["inscripcion"+inscripcion.id.to_s].permit(:peso_participacion)[:peso_participacion]
       inscripcion.save
     end
+
+    posiciones=TorneosHelper.obtener_posicion_de_ronda_por_ranking(@torneo.vacantes,1);
+    indice_posiciones=0
+    @torneo.inscripcions.order(:peso_participacion).each do | inscripcion | 
+      inscripcion.posicion_inicial=posiciones[indice_posiciones]
+      inscripcion.save
+      indice_posiciones=indice_posiciones+1
+    end
+
+    ronda_inicial=@torneo.rondas.where(numero: 1)
+   
 
     respond_to do |format|
       if @torneo.update(torneo_params)

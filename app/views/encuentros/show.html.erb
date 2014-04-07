@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @encuentro.estado %>
+</p>
+
+<p>
+  <strong>Posicion en ronda:</strong>
+  <%= @encuentro.posicion_en_ronda %>
+</p>
+
+<p>
+  <strong>Id inscripcion gamer a:</strong>
+  <%= @encuentro.id_inscripcion_gamer_a %>
+</p>
+
+<p>
+  <strong>Id inscripcion gamer b:</strong>
+  <%= @encuentro.id_inscripcion_gamer_b %>
+</p>
+
+<p>
+  <strong>Id inscripcion gamer ganador:</strong>
+  <%= @encuentro.id_inscripcion_gamer_ganador %>
+</p>
+
+<%= link_to 'Edit', edit_encuentro_path(@encuentro) %> |
+<%= link_to 'Back', encuentros_path %>

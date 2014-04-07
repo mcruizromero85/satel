@@ -8,8 +8,8 @@
       stop: function( event, ui ) {
         $( "#inscritos li" ).each(function( index ) {
           //$( this + " input " ).val("12");
+          $( this ).children("input:last").val(Math.round(index + 1));
           console.log( index + ": " + $( this ).children("input:first").val() );
-          $( this ).children("input:last").val(index + 1);
         });
       }    
     }
@@ -45,10 +45,12 @@
                 </li>  
               </ul>
               <ul class="inscripciones" id="inscritos">
+                <% contador=1 %>
                 <% @torneo.inscripcions.each do |inscripcion| %>
                   <li class="ui-state-default"><div class="columna_inscritos_nick"><%= inscripcion.gamer.nick %></div><div class="columna_inscritos_fecha"><%= inscripcion.fecha_inscripcion %></div>                     
-                    <input id="inscripcion<%=inscripcion.id%>_peso_participacion" type="hidden" name="inscripcion<%=inscripcion.id%>[peso_participacion]" />
+                    <input id="inscripcion<%=inscripcion.id%>_peso_participacion" type="hidden" name="inscripcion<%=inscripcion.id%>[peso_participacion]" value="<%=contador%>" />
                   </li>
+                <% contador=contador+1 %>  
                 <% end %>
               </ul>
 

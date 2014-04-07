@@ -3,11 +3,11 @@
             teams : [
               <% contador=0 %>
               <%   cantidad_inscripciones=@torneo.inscripcions.count %>
-              <%   @torneo.inscripcions.order(:peso_participacion).each do |inscripcion| %>
+              <%   @torneo.inscripcions.order(:posicion_inicial).each do |inscripcion| %>
                 <% if contador == 0 then %>                
-                  ["<%= inscripcion.gamer.nick %>"  
+                  ["<%= inscripcion.peso_participacion %>-<%= inscripcion.gamer.nick %>"  
                 <% else %>  
-                  "<%= inscripcion.gamer.nick %>"  
+                  "<%= inscripcion.peso_participacion %>-<%= inscripcion.gamer.nick %>" 
                 <% end if %>
                 
                 <% if contador % 2 != 0 && contador!=cantidad_inscripciones then %>              
@@ -30,9 +30,15 @@
 
 <div class="container">
   <div class="row">
-
+    <%   if cantidad_inscripciones <= 8 then %>
       <div class="tile" style="height: 456px;">
-                   
+    <%   elsif cantidad_inscripciones <= 16 then %>
+      <div class="tile" style="height: 656px;">
+    <%   elsif cantidad_inscripciones <= 32 then %>
+      <div class="tile" style="height: 1056px;">
+    <%   else %>
+      <div class="tile" style="height: 256px;">
+    <% end %>    
            <h3 class="text-center">Prepara tu torneo antes de iniciar</h3>
 
           <div id="llaves" class="table-responsive" ></div>

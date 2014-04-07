@@ -5,6 +5,19 @@ module TorneosHelper
 		Math.log(vacantes, 2).ceil
 	end
 
+	def self.obtener_posicion_de_ronda_por_ranking(cantidad_vacantes,tipo_combinacion)
+		if cantidad_vacantes==4 then
+			return [1,4,3,2]
+		elsif cantidad_vacantes==8 then
+			return [1,8,5,3,4,6,7,2]
+		elsif cantidad_vacantes==16 then
+			return [1,16,7,9,5,11,3,13,4,14,8,10,6,12,2,15]
+		else
+			return [1,32,9,13,19,5,27,7,25,15,17,11,21,3,29,4,30,12,22,16,18,8,26,6,28,14,20,10,24,2,31]
+		end
+					
+	end
+
 	def self.obtenerFormatoCuentaRegresivaHastaLaFecha(fecha_cierre_inscripcion)
 
 		diferencia_segundos_cierre_inscripcion_y_hoy=fecha_cierre_inscripcion.to_i - Time.new.to_i		

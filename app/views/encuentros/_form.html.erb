@@ -1,0 +1,37 @@
+<%= form_for(@encuentro) do |f| %>
+  <% if @encuentro.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@encuentro.errors.count, "error") %> prohibited this encuentro from being saved:</h2>
+
+      <ul>
+      <% @encuentro.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :estado %><br>
+    <%= f.text_field :estado %>
+  </div>
+  <div class="field">
+    <%= f.label :posicion_en_ronda %><br>
+    <%= f.number_field :posicion_en_ronda %>
+  </div>
+  <div class="field">
+    <%= f.label :id_inscripcion_gamer_a %><br>
+    <%= f.number_field :id_inscripcion_gamer_a %>
+  </div>
+  <div class="field">
+    <%= f.label :id_inscripcion_gamer_b %><br>
+    <%= f.number_field :id_inscripcion_gamer_b %>
+  </div>
+  <div class="field">
+    <%= f.label :id_inscripcion_gamer_ganador %><br>
+    <%= f.number_field :id_inscripcion_gamer_ganador %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

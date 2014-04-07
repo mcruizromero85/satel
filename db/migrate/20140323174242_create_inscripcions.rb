@@ -5,9 +5,9 @@ class CreateInscripcions < ActiveRecord::Migration
       t.time :hora_inscripcion
       t.string :estado_confirmacion
       t.integer :peso_participacion
+      t.integer :posicion_inicial
       t.integer :gamer_id
       t.integer :torneo_id
-
       t.timestamps
     end
   end

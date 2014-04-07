@@ -1,0 +1,35 @@
+<h1>Listing encuentros</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Estado</th>
+      <th>Posicion en ronda</th>
+      <th>Id inscripcion gamer a</th>
+      <th>Id inscripcion gamer b</th>
+      <th>Id inscripcion gamer ganador</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @encuentros.each do |encuentro| %>
+      <tr>
+        <td><%= encuentro.estado %></td>
+        <td><%= encuentro.posicion_en_ronda %></td>
+        <td><%= encuentro.id_inscripcion_gamer_a %></td>
+        <td><%= encuentro.id_inscripcion_gamer_b %></td>
+        <td><%= encuentro.id_inscripcion_gamer_ganador %></td>
+        <td><%= link_to 'Show', encuentro %></td>
+        <td><%= link_to 'Edit', edit_encuentro_path(encuentro) %></td>
+        <td><%= link_to 'Destroy', encuentro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Encuentro', new_encuentro_path %>
