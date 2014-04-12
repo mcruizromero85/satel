@@ -2877,7 +2877,7 @@ button.close {
     display: block;
     position: relative;
 }
-.nav > li > a {
+.nav > li > a,.nav > li > div {
     display: block;
     padding: 10px 15px;
     position: relative;
@@ -2964,6 +2964,9 @@ button.close {
     float: left;
 }
 .nav-pills > li > a {
+    border-radius: 5px;
+}
+.nav-pills > li > div {
     border-radius: 5px;
 }
 .nav-pills > li + li {
@@ -6217,18 +6220,52 @@ th.hidden-print, td.hidden-print {
     background-color: #050505;
 }
 
+
 .inscripciones li .columna_inscritos_nick {
-    border-style: solid; border-width: 1px 0px 1px 1px; float: left; width: 35% ;   padding: 8px;
+    border-style: solid; border-width: 1px 0px 1px 1px; float: left; width: 26% ;   padding: 8px;
 }
 .inscripciones li .columna_inscritos_fecha {
-    border-style: solid; border-width: 1px 1px 1px 1px; float: left; width: 65%;   padding: 8px;
+    border-style: solid; border-width: 1px 1px 1px 1px; float: left; width: 26%;   padding: 8px;
 }
+.inscripciones li .columna_inscritos_wins {
+    border-style: solid; border-width: 1px 0px 1px 1px; float: left; width: 20% ;   padding: 8px;
+}
+.inscripciones li .columna_inscritos_antiguas_participaciones {
+    border-style: solid; border-width: 1px 1px 1px 1px; float: left; width: 20%;   padding: 8px;
+}
+
 .inscripciones li .columna_inscritos_nick_cabecera {
-    border-style: solid; border-width: 1px 0px 1px 1px; float: left; width: 35% ;   padding: 8px; text-align: center;
+    border-style: solid; border-width: 1px 0px 1px 1px; float: left; width: 26% ;   padding: 8px; text-align: center;
 }
 .inscripciones li .columna_inscritos_fecha_cabecera {
-    border-style: solid; border-width: 1px 1px 1px 1px; float: left; width: 65%;   padding: 8px; text-align: center;
+    border-style: solid; border-width: 1px 1px 1px 1px; float: left; width: 26%;   padding: 8px; text-align: center;
+}
+.inscripciones li .columna_inscritos_wins_cabecera {
+    border-style: solid; border-width: 1px 0px 1px 1px; float: left; width: 20% ;   padding: 8px; text-align: center;
+}
+.inscripciones li .columna_inscritos_antiguas_participaciones_cabecera {
+    border-style: solid; border-width: 1px 1px 1px 1px; float: left; width: 20%;   padding: 8px; text-align: center;
 }
 
+.datos-resumidos-torneo {
+  margin-left: 25%;
+  margin-right: 25%;
+}
 
-    
+#tipo_generacion {
+  width: 450px;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}  
+
+.mensaje_alerta {
+  width: 450px;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}  

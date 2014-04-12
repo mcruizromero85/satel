@@ -14,8 +14,24 @@ module TorneosHelper
 			return [1,16,7,9,5,11,3,13,4,14,8,10,6,12,2,15]
 		else
 			return [1,32,9,13,19,5,27,7,25,15,17,11,21,3,29,4,30,12,22,16,18,8,26,6,28,14,20,10,24,2,31]
-		end
-					
+		end		
+	end
+
+	def self.obtener_posicion_de_ronda_manual(cantidad_vacantes,tipo_combinacion)
+		if cantidad_vacantes==4 then
+			return [1,2,3,4]
+		elsif cantidad_vacantes==8 then
+			return [1,2,3,4,5,6,7,8]
+		elsif cantidad_vacantes==16 then
+			return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+		else
+			return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
+		end		
+	end
+
+	def self.obtener_posicion_de_ronda_aleatoriamente(cantidad_vacantes,tipo_combinacion)
+		conjunto=[1,2,3,4,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32]
+		return conjunto.sample(cantidad_vacantes)		
 	end
 
 	def self.obtenerFormatoCuentaRegresivaHastaLaFecha(fecha_cierre_inscripcion)

@@ -10,7 +10,10 @@ class CreateTorneos < ActiveRecord::Migration
       t.time :cierre_check_in_tiempo
       t.date :inicio_torneo_fecha
       t.time :inicio_torneo_tiempo
+      t.string :tipo_torneo
+      t.string :tipo_generacion	
       t.integer :id_gamer
+      t.string :estado
       t.timestamps
     end
   end

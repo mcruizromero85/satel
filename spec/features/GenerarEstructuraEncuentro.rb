@@ -10,7 +10,7 @@ feature "Generar estructura de encuentros" do
 	      fill_in 'inscripcion_peso_participacion', :with => '0'
 	      valor=i.to_s
 	      fill_in 'inscripcion_gamer_id', :with => valor
-	      fill_in 'inscripcion_torneo_id', :with => '2'      
+	      fill_in 'inscripcion_torneo_id', :with => '1'      
 	      click_button('Create Inscripcion')
 	      expect(page).to have_content ""
 	    end

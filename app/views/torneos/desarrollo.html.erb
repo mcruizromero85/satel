@@ -40,18 +40,11 @@
     <%   else %>
       <div class="tile" style="height: 256px;">
     <% end %>    
-            <h3 class="text-center"><u>Prepara tu torneo antes de iniciar</u></h1>
-            <h3 class="text-center"><%= @torneo.titulo %></h2>
-            <h4 class="text-center"><%= @torneo.paginaweb %></h4>
-            <center>
-              <a href="/torneos/<%=@torneo.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
-            </center>
-            <br/>
+           <h2 class="text-center"><%= @torneo.titulo %></h2>
+           <h3 class="text-center"><%= @torneo.paginaweb %></h3>
             <%= form_for @torneo do |f|   %>
-             <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Iniciado" />
-            <center>
-              <a href="/torneos/preparar/<%=@torneo.id%>"><font color="#FFFFFF">Volver a generar</font></a>            
-              <%= f.submit %>
+             <center>
+              <a href="/torneos/<%=@torneo.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
             </center>
              <% end %>
           <div id="llaves" class="table-responsive" ></div>       

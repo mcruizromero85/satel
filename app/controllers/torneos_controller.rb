@@ -18,6 +18,13 @@ attr_writer :attr_names
   end
 
   def preparar
+    if @torneo.estado == 'Iniciado' then
+      respond_to do |format|
+        format.html { render action: 'desarrollo', notice: 'Torneo was successfully updated.' }      
+      end
+      return
+    end
+
   end
 
   def simular_llaves
@@ -63,6 +70,33 @@ attr_writer :attr_names
   # PATCH/PUT /torneos/1.json
   def update
 
+    if torneo_params[:estado] == 'Iniciado' then
+
+      #indice_posiciones=0
+      #contador_encuentros=1
+      #@torneo.inscripcions.order(:posicion_inicial).each do | inscripcion_gamer | 
+      #  encuentro = Encuentro.new
+      #  encuentro.estado="No Iniciado"        
+      #  encuentro.gamer_a=inscripcion_gamer
+      #  next
+      #  encuentro.gamer_b=inscripcion_gamer
+      #  encuentro.posicion_en_ronda=contador_encuentros
+      #  encuentro.save
+      #  contador_encuentros=contador_encuentros+1
+      #end      
+
+      respond_to do |format|
+        if @torneo.update(torneo_params)
+          format.html { render action: 'desarrollo', notice: 'Torneo was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @torneo.errors, status: :unprocessable_entity }
+        end
+      end
+      return
+    end
+
     
     #obtener_posicion_de_ronda_por_ranking
 
@@ -70,8 +104,15 @@ attr_writer :attr_names
       inscripcion.peso_participacion =params["inscripcion"+inscripcion.id.to_s].permit(:peso_participacion)[:peso_participacion]
       inscripcion.save
     end
-
-    posiciones=TorneosHelper.obtener_posicion_de_ronda_por_ranking(@torneo.vacantes,1);
+    
+    if torneo_params[:tipo_generacion] == 'A' then
+      posiciones=TorneosHelper.obtener_posicion_de_ronda_aleatoriamente(@torneo.vacantes,1)
+    elsif torneo_params[:tipo_generacion] == 'M' then
+      posiciones=TorneosHelper.obtener_posicion_de_ronda_manual(@torneo.vacantes,1)      
+    else
+      posiciones=TorneosHelper.obtener_posicion_de_ronda_por_ranking(@torneo.vacantes,1)
+    end
+        
     indice_posiciones=0
     @torneo.inscripcions.order(:peso_participacion).each do | inscripcion | 
       inscripcion.posicion_inicial=posiciones[indice_posiciones]
@@ -111,6 +152,6 @@ attr_writer :attr_names
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def torneo_params
-      params.require(:torneo).permit(:titulo, :paginaweb, :vacantes, :cierre_inscripcion_fecha, :cierre_inscripcion_tiempo, :inicio_torneo_fecha, :inicio_torneo_tiempo)
+      params.require(:torneo).permit(:titulo, :paginaweb, :vacantes, :cierre_inscripcion_fecha, :cierre_inscripcion_tiempo, :inicio_torneo_fecha, :inicio_torneo_tiempo,:tipo_generacion,:estado)
     end
 end
