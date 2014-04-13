@@ -24,16 +24,24 @@ class InscripcionsController < ApplicationController
   # POST /inscripcions
   # POST /inscripcions.json
   def create
-    @inscripcion = Inscripcion.new(inscripcion_params)
+
+    print "numero inscripciones: " + params["inscripcion"][:numero_inscripciones].to_s
+    
+    for i in 1..params["inscripcion"][:numero_inscripciones].to_i
+      inscripcion = Inscripcion.new
+      inscripcion.fecha_inscripcion=Time.new.to_date
+      inscripcion.hora_inscripcion=Time.new
+      inscripcion.estado_confirmacion='C'
+      inscripcion.peso_participacion=0
+      inscripcion.posicion_inicial=0
+      inscripcion.gamer_id=i
+      inscripcion.torneo_id=params["inscripcion"][:torneo_id].to_i
+      inscripcion.save
+    end
+    
 
     respond_to do |format|
-      if @inscripcion.save
-        format.html { redirect_to @inscripcion, notice: 'Inscripcion was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @inscripcion }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @inscripcion.errors, status: :unprocessable_entity }
-      end
+        format.html { redirect_to "/", notice: 'Inscripcion was successfully created.' }
     end
   end
 
@@ -69,6 +77,6 @@ class InscripcionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def inscripcion_params
-      params.require(:inscripcion).permit(:fecha_inscripcion, :hora_inscripcion, :estado_confirmacion, :peso_participacion, :gamer_id, :torneo_id)
+      params.require(:inscripcion).permit(:fecha_inscripcion, :hora_inscripcion, :estado_confirmacion, :peso_participacion, :gamer_id, :torneo_id, :numero_inscripciones)
     end
 end

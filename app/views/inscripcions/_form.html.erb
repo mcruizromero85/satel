@@ -10,27 +10,9 @@
       </ul>
     </div>
   <% end %>
+  N&uacute;mero de inscripciones:
+  <input type="text" id="inscripcion_numero_inscripciones" name="inscripcion[numero_inscripciones]" />
 
-  <div class="field">
-    <%= f.label :fecha_inscripcion %><br>
-    <%= f.date_select :fecha_inscripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :hora_inscripcion %><br>
-    <%= f.time_select :hora_inscripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :estado_confirmacion %><br>
-    <%= f.text_field :estado_confirmacion %>
-  </div>
-  <div class="field">
-    <%= f.label :peso_participacion %><br>
-    <%= f.number_field :peso_participacion %>
-  </div>
-  <div class="field">
-    <%= f.label :gamer_id %><br>
-    <%= f.number_field :gamer_id %>
-  </div>
   <div class="field">
     <%= f.label :torneo_id %><br>
     <%= f.number_field :torneo_id %>

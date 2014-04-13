@@ -20,23 +20,22 @@
                 <% end if %>
                 <% contador=contador+1 %>
               <% end %>
-
             ]
             }
           $(function() {
             $('#llaves').bracket({
-            init: minimalData /* data to initialize the bracket with */ })
+            init: minimalData })
           })
           </script>
 
 <div class="container">
   <div class="row">
     <%   if cantidad_inscripciones <= 8 then %>
-      <div class="tile" style="height: 500px;">
+      <div class="tile" style="height: 540px;">
     <%   elsif cantidad_inscripciones <= 16 then %>
-      <div class="tile" style="height: 700px;">
+      <div class="tile" style="height: 740px;">
     <%   elsif cantidad_inscripciones <= 32 then %>
-      <div class="tile" style="height: 1100px;">
+      <div class="tile" style="height: 1140px;">
     <%   else %>
       <div class="tile" style="height: 256px;">
     <% end %>    
