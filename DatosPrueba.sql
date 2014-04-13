@@ -16,4 +16,8 @@ insert into gamers(nick,correo,nombres,apellidos) values
 	('Estanislao','estanislao@satel.com','Estanislao','Contreras'),
 	('Yamil','yamil@satel.com','Yamil','Ramos');
 
+insert into gamers(id,nick,correo,nombres,apellidos) values (-1000,'Free Win','freewin@freewin.com','Free','Win');
 
+insert into juegos (nombre,descripcion,asociado_id) values ('Kayac','Coge tu kayac y compite por ser el mas rápido en los rápidos xD',1),('Olimpollos Bayer','Obten la mejor puntuación en todos los retos olimpicos',1),('Crazy Mototaxi','Coge tu moto y gana la mayor cantidad de soles',1);
+
+insert into asociados (nombre,descripcion) values ('Magia Dígital','Magia digital'); 

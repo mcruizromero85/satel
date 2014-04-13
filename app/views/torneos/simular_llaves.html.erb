@@ -3,8 +3,8 @@
             var minimalData = {
             teams : [
               <% contador=0 %>
-              <%   cantidad_inscripciones=@torneo.inscripcions.count %>
-              <%   @torneo.inscripcions.order(:posicion_inicial).each do |inscripcion| %>
+              <%   cantidad_inscripciones=@torneo.inscripcions.limit(@torneo.vacantes).count %>
+              <%   @torneo.inscripcions.order(:posicion_inicial).limit(@torneo.vacantes).each do |inscripcion| %>
                 <% if contador == 0 then %>                
                   ["<%= inscripcion.peso_participacion %>-<%= inscripcion.gamer.nick %>"  
                 <% else %>  
@@ -20,8 +20,8 @@
                 <% end if %>
                 <% contador=contador+1 %>
               <% end %>
-            ],
 
+            ]
             }
           $(function() {
             $('#llaves').bracket({
@@ -32,11 +32,11 @@
 <div class="container">
   <div class="row">
     <%   if cantidad_inscripciones <= 8 then %>
-      <div class="tile" style="height: 456px;">
+      <div class="tile" style="height: 500px;">
     <%   elsif cantidad_inscripciones <= 16 then %>
-      <div class="tile" style="height: 656px;">
+      <div class="tile" style="height: 700px;">
     <%   elsif cantidad_inscripciones <= 32 then %>
-      <div class="tile" style="height: 1056px;">
+      <div class="tile" style="height: 1100px;">
     <%   else %>
       <div class="tile" style="height: 256px;">
     <% end %>    
@@ -50,11 +50,17 @@
             <%= form_for @torneo do |f|   %>
              <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Iniciado" />
             <center>
-              <a href="/torneos/preparar/<%=@torneo.id%>"><font color="#FFFFFF">Volver a generar</font></a>            
-              <%= f.submit %>
+              <a href="/torneos/preparar/<%=@torneo.id%>"><font color="#FFFFFF">Volver a generar</font></a>       
+                <br/>
+                  <div id="boton_generar">
+                    <center><%= f.submit "Iniciar Torneo!!!"%></center>
+                  </div>
             </center>
              <% end %>
           <div id="llaves" class="table-responsive" ></div>       
       </div>      
   </div>  
 </div>  
+  <script type="text/javascript">
+    $( "#boton_generar" ).buttonset();
+  </script>

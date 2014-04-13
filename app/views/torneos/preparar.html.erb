@@ -1,6 +1,6 @@
 <script type="text/javascript">
 
-    $( "#tipo_generacion" ).buttonset();
+    
 
   function permitirMoverInscritos(radioTipoGeneracion){
     $( "#inscritos" ).sortable(
@@ -52,60 +52,66 @@
                  </center>
 
                 <br/>
-               <div class="table-responsive">          
-                <%= form_for @torneo do |f|   %>
+               <% if @torneo.inscripcions.count >= 4 %>
+                   <div class="table-responsive">          
+                    <%= form_for @torneo do |f|   %>
 
-                  <div id="tipo_generacion">
-                    <center>
-                      <input type="radio" id='torneo_tipo_generacion1' name='torneo[tipo_generacion]' value="A" onclick="javascript:actualizarMensajeYFuncionesListado(this)" checked='checked' ><label for="torneo_tipo_generacion1">Aleatorio</label>
-                      <input type="radio" id="torneo_tipo_generacion2" name='torneo[tipo_generacion]' value="M" onclick="javascript:actualizarMensajeYFuncionesListado(this)" ><label for="torneo_tipo_generacion2">Manual</label>
+                      <div id="tipo_generacion">
+                        <center>
+                          <input type="radio" id='torneo_tipo_generacion1' name='torneo[tipo_generacion]' value="A" onclick="javascript:actualizarMensajeYFuncionesListado(this)" checked='checked' ><label for="torneo_tipo_generacion1">Aleatorio</label>
+                          <input type="radio" id="torneo_tipo_generacion2" name='torneo[tipo_generacion]' value="M" onclick="javascript:actualizarMensajeYFuncionesListado(this)" ><label for="torneo_tipo_generacion2">Manual</label>
 
-                      <input type="radio" id="torneo_tipo_generacion3" name='torneo[tipo_generacion]' value="C" onclick="javascript:actualizarMensajeYFuncionesListado(this)" ><label for="torneo_tipo_generacion3">Cabezas de serie</label>
-                    </center> 
-                    <br/>
-                    <center><%= f.submit %></center>
-                  </div>
+                          <input type="radio" id="torneo_tipo_generacion3" name='torneo[tipo_generacion]' value="C" onclick="javascript:actualizarMensajeYFuncionesListado(this)" ><label for="torneo_tipo_generacion3">Cabezas de serie</label>
+                        </center> 
+                      </div>
+                      <br/>
+                      <div id="boton_generar">
+                        <center><%= f.submit "Generar llaves"%></center>
+                      </div>
+                                         
 
-                                     
+                      <div id="mensaje_aleatorio" class="mensaje_alerta text-center" >
+                        <font color="yellow"><b>Las llaves se generar&aacute;n de manera aleatoria</b></font>
+                      </div>
+                      <div id="mensaje_cabezas_serie" class="mensaje_alerta text-center"  style="display:none" >
+                        <font color="yellow"><b>Cambie la posición de los gamers, arrastrándolos, para colocarlos en el ranking que usted desea</b></font>
+                      </div>
+                      <div id="mensaje_manual" class="mensaje_alerta text-center"  style="display:none" >
+                        <font color="yellow"><b>La posición de los gamers equivale directamente a su posición en las llaves</b></font>
+                      </div>
 
-                  <div id="mensaje_aleatorio" class="mensaje_alerta text-center" >
-                    <font color="yellow"><b>Las llaves se generar&aacute;n de manera aleatoria</b></font>
-                  </div>
-                  <div id="mensaje_cabezas_serie" class="mensaje_alerta text-center"  style="display:none" >
-                    <font color="yellow"><b>Cambie la posición de los gamers, arrastrándolos, para colocarlos en el ranking que usted desea</b></font>
-                  </div>
-                  <div id="mensaje_manual" class="mensaje_alerta text-center"  style="display:none" >
-                    <font color="yellow"><b>La posición de los gamers equivale directamente a su posición en las llaves</b></font>
-                  </div>
+                  <ul class="inscripciones" class="ui-sortable">
+                    <li class="ui-state-default" style="">
+                      <div class="columna_inscritos_nick_cabecera"><b>Gamer</b></div>
+                      <div class="columna_inscritos_fecha_cabecera"><b>Cuando se inscribio</b></div>
+                      <div class="columna_inscritos_wins_cabecera"><b>Victorias</b></div>                  
+                      <div class="columna_inscritos_antiguas_participaciones_cabecera"><b>Participaciones anteriores</b></div>
+                    </li>  
+                  </ul>
+                  <ul class="inscripciones" id="inscritos">
+                    <% contador=1 %>
+                    <% @torneo.inscripcions.order(:id).limit(@torneo.vacantes).each do |inscripcion| %>
+                      <li class="ui-state-default">
+                        <div class="columna_inscritos_nick"><%= inscripcion.gamer.nick %></div>
+                        <div class="columna_inscritos_fecha"><%= inscripcion.fecha_inscripcion %></div>
+                        <div class="columna_inscritos_wins">0</div>                     
+                        <div class="columna_inscritos_antiguas_participaciones">0</div>                     
 
-              <ul class="inscripciones" class="ui-sortable">
-                <li class="ui-state-default" style="">
-                  <div class="columna_inscritos_nick_cabecera"><b>Gamer</b></div>
-                  <div class="columna_inscritos_fecha_cabecera"><b>Cuando se inscribio</b></div>
-                  <div class="columna_inscritos_wins_cabecera"><b>Victorias</b></div>                  
-                  <div class="columna_inscritos_antiguas_participaciones_cabecera"><b>Participaciones anteriores</b></div>
-                </li>  
-              </ul>
-              <ul class="inscripciones" id="inscritos">
-                <% contador=1 %>
-                <% @torneo.inscripcions.order(:id).each do |inscripcion| %>
-                  <li class="ui-state-default">
-                    <div class="columna_inscritos_nick"><%= inscripcion.gamer.nick %></div>
-                    <div class="columna_inscritos_fecha"><%= inscripcion.fecha_inscripcion %></div>
-                    <div class="columna_inscritos_wins">0</div>                     
-                    <div class="columna_inscritos_antiguas_participaciones">0</div>                     
-
-                    <input id="inscripcion<%=inscripcion.id%>_peso_participacion" type="hidden" name="inscripcion<%=inscripcion.id%>[peso_participacion]" value="<%=contador%>" />
-                  </li>
-                <% contador=contador+1 %>  
+                        <input id="inscripcion<%=inscripcion.id%>_peso_participacion" type="hidden" name="inscripcion<%=inscripcion.id%>[peso_participacion]" value="<%=contador%>" />
+                      </li>
+                    <% contador=contador+1 %>  
+                    <% end %>
+                  </ul>
                 <% end %>
-              </ul>
-
-            
+                  </div>
+            <% else %>
+              <center><font color="red"><b>Tu torneo no alcanzo el m&iacute;nimo de inscripciones confirmadas (4) para iniciar</b> </font></center> 
             <% end %>
-              </div>
-
             </div>
         </div>
     </div>
   </div>
+  <script type="text/javascript">
+    $( "#tipo_generacion" ).buttonset();
+    $( "#boton_generar" ).buttonset();
+  </script>

@@ -12,7 +12,8 @@ class CreateTorneos < ActiveRecord::Migration
       t.time :inicio_torneo_tiempo
       t.string :tipo_torneo
       t.string :tipo_generacion	
-      t.integer :id_gamer
+      t.integer :gamer_id
+      t.integer :juego_id
       t.string :estado
       t.timestamps
     end

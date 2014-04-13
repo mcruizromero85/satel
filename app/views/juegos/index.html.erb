@@ -1,0 +1,31 @@
+<h1>Listing juegos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Asociado</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @juegos.each do |juego| %>
+      <tr>
+        <td><%= juego.nombre %></td>
+        <td><%= juego.descripcion %></td>
+        <td><%= juego.asociado_id %></td>
+        <td><%= link_to 'Show', juego %></td>
+        <td><%= link_to 'Edit', edit_juego_path(juego) %></td>
+        <td><%= link_to 'Destroy', juego, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Juego', new_juego_path %>

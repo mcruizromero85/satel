@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140406234628) do
+ActiveRecord::Schema.define(version: 20140412192350) do
+
+  create_table "asociados", force: true do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.integer  "juego_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "encuentros", force: true do |t|
     t.string   "estado"
@@ -41,6 +49,14 @@ ActiveRecord::Schema.define(version: 20140406234628) do
     t.integer  "posicion_inicial"
     t.integer  "gamer_id"
     t.integer  "torneo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "juegos", force: true do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.integer  "asociado_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -91,7 +107,8 @@ ActiveRecord::Schema.define(version: 20140406234628) do
     t.time     "inicio_torneo_tiempo"
     t.string   "tipo_torneo"
     t.string   "tipo_generacion"
-    t.integer  "id_gamer"
+    t.integer  "gamer_id"
+    t.integer  "juego_id"
     t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"

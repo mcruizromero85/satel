@@ -1,0 +1,31 @@
+<h1>Listing asociados</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Juego</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @asociados.each do |asociado| %>
+      <tr>
+        <td><%= asociado.nombre %></td>
+        <td><%= asociado.descripcion %></td>
+        <td><%= asociado.juego_id %></td>
+        <td><%= link_to 'Show', asociado %></td>
+        <td><%= link_to 'Edit', edit_asociado_path(asociado) %></td>
+        <td><%= link_to 'Destroy', asociado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Asociado', new_asociado_path %>
