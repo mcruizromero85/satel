@@ -80,8 +80,8 @@ function cargarRegistroDeRondas(vacantes){
     rowTemplate = reemplazarCon(rowTemplate,6,"ronda"+contador+"[modo_ganar]");
     rowTemplate = reemplazarCon(rowTemplate,7,contador);
     if (contador==1){
-      rowTemplate = reemplazarCon(rowTemplate,8,"<%=@torneo.inicio_torneo_fecha.strftime('%d/%m/%Y') %>");
-      rowTemplate = reemplazarCon(rowTemplate,9,"<%=@torneo.inicio_torneo_tiempo.strftime('%I:%M %p') %>");
+      rowTemplate = reemplazarCon(rowTemplate,8,"<%=@torneo_view.data_inicial_para_registro.inicio_torneo_fecha.strftime('%d/%m/%Y') %>");
+      rowTemplate = reemplazarCon(rowTemplate,9,"<%=@torneo_view.data_inicial_para_registro.inicio_torneo_tiempo.strftime('%I:%M %p') %>");
       rowTemplate = reemplazarCon(rowTemplate,10,"readonly='true'");      
       $("#rondas").append(rowTemplate);
     }else{
@@ -97,28 +97,30 @@ function cargarRegistroDeRondas(vacantes){
       });
     }
 
-    
+    <% contador=1%>
+      <% @torneo_view.data_inicial_para_registro.rondas.each do |ronda| %>
+        $("#ronda<%=contador%>_inicio_fecha").val("<%=ronda.inicio_fecha.strftime('%d/%m/%Y')%>");
+        $("#ronda<%=contador%>_inicio_tiempo").val("<%=ronda.inicio_tiempo.strftime('%I:%M %p')%>");
+      <%  contador=contador+1 %>
+    <% end %>
     
 
   }      
-  <% contador=1%>
-  <% @torneo.rondas.each do |ronda| %>
-    $("#ronda<%=contador%>_inicio_fecha").val("<%=ronda.inicio_fecha.strftime('%d/%m/%Y')%>");
-    $("#ronda<%=contador%>_inicio_tiempo").val("<%=ronda.inicio_tiempo.strftime('%I:%M %p')%>");
-  <%  contador=contador+1 %>
-  <% end %>
+
+    $("#ronda1_inicio_fecha").val("<%=@torneo_view.data_inicial_para_registro.inicio_torneo_fecha.strftime('%d/%m/%Y')%>");
+    $("#ronda1_inicio_tiempo").val("<%=@torneo_view.data_inicial_para_registro.inicio_torneo_tiempo.strftime('%I:%M %p')%>");
 
 }
 
 </script>
 <span id="mensajeError"></span>
-<%= form_for(@torneo) do |f| %>
-  <% if @torneo.errors.any? %>
+<%= form_for(@torneo_view.data_inicial_para_registro) do |f| %>
+  <% if @torneo_view.data_inicial_para_registro.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@torneo.errors.count, "error") %> No permite registrar el torneo:</h2>
+      <h2><%= pluralize(@torneo_view.data_inicial_para_registro.errors.count, "error") %> No permite registrar el torneo:</h2>
 
       <ul>
-      <% @torneo.errors.full_messages.each do |msg| %>
+      <% @torneo_view.data_inicial_para_registro.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -127,11 +129,11 @@ function cargarRegistroDeRondas(vacantes){
 
   <div class="field">
     <label class="labelFormulario">Título </label>    
-    <input id="torneo_titulo"  class="string required form-control input-lg" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" size="60" value="<%=@torneo.titulo%>" >
+    <input id="torneo_titulo"  class="string required form-control input-lg" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" size="60" value="<%=@torneo_view.data_inicial_para_registro.titulo%>" >
   </div>
   <div class="field">
       <label class="labelFormulario">P&aacute;gina web</label>
-    <input id="torneo_paginaweb"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" size="60" value="<%=@torneo.paginaweb%>" >
+    <input id="torneo_paginaweb"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" size="60" value="<%=@torneo_view.data_inicial_para_registro.paginaweb%>" >
   </div>
 
   <div class="field">
@@ -139,7 +141,7 @@ function cargarRegistroDeRondas(vacantes){
     <div id="juegos">
       <% 
       contador=1
-      Juego.all.each do | juego | %>   
+      @torneo_view.lista_juegos.each do | juego | %>   
         <input type="radio" id='juego_<%=juego.id%>' name='juego[id]' value="<%=juego.id%>" 
         <% if contador == 1 then %>checked='checked' <% end %> >
         <label for="juego_<%=juego.id%>"><%= juego.nombre %></label>
@@ -152,24 +154,24 @@ function cargarRegistroDeRondas(vacantes){
     <label class="labelFormulario">Vacantes</label>    
     <div id="vacantes">
       <input type="radio" id='torneo_vacantes1' name='torneo[vacantes]' value="4" onclick="javascript:cargarRegistroDeRondas(4)"
-      <% if @torneo.vacantes == 4 then %> checked='checked'  <% end %> /><label for="torneo_vacantes1">4</label>
+      <% if @torneo_view.data_inicial_para_registro.vacantes == 4 then %> checked='checked'  <% end %> /><label for="torneo_vacantes1">4</label>
       <input type="radio" id="torneo_vacantes2" name='torneo[vacantes]' value="8" onclick="javascript:cargarRegistroDeRondas(8)" 
-      <% if @torneo.vacantes == 8 then %> checked='checked'  <% end %> /><label for="torneo_vacantes2">8</label>
+      <% if @torneo_view.data_inicial_para_registro.vacantes == 8 then %> checked='checked'  <% end %> /><label for="torneo_vacantes2">8</label>
       <input type="radio" id="torneo_vacantes3" name='torneo[vacantes]' value="16" onclick="javascript:cargarRegistroDeRondas(16)"
-      <% if @torneo.vacantes == 16 then %> checked='checked'  <% end %> /><label for="torneo_vacantes3">16</label>
+      <% if @torneo_view.data_inicial_para_registro.vacantes == 16 then %> checked='checked'  <% end %> /><label for="torneo_vacantes3">16</label>
       <input type="radio" id="torneo_vacantes4" name='torneo[vacantes]' value="32" onclick="javascript:cargarRegistroDeRondas(32)"
-      <% if @torneo.vacantes == 32 then %> checked='checked'  <% end %> /><label for="torneo_vacantes4">32</label>
+      <% if @torneo_view.data_inicial_para_registro.vacantes == 32 then %> checked='checked'  <% end %> /><label for="torneo_vacantes4">32</label>
     </div>
   </div>
   <div class="field">
     <label class="labelFormulario">Fecha inicio torneo</label>
-    <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo.inicio_torneo_fecha.strftime("%d/%m/%Y") %>" onkeypress="return false;" > 
-    <input type="text" id="torneo_inicio_torneo_tiempo" name="torneo[inicio_torneo_tiempo]" class="string required form-control input-lg" placeholder="Hora Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo.inicio_torneo_tiempo.strftime("%I:%M %p")%>" onkeypress="return false;" >
+    <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo_view.data_inicial_para_registro.inicio_torneo_fecha.strftime("%d/%m/%Y") %>" onkeypress="return false;" > 
+    <input type="text" id="torneo_inicio_torneo_tiempo" name="torneo[inicio_torneo_tiempo]" class="string required form-control input-lg" placeholder="Hora Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo_view.data_inicial_para_registro.inicio_torneo_tiempo.strftime("%I:%M %p")%>" onkeypress="return false;" >
   </div>  
   <div class="field">
     <label class="labelFormulario">Fecha cierre inscripci&oacute;n e inicio check-in </label>
-    <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in" readonly="true" value="<%=@torneo.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" > 
-    <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in" readonly="true"  value="<%=@torneo.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" >
+    <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in" readonly="true" value="<%=@torneo_view.data_inicial_para_registro.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" > 
+    <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in" readonly="true"  value="<%=@torneo_view.data_inicial_para_registro.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" >
   </div>  
   <br/>
   <h4 class="text-center"><b>Fecha de Rondas y modo de ganar</b></h4>
@@ -198,7 +200,7 @@ function cargarRegistroDeRondas(vacantes){
 
 <% end %>
 <script type="text/javascript">
-  cargarRegistroDeRondas(<%= @torneo.vacantes %>);
+  cargarRegistroDeRondas(<%= @torneo_view.data_inicial_para_registro.vacantes %>);
   $( "#tipo_generacion" ).buttonset();
 
     $(function() {

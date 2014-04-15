@@ -3,8 +3,8 @@
             var minimalData = {
             teams : [
               <% contador=0 %>
-              <%   cantidad_inscripciones=@torneo.inscripcions.limit(@torneo.vacantes).count %>
-              <%   @torneo.inscripcions.order(:posicion_inicial).limit(@torneo.vacantes).each do |inscripcion| %>
+              <%   cantidad_inscripciones=@torneo_view.torneo_detallado.inscripcions.limit(@torneo_view.torneo_detallado.vacantes).count %>
+              <%   @torneo_view.torneo_detallado.inscripcions.order(:posicion_inicial).limit(@torneo_view.torneo_detallado.vacantes).each do |inscripcion| %>
                 <% if contador == 0 then %>                
                   ["<%= inscripcion.peso_participacion %>-<%= inscripcion.gamer.nick %>"  
                 <% else %>  
@@ -40,16 +40,16 @@
       <div class="tile" style="height: 256px;">
     <% end %>    
             <h3 class="text-center"><u>Prepara tu torneo antes de iniciar</u></h1>
-            <h3 class="text-center"><%= @torneo.titulo %></h2>
-            <h4 class="text-center"><%= @torneo.paginaweb %></h4>
+            <h3 class="text-center"><%= @torneo_view.torneo_detallado.titulo %></h2>
+            <h4 class="text-center"><%= @torneo_view.torneo_detallado.paginaweb %></h4>
             <center>
-              <a href="/torneos/<%=@torneo.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
+              <a href="/torneos/<%=@torneo_view.torneo_detallado.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
             </center>
             <br/>
-            <%= form_for @torneo do |f|   %>
+            <%= form_for @torneo_view.torneo_detallado do |f|   %>
              <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Iniciado" />
             <center>
-              <a href="/torneos/preparar/<%=@torneo.id%>"><font color="#FFFFFF">Volver a generar</font></a>       
+              <a href="/torneos/preparar/<%=@torneo_view.torneo_detallado.id%>"><font color="#FFFFFF">Volver a generar</font></a>       
                 <br/>
                   <div id="boton_generar">
                     <center><%= f.submit "Iniciar Torneo!!!"%></center>

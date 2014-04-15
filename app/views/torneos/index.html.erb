@@ -18,7 +18,7 @@
           <div class="tile">
             <h3>Participa en todos los torneos que puedas</h3>
              <div class="table-responsive">
-              <% if @torneos.empty? then %>
+              <% if @torneos_view.listado_torneos.empty? then %>
                 <h4>En estos momentos no existen torneos disponibles para inscribirse, organiza el tuyo!!, <a href="torneos/new" >organizar mi torneo</a></h4>
               <% else %>
 
@@ -43,7 +43,7 @@
                 </thead>
 
                 <tbody id="torneosPortada">
-                  <% @torneos.each do |torneo| %>
+                  <% @torneos_view.listado_torneos.each do |torneo| %>
                     <tr>
                       <td><%= torneo.titulo %></td>
                       <td><%= torneo.juego.asociado.nombre %></td>

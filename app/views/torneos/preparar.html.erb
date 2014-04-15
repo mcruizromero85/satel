@@ -44,17 +44,17 @@
         <div >
             <div class="tile">
               <h3 class="text-center"><u>Prepara tu torneo antes de iniciar</u></h1>
-                <h3 class="text-center"><%= @torneo.titulo %></h2>
-                <h4 class="text-center"><%= @torneo.paginaweb %></h4>
+                <h3 class="text-center"><%= @torneo_view.torneo_detallado.titulo %></h2>
+                <h4 class="text-center"><%= @torneo_view.torneo_detallado.paginaweb %></h4>
                 
                  <center>
-                  <a href="/torneos/<%=@torneo.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
+                  <a href="/torneos/<%=@torneo_view.torneo_detallado.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
                  </center>
 
                 <br/>
-               <% if @torneo.inscripcions.count >= 4 %>
+               <% if @torneo_view.torneo_detallado.inscripcions.count >= 4 %>
                    <div class="table-responsive">          
-                    <%= form_for @torneo do |f|   %>
+                    <%= form_for @torneo_view.torneo_detallado do |f|   %>
 
                       <div id="tipo_generacion">
                         <center>
@@ -90,7 +90,7 @@
                   </ul>
                   <ul class="inscripciones" id="inscritos">
                     <% contador=1 %>
-                    <% @torneo.inscripcions.order(:id).limit(@torneo.vacantes).each do |inscripcion| %>
+                    <% @torneo_view.torneo_detallado.inscripcions.order(:id).limit(@torneo_view.torneo_detallado.vacantes).each do |inscripcion| %>
                       <li class="ui-state-default">
                         <div class="columna_inscritos_nick"><%= inscripcion.gamer.nick %></div>
                         <div class="columna_inscritos_fecha"><%= inscripcion.fecha_inscripcion %></div>

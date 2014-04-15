@@ -79,6 +79,8 @@ class TorneosService
 	            end
 	          end
 	        end
+	        print ronda
+	        print torneo
 	        torneo.rondas << ronda
 	      end
 	    end

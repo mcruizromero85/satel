@@ -3,8 +3,8 @@
             var minimalData = {
             teams : [
               <% contador=0 %>
-              <%   cantidad_inscripciones=@torneo.inscripcions.count %>
-              <%   @torneo.inscripcions.order(:posicion_inicial).each do |inscripcion| %>
+              <%   cantidad_inscripciones=@torneo_view.torneo_detallado.inscripcions.count %>
+              <%   @torneo_view.torneo_detallado.inscripcions.order(:posicion_inicial).each do |inscripcion| %>
                 <% if contador == 0 then %>                
                   ["<%= inscripcion.peso_participacion %>-<%= inscripcion.gamer.nick %>"  
                 <% else %>  
@@ -40,11 +40,11 @@
     <%   else %>
       <div class="tile" style="height: 256px;">
     <% end %>    
-           <h2 class="text-center"><%= @torneo.titulo %></h2>
-           <h3 class="text-center"><%= @torneo.paginaweb %></h3>
-            <%= form_for @torneo do |f|   %>
+           <h2 class="text-center"><%= @torneo_view.torneo_detallado.titulo %></h2>
+           <h3 class="text-center"><%= @torneo_view.torneo_detallado.paginaweb %></h3>
+            <%= form_for @torneo_view.torneo_detallado do |f|   %>
              <center>
-              <a href="/torneos/<%=@torneo.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
+              <a href="/torneos/<%=@torneo_view.torneo_detallado.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
             </center>
              <% end %>
           <div id="llaves" class="table-responsive" ></div>       

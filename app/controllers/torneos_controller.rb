@@ -1,33 +1,46 @@
 class TorneosController < ApplicationController
   require_relative '../../app/helpers/torneos_helper'
   require_relative '../../app/services/torneos_service'
+
   before_action :set_torneo, only: [:preparar,:show, :edit, :update, :destroy]
   
   # GET /torneos GET /torneos.json
   def index
-    @torneos=TorneosService.obtener_torneos_para_portada  
+    @torneos_view=TorneoView.new
+    @torneos_view.listado_torneos=TorneosService.obtener_torneos_para_portada      
   end
 
   # GET /torneos/1
   # GET /torneos/1.json
   def show
+    @torneo_view=TorneoView.new    
+    @torneo_view.torneo_detallado=@torneo
   end
 
 attr_writer :attr_names
   # GET /torneos/new
   def new
-    @torneo=TorneosService.obtener_torneo_con_valores_inicializados
+    @torneo_view=TorneoView.new
+    @torneo_view.lista_juegos=JuegosService.obtener_juegos
+    @torneo_view.data_inicial_para_registro=TorneosService.obtener_torneo_con_valores_inicializados  
+    
   end
 
   def preparar
     if @torneo.estado == 'Iniciado' then
       respond_to do |format|
+        @torneo_view=TorneoView.new    
+        @torneo_view.torneo_detallado=@torneo
         format.html { render action: 'desarrollo', notice: 'Torneo was successfully updated.' }      
       end
     end
+    @torneo_view=TorneoView.new    
+    @torneo_view.torneo_detallado=@torneo
+
   end
 
   def simular_llaves
+
   end
 
   # GET /torneos/1/edit
@@ -44,6 +57,9 @@ attr_writer :attr_names
         format.html { redirect_to @torneo, notice: 'Torneo was successfully created.' }
         format.json { render action: 'show', status: :created, location: @torneo }
       else
+        @torneo_view=TorneoView.new
+        @torneo_view.data_inicial_para_registro=@torneo
+        @torneo_view.lista_juegos=JuegosService.obtener_juegos
         format.html { render action: 'new' }
         format.json { render json: @torneo.errors, status: :unprocessable_entity }
       end
@@ -58,6 +74,8 @@ attr_writer :attr_names
       @torneo.estado= torneo_params[:estado]
       respond_to do |format|
         if TorneosService.iniciar_torneo(@torneo)
+          @torneo_view=TorneoView.new    
+          @torneo_view.torneo_detallado=@torneo
           format.html { render action: 'desarrollo', notice: 'Torneo was successfully updated.' }
         else
           format.html { render action: 'edit' }
@@ -67,12 +85,16 @@ attr_writer :attr_names
       @torneo.tipo_generacion = torneo_params[:tipo_generacion]
       respond_to do |format|
         if TorneosService.generar_estructura_llaves(@torneo,params) then
+          @torneo_view=TorneoView.new    
+          @torneo_view.torneo_detallado=@torneo
           format.html { render action: 'simular_llaves', notice: 'Torneo was successfully updated.' }         
         else
           format.html { render action: 'edit' }
         end
       end
     end
+
+    
   end
 
   # DELETE /torneos/1

@@ -6,30 +6,30 @@
               <br/>
                <div class="table-responsive">
 
-                  <h3 class="text-center"><%=@torneo.titulo%></h3>
+                  <h3 class="text-center"><%=@torneo_view.torneo_detallado.titulo%></h3>
                   <br/>
                   <div class="field">
                       <label class="labelFormulario">P&aacute;gina web</label>
-                    <input id="torneo_paginaweb"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" size="60" value="<%=@torneo.paginaweb%>" readonly="true" >
+                    <input id="torneo_paginaweb"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" size="60" value="<%=@torneo_view.torneo_detallado.paginaweb%>" readonly="true" >
                   </div>
 
                   <div class="field">
                     <label class="labelFormulario">Juego</label>    
-                      <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg" placeholder="Fecha Inicio del torneo" readonly="true" value="<%=@torneo.juego.nombre %>" >
+                      <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg" placeholder="Fecha Inicio del torneo" readonly="true" value="<%=@torneo_view.torneo_detallado.juego.nombre %>" >
                   </div>
                   <div class="field">
                     <label class="labelFormulario">Vacantes</label>    
-                      <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg" placeholder="Fecha Inicio del torneo" readonly="true" value="<%=@torneo.vacantes %>" >
+                      <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg" placeholder="Fecha Inicio del torneo" readonly="true" value="<%=@torneo_view.torneo_detallado.vacantes %>" >
                   </div>
                   <div class="field">
                     <label class="labelFormulario">Fecha inicio torneo</label>
-                    <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" readonly="true" value="<%=@torneo.inicio_torneo_fecha.strftime("%d/%m/%Y") %>" > 
-                    <input type="text" id="torneo_inicio_torneo_tiempo" name="torneo[inicio_torneo_tiempo]" class="string required form-control input-lg" placeholder="Hora Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" readonly="true" value="<%=@torneo.inicio_torneo_tiempo.strftime("%I:%M %p")%>" >
+                    <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" readonly="true" value="<%=@torneo_view.torneo_detallado.inicio_torneo_fecha.strftime("%d/%m/%Y") %>" > 
+                    <input type="text" id="torneo_inicio_torneo_tiempo" name="torneo[inicio_torneo_tiempo]" class="string required form-control input-lg" placeholder="Hora Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" readonly="true" value="<%=@torneo_view.torneo_detallado.inicio_torneo_tiempo.strftime("%I:%M %p")%>" >
                   </div>  
                   <div class="field">
                     <label class="labelFormulario">Fecha cierre inscripci&oacute;n e inicio check-in </label>
-                    <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in" readonly="true" value="<%=@torneo.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" > 
-                    <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in" readonly="true"  value="<%=@torneo.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" >
+                    <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in" readonly="true" value="<%=@torneo_view.torneo_detallado.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" > 
+                    <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in" readonly="true"  value="<%=@torneo_view.torneo_detallado.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" >
                   </div>  
                   <br/>
                   <h4 class="text-center"><b>Fecha de Rondas y modo de ganar</b></h4>
@@ -45,7 +45,7 @@
                         </tr>
                       </thead>
                       <tbody id="rondas">
-                        <% @torneo.rondas.order(:numero).each do |ronda| %>
+                        <% @torneo_view.torneo_detallado.rondas.order(:numero).each do |ronda| %>
                           <tr>
                             <td><%=ronda.numero%></td>
                             <td><input type='text' class='string required form-control input-lg datepicker' readonly="true" value="<%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %>"/></td>
