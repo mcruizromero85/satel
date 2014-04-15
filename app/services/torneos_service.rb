@@ -1,8 +1,8 @@
-module TorneosService
+class TorneosService
 	require 'active_support/core_ext/date'
 
-	def self.iniciar_torneo torneo
-		torneo.update
+	def self.iniciar_torneo(torneo)
+		torneo.save
 	end
 
 	def self.obtener_torneos_para_portada
@@ -33,7 +33,7 @@ module TorneosService
 	    else
 	      posiciones=TorneosHelper.obtener_posicion_de_ronda_por_ranking(torneo.vacantes,1)
 	    end
-	        
+	    print posiciones
 	    indice_posiciones=0
 	    torneo.inscripcions.order(:peso_participacion).each do | inscripcion | 
 	      inscripcion.posicion_inicial=posiciones[indice_posiciones]
@@ -64,8 +64,8 @@ module TorneosService
 	        ronda=Ronda.new(rondas["ronda"+i.to_s].permit(:numero,:inicio_fecha,:inicio_tiempo,:modo_ganar))
 
 	        if ronda.inicio_fecha == nil || ronda.inicio_tiempo == nil then
-	          torneo.errors.add(:inicio_torneo,"las fechas de las rondas no pueden estar vacias")
-	          flag_existe_error=true
+	          torneo.errors.add(:inicio_torneo,", las fechas de las rondas no pueden estar vacias")
+	          return
 	        end
 
 	        if i > 1 then           

@@ -5,7 +5,7 @@ class TorneosController < ApplicationController
   
   # GET /torneos GET /torneos.json
   def index
-    @torneos=TorneosService.obtener_torneos_para_portada    
+    @torneos=TorneosService.obtener_torneos_para_portada  
   end
 
   # GET /torneos/1
@@ -64,6 +64,7 @@ attr_writer :attr_names
         end
       end
     else
+      @torneo.tipo_generacion = torneo_params[:tipo_generacion]
       respond_to do |format|
         if TorneosService.generar_estructura_llaves(@torneo,params) then
           format.html { render action: 'simular_llaves', notice: 'Torneo was successfully updated.' }         

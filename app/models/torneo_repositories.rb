@@ -3,7 +3,7 @@ module TorneoRepository
     #Por Implementar
   end
 
-  def self.buscar_por_id tonreo_id
+  def self.buscar_por_id torneo_id
     #Por Implementar
   end
 end

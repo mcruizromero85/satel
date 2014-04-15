@@ -83,22 +83,24 @@ function cargarRegistroDeRondas(vacantes){
       rowTemplate = reemplazarCon(rowTemplate,8,"<%=@torneo.inicio_torneo_fecha.strftime('%d/%m/%Y') %>");
       rowTemplate = reemplazarCon(rowTemplate,9,"<%=@torneo.inicio_torneo_tiempo.strftime('%I:%M %p') %>");
       rowTemplate = reemplazarCon(rowTemplate,10,"readonly='true'");      
+      $("#rondas").append(rowTemplate);
     }else{
       rowTemplate = reemplazarCon(rowTemplate,8,"");
       rowTemplate = reemplazarCon(rowTemplate,9,"");
-      rowTemplate = reemplazarCon(rowTemplate,10,"");      
+      rowTemplate = reemplazarCon(rowTemplate,10,"");
+      $("#rondas").append(rowTemplate);      
+      $( "#ronda"+contador+"_inicio_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
+    
+      $("#ronda"+contador+"_inicio_tiempo").timepicker({
+        showPeriod: true,
+        showLeadingZero: true
+      });
     }
 
     
-    $("#rondas").append(rowTemplate);
-    $( "#ronda"+contador+"_inicio_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
     
-    $("#ronda"+contador+"_inicio_tiempo").timepicker({
-      showPeriod: true,
-      showLeadingZero: true
-    });
+
   }      
-  //asdasdasds
   <% contador=1%>
   <% @torneo.rondas.each do |ronda| %>
     $("#ronda<%=contador%>_inicio_fecha").val("<%=ronda.inicio_fecha.strftime('%d/%m/%Y')%>");
