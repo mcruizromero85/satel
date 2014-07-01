@@ -33,7 +33,7 @@ class TorneosService
 	    else
 	      posiciones=TorneosHelper.obtener_posicion_de_ronda_por_ranking(torneo.vacantes,1)
 	    end
-	    print posiciones
+	    
 	    indice_posiciones=0
 	    torneo.inscripcions.order(:peso_participacion).each do | inscripcion | 
 	      inscripcion.posicion_inicial=posiciones[indice_posiciones]
@@ -79,8 +79,7 @@ class TorneosService
 	            end
 	          end
 	        end
-	        print ronda
-	        print torneo
+
 	        torneo.rondas << ronda
 	      end
 	    end
@@ -90,11 +89,23 @@ class TorneosService
 	    juego.id = id_juego
 	    torneo.juego = juego
 
+	    puts "Torneo Inicio: " + (torneo.inicio_torneo ).to_s
+	    puts "Fecha Actual: " + (Time.new).to_s
+
+	    puts "Torneo Inicio int: " + (torneo.inicio_torneo.to_i ).to_s
+	    puts "Fecha Actual: int" + (Time.new.to_i).to_s
+	    puts "Resultado int: " + (torneo.inicio_torneo.to_i - Time.new.to_i).to_s
+
 	    if ((torneo.inicio_torneo.to_i - Time.new.to_i) < (60 * 60) ) then
 	        torneo.errors.add(:inicio_torneo,"debe ser mayor a 1 hora desde la fecha actual")
+	        print "LLEGUE!!"
 	        flag_existe_error=true
 	    end
-
-	    return torneo.save
+	    if flag_existe_error then
+	    	return false
+	    else
+	    	return torneo.save
+	    end
+	    
 	end
 end

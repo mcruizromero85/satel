@@ -69,7 +69,7 @@ function cargarRegistroDeRondas(vacantes){
 
  
   for (var i=0;i<numeroRondas;i++){
-     var rowTemplate = "<tr><td>{0}</td><td><input type='hidden' id='ronda{7}_numero' name='ronda{7}[numero]' value='{7}' /> <input type='text' id='{1}' name='{2}' class='string required form-control input-lg datepicker' placeholder='Fecha inicio {0}' value='{8}' {10} onkeypress='return false;' /> </td><td><input type='text' id='{3}' name='{4}' class='string required form-control input-lg' placeholder='Hora inicio {0}' value='{9}' {10} onkeypress='return false;' /></td><td><select id='{5}' name='{6}' class='string required form-control input-lg' ><option value='1'>Mejor de 1</option><option value='3'>Mejor de 3</option><option value='5'>Mejor de 5</option></select></td></tr>";
+     var rowTemplate = "<tr><td>{0}</td><td><input type='hidden' id='ronda{7}_numero' name='ronda{7}[numero]' value='{7}' /> <input type='text' id='{1}' name='{2}' class='string required form-control input-lg datepicker' placeholder='Fecha inicio {0}' value='{8}' {10} /> </td><td><input type='text' id='{3}' name='{4}' class='string required form-control input-lg' placeholder='Hora inicio {0}' value='{9}' {10} /></td><td><select id='{5}' name='{6}' class='string required form-control input-lg' ><option value='1'>Mejor de 1</option><option value='3'>Mejor de 3</option><option value='5'>Mejor de 5</option></select></td></tr>";
     contador=i+1;
     rowTemplate = reemplazarCon(rowTemplate,0,"Ronda "+contador);
     rowTemplate = reemplazarCon(rowTemplate,1,"ronda"+contador+"_inicio_fecha");
@@ -166,8 +166,8 @@ function cargarRegistroDeRondas(vacantes){
   <div class="field">    
     <label class="labelFormulario">Fecha inicio torneo</label>
     <div id="cuadro_fecha_inicio_torneo">
-      <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo_view.data_inicial_para_registro.inicio_torneo_fecha.strftime("%d/%m/%Y") %>" onkeypress="return false;" > 
-      <input type="text" id="torneo_inicio_torneo_tiempo" name="torneo[inicio_torneo_tiempo]" class="horario_deshabilitado string required form-control input-lg" placeholder="Hora Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo_view.data_inicial_para_registro.inicio_torneo_tiempo.strftime("%I:%M %p")%>" onkeypress="return false;" >
+      <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo_view.data_inicial_para_registro.inicio_torneo_fecha.strftime("%d/%m/%Y") %>"  > 
+      <input type="text" id="torneo_inicio_torneo_tiempo" name="torneo[inicio_torneo_tiempo]" class="horario_deshabilitado string required form-control input-lg" placeholder="Hora Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo_view.data_inicial_para_registro.inicio_torneo_tiempo.strftime("%I:%M %p")%>"  >
     </div>
   </div>  
   <div class="field">

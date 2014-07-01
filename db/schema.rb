@@ -41,18 +41,6 @@ ActiveRecord::Schema.define(version: 20140412192350) do
     t.datetime "updated_at"
   end
 
-  create_table "inscripcions", force: true do |t|
-    t.date     "fecha_inscripcion"
-    t.time     "hora_inscripcion"
-    t.string   "estado_confirmacion"
-    t.integer  "peso_participacion"
-    t.integer  "posicion_inicial"
-    t.integer  "gamer_id"
-    t.integer  "torneo_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "juegos", force: true do |t|
     t.string   "nombre"
     t.string   "descripcion"
