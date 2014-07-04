@@ -58,4 +58,4 @@ group :development, :test do
   gem 'selenium-webdriver'
 end
 
-
+gem "factory_girl_rails", "~> 4.0"

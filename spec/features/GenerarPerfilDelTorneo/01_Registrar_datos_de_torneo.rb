@@ -12,21 +12,11 @@ feature "Registrar datos de torneo" do
 	# ================
 	# Dado que se ha seleccionado un número menor a 4 o mayor 32 como número de vacantes del torneo y los demás datos están correctamente llenados, cuando se presiona el botón registrar, el mensaje que debe salir es "Las vacantes deben estar entre los valores 4 y 32"(Manual).
 
-	#Datos Correctos para un registro
-	TORNEO_TITULO_CORRECTO="TORNEO DE CS 1.6 ONLINE - THE LAST CHANCE"	 
-	TORNEO_PAGINAWEB_CORRECTO="http://www.bloodzone.net/forums/f25/torneo-de-cs-1-6-online-last-chance-108544/" 
-	TORNEO_INICIO_TORNEO_FECHA_CORRECTO="29/06/2014" 
-	TORNEO_INICIO_TORNEO_TIEMPO_CORRECTO="01:38 AM" 
-	RONDA2_INICIO_FECHA_CORRECTO="29/06/2014" 
-	RONDA2_INICIO_TIEMPO_CORRECTO="03:38 AM" 
-	RONDA3_INICIO_FECHA_CORRECTO="29/06/2014" 
-	RONDA3_INICIO_TIEMPO_CORRECTO="05:38 AM"
-
 	scenario "Dado que se ha introducido correctamente todos los datos, cuando se publica el torneo, el mensaje que debe salir es \"Torneo registrado correctamente\"", :js => true do
 		visit "/"
 		click_link "link_cabecera_registrar_torneo"
-		llenar_formulario_con_datos_correctos	    				 
-		click_button("Registrar Torneo")
+		llenar_formulario_con_datos_correctos	    				 		
+		click_button("Registrar Torneo")		
 		expect(page).to have_content("Torneo registrado correctamente")
 	end
 
@@ -57,22 +47,25 @@ feature "Registrar datos de torneo" do
 			llenar_formulario_con_datos_correctos	    		
 			fill_in("torneo_inicio_torneo_fecha", :with => fecha_hora_torneo_errado.strftime("%d/%m/%Y") )
 			fill_in("torneo_inicio_torneo_tiempo", :with => fecha_hora_torneo_errado.strftime("%I:%M %p"))
-			page.save_screenshot('screenshot.png')
 			click_button("Registrar Torneo")
 			expect(page).to have_content("La fecha de inicio tiene que ser mayor a la actual por más de 1 hora")
 		end
 	end
 
-	def llenar_formulario_con_datos_correctos		
-		fill_in("torneo_titulo", :with => TORNEO_TITULO_CORRECTO)
-	    fill_in("torneo_paginaweb", :with => TORNEO_PAGINAWEB_CORRECTO)	    
+	def llenar_formulario_con_datos_correctos	
+		torneo_correcto = FactoryGirl.build(:torneo)
+		ronda2_correcto = FactoryGirl.build(:ronda, numero: 2)
+		ronda3_correcto = FactoryGirl.build(:ronda, numero: 3)
+
+		fill_in("torneo_titulo", :with => torneo_correcto.titulo)
+	    fill_in("torneo_paginaweb", :with => torneo_correcto.paginaweb)	    
 	    choose "juego_1"
-	    fill_in("torneo_inicio_torneo_fecha", :with => TORNEO_INICIO_TORNEO_FECHA_CORRECTO)
-	    fill_in("torneo_inicio_torneo_tiempo", :with => TORNEO_INICIO_TORNEO_TIEMPO_CORRECTO)
-		fill_in("ronda2_inicio_fecha", :with => RONDA2_INICIO_FECHA_CORRECTO)
-	    fill_in("ronda2_inicio_tiempo", :with => RONDA2_INICIO_TIEMPO_CORRECTO)
-		fill_in("ronda3_inicio_fecha", :with => RONDA3_INICIO_FECHA_CORRECTO)
-	    fill_in("ronda3_inicio_tiempo", :with => RONDA3_INICIO_TIEMPO_CORRECTO)	    
+	    fill_in("torneo_inicio_torneo_fecha", :with => torneo_correcto.inicio_torneo_fecha.strftime("%d/%m/%Y"))
+	    fill_in("torneo_inicio_torneo_tiempo", :with => torneo_correcto.inicio_torneo_tiempo.strftime("%I:%M %p"))
+		fill_in("ronda2_inicio_fecha", :with => ronda2_correcto.inicio_fecha.strftime("%d/%m/%Y"))
+	    fill_in("ronda2_inicio_tiempo", :with => ronda2_correcto.inicio_tiempo.strftime("%I:%M %p"))  
+	    fill_in("ronda3_inicio_fecha", :with => ronda3_correcto.inicio_fecha.strftime("%d/%m/%Y"))
+	    fill_in("ronda3_inicio_tiempo", :with => ronda3_correcto.inicio_tiempo.strftime("%I:%M %p"))  
 	end
 	
 	def listado_titulo_torneos_errados

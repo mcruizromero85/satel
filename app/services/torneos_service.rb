@@ -89,16 +89,8 @@ class TorneosService
 	    juego.id = id_juego
 	    torneo.juego = juego
 
-	    puts "Torneo Inicio: " + (torneo.inicio_torneo ).to_s
-	    puts "Fecha Actual: " + (Time.new).to_s
-
-	    puts "Torneo Inicio int: " + (torneo.inicio_torneo.to_i ).to_s
-	    puts "Fecha Actual: int" + (Time.new.to_i).to_s
-	    puts "Resultado int: " + (torneo.inicio_torneo.to_i - Time.new.to_i).to_s
-
 	    if ((torneo.inicio_torneo.to_i - Time.new.to_i) < (60 * 60) ) then
-	        torneo.errors.add(:inicio_torneo,"debe ser mayor a 1 hora desde la fecha actual")
-	        print "LLEGUE!!"
+	        torneo.errors.add(:inicio_torneo,"La fecha de inicio tiene que ser mayor a la actual por más de 1 hora")
 	        flag_existe_error=true
 	    end
 	    if flag_existe_error then
