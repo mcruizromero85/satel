@@ -97,6 +97,7 @@ attr_writer :attr_names
     
   end
 
+
   # DELETE /torneos/1
   # DELETE /torneos/1.json
   def destroy

@@ -24,8 +24,5 @@ FactoryGirl.define do
     end  
   end
 
-  def obtener_fecha_ronda_por numero
-    "30/06/2014" 
-  end
 
 end

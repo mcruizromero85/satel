@@ -4,8 +4,6 @@ Satel::Application.routes.draw do
 
   resources :juegos
 
-  resources :prueba2s
-
   resources :encuentros
 
   resources :gamers
@@ -18,8 +16,6 @@ Satel::Application.routes.draw do
 
   resources :rondas
 
-  resources :pruebas
-  
   resources :torneos
   root 'torneos#index'
 
