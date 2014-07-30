@@ -34,7 +34,6 @@
                 <thead>
                   <tr>
                     <th class="header">Nombre</th>
-                    <th class="header">Asociado</th>
                     <th class="header">Juego</th>
                     <th class="header">Vacantes</th>
                     <th class="header">Cierre inscripcion</th>
@@ -46,7 +45,6 @@
                   <% @torneos_view.listado_torneos.each do |torneo| %>
                     <tr>
                       <td><%= torneo.titulo %></td>
-                      <td><%= torneo.juego.asociado.nombre %></td>
                       <td><%= torneo.juego.nombre %></td>
                       <td><%= torneo.vacantes %></td>
                       <td>

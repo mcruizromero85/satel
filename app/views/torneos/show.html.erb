@@ -14,19 +14,6 @@
                   </div>
 
                   <div class="field">
-                    <label class="labelFormulario">Juego</label>    
-                      <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg" placeholder="Fecha Inicio del torneo" readonly="true" value="<%=@torneo_view.torneo_detallado.juego.nombre %>" >
-                  </div>
-                  <div class="field">
-                    <label class="labelFormulario">Vacantes</label>    
-                      <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg" placeholder="Fecha Inicio del torneo" readonly="true" value="<%=@torneo_view.torneo_detallado.vacantes %>" >
-                  </div>
-                  <div class="field">
-                    <label class="labelFormulario">Fecha inicio torneo</label>
-                    <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" readonly="true" value="<%=@torneo_view.torneo_detallado.inicio_torneo_fecha.strftime("%d/%m/%Y") %>" > 
-                    <input type="text" id="torneo_inicio_torneo_tiempo" name="torneo[inicio_torneo_tiempo]" class="string required form-control input-lg" placeholder="Hora Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" readonly="true" value="<%=@torneo_view.torneo_detallado.inicio_torneo_tiempo.strftime("%I:%M %p")%>" >
-                  </div>  
-                  <div class="field">
                     <label class="labelFormulario">Fecha cierre inscripci&oacute;n e inicio check-in </label>
                     <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in" readonly="true" value="<%=@torneo_view.torneo_detallado.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" > 
                     <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in" readonly="true"  value="<%=@torneo_view.torneo_detallado.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" >

@@ -8,6 +8,9 @@
       $( "#cuadro_de_juegos" ).buttonset();
     });
 
+
+    
+
     function reemplazarCon(cadena,key,value) {
       var s = cadena;
       var reg = new RegExp("\\{" + key + "\\}", "gm");             
@@ -57,10 +60,6 @@ function sincronizarConFechaCheckIn(){
   $('#torneo_cierre_inscripcion_fecha').val( day + "/" + month + "/" + year);
   $('#torneo_cierre_inscripcion_tiempo').val( hour +":" + minute + " "+AMoPM);
 
-  $('#ronda1_inicio_fecha').val( $('#torneo_inicio_torneo_fecha').val());
-  $('#ronda1_inicio_tiempo').val( $('#torneo_inicio_torneo_tiempo').val());
-  
-  
 }
 
 function cargarRegistroDeRondas(vacantes){
@@ -79,36 +78,21 @@ function cargarRegistroDeRondas(vacantes){
     rowTemplate = reemplazarCon(rowTemplate,5,"ronda"+contador+"_modo_ganar");
     rowTemplate = reemplazarCon(rowTemplate,6,"ronda"+contador+"[modo_ganar]");
     rowTemplate = reemplazarCon(rowTemplate,7,contador);
-    if (contador==1){
-      rowTemplate = reemplazarCon(rowTemplate,8,"<%=@torneo_view.data_inicial_para_registro.inicio_torneo_fecha.strftime('%d/%m/%Y') %>");
-      rowTemplate = reemplazarCon(rowTemplate,9,"<%=@torneo_view.data_inicial_para_registro.inicio_torneo_tiempo.strftime('%I:%M %p') %>");
-      rowTemplate = reemplazarCon(rowTemplate,10,"readonly='true'");      
-      $("#rondas").append(rowTemplate);
-    }else{
-      rowTemplate = reemplazarCon(rowTemplate,8,"");
-      rowTemplate = reemplazarCon(rowTemplate,9,"");
-      rowTemplate = reemplazarCon(rowTemplate,10,"");
-      $("#rondas").append(rowTemplate);      
-      $( "#ronda"+contador+"_inicio_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
+ 
+    rowTemplate = reemplazarCon(rowTemplate,8,"");
+    rowTemplate = reemplazarCon(rowTemplate,9,"");
+    rowTemplate = reemplazarCon(rowTemplate,10,"");
+    $("#rondas").append(rowTemplate);      
+    $( "#ronda"+contador+"_inicio_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
     
-      $("#ronda"+contador+"_inicio_tiempo").timepicker({
+    $("#ronda"+contador+"_inicio_tiempo").timepicker({
         showPeriod: true,
         showLeadingZero: true
-      });
-    }
-
-    <% contador=1%>
-      <% @torneo_view.data_inicial_para_registro.rondas.each do |ronda| %>
-        $("#ronda<%=contador%>_inicio_fecha").val("<%=ronda.inicio_fecha.strftime('%d/%m/%Y')%>");
-        $("#ronda<%=contador%>_inicio_tiempo").val("<%=ronda.inicio_tiempo.strftime('%I:%M %p')%>");
-      <%  contador=contador+1 %>
-    <% end %>
+    });
     
 
-  }      
 
-    $("#ronda1_inicio_fecha").val("<%=@torneo_view.data_inicial_para_registro.inicio_torneo_fecha.strftime('%d/%m/%Y')%>");
-    $("#ronda1_inicio_tiempo").val("<%=@torneo_view.data_inicial_para_registro.inicio_torneo_tiempo.strftime('%I:%M %p')%>");
+  }      
 
 }
 
@@ -117,7 +101,7 @@ function cargarRegistroDeRondas(vacantes){
 <%= form_for(@torneo_view.data_inicial_para_registro) do |f| %>
   <% if @torneo_view.data_inicial_para_registro.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@torneo_view.data_inicial_para_registro.errors.count, "error") %> No permite registrar el torneo:</h2>
+      <h2><%= pluralize(@torneo_view.data_inicial_para_registro.errors.count, "error") %> No permiten registrar el torneo:</h2>
 
       <ul>
       <% @torneo_view.data_inicial_para_registro.errors.full_messages.each do |msg| %>
@@ -163,20 +147,28 @@ function cargarRegistroDeRondas(vacantes){
       <% if @torneo_view.data_inicial_para_registro.vacantes == 32 then %> checked='checked'  <% end %> /><label for="torneo_vacantes4">32</label>
     </div>
   </div>
-  <div class="field">    
-    <label class="labelFormulario">Fecha inicio torneo</label>
-    <div id="cuadro_fecha_inicio_torneo">
-      <input type="text" id="torneo_inicio_torneo_fecha" name="torneo[inicio_torneo_fecha]" class="string required form-control input-lg datepicker" placeholder="Fecha Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo_view.data_inicial_para_registro.inicio_torneo_fecha.strftime("%d/%m/%Y") %>"  > 
-      <input type="text" id="torneo_inicio_torneo_tiempo" name="torneo[inicio_torneo_tiempo]" class="horario_deshabilitado string required form-control input-lg" placeholder="Hora Inicio del torneo" onchange="javascript:sincronizarConFechaCheckIn();" value="<%=@torneo_view.data_inicial_para_registro.inicio_torneo_tiempo.strftime("%I:%M %p")%>"  >
-    </div>
-  </div>  
   <div class="field">
     <label class="labelFormulario">Fecha cierre inscripci&oacute;n </label>
     <div id="cuadro_tiempo_inicio_torneo">
-      <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in" readonly="true" value="<%=@torneo_view.data_inicial_para_registro.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" > 
-      <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in" readonly="true"  value="<%=@torneo_view.data_inicial_para_registro.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" >
+      <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="" > 
+      <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="" >
     </div>
   </div>  
+
+  <div class="field">
+    <label class="labelFormulario">Periodo de confirmaci&oacute;n</label>
+      <div id="cuadro_de_confirmacion">
+        
+        <select id='torneo_periodo_confirmacion_en_minutos' name='torneo[periodo_confirmacion_en_minutos]' class='string required form-control input-lg' >
+          <option value='0'>Sin confirmaci&oacute;n</option>
+          <option value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
+          <option value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
+          <option value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
+        </select>
+
+      </div>
+  </div>  
+
   <br/>
   <h4 class="text-center"><b>Fecha de Rondas y modo de ganar</b></h4>
 
@@ -207,13 +199,5 @@ function cargarRegistroDeRondas(vacantes){
   cargarRegistroDeRondas(<%= @torneo_view.data_inicial_para_registro.vacantes %>);
   $( "#tipo_generacion" ).buttonset();
 
-    $(function() {
-      $( "#torneo_inicio_torneo_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
-    });
 
-
-    $('#torneo_inicio_torneo_tiempo').timepicker({
-      showPeriod: true,
-      showLeadingZero: true
-    });
 </script>

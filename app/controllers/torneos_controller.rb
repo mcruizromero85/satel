@@ -116,6 +116,6 @@ attr_writer :attr_names
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def torneo_params
-      params.require(:torneo).permit(:titulo, :paginaweb, :vacantes, :cierre_inscripcion_fecha, :cierre_inscripcion_tiempo, :inicio_torneo_fecha, :inicio_torneo_tiempo,:tipo_generacion,:estado,:juego)
+      params.require(:torneo).permit(:titulo, :paginaweb, :vacantes, :cierre_inscripcion_fecha, :cierre_inscripcion_tiempo,:periodo_confirmacion_en_minutos,:tipo_generacion,:estado,:juego)
     end
 end

@@ -12,8 +12,6 @@ class TorneosService
 	def self.obtener_torneo_con_valores_inicializados
 		torneo = Torneo.new
 	    torneo.vacantes=8
-	    torneo.inicio_torneo_fecha = (Time.new + (60 * 60 * 2)).to_date
-	    torneo.inicio_torneo_tiempo = Time.new + (60 * 60 * 2)
 	    torneo.cierre_inscripcion_fecha = (Time.new + ((60 * 60 * 2) - (45 * 60) )).to_date
 	    torneo.cierre_inscripcion_tiempo = Time.new + ((60 * 60 * 2) - (45 * 60) )
 	    return torneo
@@ -56,31 +54,15 @@ class TorneosService
 
 	def self.guardar_torneo(torneo,rondas)
 
-		flag_existe_error=false
+		
 	    rondas_contador = TorneosHelper.obtener_rondas_por_vacantes(torneo.vacantes)
 
 	    for i in 1..rondas_contador
 	      if rondas["ronda"+i.to_s] != nil
 	        ronda=Ronda.new(rondas["ronda"+i.to_s].permit(:numero,:inicio_fecha,:inicio_tiempo,:modo_ganar))
-
-	        if ronda.inicio_fecha == nil || ronda.inicio_tiempo == nil then
-	          torneo.errors.add(:inicio_torneo,", las fechas de las rondas no pueden estar vacias")
-	          return
-	        end
-
-	        if i > 1 then           
-	          torneo.rondas.each do | ronda_previa|
-	            if ronda_previa.numero == (i - 1) then
-	              if (ronda.inicio_ronda - ronda_previa.inicio_ronda) <= ( 60 * 60) then
-	                  torneo.errors.add(:inicio_torneo,", la fecha de inicio de la ronda " + ronda.numero.to_s + " debe ser mayor por una hora a la ronda " + ronda_previa.numero.to_s)                  
-	                  flag_existe_error=true
-	              end
-	              break
-	            end
-	          end
-	        end
-
-	        torneo.rondas << ronda
+	        if ronda.valid?
+	        	torneo.rondas << ronda
+	    	end
 	      end
 	    end
 
@@ -89,15 +71,9 @@ class TorneosService
 	    juego.id = id_juego
 	    torneo.juego = juego
 
-	    if ((torneo.inicio_torneo.to_i - Time.new.to_i) < (60 * 60) ) then
-	        torneo.errors.add(:inicio_torneo,"La fecha de inicio tiene que ser mayor a la actual por más de 1 hora")
-	        flag_existe_error=true
-	    end
-	    if flag_existe_error then
-	    	return false
-	    else
-	    	return torneo.save
-	    end
+	    torneo.save
+
+
 	    
 	end
 end

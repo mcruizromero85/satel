@@ -6259,7 +6259,7 @@ th.hidden-print, td.hidden-print {
     max-width: 1080px;
 }
 
-#cuadro_de_juegos, #cuadro_de_vacantes, #cuadro_fecha_inicio_torneo, #cuadro_tiempo_inicio_torneo{
+#cuadro_de_juegos, #cuadro_de_vacantes, #cuadro_fecha_inicio_torneo, #cuadro_tiempo_inicio_torneo, #cuadro_de_confirmacion{
     margin-left: 40%;
 }
 

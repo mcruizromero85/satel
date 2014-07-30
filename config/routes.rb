@@ -1,5 +1,7 @@
 Satel::Application.routes.draw do
 
+  resources :ordens
+
   resources :asociados
 
   resources :juegos
