@@ -4,7 +4,7 @@ class CreateRondas < ActiveRecord::Migration
       t.integer :numero
       t.date :inicio_fecha
       t.time :inicio_tiempo
-      t.string :modo_ganar
+      t.integer :modo_ganar
       t.integer :torneo_id
       t.integer :ronda_id
       t.timestamps

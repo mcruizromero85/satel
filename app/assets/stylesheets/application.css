@@ -216,77 +216,87 @@ a > .label:hover, a > .label:focus {
 a:link i:hover {
     text-decoration: none;
 }
-.social-icons {
-    padding-top: 10px;
+
+footer {
+
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 68em;
+    padding: 30px 0;
 }
-.social-icons .fa-stack {
-    color: #58595B;
+footer:before, footer:after {
+    content: " ";
+    display: table;
 }
-.social-icons .fa-stack:hover {
-    color: #414042;
+footer:after {
+    clear: both;
 }
-.social-icons .fa-stack.facebook:hover {
-    color: #3B5998;
+footer .partners {
+    float: left;
 }
-.social-icons .fa-stack.twitter:hover {
-    color: #00ACED;
+footer .social-iconos-gris {
+    float: right;
 }
-.social-icons .fa-stack.google-plus:hover {
-    color: #DD4B39;
+
+.social-iconos-color .facebook {
+    color: #3b5998;
 }
-.social-icons .fa-stack.linkedin:hover {
-    color: #007BB6;
+.social-iconos-color .twitter {
+    color: #00aced;
 }
-.social-icons .fa-stack.github:hover {
-    color: #4183C4;
+.social-iconos-color .google-plus {
+    color: #dd4b39;
 }
-.btn-toolbar {
-    margin-bottom: 15px;
+.social-iconos-color .youtube {
+    color: #cc181e;
 }
-.flag {
-    vertical-align: text-top;
+.social-iconos-color .linkedin {
+    color: #007bb6;
 }
-#footer {
-    clear: left;
-    height: auto;
-    position: relative;
-    width: auto;
+.social-iconos-color .tumblr {
+    color: #2c4762;
 }
-#footer h3 {
-    color: #FFFFFF;
-    font-size: 15px;
-    margin-top: 0;
+.social-iconos-color span {
+    transition: all 0.5s ease 0s;
 }
-#footer a {
-    color: #FFFFFF;
-    text-decoration: none;
+.social-iconos-color span:hover {
+    transform: scale(1.1);
 }
-#footer a:hover {
-    color: #428BCA;
+.social-iconos-gris .fa-stack {
+    color: #3b5998;
 }
-#footer #social a .fa-stack.facebook:hover {
-    color: #3B5998;
+.social-iconos-gris .twitter {
+    color: #00aced;
 }
-#footer #social a .fa-stack.twitter:hover {
-    color: #00ACED;
+
+.social-iconos-gris .google-plus {
+    color: #dd4b39;
 }
-#footer #social a .fa-stack.google:hover {
-    color: #DD4B39;
+
+.social-iconos-gris .youtube {
+    color: #cc181e;
 }
-#footer #social a .fa-stack.linkedin:hover {
-    color: #007BB6;
+
+.social-iconos-gris .facebook:hover {
+    color: #3b5998;
 }
-#footer #social a .fa-stack.tumblr:hover {
-    color: #2C4762;
+.social-iconos-gris .twitter:hover {
+    color: #00aced;
 }
-#footer #contacto {
-    margin: 0 0 10px 5px;
+.social-iconos-gris .google-plus:hover {
+    color: #dd4b39;
 }
-#footer #contacto i {
-    padding-right: 10px;
+.social-iconos-gris .linkedin:hover {
+    color: #007bb6;
+}
+.social-iconos-gris .github:hover {
+    color: #4183c4;
+}
+.social-iconos-gris .youtube:hover {
+    color: #cc181e;
 }
 a {
-    color: #FFFFFF;
+    color: #FFFFFF;    
     text-decoration: none;
 }
 a:hover {
@@ -1034,6 +1044,7 @@ html {
 }
 body {
     background: none repeat scroll 0 0 #00162D;
+    background-color: #16243a;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857;
@@ -6265,4 +6276,8 @@ th.hidden-print, td.hidden-print {
 
 .datepicker, .hasTimepicker, #torneo_cierre_inscripcion_tiempo{
     width: 35%;
+}
+
+.links_cabecera:hover {
+    background-color: #000000
 }

@@ -19,56 +19,13 @@
     }
 
     
-
-
-function sincronizarConFechaCheckIn(){
-
-  var fechaActual = new Date();
-  var torneo_inicio_torneo_fecha = document.getElementById('torneo_inicio_torneo_fecha').value;
-  var torneo_inicio_torneo_tiempo = document.getElementById('torneo_inicio_torneo_tiempo').value;
-
-  var parts = torneo_inicio_torneo_fecha.split('/');
-  var partsTime = torneo_inicio_torneo_tiempo.split(':');
-
-  var condicional24Horas = partsTime[1].substring(3,5);
-
-  if (condicional24Horas=='PM'){
-    partsTime[0]=(partsTime[0]*1.0)+12;
-  }
-
-  var inicioTorneo=new Date(parts[2],parts[1]-1,parts[0],partsTime[0],partsTime[1].substring(0,2));
-
-  inicioTorneo.setMinutes(inicioTorneo.getMinutes()-45)
-
-  var year = inicioTorneo.getFullYear();
-  var month_pre=("00" + (inicioTorneo.getMonth()+1));
-  var day_pre=("00" + (inicioTorneo.getDate()));
-  var month = month_pre.substring(month_pre.length -2,month_pre.length);
-  var day = day_pre.substring(day_pre.length -2,day_pre.length);
-
-  var hour_pre=("00" + (inicioTorneo.getHours()));
-  var minute_pre=("00" + (inicioTorneo.getMinutes()));
-
-  var hour = hour_pre.substring(hour_pre.length -2,hour_pre.length);  
-  var AMoPM="AM"
-  if (hour>12){
-    hour=hour-12;
-    AMoPM="PM"
-  }
-  var minute = minute_pre.substring(minute_pre.length -2,minute_pre.length);
-
-  $('#torneo_cierre_inscripcion_fecha').val( day + "/" + month + "/" + year);
-  $('#torneo_cierre_inscripcion_tiempo').val( hour +":" + minute + " "+AMoPM);
-
-}
-
 function cargarRegistroDeRondas(vacantes){
    $("#rondas").find("tr").remove();
   var numeroRondas=Math.log(vacantes) / Math.log(2);
 
  
   for (var i=0;i<numeroRondas;i++){
-     var rowTemplate = "<tr><td>{0}</td><td><input type='hidden' id='ronda{7}_numero' name='ronda{7}[numero]' value='{7}' /> <input type='text' id='{1}' name='{2}' class='string required form-control input-lg datepicker' placeholder='Fecha inicio {0}' value='{8}' {10} /> </td><td><input type='text' id='{3}' name='{4}' class='string required form-control input-lg' placeholder='Hora inicio {0}' value='{9}' {10} /></td><td><select id='{5}' name='{6}' class='string required form-control input-lg' ><option value='1'>Mejor de 1</option><option value='3'>Mejor de 3</option><option value='5'>Mejor de 5</option></select></td></tr>";
+     var rowTemplate = "<tr><td>{0}</td><td><input type='hidden' id='ronda{7}_numero' name='ronda{7}[numero]' value='{7}' /> <input type='text' id='{1}' name='{2}' class='string required form-control input-lg datepicker' placeholder='dd/mm/yyyy' value='{8}' {10} /> </td><td><input type='text' id='{3}' name='{4}' class='string required form-control input-lg' placeholder='hh:mm AM/PM' value='{9}' {10} /></td><td><select id='{5}' name='{6}' class='string required form-control input-lg' ><option value='1'>Mejor de 1</option><option value='3'>Mejor de 3</option><option value='5'>Mejor de 5</option></select></td></tr>";
     contador=i+1;
     rowTemplate = reemplazarCon(rowTemplate,0,"Ronda "+contador);
     rowTemplate = reemplazarCon(rowTemplate,1,"ronda"+contador+"_inicio_fecha");
@@ -89,9 +46,6 @@ function cargarRegistroDeRondas(vacantes){
         showPeriod: true,
         showLeadingZero: true
     });
-    
-
-
   }      
 
 }
@@ -150,8 +104,8 @@ function cargarRegistroDeRondas(vacantes){
   <div class="field">
     <label class="labelFormulario">Fecha cierre inscripci&oacute;n </label>
     <div id="cuadro_tiempo_inicio_torneo">
-      <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="" > 
-      <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="" >
+      <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo_view.data_inicial_para_registro.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" /> 
+      <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="<%= @torneo_view.data_inicial_para_registro.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" />
     </div>
   </div>  
 
@@ -160,10 +114,10 @@ function cargarRegistroDeRondas(vacantes){
       <div id="cuadro_de_confirmacion">
         
         <select id='torneo_periodo_confirmacion_en_minutos' name='torneo[periodo_confirmacion_en_minutos]' class='string required form-control input-lg' >
-          <option value='0'>Sin confirmaci&oacute;n</option>
-          <option value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
-          <option value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
-          <option value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
+          <option value='0'>Sin confirmaci&oacute;n</option>          
+          <option <% if @torneo_view.data_inicial_para_registro.periodo_confirmacion_en_minutos == 10 then %> selected <% end %>value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
+          <option <% if @torneo_view.data_inicial_para_registro.periodo_confirmacion_en_minutos == 20 then %> selected <% end %>value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
+          <option <% if @torneo_view.data_inicial_para_registro.periodo_confirmacion_en_minutos == 30 then %> selected <% end %>value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
         </select>
 
       </div>
@@ -183,6 +137,23 @@ function cargarRegistroDeRondas(vacantes){
         </tr>
       </thead>
       <tbody id="rondas">
+        <% @torneo_view.data_inicial_para_registro.rondas.each do | ronda | %>
+        <tr>
+          <td><%=ronda.numero%></td>
+          <td><input type='hidden' id='ronda<%=ronda.numero%>_numero' name='ronda<%=ronda.numero%>[numero]' value='<%=ronda.numero%>' /> 
+            <input type='text' id='ronda<%=ronda.numero%>_inicio_fecha' name='ronda<%=ronda.numero%>[inicio_fecha]' class='string required form-control input-lg datepicker' placeholder='dd/mm/yyyy' value='<%=ronda.inicio_fecha.strftime("%d/%m/%Y")%>'  /> 
+          </td>
+          <td><input type='text' id='ronda<%=ronda.numero%>_inicio_tiempo' name='ronda<%=ronda.numero%>[inicio_tiempo]' class='string required form-control input-lg' placeholder='hh:mm AM/PM' value='<%=ronda.inicio_tiempo.strftime("%I:%M %p")%>' />
+          </td>
+          <td>
+            <select id='ronda<%=ronda.numero%>_modo_ganar' name='ronda<%=ronda.numero%>[modo_ganar]' class='string required form-control input-lg' >
+              <option <% if ronda.modo_ganar == 1 then %> selected="true" <% end %> value='1'>Mejor de 1</option>
+              <option <% if ronda.modo_ganar == 3 then %> selected="true" <% end %> value='3'>Mejor de 3</option>
+              <option <% if ronda.modo_ganar == 5 then %>  selected="true" <% end %> value='5'>Mejor de 5</option>
+            </select>
+          </td>
+        </tr>
+        <% end %>
       </tbody>
     </table>
    </div>
@@ -196,8 +167,13 @@ function cargarRegistroDeRondas(vacantes){
 
 <% end %>
 <script type="text/javascript">
-  cargarRegistroDeRondas(<%= @torneo_view.data_inicial_para_registro.vacantes %>);
+  
   $( "#tipo_generacion" ).buttonset();
 
+  $("#torneo_cierre_inscripcion_tiempo").timepicker({
+        showPeriod: true,
+        showLeadingZero: true
+  });
+  $( "#torneo_cierre_inscripcion_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
 
 </script>

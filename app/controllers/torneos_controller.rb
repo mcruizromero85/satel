@@ -6,8 +6,10 @@ class TorneosController < ApplicationController
   
   # GET /torneos GET /torneos.json
   def index
+
     @torneos_view=TorneoView.new
     @torneos_view.listado_torneos=TorneosService.obtener_torneos_para_portada      
+
   end
 
   # GET /torneos/1
@@ -21,8 +23,8 @@ attr_writer :attr_names
   # GET /torneos/new
   def new
     @torneo_view=TorneoView.new
+    @torneo_view.inicializar_datos_de_torneo_nuevo
     @torneo_view.lista_juegos=JuegosService.obtener_juegos
-    @torneo_view.data_inicial_para_registro=TorneosService.obtener_torneo_con_valores_inicializados  
     
   end
 

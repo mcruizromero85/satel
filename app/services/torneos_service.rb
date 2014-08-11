@@ -9,13 +9,7 @@ class TorneosService
 		Torneo.all.order(:cierre_inscripcion_fecha,:cierre_inscripcion_tiempo).limit(20).where("date(cierre_inscripcion_fecha) > date(:fecha_actual) or ( cierre_inscripcion_tiempo > time :hora_actual and date(cierre_inscripcion_fecha) = date(:fecha_actual) )",{fecha_actual: Time.new.strftime("%F"), hora_actual:Time.new.strftime("%T")})
 	end
 
-	def self.obtener_torneo_con_valores_inicializados
-		torneo = Torneo.new
-	    torneo.vacantes=8
-	    torneo.cierre_inscripcion_fecha = (Time.new + ((60 * 60 * 2) - (45 * 60) )).to_date
-	    torneo.cierre_inscripcion_tiempo = Time.new + ((60 * 60 * 2) - (45 * 60) )
-	    return torneo
-	end
+
 
 	def self.generar_estructura_llaves(torneo,inscripciones)
 

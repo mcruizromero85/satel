@@ -483,7 +483,8 @@
             // the binding for the minute cells also exists in _updateMinuteDisplay
             .find('.ui-timepicker-minute-cell')
                 .unbind()
-                .bind("click", { fromDoubleClick:false }, $.proxy($.timepicker.selectMinutes, this))
+                //.bind("click", { fromDoubleClick:false }, $.proxy($.timepicker.selectMinutes, this))
+                .bind("click", { fromDoubleClick:true }, $.proxy($.timepicker.selectMinutes, this))
                 .bind("dblclick", { fromDoubleClick:true }, $.proxy($.timepicker.selectMinutes, this))
             .end()
             .find('.ui-timepicker-hour-cell')
@@ -1159,6 +1160,7 @@
 
         /* Set the time directly. */
         _setTime: function(inst, time, noChange) {
+
             var origHours = inst.hours;
             var origMinutes = inst.minutes;
             if (time instanceof Date) {
@@ -1192,6 +1194,7 @@
         * Parse a time string into hours and minutes
         */
         parseTime: function (inst, timeVal) {
+
             var retVal = new Object();
             retVal.hours = -1;
             retVal.minutes = -1;
@@ -1260,6 +1263,7 @@
 
 
         selectHours: function (event) {
+
             var $td = $(event.currentTarget),
                 id = $td.attr("data-timepicker-instance-id"),
                 newHours = parseInt($td.attr("data-hour")),
@@ -1295,6 +1299,7 @@
         },
 
         selectMinutes: function (event) {
+            
             var $td = $(event.currentTarget),
                 id = $td.attr("data-timepicker-instance-id"),
                 newMinutes = parseInt($td.attr("data-minute")),

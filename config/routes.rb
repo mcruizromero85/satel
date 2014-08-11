@@ -1,5 +1,7 @@
 Satel::Application.routes.draw do
 
+  resources :authentications
+
   resources :ordens
 
   resources :asociados
@@ -20,7 +22,8 @@ Satel::Application.routes.draw do
 
   resources :torneos
   root 'torneos#index'
-
+  
+  get '/auth/:provider/callback' => 'authentications#create'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

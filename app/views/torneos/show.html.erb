@@ -5,22 +5,24 @@
               <h3 class="text-center"><font color="#008000"><b><u>Torneo registrado correctamente</u></b></font></h3>
               <br/>
                <div class="table-responsive">
-
-                  <h3 class="text-center"><%=@torneo_view.torneo_detallado.titulo%></h3>
-                  <br/>
                   <div class="field">
-                      <label class="labelFormulario">P&aacute;gina web</label>
-                    <input id="torneo_paginaweb"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" size="60" value="<%=@torneo_view.torneo_detallado.paginaweb%>" readonly="true" >
+                    <h4 class="text-center"><%=@torneo_view.torneo_detallado.titulo%></h4>
                   </div>
-
                   <div class="field">
-                    <label class="labelFormulario">Fecha cierre inscripci&oacute;n e inicio check-in </label>
-                    <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in" readonly="true" value="<%=@torneo_view.torneo_detallado.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" > 
-                    <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in" readonly="true"  value="<%=@torneo_view.torneo_detallado.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" >
+                    <h4 class="text-center"><%=@torneo_view.torneo_detallado.paginaweb%></h4>
+                  </div>
+                  <div class="field">
+                    <h4 class="text-center">Juego: <%=@torneo_view.torneo_detallado.juego.nombre%></h4>
+                  </div>
+                  <div class="field">
+                     <h4 class="text-center">Fecha cierre inscripci&oacute;n 
+                    <%=@torneo_view.torneo_detallado.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>
+                    <%=@torneo_view.torneo_detallado.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>
+                    </h4>
+                  </div>
+                  <div class="field">
+                    <h4 class="text-center">Minutos previos para confirmar: <%=@torneo_view.torneo_detallado.periodo_confirmacion_en_minutos%></h4>
                   </div>  
-                  <br/>
-                  <h4 class="text-center"><b>Fecha de Rondas y modo de ganar</b></h4>
-
                    <div class="field">
                       <table class="table table-bordered table-hover table-striped tablesorter">
                       <thead>
@@ -35,9 +37,8 @@
                         <% @torneo_view.torneo_detallado.rondas.order(:numero).each do |ronda| %>
                           <tr>
                             <td><%=ronda.numero%></td>
-                            <td><input type='text' class='string required form-control input-lg datepicker' readonly="true" value="<%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %>"/></td>
-                            <td><input type='text' class='string required form-control input-lg' readonly="true" value="<%=ronda.inicio_tiempo.strftime("%I:%M %p")  %>" />
-                            </td>
+                            <td><%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %></td>
+                            <td><%=ronda.inicio_tiempo.strftime("%I:%M %p")  %></td>
                             <td>Mejor de <%=ronda.modo_ganar%></td></tr>
                         <% end %>
                       </tbody>

@@ -32,68 +32,65 @@
 </a>    </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="navbar-collapse navbar-ex1-collapse in" style="height: auto;">
+    <div class="navbar-collapse navbar-ex1-collapse in" style="height: auto;float: left">
       <ul class="nav nav-pills navbar-left">
         <li class="active"><a id="link_cabecera_registrar_torneo" href="/torneos/new" class="enlacesCabecera" >Organizar un Torneo</a></li>
         <li class="active"><a href="#">Buscar m&aacute;s torneos</a></li>  
         <li class="active"><a href="/torneos/preparar/<%= Torneo.count %>"><font color="red">Inicia tu torneo Ya!!!</font></a></li>
       </ul>
-      <ul class="nav nav-pills navbar-right">
-        <li class="active"><a href="/ingresar">Ingresar</a></li>
-      </ul>
     </div><!-- /.navbar-collapse -->
+
+    <% if @current_gamer == nil %>
+      <div class="navbar-header" style="height: auto; float: right;  margin-top: 13px; width: 325px; ">        
+        <a class="navbar-brand"  style="color: rgb(255, 255, 255); font-size: 13px; padding-top: 0px; padding-bottom: 0px;" href="/auth/facebook" > 
+          <img alt="Ingresar con facebook" height="60px" width="325px" src="<%= image_path("facebook-ingreso.png") %>">
+        </a>    
+      </div>
+    <% else %>
+      <div class="navbar-header" style="height: auto; float: right; background-image: url('/assets/facebook-logeado.png'); margin-top: 13px; width: 325px;  background-size: 325px 60px;padding-left: 0px;padding-right: 0px;">
+        <a class="navbar-brand"  style="color: #FFFFFF;font-size:13px;margin-left:70px" href="#" >
+          <b>Bienvenid@: <%=@current_gamer.nombres%></b>
+        </a>    
+      </div>
+    <% end %>
+
+
   </div>
 </nav>
   </header>
 
 
 <%= yield %>
-<footer id="footer">
-  <div class="container"><hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3>Acerca de</h3>
-      <p>
-        Somos Satel(nombre temporal) y brindamos una plataforma de gestión de torneos en línea para e-sports.
-      </p>
-    </div>
-    <div class="col-md-3">
-      <h3>Satel(nombre temporal)</h3>
-      <ul class="list-unstyled">
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/torneos/new"  >Organizar un torneo</a></li>
-        <li><a href="/#">Buscar m&aacute;s torneos</a></li>
-        <li><a href="http://facebook/satel/">FanPage</a></li>
-      </ul>
-    </div>
-    <div class="col-md-3">
-      <h3>Contacto</h3>
-      <div id="contacto">
-        <a target="_blank" href="mailto:satel@gmail.com"><i class="fa fa-envelope"></i>satel@gmail.com</a>
-      </div>
-      <div id="social">
-        <a target="_blank" href="https://www.facebook.com/satel">
-          <span class="fa-stack facebook">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-        <a target="_blank" href="https://twitter.com/satel">
-          <span class="fa-stack twitter">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-        <a target="_blank" rel="publisher" href="https://plus.google.com/satel/posts">
-          <span class="fa-stack google">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-        </div>
-    </div>
-  </div>
-</div>
+<footer>
+  <div class="social-iconos-gris">
+    <font color="white"><b>Síguenos en</b></font>
+    <br>
+    <a target="_blank" href="https://www.facebook.com/satel">
+      <span class="fa-stack facebook fa-2x">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+    <a target="_blank" href="https://twitter.com/satel">
+      <span class="fa-stack twitter fa-2x">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+    <a target="_blank" href="https://plus.google.com/+satel/posts">
+      <span class="fa-stack google-plus fa-2x">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+    <a target="_blank" href="https://www.youtube.com/user/satel">
+      <span class="fa-stack youtube fa-2x">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-youtube fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </div>  
 </footer>
 </body>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </html>

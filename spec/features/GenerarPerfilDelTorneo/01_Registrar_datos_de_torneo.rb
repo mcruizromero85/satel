@@ -27,7 +27,7 @@ feature "Registrar datos de torneo" do
 		llenar_formulario_con_datos_correctos	    		
 		fill_in("torneo_paginaweb", :with => "pagina errada")
 		click_button("Registrar Torneo")
-		expect(page).to have_content("la página web debe tener el formato de una url, incluido http:// y https://")
+		expect(page).to have_content("la página web debe tener el formato de una url, incluido http:// o https://")
 	end
 
 	scenario "Dado que se ha introducido como fecha de cierre de inscripcion del torneo una fecha menor a la actual y los demás datos están correctamente llenados, el sistema debe advertirlo",:js => true do

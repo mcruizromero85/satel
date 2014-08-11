@@ -3,11 +3,12 @@ class Torneo < ActiveRecord::Base
 	validates_length_of :titulo, :within => 30..100, :message => ", el título debe estar entre 30 y 100 caracteres"
 	validates_presence_of :cierre_inscripcion_fecha, :message => ", la fecha debe estar en formato dd/mm/yyyy" 
 	validates_presence_of :cierre_inscripcion_tiempo, :message => ", la hora debe estar en formato hh:mm AM/PM"		
-	validates_format_of(:paginaweb, :with => URI::regexp(%w(http https)), :on => :create, :message=>", la página web debe tener el formato de una url, incluido http:// y https://")
+	validates_format_of(:paginaweb, :with => URI::regexp(%w(http https)), :on => :create, :message=>", la página web debe tener el formato de una url, incluido http:// o https://")
 	validate :fecha_cierre_mayor_que_actual
 	validate :fecha_registro_entre_rondas
 	validate :ronda_numero_uno_mayor_fecha_inscripcion
 	validate :rondas_existentes_por_vacantes
+	validates_numericality_of :periodo_confirmacion_en_minutos
 
 	belongs_to :juego , autosave: false
 	has_many :rondas , autosave: true
