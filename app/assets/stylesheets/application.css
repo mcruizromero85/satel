@@ -255,14 +255,14 @@ footer .social-iconos-gris {
 .social-iconos-color .tumblr {
     color: #2c4762;
 }
-/*
+
 .social-iconos-color span {
     transition: all 0.5s ease 0s;
 }
 .social-iconos-color span:hover {
     transform: scale(1.1);
 }
-*/
+
 .social-iconos-gris .fa-stack {
     color: #3b5998;
 }
