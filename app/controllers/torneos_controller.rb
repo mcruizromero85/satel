@@ -3,7 +3,15 @@ class TorneosController < ApplicationController
   require_relative '../../app/services/torneos_service'
 
   before_action :set_torneo, only: [:preparar,:show, :edit, :update, :destroy]
+  before_action :revisa_si_existe_gamer_en_sesion, only: [:new]
   
+  def revisa_si_existe_gamer_en_sesion
+    if current_gamer == nil then
+      session[:last_url_pre_login] = '/torneos/new'
+      redirect_to '/auth/facebook'
+    end
+  end
+
   # GET /torneos GET /torneos.json
   def index
 

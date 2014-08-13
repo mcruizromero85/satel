@@ -31,7 +31,14 @@ class AuthenticationsController < ApplicationController
     end
     # Log the authorizing user in.
     self.current_gamer = @auth.gamer
-    redirect_to :action => 'index', :controller=>"torneos"    
+
+    if session[:last_url_pre_login] != nil
+      redirect_to session[:last_url_pre_login]
+    else
+      redirect_to :action => 'index', :controller=>"torneos"    
+    end
+
+    
   end
 
   def destroy
