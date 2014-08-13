@@ -60,3 +60,4 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.3.0'
 end
 gem 'omniauth'
+gem 'omniauth-facebook'
