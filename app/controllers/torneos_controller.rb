@@ -13,11 +13,12 @@ class TorneosController < ApplicationController
   end
 
   # GET /torneos GET /torneos.json
-  def index
+  def index 
+    if current_gamer != nil then      
+      @torneos_inscritos = Torneo.joins(:inscripciones).where("date(torneos.cierre_inscripcion_fecha) > date(:fecha_actual) or ( torneos.cierre_inscripcion_tiempo > time :hora_actual and date(torneos.cierre_inscripcion_fecha) = date(:fecha_actual)) and inscripciones.gamer_id = :gamer_id ",{fecha_actual: Time.new.strftime("%F"), hora_actual:Time.new.strftime("%T"), gamer_id: current_gamer.id })
+    end
 
-    @torneos_view=TorneoView.new
-    @torneos_view.listado_torneos=TorneosService.obtener_torneos_para_portada      
-
+    @torneos=Torneo.all.order(:cierre_inscripcion_fecha,:cierre_inscripcion_tiempo).limit(20).where("date(cierre_inscripcion_fecha) > date(:fecha_actual) or ( cierre_inscripcion_tiempo > time :hora_actual and date(cierre_inscripcion_fecha) = date(:fecha_actual)) ",{fecha_actual: Time.new.strftime("%F"), hora_actual:Time.new.strftime("%T")})
   end
 
   # GET /torneos/1
@@ -61,9 +62,25 @@ attr_writer :attr_names
   # POST /torneos.json
   def create
     @torneo = Torneo.new(torneo_params)
+    rondas_contador = TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes)
+
+    for i in 1..rondas_contador
+      if params["ronda"+i.to_s] != nil
+        ronda=Ronda.new(params["ronda"+i.to_s].permit(:numero,:inicio_fecha,:inicio_tiempo,:modo_ganar))
+      end
+      if ronda.valid?
+        @torneo.rondas << ronda
+      end
+    end
+   
+    id_juego = params["juego"].permit(:id)[:id]
+    juego = Juego.new
+    juego.id = id_juego
+    @torneo.juego = juego
+    @torneo.gamer = current_gamer
     
     respond_to do |format|
-      if TorneosService.guardar_torneo(@torneo,params)
+      if @torneo.save then
         format.html { redirect_to @torneo, notice: 'Torneo was successfully created.' }
         format.json { render action: 'show', status: :created, location: @torneo }
       else

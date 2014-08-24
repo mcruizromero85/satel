@@ -1,0 +1,37 @@
+<div class="marketing">
+  <div class="container">
+  
+  <div class="row">
+      <div class="text-center">
+          <div class="tile">
+            <h3>Participa en todos los torneos que puedas</h3>
+             <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped tablesorter">
+              <thead>
+                <tr>
+                  <th class="header">Orden</th>
+                  <th class="header">Nombre</th>
+                  <th class="header">Fecha Inscripci&oacute;n</th>
+                  <th class="header">Estado</th>
+                </tr>
+              </thead>
+              <tbody id="torneosPortada">
+                 <% posicion=1 %>
+                 <% @inscripciones.each do |inscripcion| %>
+                  <tr>
+                    <td><%= posicion %></td>
+                    <td><%= inscripcion.gamer.nombres %></td>
+                    <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
+                    <td>No confirmado</td>        
+                  </tr>
+                  <% posicion = posicion + 1 %>
+                <% end %>
+              </tbody>
+            </table>
+           </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<br>

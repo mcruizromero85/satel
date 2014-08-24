@@ -1,5 +1,5 @@
 class Inscripcion < ActiveRecord::Base
-	belongs_to :torneo
+	validates :torneo, uniqueness: { scope: :gamer, message: ", Ya estas inscrito en este torneo" }
 	belongs_to :gamer
-	has_many :encuentros
+	belongs_to :torneo  , autosave: false
 end

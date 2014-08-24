@@ -10,9 +10,10 @@ class Torneo < ActiveRecord::Base
 	validate :rondas_existentes_por_vacantes
 	validates_numericality_of :periodo_confirmacion_en_minutos
 
+	belongs_to :gamer
 	belongs_to :juego , autosave: false
 	has_many :rondas , autosave: true
-	has_many :inscripcions, autosave: true
+	has_many :inscripciones, autosave: true
 
 	def cierre_inscripcion
 		if self.cierre_inscripcion_fecha != nil and self.cierre_inscripcion_tiempo != nil then
@@ -20,6 +21,13 @@ class Torneo < ActiveRecord::Base
 			tiempo=self.cierre_inscripcion_tiempo
 			Time.local(fecha.year ,fecha.month,fecha.day,tiempo.hour,tiempo.min,tiempo.sec)
 		end
+	end
+
+	def inicio_fecha_hora_confirmacion
+			fecha=self.cierre_inscripcion_fecha
+			tiempo=self.cierre_inscripcion_tiempo
+			fecha_hora_inscripcion=Time.local(fecha.year ,fecha.month,fecha.day,tiempo.hour,tiempo.min,tiempo.sec)
+			return (fecha_hora_inscripcion - (periodo_confirmacion_en_minutos * 60))
 	end
 
 	def fecha_cierre_mayor_que_actual

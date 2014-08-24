@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810225253) do
+ActiveRecord::Schema.define(version: 20140817033501) do
 
   create_table "asociados", force: true do |t|
     t.string   "nombre"
@@ -49,14 +49,10 @@ ActiveRecord::Schema.define(version: 20140810225253) do
     t.datetime "updated_at"
   end
 
-  create_table "inscripcions", force: true do |t|
-    t.date     "fecha_inscripcion"
-    t.time     "hora_inscripcion"
-    t.string   "estado_confirmacion"
-    t.integer  "peso_participacion"
-    t.integer  "posicion_inicial"
-    t.integer  "gamer_id"
+  create_table "inscripciones", force: true do |t|
     t.integer  "torneo_id"
+    t.integer  "gamer_id"
+    t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

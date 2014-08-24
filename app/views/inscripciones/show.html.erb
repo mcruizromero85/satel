@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Torneo:</strong>
+  <%= @inscripcion.torneo_id %>
+</p>
+
+<p>
+  <strong>Gamer:</strong>
+  <%= @inscripcion.gamer_id %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @inscripcion.fecha %>
+</p>
+
+<p>
+  <strong>Hora:</strong>
+  <%= @inscripcion.hora %>
+</p>
+
+<%= link_to 'Edit', edit_inscripcion_path(@inscripcion) %> |
+<%= link_to 'Back', inscripciones_path %>

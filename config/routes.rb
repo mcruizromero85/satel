@@ -1,8 +1,8 @@
 Satel::Application.routes.draw do
 
-  resources :authentications
+  resources :inscripciones
 
-  resources :ordens
+  resources :authentications
 
   resources :asociados
 
@@ -13,6 +13,8 @@ Satel::Application.routes.draw do
   resources :gamers
 
   resources :inscripcions
+
+  get '/inscripciones/new/:id_torneo' => 'inscripciones#new'
 
   get '/torneos/preparar/:id' => 'torneos#preparar'
 

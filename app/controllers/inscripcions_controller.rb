@@ -38,7 +38,6 @@ class InscripcionsController < ApplicationController
       inscripcion.torneo_id=params["inscripcion"][:torneo_id].to_i
       inscripcion.save
     end
-    
 
     respond_to do |format|
         format.html { redirect_to "/", notice: 'Inscripcion was successfully created.' }
