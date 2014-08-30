@@ -1,5 +1,49 @@
 ç<div class="marketing">
   <div class="container">
+    <% if @torneos_inscritos.size != 0 %>
+    <script type="text/javascript">
+      function generarContadorPorTorneoInscrito(idTorneo,fecha_inicio_confirmacion){
+        $('#countdown_torneo_inscrito_'+idTorneo).countdown({until: fecha_inicio_confirmacion, format: 'dhmS',expiryText: "<font color='orange'><a href='/inscripciones/confirmar/"+idTorneo+"'>CONFIRMAR YA!!!!</a></font>" }); 
+      }
+    </script>
+      <div class="row">
+        <div class="text-center">
+            <div class="tile">
+                <table class="table table-hover table-striped tablesorter">
+                  <tbody id="torneosPortadaInscritos">
+                      <% @torneos_inscritos.each do |torneo_inscrito| %>
+                         <tr id="torneo_inscrito">
+                          <td><%= torneo_inscrito.titulo %></td>
+                          <td><%= torneo_inscrito.juego.nombre %></td>
+                          <td><%= torneo_inscrito.vacantes %></td>
+                          <td><font color="green"><b>Confirmaci&oacute;n en..</b></font>
+                            <% 
+                            un_dias_en_segundos=60 * 60 * 24
+                            if torneo_inscrito.inicio_fecha_hora_confirmacion.to_i - Time.new.to_i >= un_dias_en_segundos then %>  
+                              <%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo_inscrito.inicio_fecha_hora_confirmacion) %>
+                            <% else %>
+                              <%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo_inscrito.inicio_fecha_hora_confirmacion) %>
+                              <div id='countdown_torneo_inscrito_<%=torneo_inscrito.id%>'></div>
+                              <script type="text/javascript">
+                                generarContadorPorTorneoInscrito('<%=torneo_inscrito.id%>', new Date(<%= torneo_inscrito.inicio_fecha_hora_confirmacion.strftime('%s').to_i * 1000 %>));
+                              </script>
+                            <% end %>
+                          </td>
+                          <td><ul class="btnInscrito">
+                                <li class="active"><a href="/torneos/<%=torneo_inscrito.id%>">Ya Estoy Inscrito :)</a></li>
+                              </ul>
+                          </td>                      
+                        <tr> 
+                      <% end %>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+
+    <% end %>
+    
+
     <div class="row">
       <div class="text-center">
           <div class="tile">
@@ -13,22 +57,15 @@
           <div class="tile">
             <h3>Participa en todos los torneos que puedas</h3>
              <div class="table-responsive">
-              <% if @torneos.empty? then %>
+              <% if @torneos.empty?   then %>
                 <h4>En estos momentos no existen torneos disponibles para inscribirse, organiza el tuyo!!, <a href="torneos/new" >organizar mi torneo</a></h4>
               <% else %>
 
               <script type="text/javascript">
-
                 function generarContadorPorTorneo(idTorneo,fecha_cierre_inscripcion){
                   $('#countdown_'+idTorneo).countdown({until: fecha_cierre_inscripcion, format: 'dhmS',expiryText: "<font color='red'>Inscripciones Cerradas</font>" }); 
                 }
-
               </script>
-
-              
-              <% @torneos_inscritos.each do |torneos_inscritos| %>
-                <%= torneos_inscritos.titulo %>
-              <% end %>
 
               <table class="table table-bordered table-hover table-striped tablesorter">
                 <thead>
@@ -42,36 +79,7 @@
                 </thead>
 
                 <tbody id="torneosPortada">
-                  <% array_id_torneos_ya_inscritos=Array.new %>
-                  <% @torneos_inscritos.each do |torneo_inscrito| %>
-                    <% array_id_torneos_ya_inscritos << torneo_inscrito.id %>
-                     <tr id="torneo_inscrito">
-                      <td><%= torneo_inscrito.titulo %></td>
-                      <td><%= torneo_inscrito.juego.nombre %></td>
-                      <td><%= torneo_inscrito.vacantes %></td>
-                      <td><font color="green"><b>Confirmaci&oacute;n en..</b></font>
-                        <% 
-                        un_dias_en_segundos=60 * 60 * 24
-                        if torneo_inscrito.inicio_fecha_hora_confirmacion.to_i - Time.new.to_i >= un_dias_en_segundos then %>  
-                          <%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo_inscrito.inicio_fecha_hora_confirmacion) %>
-                        <% else %>
-                          <div id='countdown_<%=torneo_inscrito.id%>'></div>
-                          <script type="text/javascript">
-                            generarContadorPorTorneo('<%=torneo_inscrito.id%>', new Date(<%= torneo_inscrito.inicio_fecha_hora_confirmacion.strftime('%s').to_i * 1000 %>));
-                          </script>
-                        <% end %>
-                      </td>
-                      <td><ul class="btnInscrito">
-                            <li class="active"><a href="/torneos/<%=torneo_inscrito.id%>">Ya Estoy Inscrito :)</a></li>
-                          </ul>
-                      </td>                      
-                    <tr>  
-                    
-                  <% end %>
-
-
                   <% @torneos.each do |torneo| %>
-                  <% next if array_id_torneos_ya_inscritos.index(torneo.id) != nil %>
                     <tr>
                       <td><%= torneo.titulo %></td>
                       <td><%= torneo.juego.nombre %></td>

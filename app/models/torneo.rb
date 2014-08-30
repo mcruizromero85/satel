@@ -23,7 +23,7 @@ class Torneo < ActiveRecord::Base
 		end
 	end
 
-	def inicio_fecha_hora_confirmacion
+	def inicio_fecha_hora_confirmacion			
 			fecha=self.cierre_inscripcion_fecha
 			tiempo=self.cierre_inscripcion_tiempo
 			fecha_hora_inscripcion=Time.local(fecha.year ,fecha.month,fecha.day,tiempo.hour,tiempo.min,tiempo.sec)

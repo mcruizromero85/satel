@@ -20,6 +20,8 @@ Satel::Application.routes.draw do
 
   get '/torneos/simular_llaves/:id' => 'torneos#simular_llaves'
 
+  get '/inscripciones/confirmar/:id_torneo' => 'inscripciones#update'
+
   resources :rondas
 
   resources :torneos

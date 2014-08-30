@@ -45,6 +45,9 @@ class InscripcionesController < ApplicationController
   # PATCH/PUT /inscripciones/1
   # PATCH/PUT /inscripciones/1.json
   def update
+
+    inscripcion = inscripciones.
+
     respond_to do |format|
       if @inscripcion.update(inscripcion_params)
         format.html { redirect_to @inscripcion, notice: 'Inscripcion was successfully updated.' }
