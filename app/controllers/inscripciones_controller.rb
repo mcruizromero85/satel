@@ -42,6 +42,23 @@ class InscripcionesController < ApplicationController
     end
   end
 
+  def confirmar
+    @inscripcion=Inscripcion.find_by(torneo_id: params[:id_torneo],gamer_id: current_gamer.id)
+    @inscripcion.estado="Confirmado"
+
+    respond_to do |format|
+      if @inscripcion.save
+        format.html { redirect_to :action => 'index', :id_torneo => params[:id_torneo] }
+        format.json { render action: 'show', status: :created, location: @inscripcion }
+      else
+        @torneo = Torneo.find(params[:id_torneo])
+        format.html {render action: 'new' }
+        format.json { render json: @inscripcion.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
   # PATCH/PUT /inscripciones/1
   # PATCH/PUT /inscripciones/1.json
   def update

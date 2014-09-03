@@ -20,7 +20,7 @@ Satel::Application.routes.draw do
 
   get '/torneos/simular_llaves/:id' => 'torneos#simular_llaves'
 
-  get '/inscripciones/confirmar/:id_torneo' => 'inscripciones#update'
+  get '/inscripciones/confirmar/:id_torneo' => 'inscripciones#confirmar'
 
   resources :rondas
 

@@ -3039,8 +3039,31 @@ button.close {
 
 }
 
-.btnInscrito > li.active > a, .btnInscribir > li.active > a:hover, .btnInscribir > li.active > a:focus {
-    background-color: #007763;
+.btnConfirmado > li.active > a, .btnConfirmado > li.active > a:hover, .btnConfirmado > li.active > a:focus {
+    background-color: green;
+    color: #FFFFFF;
+}
+
+.btnConfirmado {
+    list-style: none outside none;
+    padding-left: 0px;
+    margin-bottom: 0px;
+}
+
+.btnConfirmado > li{
+    float: none;   
+}
+
+.btnConfirmado > li > a {
+    border-radius: 5px;
+    display: block;
+    padding: 10px 15px;
+    position: relative;
+
+}
+
+.btnConfirmado > li.active > a, .btnConfirmado > li.active > a:hover, .btnConfirmado > li.active > a:focus {
+    background-color: green;
     color: #FFFFFF;
 }
 
@@ -6305,4 +6328,13 @@ th.hidden-print, td.hidden-print {
 
 .links_cabecera:hover {
     background-color: #000000
+}
+
+.estilo_confirmacion{
+    color: orange;
+}
+
+.estilo_confirmacion:hover{
+    color: orange;
+    background-color: #FBF8E9;
 }

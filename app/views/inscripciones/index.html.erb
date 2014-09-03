@@ -22,7 +22,7 @@
                     <td><%= posicion %></td>
                     <td><%= inscripcion.gamer.nombres %></td>
                     <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
-                    <td>No confirmado</td>        
+                    <td><%= inscripcion.estado %></td>        
                   </tr>
                   <% posicion = posicion + 1 %>
                 <% end %>
