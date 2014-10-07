@@ -103,8 +103,8 @@ function cargarRegistroDeRondas(vacantes){
   </div>
   <div class="field">
     <label class="labelFormulario">Fecha cierre inscripci&oacute;n </label>
-    <div id="cuadro_tiempo_inicio_torneo">
-      <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo_view.data_inicial_para_registro.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" /> 
+    <div id="cuadro_tiempo_inicio_torneo">      
+      <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo_view.data_inicial_para_registro.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" />       
       <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="<%= @torneo_view.data_inicial_para_registro.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" />
     </div>
   </div>  

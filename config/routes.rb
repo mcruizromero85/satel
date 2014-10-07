@@ -22,6 +22,8 @@ Satel::Application.routes.draw do
 
   get '/inscripciones/confirmar/:id_torneo' => 'inscripciones#confirmar'
 
+  get '/torneos/mis_torneos' => 'torneos#mis_torneos'
+
   resources :rondas
 
   resources :torneos

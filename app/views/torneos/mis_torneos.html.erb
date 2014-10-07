@@ -1,0 +1,50 @@
+ <div class="marketing">
+  <div class="container">
+
+  <div class="row">
+      <div class="text-center">
+          <div class="tile">
+            <h3>Mis torneos Organizados</h3>
+             <div class="table-responsive">
+              <% if @torneos.empty?   then %>
+                <h4>A&ucacute;n no has organizado un torneo, que esperas <a href="torneos/new" >organizalo!!!</a></h4>
+              <% else %>
+              <table class="table table-bordered table-hover table-striped tablesorter">
+                <thead>
+                  <tr>
+                    <th class="header">Nombre</th>
+                    <th class="header">Juego</th>
+                    <th class="header">Vacantes</th>
+                    <th class="header">Cierre inscripcion</th>
+                     <th class="header">Acci&oacute;n</th>
+                  </tr>
+                </thead>
+
+                <tbody id="torneosPortada">
+                  <% @torneos.each do |torneo| %>
+                    <tr>
+                      <td><%= torneo.titulo %></td>
+                      <td><%= torneo.juego.nombre %></td>
+                      <td><%= torneo.vacantes %></td>
+                      <td>
+
+                      </td>
+                      <td>
+                          <ul class="btnInscribir">
+                            <li class="active"><a href="/inscripciones/new/<%=torneo.id%>">Iniciar ya!!!</a></li>
+                          </ul>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <% end %>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<br>
+
+

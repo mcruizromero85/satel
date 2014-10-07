@@ -4,12 +4,9 @@ class TorneosController < ApplicationController
 
   before_action :set_torneo, only: [:preparar,:show, :edit, :update, :destroy]
   before_action :revisa_si_existe_gamer_en_sesion, only: [:new]
-  
-  def revisa_si_existe_gamer_en_sesion
-    if current_gamer == nil then
-      session[:last_url_pre_login] = '/torneos/new'
-      redirect_to '/auth/facebook'
-    end
+
+  def mis_torneos
+    @torneos=Torneo.all.order(:cierre_inscripcion_fecha,:cierre_inscripcion_tiempo).where("gamer_id = :gamer_id ",{gamer_id: current_gamer.id })    
   end
 
   # GET /torneos GET /torneos.json
@@ -17,18 +14,19 @@ class TorneosController < ApplicationController
 
     if current_gamer != nil then
 
-      @torneos_confirmados = Torneo.joins(:inscripciones).where("date(torneos.cierre_inscripcion_fecha) > date(:fecha_actual) or ( torneos.cierre_inscripcion_tiempo > time :hora_actual and date(torneos.cierre_inscripcion_fecha) = date(:fecha_actual)) and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado ",{fecha_actual: Time.new.strftime("%F"), hora_actual:Time.new.strftime("%T"), gamer_id: current_gamer.id, estado: "Confirmado" })
+      @torneos_confirmados = Torneo.joins(:inscripciones).where("torneos.estado != :estado_no_esperado_torneo and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado ",{gamer_id: current_gamer.id, estado: "Confirmado", estado_no_esperado_torneo: "Finalizado" })
       if @torneos_confirmados.size > 0 then
         ids_torneos_inscritos_y_confirmados=@torneos_confirmados.pluck(:id)
       else
         ids_torneos_inscritos_y_confirmados=[-1]
       end
-
-
       @torneos_inscritos = Torneo.joins(:inscripciones).where("date(torneos.cierre_inscripcion_fecha) > date(:fecha_actual) or ( torneos.cierre_inscripcion_tiempo > time :hora_actual and date(torneos.cierre_inscripcion_fecha) = date(:fecha_actual)) and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado ",{fecha_actual: Time.new.strftime("%F"), hora_actual:Time.new.strftime("%T"), gamer_id: current_gamer.id, estado: "No confirmado" })
         ids_torneos_inscritos_y_confirmados.concat(@torneos_inscritos.pluck(:id))
-      
+    else
+	@torneos_confirmados= Array.new
+	@torneos_inscritos=Array.new	
     end
+
 
     @torneos=Torneo.all.order(:cierre_inscripcion_fecha,:cierre_inscripcion_tiempo).limit(20).where("date(cierre_inscripcion_fecha) > date(:fecha_actual) or ( cierre_inscripcion_tiempo > time :hora_actual and date(cierre_inscripcion_fecha) = date(:fecha_actual)) and id not in (:ids_torneos_inscritos_y_confirmados) ",{fecha_actual: Time.new.strftime("%F"), hora_actual:Time.new.strftime("%T"), ids_torneos_inscritos_y_confirmados: ids_torneos_inscritos_y_confirmados })
   end
@@ -97,7 +95,7 @@ attr_writer :attr_names
         format.json { render action: 'show', status: :created, location: @torneo }
       else
         @torneo_view=TorneoView.new
-        @torneo_view.data_inicial_para_registro=@torneo
+        @torneo_view.inicializar_datos_de_torneo_nuevo
         @torneo_view.lista_juegos=JuegosService.obtener_juegos
         format.html { render action: 'new' }
         format.json { render json: @torneo.errors, status: :unprocessable_entity }

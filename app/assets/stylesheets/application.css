@@ -6338,3 +6338,12 @@ th.hidden-print, td.hidden-print {
     color: orange;
     background-color: #FBF8E9;
 }
+
+.estilo_listo{
+    color: green;
+}
+
+.estilo_listo:hover{
+    color: green;
+    background-color: #FBF8E9;
+}

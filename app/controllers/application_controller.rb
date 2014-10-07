@@ -23,4 +23,15 @@ class ApplicationController < ActionController::Base
     session[:gamer_id] = gamer.id
   end
 
+  def revisa_si_existe_gamer_en_sesion
+    if current_gamer == nil then
+      session[:last_url_pre_login] = '/torneos/new'
+      if ENV["RAILS_ENV"] == 'test'
+        redirect_to '/auth/developer'
+      else
+        redirect_to '/auth/facebook'
+      end  
+    end
+  end
+
 end

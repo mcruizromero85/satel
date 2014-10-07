@@ -18,7 +18,11 @@ class AuthenticationsController < ApplicationController
       facebook_gamer = auth['info']
       gamer = Gamer.new
       gamer.correo = facebook_gamer.email
-      gamer.nombres = facebook_gamer.first_name
+      if params[:provider] == "developer"
+        gamer.nombres = facebook_gamer.name
+      else
+        gamer.nombres = facebook_gamer.first_name
+      end
       gamer.apellidos = facebook_gamer.last_name
       gamer.save
 
