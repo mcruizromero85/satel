@@ -9,6 +9,12 @@ class TorneosController < ApplicationController
     @torneos=Torneo.all.order(:cierre_inscripcion_fecha,:cierre_inscripcion_tiempo).where("gamer_id = :gamer_id ",{gamer_id: current_gamer.id })    
   end
 
+  def iniciar_torneo
+     @torneo = Torneo.find(params[:id_torneo])
+     @torneo.generar_encuentros
+
+  end
+
   # GET /torneos GET /torneos.json
   def index 
 
@@ -95,7 +101,7 @@ attr_writer :attr_names
         format.json { render action: 'show', status: :created, location: @torneo }
       else
         @torneo_view=TorneoView.new
-        @torneo_view.inicializar_datos_de_torneo_nuevo
+        @torneo_view.data_inicial_para_registro=@torneo
         @torneo_view.lista_juegos=JuegosService.obtener_juegos
         format.html { render action: 'new' }
         format.json { render json: @torneo.errors, status: :unprocessable_entity }
@@ -106,17 +112,10 @@ attr_writer :attr_names
   # PATCH/PUT /torneos/1
   # PATCH/PUT /torneos/1.json
   def update
-
-    if torneo_params[:estado] == 'Iniciado' then
-      @torneo.estado= torneo_params[:estado]
-      respond_to do |format|
-        if TorneosService.iniciar_torneo(@torneo)
-          @torneo_view=TorneoView.new    
-          @torneo_view.torneo_detallado=@torneo
-          format.html { render action: 'desarrollo', notice: 'Torneo was successfully updated.' }
-        else
-          format.html { render action: 'edit' }
-        end
+    if torneo_params[:estado] == 'Iniciado' then      
+      respond_to do |format|        
+        @torneo.update(estado: torneo_params[:estado])
+        format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }        
       end
     else
       @torneo.tipo_generacion = torneo_params[:tipo_generacion]

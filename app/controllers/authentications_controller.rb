@@ -48,6 +48,12 @@ class AuthenticationsController < ApplicationController
   def destroy
   end
 
+  def cerrar_sesion    
+    @current_gamer = nil
+    session[:gamer_id] = nil
+    redirect_to :action => 'index', :controller=>"torneos"  
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_authentication

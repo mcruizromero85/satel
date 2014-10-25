@@ -69,6 +69,6 @@ class EncuentrosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def encuentro_params
-      params.require(:encuentro).permit(:estado, :posicion_en_ronda, :id_inscripcion_gamer_a, :id_inscripcion_gamer_b, :id_inscripcion_gamer_ganador)
+      params.require(:encuentro).permit(:gamera_id, :gamerb_id, :posicion_en_ronda, :id_ronda, :flag_ganador, :descripcion, :encuentro_anterior_a_id, :encuentro_anterior_b_id)
     end
 end

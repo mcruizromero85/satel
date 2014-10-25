@@ -12,24 +12,36 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :estado %><br>
-    <%= f.text_field :estado %>
+    <%= f.label :gamera_id %><br>
+    <%= f.number_field :gamera_id %>
+  </div>
+  <div class="field">
+    <%= f.label :gamerb_id %><br>
+    <%= f.number_field :gamerb_id %>
   </div>
   <div class="field">
     <%= f.label :posicion_en_ronda %><br>
     <%= f.number_field :posicion_en_ronda %>
   </div>
   <div class="field">
-    <%= f.label :id_inscripcion_gamer_a %><br>
-    <%= f.number_field :id_inscripcion_gamer_a %>
+    <%= f.label :id_ronda %><br>
+    <%= f.number_field :id_ronda %>
   </div>
   <div class="field">
-    <%= f.label :id_inscripcion_gamer_b %><br>
-    <%= f.number_field :id_inscripcion_gamer_b %>
+    <%= f.label :flag_ganador %><br>
+    <%= f.text_field :flag_ganador %>
   </div>
   <div class="field">
-    <%= f.label :id_inscripcion_gamer_ganador %><br>
-    <%= f.number_field :id_inscripcion_gamer_ganador %>
+    <%= f.label :descripcion %><br>
+    <%= f.text_field :descripcion %>
+  </div>
+  <div class="field">
+    <%= f.label :encuentro_anterior_a_id %><br>
+    <%= f.number_field :encuentro_anterior_a_id %>
+  </div>
+  <div class="field">
+    <%= f.label :encuentro_anterior_b_id %><br>
+    <%= f.text_field :encuentro_anterior_b_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Estado:</strong>
-  <%= @encuentro.estado %>
+  <strong>Gamera:</strong>
+  <%= @encuentro.gamera_id %>
+</p>
+
+<p>
+  <strong>Gamerb:</strong>
+  <%= @encuentro.gamerb_id %>
 </p>
 
 <p>
@@ -11,18 +16,28 @@
 </p>
 
 <p>
-  <strong>Id inscripcion gamer a:</strong>
-  <%= @encuentro.id_inscripcion_gamer_a %>
+  <strong>Id ronda:</strong>
+  <%= @encuentro.id_ronda %>
 </p>
 
 <p>
-  <strong>Id inscripcion gamer b:</strong>
-  <%= @encuentro.id_inscripcion_gamer_b %>
+  <strong>Flag ganador:</strong>
+  <%= @encuentro.flag_ganador %>
 </p>
 
 <p>
-  <strong>Id inscripcion gamer ganador:</strong>
-  <%= @encuentro.id_inscripcion_gamer_ganador %>
+  <strong>Descripcion:</strong>
+  <%= @encuentro.descripcion %>
+</p>
+
+<p>
+  <strong>Encuentro anterior a:</strong>
+  <%= @encuentro.encuentro_anterior_a_id %>
+</p>
+
+<p>
+  <strong>Encuentro anterior b:</strong>
+  <%= @encuentro.encuentro_anterior_b_id %>
 </p>
 
 <%= link_to 'Edit', edit_encuentro_path(@encuentro) %> |

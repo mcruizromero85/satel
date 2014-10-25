@@ -23,6 +23,7 @@ Satel::Application.routes.draw do
   get '/inscripciones/confirmar/:id_torneo' => 'inscripciones#confirmar'
 
   get '/torneos/mis_torneos' => 'torneos#mis_torneos'
+  get '/torneos/iniciar/:id_torneo' => 'torneos#iniciar_torneo'
 
   resources :rondas
 
@@ -30,6 +31,7 @@ Satel::Application.routes.draw do
   root 'torneos#index'
   
   get '/auth/:provider/callback' => 'authentications#create'
+  get '/cerrar_sesion' => 'authentications#cerrar_sesion'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

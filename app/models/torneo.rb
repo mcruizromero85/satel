@@ -31,9 +31,11 @@ class Torneo < ActiveRecord::Base
 	end
 
 	def fecha_cierre_mayor_que_actual
-	    if (cierre_inscripcion.to_i - Time.new.to_i) < 0 then 
-	      errors.add(:cierre_inscripcion_fecha, ", la fecha de cierre de inscripciones tiene que ser mayor a la actual")
-	    end
+		if print self.estado == "Creado"
+		    if (cierre_inscripcion.to_i - Time.new.to_i) < 0 then 
+		      errors.add(:cierre_inscripcion_fecha, ", la fecha de cierre de inscripciones tiene que ser mayor a la actual")
+		    end
+		end
   	end
 
   	def ronda_numero_uno_mayor_fecha_inscripcion
@@ -61,4 +63,32 @@ class Torneo < ActiveRecord::Base
 			errors.add(:rondas,", todas las rondas deben estar definidas")
 		end
 	end
+
+	def generar_encuentros
+
+		array_gamers_confirmados = Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").limit(self.vacantes).order('inscripciones.id')
+		array_ids_aleatorios_de_gamers = array_gamers_confirmados.pluck(:id).sample(self.vacantes)
+		@array_nombres_aleatorios_de_gamers = array_gamers_confirmados.pluck(:nombres).sample(self.vacantes)
+		array_de_encuentros=TorneosHelper.obtener_array_doble_de_encuentros(array_ids_aleatorios_de_gamers,self.vacantes)
+
+		array_de_encuentros.each do | array_encuentro | 
+
+			gamera = Gamer.new
+			gamera.id = array_encuentro[0]
+
+			gamerb = Gamer.new
+			gamerb.id = array_encuentro[1]
+
+			encuentro = Encuentro.new
+			encuentro.gamera=gamera
+			encuentro.gamerb=gamerb
+			encuentro.ronda=self.rondas.first
+			encuentro.save
+		end
+	end
+
+	def array_para_llaves
+
+		TorneosHelper.obtener_array_para_llaves(@array_nombres_aleatorios_de_gamers,self.vacantes)
+	end 
 end

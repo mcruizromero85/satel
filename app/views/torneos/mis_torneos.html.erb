@@ -23,7 +23,7 @@
                 <tbody id="torneosPortada">
                   <% @torneos.each do |torneo| %>
                     <tr>
-                      <td><%= torneo.titulo %></td>
+                      <td><a href="/inscripciones?id_torneo=<%=torneo.id%>"><%= torneo.titulo %><a/></td>
                       <td><%= torneo.juego.nombre %></td>
                       <td><%= torneo.vacantes %></td>
                       <td>
@@ -31,7 +31,7 @@
                       </td>
                       <td>
                           <ul class="btnInscribir">
-                            <li class="active"><a href="/inscripciones/new/<%=torneo.id%>">Iniciar ya!!!</a></li>
+                            <li class="active"><a href="/torneos/iniciar/<%=torneo.id%>">Iniciar ya!!!</a></li>
                           </ul>
                       </td>
                     </tr>

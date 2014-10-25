@@ -3,11 +3,14 @@
 <table>
   <thead>
     <tr>
-      <th>Estado</th>
+      <th>Gamera</th>
+      <th>Gamerb</th>
       <th>Posicion en ronda</th>
-      <th>Id inscripcion gamer a</th>
-      <th>Id inscripcion gamer b</th>
-      <th>Id inscripcion gamer ganador</th>
+      <th>Id ronda</th>
+      <th>Flag ganador</th>
+      <th>Descripcion</th>
+      <th>Encuentro anterior a</th>
+      <th>Encuentro anterior b</th>
       <th></th>
       <th></th>
       <th></th>
@@ -17,11 +20,14 @@
   <tbody>
     <% @encuentros.each do |encuentro| %>
       <tr>
-        <td><%= encuentro.estado %></td>
+        <td><%= encuentro.gamera_id %></td>
+        <td><%= encuentro.gamerb_id %></td>
         <td><%= encuentro.posicion_en_ronda %></td>
-        <td><%= encuentro.id_inscripcion_gamer_a %></td>
-        <td><%= encuentro.id_inscripcion_gamer_b %></td>
-        <td><%= encuentro.id_inscripcion_gamer_ganador %></td>
+        <td><%= encuentro.id_ronda %></td>
+        <td><%= encuentro.flag_ganador %></td>
+        <td><%= encuentro.descripcion %></td>
+        <td><%= encuentro.encuentro_anterior_a_id %></td>
+        <td><%= encuentro.encuentro_anterior_b_id %></td>
         <td><%= link_to 'Show', encuentro %></td>
         <td><%= link_to 'Edit', edit_encuentro_path(encuentro) %></td>
         <td><%= link_to 'Destroy', encuentro, method: :delete, data: { confirm: 'Are you sure?' } %></td>

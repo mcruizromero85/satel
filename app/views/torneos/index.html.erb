@@ -54,7 +54,7 @@
                                <font color="orange"><b>Confirmaci&oacute;n en..</b></font>                             
                               <%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo_inscrito.inicio_fecha_hora_confirmacion) %>
                             <% elsif (torneo_inscrito.inicio_fecha_hora_confirmacion.to_i - Time.new.to_i) < 0  %>                              
-                              <font color='red'><b><a class="estilo_confirmacion" href='/inscripciones/confirmar/<%= torneo_inscrito.id %>'>CONFIRMAR YA!!!!</a></b></font>
+                              <font color='red'><b><a class="estilo_confirmacion" id="link_confirmar_torneo_<%=torneo_inscrito.id%>" href='/inscripciones/confirmar/<%= torneo_inscrito.id %>'>CONFIRMAR YA!!!!</a></b></font>
                             <% else %>
                               <font color="orange"><b>Confirmaci&oacute;n en..</b></font>  
                               <div id='countdown_torneo_inscrito_<%=torneo_inscrito.id%>'></div>
@@ -132,7 +132,7 @@
                       </td>
                       <td>
                           <ul class="btnInscribir">
-                            <li class="active"><a href="/inscripciones/new/<%=torneo.id%>">Inscribirme ya!!!</a></li>
+                            <li class="active"><a id="link_inscripcion_torneo_<%=torneo.id%>" href="/inscripciones/new/<%=torneo.id%>">Inscribirme ya!!!</a></li>
                           </ul>
                       </td>
                     </tr>

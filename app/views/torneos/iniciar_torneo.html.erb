@@ -1,0 +1,50 @@
+          <script type="text/javascript">
+
+            var minimalData = {
+              <% contador=0 %>
+              <%   cantidad_inscripciones=@torneo.inscripciones.limit(@torneo.vacantes).count %>
+              teams : <%=raw @torneo.array_para_llaves%>
+            }
+          $(function() {
+            $('#llaves').bracket({
+            init: minimalData })
+          })
+
+          </script> 
+
+<div class="container">
+  <div class="row">
+    <%= @torneo.generar_encuentros %>
+    <%   if cantidad_inscripciones <= 8 then %>
+      <div class="tile" style="height: 540px;">
+    <%   elsif cantidad_inscripciones <= 16 then %>
+      <div class="tile" style="height: 800px;">
+    <%   elsif cantidad_inscripciones <= 32 then %>
+      <div class="tile" style="height: 1200px;">
+    <%   else %>
+      <div class="tile" style="height: 256px;">
+    <% end %>    
+            <h3 class="text-center"><u>Prepara tu torneo antes de iniciar</u></h1>
+            <h3 class="text-center"><%= @torneo.titulo %></h2>
+            <h4 class="text-center"><%= @torneo.paginaweb %></h4>
+            <center>
+              <a href="/torneos/<%=@torneo.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
+            </center>
+            <br/>
+            <%= form_for @torneo do |f|   %>
+             <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Iniciado" />
+            <center>
+              <a href="/torneos/iniciar/<%=@torneo.id%>"><font color="#FFFFFF">Volver a generar</font></a>       
+                <br/>
+                  <div id="boton_generar">
+                    <center><%= f.submit "Iniciar Torneo!!!"%></center>
+                  </div>
+            </center>
+             <% end %>
+          <div id="llaves" class="table-responsive" ></div>       
+      </div>      
+  </div>  
+</div>  
+  <script type="text/javascript">
+    $( "#boton_generar" ).buttonset();
+  </script>

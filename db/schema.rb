@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140817033501) do
+ActiveRecord::Schema.define(version: 20141020220459) do
 
   create_table "asociados", force: true do |t|
     t.string   "nombre"
@@ -30,11 +30,14 @@ ActiveRecord::Schema.define(version: 20140817033501) do
   end
 
   create_table "encuentros", force: true do |t|
-    t.string   "estado"
+    t.integer  "gamera_id"
+    t.integer  "gamerb_id"
     t.integer  "posicion_en_ronda"
-    t.integer  "id_inscripcion_gamer_a"
-    t.integer  "id_inscripcion_gamer_b"
-    t.integer  "id_inscripcion_gamer_ganador"
+    t.integer  "ronda_id"
+    t.string   "flag_ganador"
+    t.string   "descripcion"
+    t.integer  "encuentro_anterior_a_id"
+    t.string   "encuentro_anterior_b_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,18 +60,6 @@ ActiveRecord::Schema.define(version: 20140817033501) do
     t.datetime "updated_at"
   end
 
-  create_table "inscripcions", force: true do |t|
-    t.date     "fecha_inscripcion"
-    t.time     "hora_inscripcion"
-    t.string   "estado_confirmacion"
-    t.integer  "peso_participacion"
-    t.integer  "posicion_inicial"
-    t.integer  "gamer_id"
-    t.integer  "torneo_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "juegos", force: true do |t|
     t.string   "nombre"
     t.string   "descripcion"
@@ -77,11 +68,44 @@ ActiveRecord::Schema.define(version: 20140817033501) do
     t.datetime "updated_at"
   end
 
+  create_table "ordens", force: true do |t|
+    t.string   "dni"
+    t.string   "password"
+    t.string   "sku"
+    t.string   "medio_de_pago"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "prueba2s", force: true do |t|
+    t.string   "estado"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pruebas", force: true do |t|
+    t.string   "titulo"
+    t.string   "descripcion"
+    t.string   "formato"
+    t.string   "modalidad"
+    t.integer  "juego_id"
+    t.string   "modalidad_reporte_victoria"
+    t.integer  "vacantes"
+    t.date     "cierre_inscripcion_fecha"
+    t.time     "cierre_inscripcion_tiempo"
+    t.date     "cierre_check_in_fecha"
+    t.time     "cierre_check_in_tiempo"
+    t.date     "inicio_torneo_fecha"
+    t.string   "inicio_torneo_tiempo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rondas", force: true do |t|
     t.integer  "numero"
     t.date     "inicio_fecha"
     t.time     "inicio_tiempo"
-    t.string   "modo_ganar"
+    t.integer  "modo_ganar"
     t.integer  "torneo_id"
     t.integer  "ronda_id"
     t.datetime "created_at"
