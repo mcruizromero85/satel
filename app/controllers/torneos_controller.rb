@@ -12,6 +12,7 @@ class TorneosController < ApplicationController
   def iniciar_torneo
      @torneo = Torneo.find(params[:id_torneo])
      @torneo.generar_encuentros
+     session[:array_encuentros_para_guardar_llaves] = @torneo.array_encuentros_para_guardar_llaves
 
   end
 
@@ -51,23 +52,6 @@ attr_writer :attr_names
     @torneo_view.inicializar_datos_de_torneo_nuevo
     @torneo_view.lista_juegos=JuegosService.obtener_juegos
     
-  end
-
-  def preparar
-    if @torneo.estado == 'Iniciado' then
-      respond_to do |format|
-        @torneo_view=TorneoView.new    
-        @torneo_view.torneo_detallado=@torneo
-        format.html { render action: 'desarrollo', notice: 'Torneo was successfully updated.' }      
-      end
-    end
-    @torneo_view=TorneoView.new    
-    @torneo_view.torneo_detallado=@torneo
-
-  end
-
-  def simular_llaves
-
   end
 
   # GET /torneos/1/edit
@@ -115,6 +99,23 @@ attr_writer :attr_names
     if torneo_params[:estado] == 'Iniciado' then      
       respond_to do |format|        
         @torneo.update(estado: torneo_params[:estado])
+        array_encuentros_para_guardar_llaves = session[:array_encuentros_para_guardar_llaves]        
+        contador_posicion_en_ronda=1
+        array_encuentros_para_guardar_llaves.each do | array_encuentro | 
+          gamera = Gamer.new
+          gamera.id = array_encuentro[0]
+
+          gamerb = Gamer.new
+          gamerb.id = array_encuentro[1]
+
+          encuentro = Encuentro.new
+          encuentro.gamera=gamera
+          encuentro.gamerb=gamerb
+          encuentro.posicion_en_ronda=contador_posicion_en_ronda
+          encuentro.ronda=@torneo.rondas.first
+          encuentro.save
+          contador_posicion_en_ronda=contador_posicion_en_ronda+1
+        end
         format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }        
       end
     else

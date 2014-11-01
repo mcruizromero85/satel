@@ -3,18 +3,23 @@
             var minimalData = {
               <% contador=0 %>
               <%   cantidad_inscripciones=@torneo.inscripciones.limit(@torneo.vacantes).count %>
-              teams : <%=raw @torneo.array_para_llaves%>
+              teams : <%=raw @torneo.array_encuentros_para_generar_llaves%>
             }
           $(function() {
             $('#llaves').bracket({
-            init: minimalData })
+            init: minimalData, 
+            onMatchClick: registrarGanador}
+            )
           })
+
+          function registrarGanador(data) {
+            alert(data);            
+          }
 
           </script> 
 
 <div class="container">
   <div class="row">
-    <%= @torneo.generar_encuentros %>
     <%   if cantidad_inscripciones <= 8 then %>
       <div class="tile" style="height: 540px;">
     <%   elsif cantidad_inscripciones <= 16 then %>
