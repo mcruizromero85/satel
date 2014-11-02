@@ -3,7 +3,8 @@
             var minimalData = {
               <% contador=0 %>
               <%   cantidad_inscripciones=@torneo.inscripciones.limit(@torneo.vacantes).count %>
-              teams : <%=raw @torneo.array_encuentros_para_generar_llaves%>
+              teams : <%=raw @torneo.array_encuentros_para_generar_llaves%>,
+              results: <%=raw @torneo.array_resultado_encuentros_para_generar_llaves%>
             }
           $(function() {
             $('#llaves').bracket({

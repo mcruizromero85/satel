@@ -91,4 +91,8 @@ class Torneo < ActiveRecord::Base
 	def array_encuentros_para_guardar_llaves
 		TorneosHelper.obtener_array_doble_de_encuentros(@array_ids_aleatorios_de_gamers,self.vacantes)
 	end
+
+	def array_resultado_encuentros_para_generar_llaves
+        TorneosHelper.obtener_array_resultados_para_llaves(@array_nombres_aleatorios_de_gamers,self.vacantes)
+	end
 end
