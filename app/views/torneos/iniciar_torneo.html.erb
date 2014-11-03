@@ -2,7 +2,7 @@
 
             var minimalData = {
               <% contador=0 %>
-              <%   cantidad_inscripciones=@torneo.inscripciones.limit(@torneo.vacantes).count %>
+              <%   cantidad_inscripciones=@torneo.vacantes %>
               teams : <%=raw @torneo.array_encuentros_para_generar_llaves%>,
               results: <%=raw @torneo.array_resultado_encuentros_para_generar_llaves%>
             }
@@ -38,15 +38,19 @@
             </center>
             <br/>
             <%= form_for @torneo do |f|   %>
+             <% if @torneo.estado != "Iniciado" %>
              <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Iniciado" />
-            <center>
-              <a href="/torneos/iniciar/<%=@torneo.id%>"><font color="#FFFFFF">Volver a generar</font></a>       
-                <br/>
-                  <div id="boton_generar">
-                    <center><%= f.submit "Iniciar Torneo!!!"%></center>
-                  </div>
-            </center>
-             <% end %>
+                <center>
+                  <a href="/torneos/iniciar/<%=@torneo.id%>"><font color="#FFFFFF">Volver a generar</font></a>       
+                    <br/>
+                     
+                      <div id="boton_generar">
+                        <center><%= f.submit "Iniciar Torneo!!!"%></center>
+                      </div>
+                      
+                </center>
+            <% end %>
+            <% end %>
           <div id="llaves" class="table-responsive" ></div>       
       </div>      
   </div>  

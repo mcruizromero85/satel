@@ -52,13 +52,13 @@ function cargarRegistroDeRondas(vacantes){
 
 </script>
 <span id="mensajeError"></span>
-<%= form_for(@torneo_view.data_inicial_para_registro) do |f| %>
-  <% if @torneo_view.data_inicial_para_registro.errors.any? %>
+<%= form_for(@torneo) do |f| %>
+  <% if @torneo.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@torneo_view.data_inicial_para_registro.errors.count, "error") %> No permiten registrar el torneo:</h2>
+      <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>
 
       <ul>
-      <% @torneo_view.data_inicial_para_registro.errors.full_messages.each do |msg| %>
+      <% @torneo.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -66,51 +66,46 @@ function cargarRegistroDeRondas(vacantes){
   <% end %>
 
   <div class="field">    
-    <input id="torneo_titulo"  class="string required form-control input-lg" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" value="<%=@torneo_view.data_inicial_para_registro.titulo%>" />
+    <input id="torneo_titulo"  class="string required form-control input-lg" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" value="<%=@torneo.titulo%>" />
     <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Creado" />
   </div>
   <div class="field">
-    <input id="torneo_paginaweb"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" value="<%=@torneo_view.data_inicial_para_registro.paginaweb%>" />
+    <input id="torneo_paginaweb"  class="string required form-control input-lg" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" value="<%=@torneo.paginaweb%>" />
   </div>
 
   <div class="field">
     <div class="labelFormulario">Juego</div>    
     <div id="cuadro_de_juegos">
-
       <% 
-      contador=1
-      @torneo_view.lista_juegos.each do | juego | %>   
-        <input type="radio" id='juego_<%=juego.id%>' name='juego[id]' value="<%=juego.id%>" 
-        <% if contador == 1 then %>checked='checked' <% end %> >
+      Juego.all.each do | juego | %>   
+        <input type="radio" id='juego_<%=juego.id%>' name='juego[id]' value="<%=juego.id%>" checked='checked'>
         <label for="juego_<%=juego.id%>"><%= juego.nombre %></label>
         <br/>
-      <% 
-      contador=contador+1
-      end %>
+      <% end %>
     </div>
   </div>
   <div class="field">
     <label class="labelFormulario">Vacantes</label>    
     <div id="cuadro_de_vacantes">
       <input type="radio" id='torneo_vacantes1' name='torneo[vacantes]' value="4" onclick="javascript:cargarRegistroDeRondas(4)"
-      <% if @torneo_view.data_inicial_para_registro.vacantes == 4 then %> checked='checked'  <% end %> /><label for="torneo_vacantes1">4</label>
+      <% if @torneo.vacantes == 4 then %> checked='checked'  <% end %> /><label for="torneo_vacantes1">4</label>
       <input type="radio" id="torneo_vacantes2" name='torneo[vacantes]' value="8" onclick="javascript:cargarRegistroDeRondas(8)" 
-      <% if @torneo_view.data_inicial_para_registro.vacantes == 8 then %> checked='checked'  <% end %> /><label for="torneo_vacantes2">8</label>
+      <% if @torneo.vacantes == 8 then %> checked='checked'  <% end %> /><label for="torneo_vacantes2">8</label>
       <input type="radio" id="torneo_vacantes3" name='torneo[vacantes]' value="16" onclick="javascript:cargarRegistroDeRondas(16)"
-      <% if @torneo_view.data_inicial_para_registro.vacantes == 16 then %> checked='checked'  <% end %> /><label for="torneo_vacantes3">16</label>
+      <% if @torneo.vacantes == 16 then %> checked='checked'  <% end %> /><label for="torneo_vacantes3">16</label>
       <input type="radio" id="torneo_vacantes4" name='torneo[vacantes]' value="32" onclick="javascript:cargarRegistroDeRondas(32)"
-      <% if @torneo_view.data_inicial_para_registro.vacantes == 32 then %> checked='checked'  <% end %> /><label for="torneo_vacantes4">32</label>
+      <% if @torneo.vacantes == 32 then %> checked='checked'  <% end %> /><label for="torneo_vacantes4">32</label>
     </div>
   </div>
   <div class="field">
     <label class="labelFormulario">Fecha cierre inscripci&oacute;n </label>
     <div id="cuadro_tiempo_inicio_torneo">
-      <% if @torneo_view.data_inicial_para_registro.cierre_inscripcion_fecha.nil? || @torneo_view.data_inicial_para_registro.cierre_inscripcion_tiempo.nil? %>      
+      <% if @torneo.cierre_inscripcion_fecha.nil? || @torneo.cierre_inscripcion_tiempo.nil? %>      
         <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="" />       
         <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="" />
       <% else %>
-        <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo_view.data_inicial_para_registro.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" />       
-        <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="<%= @torneo_view.data_inicial_para_registro.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" />        
+        <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" />       
+        <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="<%= @torneo.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" />        
       <% end %>  
     </div>
   </div>  
@@ -121,9 +116,9 @@ function cargarRegistroDeRondas(vacantes){
         
         <select id='torneo_periodo_confirmacion_en_minutos' name='torneo[periodo_confirmacion_en_minutos]' class='string required form-control input-lg' >
           <option value='0'>Sin confirmaci&oacute;n</option>          
-          <option <% if @torneo_view.data_inicial_para_registro.periodo_confirmacion_en_minutos == 10 then %> selected <% end %>value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
-          <option <% if @torneo_view.data_inicial_para_registro.periodo_confirmacion_en_minutos == 20 then %> selected <% end %>value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
-          <option <% if @torneo_view.data_inicial_para_registro.periodo_confirmacion_en_minutos == 30 then %> selected <% end %>value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
+          <option <% if @torneo.periodo_confirmacion_en_minutos == 10 then %> selected <% end %>value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
+          <option <% if @torneo.periodo_confirmacion_en_minutos == 20 then %> selected <% end %>value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
+          <option <% if @torneo.periodo_confirmacion_en_minutos == 30 then %> selected <% end %>value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
         </select>
 
       </div>
@@ -143,7 +138,7 @@ function cargarRegistroDeRondas(vacantes){
         </tr>
       </thead>
       <tbody id="rondas">
-        <% @torneo_view.data_inicial_para_registro.rondas.each do | ronda | %>
+        <% @torneo.rondas.each do | ronda | %>
         <tr>
           <td><%=ronda.numero%></td>
           <td><input type='hidden' id='ronda<%=ronda.numero%>_numero' name='ronda<%=ronda.numero%>[numero]' value='<%=ronda.numero%>' /> 

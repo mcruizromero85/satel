@@ -73,8 +73,10 @@ class Torneo < ActiveRecord::Base
 			ronda.encuentros.each do | encuentro |
 				@array_ids_aleatorios_de_gamers << encuentro.gamera.id
 				@array_nombres_aleatorios_de_gamers << encuentro.gamera.nombres
-				@array_ids_aleatorios_de_gamers << encuentro.gamerb.id
-				@array_nombres_aleatorios_de_gamers << encuentro.gamerb.nombres
+				if encuentro.gamerb != nil				
+					@array_ids_aleatorios_de_gamers << encuentro.gamerb.id
+					@array_nombres_aleatorios_de_gamers << encuentro.gamerb.nombres
+				end
 			end
 		else
 			array_gamers_confirmados = Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").limit(self.vacantes).order('inscripciones.id')

@@ -18,7 +18,7 @@
 
                         <% @torneos_confirmados.each do |torneo_confirmado| %>
                          <tr id="torneo_confirmados">
-                          <td><%= torneo_confirmado.titulo %></td>
+                          <td><a href="/torneos/<%=torneo_confirmado.id%>"><%= torneo_confirmado.titulo %></a></td>
                           <td><%= torneo_confirmado.juego.nombre %></td>
                           <td><%= torneo_confirmado.vacantes %></td>
                           <td>
@@ -35,7 +35,7 @@
                               </b></font> 
                           </td>
                           <td><ul class="btnConfirmado">
-                                <li class="active"><a class="estilo_listo" href="/torneos/<%=torneo_confirmado.id%>">Ya Estoy Listo!!!!!</a></li>
+                                <li class="active"><a class="estilo_listo" href="/inscripciones?id_torneo=<%=torneo_confirmado.id%>">Ver inscritos</a></li>
                               </ul>
                           </td>                      
                         <tr> 
@@ -64,7 +64,7 @@
                             <% end %>
                           </td>
                           <td><ul class="btnInscrito">
-                                <li class="active"><a class="estilo_confirmacion" href="/torneos/<%=torneo_inscrito.id%>">Ya Estoy Inscrito :)</a></li>
+                                <li class="active"><a class="estilo_confirmacion" href="/inscripciones?id_torneo=<%=torneo_inscrito.id%>">Ver inscritos</a></li>
                               </ul>
                           </td>                      
                         <tr> 

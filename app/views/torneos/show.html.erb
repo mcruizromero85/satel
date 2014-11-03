@@ -6,24 +6,30 @@
               <br/>
                <div class="table-responsive">
                   <div class="field">
-                    <h4 class="text-center"><%=@torneo_view.torneo_detallado.titulo%></h4>
-                    <div id="id_torneo_registrado"><%=@torneo_view.torneo_detallado.id%></div>
+                    <h4 class="text-center"><%=@torneo.titulo%></h4>
+                    <div id="id_torneo_registrado"><%=@torneo.id%></div>
                   </div>
                   <div class="field">
-                    <h4 class="text-center"><%=@torneo_view.torneo_detallado.paginaweb%></h4>
+                    <h4 class="text-center"><%=@torneo.paginaweb%></h4>
                   </div>
                   <div class="field">
-                    <h4 class="text-center">Juego: <%=@torneo_view.torneo_detallado.juego.nombre%></h4>
+                    <h4 class="text-center">Juego: <%=@torneo.juego.nombre%></h4>
                   </div>
                   <div class="field">
                      <h4 class="text-center">Fecha cierre inscripci&oacute;n 
-                    <%=@torneo_view.torneo_detallado.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>
-                    <%=@torneo_view.torneo_detallado.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>
+                    <%=@torneo.cierre_inscripcion_tiempo.strftime("%d/%m/%Y") %>
+                    <%=@torneo.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>
                     </h4>
                   </div>
                   <div class="field">
-                    <h4 class="text-center">Minutos previos para confirmar: <%=@torneo_view.torneo_detallado.periodo_confirmacion_en_minutos%></h4>
+                    <h4 class="text-center">Minutos previos para confirmar: <%=@torneo.periodo_confirmacion_en_minutos%></h4>
                   </div>  
+                  <% if @torneo.inscripciones.count > 0 %>
+                  <div class="field">
+                    <h4 class="text-center"> <a href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a></h4>
+                  </div> 
+                  <% end %>
+
                    <div class="field">
                       <table class="table table-bordered table-hover table-striped tablesorter">
                       <thead>
@@ -35,7 +41,7 @@
                         </tr>
                       </thead>
                       <tbody id="rondas">
-                        <% @torneo_view.torneo_detallado.rondas.order(:numero).each do |ronda| %>
+                        <% @torneo.rondas.order(:numero).each do |ronda| %>
                           <tr>
                             <td><%=ronda.numero%></td>
                             <td><%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %></td>
