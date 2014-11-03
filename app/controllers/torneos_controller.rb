@@ -1,6 +1,5 @@
 class TorneosController < ApplicationController
   require_relative '../../app/helpers/torneos_helper'
-  require_relative '../../app/services/torneos_service'
 
   before_action :set_torneo, only: [:preparar,:show, :edit, :update, :destroy]
   before_action :revisa_si_existe_gamer_en_sesion, only: [:new]
