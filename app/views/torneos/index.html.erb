@@ -28,8 +28,13 @@
                                 <script type="text/javascript">
                                   generarContadorPorTorneoConfirmado('<%=torneo_confirmado.id%>', new Date(<%= torneo_confirmado.cierre_inscripcion.strftime('%s').to_i * 1000 %>));
                                 </script>
-                              <% else %>  
-                                <font color='green'><a class='estilo_listo' href='/torneo/inicio_torneo/<%=torneo_confirmado.id%>'>Esperando generaci&oacute;n de llaves</a></font>
+                              <% else %> 
+                                <% if torneo_confirmado.estado == "Iniciado" %> 
+                                  <font color='green'><a class='estilo_listo' href='/torneos/iniciar/<%=torneo_confirmado.id%>'>En curso</a></font>
+                                <% else %>
+                                  <font color='green'>Esperando generaci&oacute;n de llaves</font>
+                                <% end %>
+                                
                               <% end %>
 
                               </b></font> 

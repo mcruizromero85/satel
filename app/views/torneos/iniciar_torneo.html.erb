@@ -22,11 +22,11 @@
 <div class="container">
   <div class="row">
     <%   if cantidad_inscripciones <= 8 then %>
-      <div class="tile" style="height: 540px;">
+      <div class="tile" style="height: 640px;">
     <%   elsif cantidad_inscripciones <= 16 then %>
-      <div class="tile" style="height: 800px;">
+      <div class="tile" style="height: 900px;">
     <%   elsif cantidad_inscripciones <= 32 then %>
-      <div class="tile" style="height: 1200px;">
+      <div class="tile" style="height: 1300px;">
     <%   else %>
       <div class="tile" style="height: 256px;">
     <% end %>    
@@ -36,6 +36,18 @@
             <center>
               <a href="/torneos/<%=@torneo.id%>"><font color="#FFFFFF">Ver detalle del detalle del torneo</font></a>
             </center>
+            <br/>
+            <% if @torneo.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>
+
+                <ul>
+                <% @torneo.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
             <br/>
             <%= form_for @torneo do |f|   %>
              <% if @torneo.estado != "Iniciado" %>

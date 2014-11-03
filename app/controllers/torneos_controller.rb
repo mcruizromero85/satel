@@ -2,7 +2,7 @@ class TorneosController < ApplicationController
   require_relative '../../app/helpers/torneos_helper'
 
   before_action :set_torneo, only: [:preparar,:show, :edit, :update, :destroy]
-  before_action :revisa_si_existe_gamer_en_sesion, only: [:new]
+  before_action :revisa_si_existe_gamer_en_sesion, only: [:new,:mis_torneos]
 
   def mis_torneos
     @torneos=Torneo.all.where("gamer_id = :gamer_id ",{gamer_id: current_gamer.id }).order(cierre_inscripcion_fecha: :desc,cierre_inscripcion_tiempo: :desc) 
@@ -26,12 +26,13 @@ class TorneosController < ApplicationController
       else
         ids_torneos_inscritos_y_confirmados=[-1]
       end
-      
+
       @torneos_inscritos = Torneo.joins(:inscripciones).where("date(torneos.cierre_inscripcion_fecha) > date(:fecha_actual) or ( torneos.cierre_inscripcion_tiempo > time :hora_actual and date(torneos.cierre_inscripcion_fecha) = date(:fecha_actual)) and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado ",{fecha_actual: Time.new.strftime("%F"), hora_actual:Time.new.strftime("%T"), gamer_id: current_gamer.id, estado: "No confirmado" }).order(cierre_inscripcion_fecha: :desc,cierre_inscripcion_tiempo: :desc)
         ids_torneos_inscritos_y_confirmados.concat(@torneos_inscritos.pluck(:id))
     else
     	@torneos_confirmados= Array.new
     	@torneos_inscritos=Array.new	
+      ids_torneos_inscritos_y_confirmados=[-1]
     end
 
 
@@ -108,25 +109,35 @@ attr_writer :attr_names
   def update
     if torneo_params[:estado] == 'Iniciado' then      
       respond_to do |format|        
-        @torneo.update(estado: torneo_params[:estado])
-        array_encuentros_para_guardar_llaves = session[:array_encuentros_para_guardar_llaves]        
-        contador_posicion_en_ronda=1
-        array_encuentros_para_guardar_llaves.each do | array_encuentro | 
-          gamera = Gamer.new
-          gamera.id = array_encuentro[0]
+        @torneo.estado=torneo_params[:estado]
+        if @torneo.valid? 
 
-          gamerb = Gamer.new
-          gamerb.id = array_encuentro[1]
+          array_encuentros_para_guardar_llaves = session[:array_encuentros_para_guardar_llaves]        
+          contador_posicion_en_ronda=1
+          array_encuentros_para_guardar_llaves.each do | array_encuentro | 
+            gamera = Gamer.new
+            gamera.id = array_encuentro[0]
 
-          encuentro = Encuentro.new
-          encuentro.gamera=gamera
-          encuentro.gamerb=gamerb
-          encuentro.posicion_en_ronda=contador_posicion_en_ronda
-          encuentro.ronda=@torneo.rondas.first
-          encuentro.save
-          contador_posicion_en_ronda=contador_posicion_en_ronda+1
-        end
-        format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }        
+            gamerb = Gamer.new
+            gamerb.id = array_encuentro[1]
+
+            encuentro = Encuentro.new
+            encuentro.gamera=gamera
+            encuentro.gamerb=gamerb
+            encuentro.posicion_en_ronda=contador_posicion_en_ronda
+            encuentro.ronda=@torneo.rondas.first
+            encuentro.save
+            contador_posicion_en_ronda=contador_posicion_en_ronda+1
+          end
+
+          @torneo.save
+          format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }        
+        else
+          @torneo.estado="Creado"
+          @torneo.generar_encuentros
+          session[:array_encuentros_para_guardar_llaves] = @torneo.array_encuentros_para_guardar_llaves
+          format.html { render action: 'iniciar_torneo', notice: 'Error' }   
+        end     
       end
     else
 

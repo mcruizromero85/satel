@@ -8,12 +8,22 @@ class Torneo < ActiveRecord::Base
 	validate :fecha_registro_entre_rondas
 	validate :ronda_numero_uno_mayor_fecha_inscripcion
 	validate :rondas_existentes_por_vacantes
+	validate :cantidad_minima_confirmados
 	validates_numericality_of :periodo_confirmacion_en_minutos
-
 	belongs_to :gamer
 	belongs_to :juego , autosave: false
 	has_many :rondas , autosave: true
 	has_many :inscripciones, autosave: true
+
+	def cantidad_minima_confirmados
+		print "HOLAAAAAAAAA"
+		cantidad_confirmados=Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").count
+		print "GGG: " + self.estado
+		print "GGG: " + cantidad_confirmados.to_s
+		if self.estado == "Iniciado" and cantidad_confirmados < 4
+		      errors.add(:vacantes, ", El Torneo debe tener como mínimo 4 gamers confirmados")
+		end 
+	end
 
 	def cierre_inscripcion
 		if self.cierre_inscripcion_fecha != nil and self.cierre_inscripcion_tiempo != nil then
@@ -31,7 +41,7 @@ class Torneo < ActiveRecord::Base
 	end
 
 	def fecha_cierre_mayor_que_actual
-		if print self.estado == "Creado"
+		if self.estado == "Creado"
 		    if (cierre_inscripcion.to_i - Time.new.to_i) < 0 then 
 		      errors.add(:cierre_inscripcion_fecha, ", la fecha de cierre de inscripciones tiene que ser mayor a la actual")
 		    end
@@ -82,7 +92,6 @@ class Torneo < ActiveRecord::Base
 			array_gamers_confirmados = Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").limit(self.vacantes).order('inscripciones.id')
 			@array_ids_aleatorios_de_gamers = array_gamers_confirmados.pluck(:id).sample(self.vacantes)
 			@array_nombres_aleatorios_de_gamers = array_gamers_confirmados.pluck(:nombres).sample(self.vacantes)
-
 		end
 	end
 
