@@ -1,0 +1,13 @@
+git push -u heroku master
+heroku run rake db:drop
+heroku run rake db:migrate
+heroku run rake db:setup
+heroku logs
+heroku run rake db:setup
+heroku run rake db -T
+heroku logs --tail
+heroku run rake db:migrate --force
+heroku run rake db:migrate --help
+heroku addons:add heroku-postgresql
+heroku pg:promote HEROKU_POSTGRESQL_AMBER_URL
+

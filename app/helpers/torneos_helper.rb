@@ -2,6 +2,36 @@ module TorneosHelper
 	require 'active_support/core_ext/date'
 	require 'uri'
 
+	def self.obtener_bracket_segun_cantidad_confirmados(cantidad_gamers_confirmados)
+		if cantidad_gamers_confirmados <= 8 
+			8
+		elsif cantidad_gamers_confirmados <= 16 
+			16
+		elsif cantidad_gamers_confirmados <= 32
+			32
+		else
+			64
+		end
+	end
+
+    def self.obtener_array_resultados_para_llaves(array_id_gamers_aleatorio,vacantes)
+        array_id_encuentros = Array.new(vacantes/2){[-1,-1]}
+        contador_array_encuentros=0
+        contador=1
+         
+        array_id_gamers_aleatorio.each do | id |
+           if contador % 2 == 0
+               array_id_encuentros[contador_array_encuentros] = [0,0,'Match ' + (contador_array_encuentros +1).to_s]
+               contador_array_encuentros=contador_array_encuentros+1
+           else
+               primer_gamer=0
+               array_id_encuentros[contador_array_encuentros] = [0,-1,'Match ' + (contador_array_encuentros +1).to_s]
+           end
+           contador=contador+1
+        end
+        return array_id_encuentros
+    end
+
 	def self.obtener_array_doble_de_encuentros(array_id_gamers_aleatorio,vacantes)
         array_id_encuentros = Array.new(vacantes/2){[-1,-1]}
         contador_array_encuentros=0

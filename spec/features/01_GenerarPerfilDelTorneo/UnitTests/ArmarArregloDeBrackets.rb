@@ -1,5 +1,4 @@
 require "spec_helper"
-require 'active_support/core_ext/date'
 
 require_relative '../../../../app/helpers/torneos_helper'
 

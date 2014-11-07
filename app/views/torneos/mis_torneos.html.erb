@@ -7,7 +7,7 @@
             <h3>Mis torneos Organizados</h3>
              <div class="table-responsive">
               <% if @torneos.empty?   then %>
-                <h4>A&ucacute;n no has organizado un torneo, que esperas <a href="torneos/new" >organizalo!!!</a></h4>
+                <h4>A&uacute;n no has organizado un torneo, que esperas <a href="/torneos/new" >organizalo!!!</a></h4>
               <% else %>
               <table class="table table-bordered table-hover table-striped tablesorter">
                 <thead>
@@ -15,6 +15,7 @@
                     <th class="header">Nombre</th>
                     <th class="header">Juego</th>
                     <th class="header">Vacantes</th>
+                    <th class="header">Inscritos</th>
                     <th class="header">Cierre inscripcion</th>
                      <th class="header">Acci&oacute;n</th>
                   </tr>
@@ -23,15 +24,20 @@
                 <tbody id="torneosPortada">
                   <% @torneos.each do |torneo| %>
                     <tr>
-                      <td><a href="/inscripciones?id_torneo=<%=torneo.id%>"><%= torneo.titulo %><a/></td>
+                      <td><a href="/torneos/<%=torneo.id%>"><%= torneo.titulo %><a/></td>
                       <td><%= torneo.juego.nombre %></td>
-                      <td><%= torneo.vacantes %></td>
-                      <td>
-
+                      <td><%= torneo.vacantes %></td>                      
+                      <td><a href="/inscripciones?id_torneo=<%=torneo.id%>" ><%= torneo.inscripciones.count %><a/></td>
+                      <td><%= torneo.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %> <%= torneo.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>
                       </td>
                       <td>
                           <ul class="btnInscribir">
-                            <li class="active"><a href="/torneos/iniciar/<%=torneo.id%>">Iniciar ya!!!</a></li>
+                           
+                              <% if torneo.estado == "Iniciado"%>
+                               <li class="active"><a href="/torneos/iniciar/<%=torneo.id%>"><font color="green">Seguimiento</font></a></li>
+                              <% else %>
+                                <li class="active"><a href="/torneos/iniciar/<%=torneo.id%>">Iniciar ya!!!</a></li>                                
+                              <% end %>
                           </ul>
                       </td>
                     </tr>

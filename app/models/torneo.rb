@@ -8,12 +8,22 @@ class Torneo < ActiveRecord::Base
 	validate :fecha_registro_entre_rondas
 	validate :ronda_numero_uno_mayor_fecha_inscripcion
 	validate :rondas_existentes_por_vacantes
+	validate :cantidad_minima_confirmados
 	validates_numericality_of :periodo_confirmacion_en_minutos
-
 	belongs_to :gamer
 	belongs_to :juego , autosave: false
 	has_many :rondas , autosave: true
 	has_many :inscripciones, autosave: true
+
+	def cantidad_minima_confirmados
+		print "HOLAAAAAAAAA"
+		cantidad_confirmados=Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").count
+		print "GGG: " + self.estado
+		print "GGG: " + cantidad_confirmados.to_s
+		if self.estado == "Iniciado" and cantidad_confirmados < 4
+		      errors.add(:vacantes, ", El Torneo debe tener como mínimo 4 gamers confirmados")
+		end 
+	end
 
 	def cierre_inscripcion
 		if self.cierre_inscripcion_fecha != nil and self.cierre_inscripcion_tiempo != nil then
@@ -31,7 +41,7 @@ class Torneo < ActiveRecord::Base
 	end
 
 	def fecha_cierre_mayor_que_actual
-		if print self.estado == "Creado"
+		if self.estado == "Creado"
 		    if (cierre_inscripcion.to_i - Time.new.to_i) < 0 then 
 		      errors.add(:cierre_inscripcion_fecha, ", la fecha de cierre de inscripciones tiene que ser mayor a la actual")
 		    end
@@ -65,30 +75,35 @@ class Torneo < ActiveRecord::Base
 	end
 
 	def generar_encuentros
+		if self.estado == "Iniciado"
+			ronda=self.rondas.first
+			@array_ids_aleatorios_de_gamers = Array.new
+			@array_nombres_aleatorios_de_gamers = Array.new
 
-		array_gamers_confirmados = Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").limit(self.vacantes).order('inscripciones.id')
-		array_ids_aleatorios_de_gamers = array_gamers_confirmados.pluck(:id).sample(self.vacantes)
-		@array_nombres_aleatorios_de_gamers = array_gamers_confirmados.pluck(:nombres).sample(self.vacantes)
-		array_de_encuentros=TorneosHelper.obtener_array_doble_de_encuentros(array_ids_aleatorios_de_gamers,self.vacantes)
-
-		array_de_encuentros.each do | array_encuentro | 
-
-			gamera = Gamer.new
-			gamera.id = array_encuentro[0]
-
-			gamerb = Gamer.new
-			gamerb.id = array_encuentro[1]
-
-			encuentro = Encuentro.new
-			encuentro.gamera=gamera
-			encuentro.gamerb=gamerb
-			encuentro.ronda=self.rondas.first
-			encuentro.save
+			ronda.encuentros.each do | encuentro |
+				@array_ids_aleatorios_de_gamers << encuentro.gamera.id
+				@array_nombres_aleatorios_de_gamers << encuentro.gamera.nombres
+				if encuentro.gamerb != nil				
+					@array_ids_aleatorios_de_gamers << encuentro.gamerb.id
+					@array_nombres_aleatorios_de_gamers << encuentro.gamerb.nombres
+				end
+			end
+		else
+			array_gamers_confirmados = Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").limit(self.vacantes).order('inscripciones.id')
+			@array_ids_aleatorios_de_gamers = array_gamers_confirmados.pluck(:id).sample(self.vacantes)
+			@array_nombres_aleatorios_de_gamers = array_gamers_confirmados.pluck(:nombres).sample(self.vacantes)
 		end
 	end
 
-	def array_para_llaves
-
+	def array_encuentros_para_generar_llaves
 		TorneosHelper.obtener_array_para_llaves(@array_nombres_aleatorios_de_gamers,self.vacantes)
-	end 
+	end
+
+	def array_encuentros_para_guardar_llaves
+		TorneosHelper.obtener_array_doble_de_encuentros(@array_ids_aleatorios_de_gamers,self.vacantes)
+	end
+
+	def array_resultado_encuentros_para_generar_llaves
+        TorneosHelper.obtener_array_resultados_para_llaves(@array_nombres_aleatorios_de_gamers,self.vacantes)
+	end
 end
