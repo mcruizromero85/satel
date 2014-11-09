@@ -4,8 +4,8 @@ class CreateTorneos < ActiveRecord::Migration
       t.string :titulo
       t.string :paginaweb
       t.integer :vacantes
-      t.date :cierre_inscripcion_fecha
-      t.time :cierre_inscripcion_tiempo
+      t.timestamp :cierre_inscripcion_fecha
+      t.timestamp :cierre_inscripcion_tiempo
       t.integer :periodo_confirmacion_en_minutos
       t.string :tipo_torneo
       t.string :tipo_generacion	

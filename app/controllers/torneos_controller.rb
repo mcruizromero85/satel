@@ -17,26 +17,23 @@ class TorneosController < ApplicationController
 
   # GET /torneos GET /torneos.json
   def index 
+    if current_gamer != nil 
+      @torneos_confirmados = Torneo.obtener_torneos_ya_confirmados(current_gamer)
 
-    if current_gamer != nil then
-
-      @torneos_confirmados = Torneo.joins(:inscripciones).where("torneos.estado != :estado_no_esperado_torneo and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado ",{gamer_id: current_gamer.id, estado: "Confirmado", estado_no_esperado_torneo: "Finalizado" }).order(cierre_inscripcion_fecha: :desc,cierre_inscripcion_tiempo: :desc)
-      if @torneos_confirmados.size > 0 then
+      if @torneos_confirmados.size > 0 
         ids_torneos_inscritos_y_confirmados=@torneos_confirmados.pluck(:id)
       else
         ids_torneos_inscritos_y_confirmados=[-1]
       end
 
-      @torneos_inscritos = Torneo.joins(:inscripciones).where("date(torneos.cierre_inscripcion_fecha) > date(:fecha_actual) or ( torneos.cierre_inscripcion_tiempo > time :hora_actual and date(torneos.cierre_inscripcion_fecha) = date(:fecha_actual)) and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado ",{fecha_actual: Time.new.strftime("%F"), hora_actual:Time.new.strftime("%T"), gamer_id: current_gamer.id, estado: "No confirmado" }).order(cierre_inscripcion_fecha: :desc,cierre_inscripcion_tiempo: :desc)
-        ids_torneos_inscritos_y_confirmados.concat(@torneos_inscritos.pluck(:id))
+      @torneos_inscritos = Torneo.obtener_torneos_ya_inscrito(current_gamer)
+      ids_torneos_inscritos_y_confirmados.concat(@torneos_inscritos.pluck(:id))
     else
     	@torneos_confirmados= Array.new
     	@torneos_inscritos=Array.new	
       ids_torneos_inscritos_y_confirmados=[-1]
     end
-
-
-    @torneos=Torneo.all.order(cierre_inscripcion_fecha: :desc,cierre_inscripcion_tiempo: :desc).limit(20).where("date(cierre_inscripcion_fecha) > date(:fecha_actual) or ( cierre_inscripcion_tiempo > time :hora_actual and date(cierre_inscripcion_fecha) = date(:fecha_actual)) and id not in (:ids_torneos_inscritos_y_confirmados) ",{fecha_actual: Time.new.strftime("%F"), hora_actual:Time.new.strftime("%T"), ids_torneos_inscritos_y_confirmados: ids_torneos_inscritos_y_confirmados })
+    @torneos=Torneo.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados)    
   end
 
   # GET /torneos/1
@@ -50,7 +47,7 @@ attr_writer :attr_names
     @torneo=Torneo.new
     @torneo.vacantes=8
     @torneo.cierre_inscripcion_fecha = (Time.new + (60 * 60 * 0.5)).to_date
-      @torneo.cierre_inscripcion_tiempo = Time.new + ((60 * 60 * 0.5))            
+    @torneo.cierre_inscripcion_tiempo = Time.new + ((60 * 60 * 0.5))            
 
       numero_de_rondas_totales=TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes)
 
@@ -76,6 +73,8 @@ attr_writer :attr_names
   # POST /torneos.json
   def create
     @torneo = Torneo.new(torneo_params)
+    @torneo.fecha_y_hora_inscripcion(torneo_params['cierre_inscripcion_fecha'],torneo_params['cierre_inscripcion_tiempo'])
+
     rondas_contador = TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes)
 
     for i in 1..rondas_contador
@@ -94,7 +93,7 @@ attr_writer :attr_names
     @torneo.gamer = current_gamer
     
     respond_to do |format|
-      if @torneo.save then
+      if @torneo.registrar then
         format.html { redirect_to @torneo, notice: 'Torneo was successfully created.' }
         format.json { render action: 'show', status: :created, location: @torneo }
       else
@@ -131,6 +130,8 @@ attr_writer :attr_names
           end
 
           @torneo.save
+          @torneo.generar_encuentros
+          
           format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }        
         else
           @torneo.estado="Creado"

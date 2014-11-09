@@ -15,34 +15,51 @@ class Torneo < ActiveRecord::Base
 	has_many :rondas , autosave: true
 	has_many :inscripciones, autosave: true
 
+	def self.obtener_torneos_ya_confirmados(gamer_logeado)
+		Torneo.joins(:inscripciones).where("torneos.estado != :estado_no_esperado_torneo and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado ",{gamer_id: gamer_logeado.id, estado: "Confirmado", estado_no_esperado_torneo: "Finalizado" }).order(cierre_inscripcion_fecha: :desc,cierre_inscripcion_tiempo: :desc)
+	end
+
+	def self.obtener_torneos_ya_inscrito(gamer_logeado)
+		Torneo.joins(:inscripciones).where("torneos.cierre_inscripcion_fecha > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado ",{fecha_actual: Time.new, gamer_id: gamer_logeado.id, estado: "No confirmado" }).order(cierre_inscripcion_fecha: :desc,cierre_inscripcion_tiempo: :desc)
+	end
+
+	def self.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados)
+		Torneo.all.order(cierre_inscripcion_fecha: :desc,cierre_inscripcion_tiempo: :desc).limit(20).where("cierre_inscripcion_fecha > :fecha_actual and id not in (:ids_torneos_inscritos_y_confirmados) ",{fecha_actual: Time.new, ids_torneos_inscritos_y_confirmados: ids_torneos_inscritos_y_confirmados })
+	end
+
+	def fecha_y_hora_inscripcion(fecha,hora)
+		fecha=Date.strptime(fecha, "%d/%m/%Y") rescue nil
+		hora=Time.strptime(hora, "%I:%M %p") rescue nil
+		if fecha == nil
+			errors.add(:cierre_inscripcion_fecha, ", la fecha debe estar en formato dd/mm/yyyy")
+			return
+		end
+		
+		if hora == nil
+			errors.add(:cierre_inscripcion_fecha, ", , la hora debe estar en formato hh:mm AM/PM")
+			return
+		end
+		self.cierre_inscripcion_fecha=Time.local(fecha.year ,fecha.month,fecha.day,hora.hour,hora.min,hora.sec)
+	end
+
+	def registrar
+		self.save
+	end
+
 	def cantidad_minima_confirmados
-		print "HOLAAAAAAAAA"
 		cantidad_confirmados=Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").count
-		print "GGG: " + self.estado
-		print "GGG: " + cantidad_confirmados.to_s
 		if self.estado == "Iniciado" and cantidad_confirmados < 4
 		      errors.add(:vacantes, ", El Torneo debe tener como mínimo 4 gamers confirmados")
 		end 
 	end
 
-	def cierre_inscripcion
-		if self.cierre_inscripcion_fecha != nil and self.cierre_inscripcion_tiempo != nil then
-			fecha=self.cierre_inscripcion_fecha
-			tiempo=self.cierre_inscripcion_tiempo
-			Time.local(fecha.year ,fecha.month,fecha.day,tiempo.hour,tiempo.min,tiempo.sec)
-		end
-	end
-
 	def inicio_fecha_hora_confirmacion			
-			fecha=self.cierre_inscripcion_fecha
-			tiempo=self.cierre_inscripcion_tiempo
-			fecha_hora_inscripcion=Time.local(fecha.year ,fecha.month,fecha.day,tiempo.hour,tiempo.min,tiempo.sec)
-			return (fecha_hora_inscripcion - (periodo_confirmacion_en_minutos * 60))
+		return (cierre_inscripcion_fecha - (periodo_confirmacion_en_minutos * 60))
 	end
 
 	def fecha_cierre_mayor_que_actual
 		if self.estado == "Creado"
-		    if (cierre_inscripcion.to_i - Time.new.to_i) < 0 then 
+		    if (cierre_inscripcion_fecha.to_i - Time.new.to_i) < 0 then 
 		      errors.add(:cierre_inscripcion_fecha, ", la fecha de cierre de inscripciones tiene que ser mayor a la actual")
 		    end
 		end
@@ -50,7 +67,7 @@ class Torneo < ActiveRecord::Base
 
   	def ronda_numero_uno_mayor_fecha_inscripcion
   		if rondas.size > 0 then
-			if ( rondas[0].inicio_ronda.to_i - cierre_inscripcion.to_i) < 0 then 
+			if ( rondas[0].inicio_ronda.to_i - cierre_inscripcion_fecha.to_i) < 0 then 
 				errors.add(:cierre_inscripcion_fecha, ", la fecha de la primera ronda debe ser mayor a la fecha de cierre de inscripcion")
 			end		
 		end
@@ -79,31 +96,51 @@ class Torneo < ActiveRecord::Base
 			ronda=self.rondas.first
 			@array_ids_aleatorios_de_gamers = Array.new
 			@array_nombres_aleatorios_de_gamers = Array.new
+			@cantidad_slots=0
 
 			ronda.encuentros.each do | encuentro |
 				@array_ids_aleatorios_de_gamers << encuentro.gamera.id
 				@array_nombres_aleatorios_de_gamers << encuentro.gamera.nombres
+				@cantidad_slots=@cantidad_slots+1
 				if encuentro.gamerb != nil				
 					@array_ids_aleatorios_de_gamers << encuentro.gamerb.id
 					@array_nombres_aleatorios_de_gamers << encuentro.gamerb.nombres
+					@cantidad_slots=@cantidad_slots+1
 				end
 			end
 		else
 			array_gamers_confirmados = Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").limit(self.vacantes).order('inscripciones.id')
-			@array_ids_aleatorios_de_gamers = array_gamers_confirmados.pluck(:id).sample(self.vacantes)
-			@array_nombres_aleatorios_de_gamers = array_gamers_confirmados.pluck(:nombres).sample(self.vacantes)
+			@cantidad_slots=obtener_cantidad_de_slots_segun_gamers_confirmados(array_gamers_confirmados.count)
+			@array_ids_aleatorios_de_gamers = array_gamers_confirmados.pluck(:id).sample(@cantidad_slots)
+			@array_nombres_aleatorios_de_gamers = array_gamers_confirmados.pluck(:nombres).sample(@cantidad_slots)
 		end
 	end
 
 	def array_encuentros_para_generar_llaves
-		TorneosHelper.obtener_array_para_llaves(@array_nombres_aleatorios_de_gamers,self.vacantes)
+		TorneosHelper.obtener_array_para_llaves(@array_nombres_aleatorios_de_gamers,@cantidad_slots)
 	end
 
 	def array_encuentros_para_guardar_llaves
-		TorneosHelper.obtener_array_doble_de_encuentros(@array_ids_aleatorios_de_gamers,self.vacantes)
+		TorneosHelper.obtener_array_doble_de_encuentros(@array_ids_aleatorios_de_gamers,@cantidad_slots)
 	end
 
 	def array_resultado_encuentros_para_generar_llaves
-        TorneosHelper.obtener_array_resultados_para_llaves(@array_nombres_aleatorios_de_gamers,self.vacantes)
+        TorneosHelper.obtener_array_resultados_para_llaves(@array_nombres_aleatorios_de_gamers,@cantidad_slots)
 	end
+
+	private    
+    def obtener_cantidad_de_slots_segun_gamers_confirmados(gamers_confirmados)
+      if gamers_confirmados <= 4 
+      	4
+      elsif gamers_confirmados <= 8
+      	8
+      elsif gamers_confirmados <= 16
+      	16
+      elsif gamers_confirmados <= 32
+      	32
+      else
+      	64
+      end
+    end
+
 end

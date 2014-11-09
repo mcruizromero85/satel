@@ -6,7 +6,6 @@
     	fecha_segunda_ronda=fecha_primera_ronda+120
     	fecha_tercera_ronda=fecha_segunda_ronda+120
  		
-	 	visit("/")
 		click_link("link_cabecera_registrar_torneo")
 
 		torneo_correcto = FactoryGirl.build(:torneo, cierre_inscripcion_fecha: fecha_cierre_inscripcion_correcto,cierre_inscripcion_tiempo: fecha_cierre_inscripcion_correcto)
@@ -27,10 +26,14 @@
 		fill_in("ronda3_inicio_tiempo", :with => fecha_tercera_ronda.strftime("%I:%M %p"))  
    	end
 
-	def autenticarse
+	def autenticarse_como_organizador
 		visit "/"
 		click_link("autenticarse")
 		fill_in("name", :with => "Gissella")
 		fill_in("email", :with => "gcarhuamacaquispe@gmail.com")
 		click_button("autenticar")
 	end
+
+
+
+

@@ -4,7 +4,7 @@ require "util_tests"
 feature "Definir estructura del torneo" do
 
 	scenario "Dado que la fecha de primera ronda es mayor a la de cierre de inscripción, el sistema debe alertarlo", :js => true do
-		autenticarse
+		autenticarse_como_organizador
 		llenar_formulario_con_datos_correctos
 
 		cierre_inscripciones_para_manana=obtener_fecha_actual_sumando_minutos(60*24)
@@ -22,7 +22,7 @@ feature "Definir estructura del torneo" do
 
 
 	scenario "Dado que se selecciona una ronda con fecha y hora de inicio menor a la ronda anterior, entonces al publicar el torneo, él sistema debe alertarlo", :js => true do
-		autenticarse
+		autenticarse_como_organizador
 		llenar_formulario_con_datos_correctos
 
 		inicio_ronda2_cuatro_dias_despues=obtener_fecha_actual_sumando_minutos(60*24*4)
