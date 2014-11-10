@@ -3,7 +3,7 @@
     <% if @torneos_inscritos.size != 0 or @torneos_confirmados.size != 0 %>
     <script type="text/javascript">
       function generarContadorPorTorneoInscrito(idTorneo,fecha_inicio_confirmacion){        
-        $('#countdown_torneo_inscrito_'+idTorneo).countdown({until: fecha_inicio_confirmacion, format: 'dhmS',expiryText: "<font color='red'><a class='estilo_confirmacion' href='/inscripciones/confirmar/"+idTorneo+"'>YA, CONFIRMA!!!!</a></font>" }); 
+        $('#countdown_torneo_inscrito_'+idTorneo).countdown({until: fecha_inicio_confirmacion, format: 'dhmS',expiryText: "<font color='red'><a class='estilo_confirmacion' href='/inscripciones/confirmar/"+idTorneo+"'>CONFIRMAR YA!!!!</a></font>" }); 
       }
 
       function generarContadorPorTorneoConfirmado(idTorneo,fecha_cierre_inscripcion){        
@@ -26,7 +26,7 @@
                               <% if torneo_confirmado.cierre_inscripcion_fecha.to_i - Time.new.to_i >= 0 then %>   
                                 <div id='countdown_torneo_confirmado_<%=torneo_confirmado.id%>'></div>
                                 <script type="text/javascript">
-                                  generarContadorPorTorneoConfirmado('<%=torneo_confirmado.id%>', new Date(<%= torneo_confirmado.cierre_inscripcion_fecha.strftime('%s').to_i * 1000 %>));
+                                  generarContadorPorTorneoConfirmado('<%=torneo_confirmado.id%>', new Date(<%= torneo_confirmado.cierre_inscripcion_fecha.to_i * 1000 %>));
                                 </script>
                               <% else %> 
                                 <% if torneo_confirmado.estado == "Iniciado" %> 
@@ -64,7 +64,7 @@
                               <font color="orange"><b>Confirmaci&oacute;n en..</b></font>  
                               <div id='countdown_torneo_inscrito_<%=torneo_inscrito.id%>'></div>
                               <script type="text/javascript">
-                                generarContadorPorTorneoInscrito('<%=torneo_inscrito.id%>', new Date(<%= torneo_inscrito.inicio_fecha_hora_confirmacion.strftime('%s').to_i * 1000 %>));
+                                generarContadorPorTorneoInscrito('<%=torneo_inscrito.id%>', new Date(<%= torneo_inscrito.inicio_fecha_hora_confirmacion.to_i * 1000 %>));
                               </script>
                             <% end %>
                           </td>
@@ -131,7 +131,7 @@
                         <% else %>
                           <div id='countdown_<%=torneo.id%>'></div>
                           <script type="text/javascript">
-                            generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion_fecha.strftime('%s').to_i * 1000 %>));
+                            generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion_fecha.to_i * 1000 %>));
                           </script>
                         <% end %>
                       </td>

@@ -42,48 +42,6 @@ feature "Iniciar Torneo" do
 		inscribir_y_confirmar_gamers 10		
 		iniciar_torneo
 		expect(page).to have_content("Torneo en Curso")
-		page.save_screenshot('Inscritos.png')
-	end
-
-	def inscribir_y_confirmar_gamers cantidad_inscritos_confirmados=8
-
-		array_gamers_ejemplo = Array.new
-		array_gamers_ejemplo << "Mauro"
-		array_gamers_ejemplo << "Mateo"
-		array_gamers_ejemplo << "EddyArn"
-		array_gamers_ejemplo << "Brucefulus"
-		array_gamers_ejemplo << "Locopiedra"
-		array_gamers_ejemplo << "Sivicious"
-		array_gamers_ejemplo << "Otaru"
-		array_gamers_ejemplo << "Gianella"
-		array_gamers_ejemplo << "Sonny"
-		array_gamers_ejemplo << "Kodo"
-
-		array_gamers_a_inscribirse=array_gamers_ejemplo.sample(cantidad_inscritos_confirmados)	
-
-		array_gamers_a_inscribirse.each do | nombre_gamer | 
-			inscribirse_como(nombre_gamer,nombre_gamer.downcase + "gmail.com")
-		end					
-	end
-
-	def registrar_torneo
-		llenar_formulario_con_datos_correctos 30
-		click_button("Registrar Torneo")
-		@id_torneo_registrado=find('#id_torneo_registrado').text				
-		click_link('link_cerrar_sesion')		
-	end
-
-	def inscribirse_como(nombre,correo)
-		visit "/"
-		click_link("autenticarse")
-		fill_in("name", :with => nombre)
-		fill_in("email", :with => correo)
-		click_button("autenticar")
-		click_link('link_inscripcion_torneo_'+@id_torneo_registrado)
-		click_button("Inscribirme")
-		visit "/"			
-		click_link('link_confirmar_torneo_'+@id_torneo_registrado)		
-		click_link('link_cerrar_sesion')
 	end
 
 	def iniciar_torneo
