@@ -13,35 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20141020220459) do
 
-  create_table "asociados", force: true do |t|
-    t.string   "nombre"
-    t.string   "descripcion"
-    t.integer  "juego_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "authentications", force: true do |t|
-    t.integer  "gamer_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "encuentros", force: true do |t|
-    t.integer  "gamera_id"
-    t.integer  "gamerb_id"
-    t.integer  "posicion_en_ronda"
-    t.integer  "ronda_id"
-    t.string   "flag_ganador"
-    t.string   "descripcion"
-    t.integer  "encuentro_anterior_a_id"
-    t.string   "encuentro_anterior_b_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "gamers", force: true do |t|
     t.string   "nick"
     t.string   "correo"
@@ -52,22 +23,11 @@ ActiveRecord::Schema.define(version: 20141020220459) do
     t.datetime "updated_at"
   end
 
-  create_table "inscripciones", force: true do |t|
-    t.integer  "torneo_id"
+  create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
-    t.string   "estado"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "inscripcions", force: true do |t|
-    t.date     "fecha_inscripcion"
-    t.time     "hora_inscripcion"
-    t.string   "estado_confirmacion"
-    t.integer  "peso_participacion"
-    t.integer  "posicion_inicial"
-    t.integer  "gamer_id"
-    t.integer  "torneo_id"
+    t.foreign_key :gamers
+    t.string   "provider"
+    t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -75,18 +35,6 @@ ActiveRecord::Schema.define(version: 20141020220459) do
   create_table "juegos", force: true do |t|
     t.string   "nombre"
     t.string   "descripcion"
-    t.integer  "asociado_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "rondas", force: true do |t|
-    t.integer  "numero"
-    t.date     "inicio_fecha"
-    t.time     "inicio_tiempo"
-    t.string   "modo_ganar"
-    t.integer  "torneo_id"
-    t.integer  "ronda_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,6 +50,45 @@ ActiveRecord::Schema.define(version: 20141020220459) do
     t.string   "tipo_generacion"
     t.integer  "gamer_id"
     t.integer  "juego_id"
+    t.string   "estado"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.foreign_key :juegos
+    t.foreign_key :gamers
+  end
+
+  create_table "rondas", force: true do |t|
+    t.integer  "numero"
+    t.date     "inicio_fecha"
+    t.time     "inicio_tiempo"
+    t.string   "modo_ganar"
+    t.integer  "torneo_id"
+    t.foreign_key :torneos
+    t.integer  "ronda_id"
+    t.foreign_key :rondas
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "encuentros", force: true do |t|
+    t.integer  "gamera_id"
+    t.integer  "gamerb_id"
+    t.integer  "posicion_en_ronda"
+    t.integer  "ronda_id"
+    t.foreign_key :rondas
+    t.string   "flag_ganador"
+    t.string   "descripcion"
+    t.integer  "encuentro_anterior_a_id"
+    t.string   "encuentro_anterior_b_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "inscripciones", force: true do |t|
+    t.integer  "torneo_id"
+    t.foreign_key :torneos
+    t.integer  "gamer_id"
+    t.foreign_key :gamers
     t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"

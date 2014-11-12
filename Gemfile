@@ -61,3 +61,4 @@ group :development, :test do
 end
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'foreigner'
