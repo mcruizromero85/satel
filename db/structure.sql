@@ -29,16 +29,52 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: authentications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE authentications (
+    id integer NOT NULL,
+    gamer_id integer,
+    provider character varying(255),
+    uid character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: authentications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE authentications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: authentications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE authentications_id_seq OWNED BY authentications.id;
+
+
+--
 -- Name: encuentros; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE encuentros (
     id integer NOT NULL,
-    estado character varying(255),
+    gamera_id integer,
+    gamerb_id integer,
     posicion_en_ronda integer,
-    id_inscripcion_gamer_a integer,
-    id_inscripcion_gamer_b integer,
-    id_inscripcion_gamer_ganador integer,
+    ronda_id integer,
+    flag_ganador character varying(255),
+    descripcion character varying(255),
+    encuentro_anterior_a_id integer,
+    encuentro_anterior_b_id character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -99,34 +135,24 @@ ALTER SEQUENCE gamers_id_seq OWNED BY gamers.id;
 
 
 --
--- Name: pruebas; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: inscripciones; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE pruebas (
+CREATE TABLE inscripciones (
     id integer NOT NULL,
-    titulo character varying(255),
-    descripcion character varying(255),
-    formato character varying(255),
-    modalidad character varying(255),
-    juego_id integer,
-    modalidad_reporte_victoria character varying(255),
-    vacantes integer,
-    cierre_inscripcion_fecha date,
-    cierre_inscripcion_tiempo time without time zone,
-    cierre_check_in_fecha date,
-    cierre_check_in_tiempo time without time zone,
-    inicio_torneo_fecha date,
-    inicio_torneo_tiempo character varying(255),
+    torneo_id integer,
+    gamer_id integer,
+    estado character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
 
 
 --
--- Name: pruebas_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: inscripciones_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE pruebas_id_seq
+CREATE SEQUENCE inscripciones_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -135,10 +161,42 @@ CREATE SEQUENCE pruebas_id_seq
 
 
 --
--- Name: pruebas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: inscripciones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE pruebas_id_seq OWNED BY pruebas.id;
+ALTER SEQUENCE inscripciones_id_seq OWNED BY inscripciones.id;
+
+
+--
+-- Name: juegos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE juegos (
+    id integer NOT NULL,
+    nombre character varying(255),
+    descripcion character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: juegos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE juegos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: juegos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE juegos_id_seq OWNED BY juegos.id;
 
 
 --
@@ -152,6 +210,7 @@ CREATE TABLE rondas (
     inicio_tiempo time without time zone,
     modo_ganar character varying(255),
     torneo_id integer,
+    ronda_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -194,13 +253,14 @@ CREATE TABLE torneos (
     titulo character varying(255),
     paginaweb character varying(255),
     vacantes integer,
-    cierre_inscripcion_fecha date,
-    cierre_inscripcion_tiempo time without time zone,
-    cierre_check_in_fecha date,
-    cierre_check_in_tiempo time without time zone,
-    inicio_torneo_fecha date,
-    inicio_torneo_tiempo time without time zone,
-    id_gamer integer,
+    cierre_inscripcion_fecha timestamp without time zone,
+    cierre_inscripcion_tiempo timestamp without time zone,
+    periodo_confirmacion_en_minutos integer,
+    tipo_torneo character varying(255),
+    tipo_generacion character varying(255),
+    gamer_id integer,
+    juego_id integer,
+    estado character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -229,6 +289,13 @@ ALTER SEQUENCE torneos_id_seq OWNED BY torneos.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY authentications ALTER COLUMN id SET DEFAULT nextval('authentications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY encuentros ALTER COLUMN id SET DEFAULT nextval('encuentros_id_seq'::regclass);
 
 
@@ -243,7 +310,14 @@ ALTER TABLE ONLY gamers ALTER COLUMN id SET DEFAULT nextval('gamers_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY pruebas ALTER COLUMN id SET DEFAULT nextval('pruebas_id_seq'::regclass);
+ALTER TABLE ONLY inscripciones ALTER COLUMN id SET DEFAULT nextval('inscripciones_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY juegos ALTER COLUMN id SET DEFAULT nextval('juegos_id_seq'::regclass);
 
 
 --
@@ -258,6 +332,14 @@ ALTER TABLE ONLY rondas ALTER COLUMN id SET DEFAULT nextval('rondas_id_seq'::reg
 --
 
 ALTER TABLE ONLY torneos ALTER COLUMN id SET DEFAULT nextval('torneos_id_seq'::regclass);
+
+
+--
+-- Name: authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY authentications
+    ADD CONSTRAINT authentications_pkey PRIMARY KEY (id);
 
 
 --
@@ -277,11 +359,19 @@ ALTER TABLE ONLY gamers
 
 
 --
--- Name: pruebas_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: inscripciones_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY pruebas
-    ADD CONSTRAINT pruebas_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY inscripciones
+    ADD CONSTRAINT inscripciones_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: juegos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY juegos
+    ADD CONSTRAINT juegos_pkey PRIMARY KEY (id);
 
 
 --
@@ -308,6 +398,70 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
+-- Name: authentications_gamer_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY authentications
+    ADD CONSTRAINT authentications_gamer_id_fk FOREIGN KEY (gamer_id) REFERENCES gamers(id);
+
+
+--
+-- Name: encuentros_ronda_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY encuentros
+    ADD CONSTRAINT encuentros_ronda_id_fk FOREIGN KEY (ronda_id) REFERENCES rondas(id);
+
+
+--
+-- Name: inscripciones_gamer_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY inscripciones
+    ADD CONSTRAINT inscripciones_gamer_id_fk FOREIGN KEY (gamer_id) REFERENCES gamers(id);
+
+
+--
+-- Name: inscripciones_torneo_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY inscripciones
+    ADD CONSTRAINT inscripciones_torneo_id_fk FOREIGN KEY (torneo_id) REFERENCES torneos(id);
+
+
+--
+-- Name: rondas_ronda_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY rondas
+    ADD CONSTRAINT rondas_ronda_id_fk FOREIGN KEY (ronda_id) REFERENCES rondas(id);
+
+
+--
+-- Name: rondas_torneo_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY rondas
+    ADD CONSTRAINT rondas_torneo_id_fk FOREIGN KEY (torneo_id) REFERENCES torneos(id);
+
+
+--
+-- Name: torneos_gamer_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY torneos
+    ADD CONSTRAINT torneos_gamer_id_fk FOREIGN KEY (gamer_id) REFERENCES gamers(id);
+
+
+--
+-- Name: torneos_juego_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY torneos
+    ADD CONSTRAINT torneos_juego_id_fk FOREIGN KEY (juego_id) REFERENCES juegos(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -315,12 +469,16 @@ SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20131210145649');
 
-INSERT INTO schema_migrations (version) VALUES ('20131224000829');
-
 INSERT INTO schema_migrations (version) VALUES ('20131230234849');
-
-INSERT INTO schema_migrations (version) VALUES ('20140323174242');
 
 INSERT INTO schema_migrations (version) VALUES ('20140323192709');
 
-INSERT INTO schema_migrations (version) VALUES ('20140406010445');
+INSERT INTO schema_migrations (version) VALUES ('20140412192319');
+
+INSERT INTO schema_migrations (version) VALUES ('20140412192350');
+
+INSERT INTO schema_migrations (version) VALUES ('20140810225253');
+
+INSERT INTO schema_migrations (version) VALUES ('20140817033501');
+
+INSERT INTO schema_migrations (version) VALUES ('20141020220459');

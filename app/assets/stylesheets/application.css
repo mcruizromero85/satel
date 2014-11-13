@@ -2110,20 +2110,12 @@ textarea.input-sm {
     height: auto;
 }
 .input-lg {
-    /*MOdificando el formulario para su compatibilidad con Crhome
-    border-radius: 6px;
-    font-size: 18px;
-    height: 45px;
-    line-height: 1.33;
-    padding: 10px 16px;
-    width: 95%;
-*/
-padding: 10px 10px
+    padding: 10px 10px;
     border-radius: 6px;
     width: 75%; 
     height: 45px; 
     line-height: 1.33;
-     font-size: 18px;
+    font-size: 18px;
 
 }
 select.input-lg {

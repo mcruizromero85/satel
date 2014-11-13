@@ -29,8 +29,12 @@
       <div class="tile" style="height: 1300px;">
     <%   else %>
       <div class="tile" style="height: 256px;">
-    <% end %>    
-            <h3 class="text-center"><u>Prepara tu torneo antes de iniciar</u></h1>
+    <% end %>
+            <% if @torneo.estado == "Iniciado"  %>  
+              <h3 class="text-center"><u>Torneo en Curso</u></h1>
+            <% else%>
+              <h3 class="text-center"><u>Prepara tu torneo antes de iniciar</u></h1>
+            <% end %>  
             <h3 class="text-center"><%= @torneo.titulo %></h2>
             <h4 class="text-center"><%= @torneo.paginaweb %></h4>
             <center>

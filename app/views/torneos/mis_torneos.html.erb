@@ -34,9 +34,9 @@
                           <ul class="btnInscribir">
                            
                               <% if torneo.estado == "Iniciado"%>
-                               <li class="active"><a href="/torneos/iniciar/<%=torneo.id%>"><font color="green">Seguimiento</font></a></li>
+                               <li class="active"><a id="link_seguimiento_torneo_<%=torneo.id%>" href="/torneos/iniciar/<%=torneo.id%>"><font color="green">Seguimiento</font></a></li>
                               <% else %>
-                                <li class="active"><a href="/torneos/iniciar/<%=torneo.id%>">Iniciar ya!!!</a></li>                                
+                                <li class="active"><a id="link_iniciar_torneo_<%=torneo.id%>" href="/torneos/iniciar/<%=torneo.id%>">Iniciar ya!!!</a></li>                                
                               <% end %>
                           </ul>
                       </td>

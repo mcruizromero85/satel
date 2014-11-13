@@ -11,3 +11,7 @@ heroku run rake db:migrate --help
 heroku addons:add heroku-postgresql
 heroku pg:promote HEROKU_POSTGRESQL_AMBER_URL
 
+rake db:migrate
+rake db:migrate RAILS_ENV=development 
+rake db:migrate:redo VERSION=20140323174242
+

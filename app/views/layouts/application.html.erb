@@ -17,79 +17,41 @@
 <header id="header">
     <nav class="navbar" role="navigation">
   <div class="container">
-
-    <!-- Brand and toggle get grouped for better mobile display -->
-
-    
     <div class="navbar-header">
-      <!--Cambio1.- Se retira, por el momento boton de google
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button> 
-       -->
       <a class="navbar-brand" href="/">
-
       <img alt="Satel logo" class="logo-main" src="<%= image_path("logo.png") %>">
 </a>    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="navbar-collapse navbar-ex1-collapse in" style="height: auto;float: left">
 
       <ul class="nav nav-pills navbar-left">
         <li class="active"><a id="link_cabecera_registrar_torneo" href="/torneos/new" class="enlacesCabecera" >Organizar un Torneo</a></li>
 
 <!--<li class="active"><a href="#">Buscar m&aacute;s torneos</a></li> -->
-        <li class="active"><a href="/torneos/mis_torneos"><font color="red">Mis Torneos Organizados</font></a></li>
-
-
+       
 <!--Cambio 2, se adiciona a la list el menu el boton del logon-->
+        <li class="active"><a id="link_mis_torneos" href="/torneos/mis_torneos"><font color="red">Mis Torneos Organizados</font></a></li>
         <li class="active">
-<!-- Inicio de bloque1 movido-->
-
     <% if @current_gamer == nil %>
-      <!--
-      <div class="navbar-header" style="height: auto; float: right;  margin-top: 13px; width: 325px; "> -->   
-
         <% if ENV["RAILS_ENV"] == 'test'%>
           <a id="autenticarse" class="navbar-brand"  style="color: rgb(255, 255, 255); font-size: 13px; padding-top: 0px; padding-bottom: 0px;" href="/auth/developer" > 
-            <img alt="Ingresar con facebook" height="60px" width="290px" src="<%= image_path("facebook-ingreso.png") %>">
+            <img alt="Ingresar con facebook" height="60px" width="290px" src="<%= image_path("facebook-ingreso.png") %>"  />
           </a>    
         <% else %>
           <a id="autenticarse" class="navbar-brand"  style="color: rgb(255, 255, 255); font-size: 13px; padding-top: 0px; padding-bottom: 0px;" href="/auth/facebook" > 
-            <img alt="Ingresar con facebook" height="60px" width="290px" src="<%= image_path("facebook-ingreso.png") %>">
+            <img alt="Ingresar con facebook" height="60px" width="290px" src="<%= image_path("facebook-ingreso.png") %>" />
           </a> 
         <% end %>
-
-      <!--</div>-->
-
     <% else %>
      <li class="active">
       <a id="link_cerrar_sesion" href="/cerrar_sesion" > Cerrar Sesi&oacute;n</a>
     </li>
-    <!--
-      <div class="navbar-header" style="height: auto; float: right; background-image: url('<%= image_path("facebook-logeado.png") %>'); margin-top: 13px; width: 325px;  background-size: 325px 60px;padding-left: 0px;padding-right: 0px;">-->
-
         <a class="navbar-brand"  style="color: #FFFFFF;font-size:13px; background-image: url('<%= image_path("facebook-logeado.png") %>');height=60px; width: 300px; padding-left: 0px;padding-right: 0px; background-size: 325px 60px;"  href="#" >
           <b Style="margin-left:80px"> Bienvenid@: <%=@current_gamer.nombres%></b>
-          </a>  
-
-      <!--</div> -->
+          </a> 
    </li>
-
-      
-        
     <% end %>
-
-
-<!--fin de bloque movido-->
       </ul>
-    </div><!-- /.navbar-collapse -->
-
-<!-- ESpacio del bloque movido del cambio 2-->
-
+    </div>
   </div>
 </nav>
   </header>

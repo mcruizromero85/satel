@@ -9,7 +9,7 @@ feature "Portada mostrar torneos" do
   end
 
   scenario "Dado que existe más de 3 torneos registrados, todos cerraron  ayer, entonces no debe mostrarse ningún registro", :js => true do
-    autenticarse    
+    autenticarse_como_organizador    
     llenar_formulario_con_datos_correctos(60 * 60 * 24 * -1)
     click_button("Registrar Torneo")
     llenar_formulario_con_datos_correctos(60 * 60 * 24 * -1)
@@ -21,32 +21,32 @@ feature "Portada mostrar torneos" do
   end
 
   scenario "Dado que existe un torneo con fecha de cierre de inscripción a 2 días, el formato que debe mostrarse es \"2d\" ", :js => true do
-    autenticarse
-    llenar_formulario_con_datos_correctos(48)      
+    autenticarse_como_organizador
+    llenar_formulario_con_datos_correctos(2 * 24  * 60)      
     click_button("Registrar Torneo")
     visit("/")
     expect(page).to have_content("2d")
   end
 
   scenario "Dado que existe un torneo con fecha de cierre de inscripción a 5 días, el formato que debe mostrarse es '5d'", :js => true do
-    autenticarse
-    llenar_formulario_con_datos_correctos(120)
+    autenticarse_como_organizador
+    llenar_formulario_con_datos_correctos(5 * 24 * 60)
     click_button("Registrar Torneo")        
     visit "/"
     expect(page).to have_content '5d'
   end
 
   scenario "Dado que existe un torneo con fecha de cierre de inscripción a 35 horas, el formato que debe mostrarse es '1d 11h'", :js => true do
-    autenticarse
-    llenar_formulario_con_datos_correctos(35)
+    autenticarse_como_organizador
+    llenar_formulario_con_datos_correctos(35 * 60)
     click_button("Registrar Torneo")
     visit "/"
     expect(page).to have_content '1d 11h'
   end
 
   scenario "Dado que existe un torneo con fecha de cierre de inscripción a 66 horas, el formato que debe mostrarse es '3d'", :js => true do
-    autenticarse
-    llenar_formulario_con_datos_correctos(66)
+    autenticarse_como_organizador
+    llenar_formulario_con_datos_correctos(66 * 60)
     click_button("Registrar Torneo")        
     visit "/"
     expect(page).to have_content '3d'
