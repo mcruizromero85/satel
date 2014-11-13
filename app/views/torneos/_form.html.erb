@@ -131,22 +131,22 @@ function cargarRegistroDeRondas(vacantes){
       <table class="table table-bordered table-hover tablesorter">
       <thead>
         <tr>
-          <th class="header">Ronda</td>
-          <th class="header">Fecha de inicio</td>
-          <th class="header">Hora de inicio</td>
+          <th class="header1">Ronda</td>
+          <th class="header2">Fecha de inicio</td>
+          <th class="header3">Hora de inicio</td>
           <th class="header">Modo de ganar</td>
         </tr>
       </thead>
       <tbody id="rondas">
         <% @torneo.rondas.each do | ronda | %>
         <tr>
-          <td><%=ronda.numero%></td>
-          <td><input type='hidden' id='ronda<%=ronda.numero%>_numero' name='ronda<%=ronda.numero%>[numero]' value='<%=ronda.numero%>' /> 
-            <input type='text' id='ronda<%=ronda.numero%>_inicio_fecha' name='ronda<%=ronda.numero%>[inicio_fecha]' class='string required form-control input-lg datepicker' placeholder='dd/mm/yyyy' value='<%=ronda.inicio_fecha.strftime("%d/%m/%Y")%>'  /> 
+          <td align="Center"><%=ronda.numero%></td>
+          <td align="Center"><input type='hidden' id='ronda<%=ronda.numero%>_numero' name='ronda<%=ronda.numero%>[numero]' value='<%=ronda.numero%>' /> 
+            <input type='text' id='ronda<%=ronda.numero%>_inicio_fecha' name='ronda<%=ronda.numero%>[inicio_fecha]' class='string required form-control input-lg-inFec datepicker1' placeholder='dd/mm/yyyy' value='<%=ronda.inicio_fecha.strftime("%d/%m/%Y")%>'  /> 
           </td>
-          <td><input type='text' id='ronda<%=ronda.numero%>_inicio_tiempo' name='ronda<%=ronda.numero%>[inicio_tiempo]' class='string required form-control input-lg' placeholder='hh:mm AM/PM' value='<%=ronda.inicio_tiempo.strftime("%I:%M %p")%>' />
+          <td align="Center"><input type='text' id='ronda<%=ronda.numero%>_inicio_tiempo' name='ronda<%=ronda.numero%>[inicio_tiempo]' class='string required form-control input-lg-inTi' placeholder='hh:mm AM/PM' value='<%=ronda.inicio_tiempo.strftime("%I:%M %p")%>' />
           </td>
-          <td>
+          <td align="Center">
             <select id='ronda<%=ronda.numero%>_modo_ganar' name='ronda<%=ronda.numero%>[modo_ganar]' class='string required form-control input-lg' >
               <option <% if ronda.modo_ganar == 1 then %> selected="true" <% end %> value='1'>Mejor de 1</option>
               <option <% if ronda.modo_ganar == 3 then %> selected="true" <% end %> value='3'>Mejor de 3</option>

@@ -12,6 +12,9 @@
  *= require_tree .
  */
 
+
+
+
 .header{
     background-color: #DCE9F9;
     background-image: linear-gradient(to bottom, #EBF3FC, #DCE9F9);
@@ -1899,11 +1902,13 @@ th {
 .table {
     margin-bottom: 20px;
     width: 100%;
+
 }
 .table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
     border-top: 1px solid #DDDDDD;
     line-height: 1.42857;
-    padding: 8px;
+    padding: 7px;
+    
 }
 .table thead > tr > th {
     vertical-align: bottom;
@@ -2115,7 +2120,7 @@ textarea.input-sm {
 */
 padding: 10px 10px
     border-radius: 6px;
-    width: 50%; 
+    width: 75%; 
     height: 45px; 
     line-height: 1.33;
      font-size: 18px;
@@ -6356,3 +6361,38 @@ th.hidden-print, td.hidden-print {
     color: green;
     background-color: #FBF8E9;
 }
+
+.input-lg-inFec {
+    font-size: 18px;
+    height: 30px;
+    line-height: 1.33;
+    width: 75%;
+    text-align: center;
+}
+
+.input-lg-inTi{
+    font-size: 18px;
+    height: 30px;
+    line-height: 1.33;
+    width: 75%;
+    text-align: center;
+}
+
+.AnchoCelda{
+    width: 43%;
+    }
+
+    .header1{
+    background-color: #DCE9F9;
+    width: 1%;
+    }
+
+     .header2{
+    background-color: #DCE9F9;
+    width: 18%;
+    }
+
+    .header3{
+    background-color: #DCE9F9;
+    width: 18%;
+    }
