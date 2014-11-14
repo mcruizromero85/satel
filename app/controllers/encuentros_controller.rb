@@ -40,9 +40,12 @@ class EncuentrosController < ApplicationController
   # PATCH/PUT /encuentros/1
   # PATCH/PUT /encuentros/1.json
   def update
+
+    @encuentro.gamer_ganador=Gamer.new(id: params['encuentro_gamer_ganador_id'])
+
     respond_to do |format|
-      if @encuentro.update(encuentro_params)
-        format.html { redirect_to @encuentro, notice: 'Encuentro was successfully updated.' }
+      if @encuentro.save
+        format.html { redirect_to :action => 'iniciar_torneo', :controller=>"torneos", :id_torneo => @encuentro.ronda.torneo.id }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

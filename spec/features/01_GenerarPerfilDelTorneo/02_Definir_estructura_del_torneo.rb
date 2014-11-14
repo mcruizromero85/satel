@@ -10,8 +10,8 @@ feature "Definir estructura del torneo" do
 		cierre_inscripciones_para_manana=obtener_fecha_actual_sumando_minutos(60*24)
 		inicio_ronda1_1_minuto_antes=obtener_fecha_actual_sumando_minutos((60*24)-1)
 		
-		fill_in("torneo_cierre_inscripcion_fecha", :with => cierre_inscripciones_para_manana.strftime("%d/%m/%Y"))
-	    fill_in("torneo_cierre_inscripcion_tiempo", :with => cierre_inscripciones_para_manana.strftime("%I:%M %p"))
+		fill_in("cierre_inscripcion_fecha", :with => cierre_inscripciones_para_manana.strftime("%d/%m/%Y"))
+	  fill_in("cierre_inscripcion_hora", :with => cierre_inscripciones_para_manana.strftime("%I:%M %p"))
 
 		fill_in("ronda1_inicio_fecha", :with => inicio_ronda1_1_minuto_antes.strftime("%d/%m/%Y"))		
 		fill_in("ronda1_inicio_tiempo", :with => inicio_ronda1_1_minuto_antes.strftime("%I:%M %p"))

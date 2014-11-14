@@ -15,15 +15,15 @@
  		
 		click_link("link_cabecera_registrar_torneo")
 
-		torneo_correcto = FactoryGirl.build(:torneo, cierre_inscripcion_fecha: fecha_cierre_inscripcion_correcto,cierre_inscripcion_tiempo: fecha_cierre_inscripcion_correcto)
+		torneo_correcto = FactoryGirl.build(:torneo, cierre_inscripcion: fecha_cierre_inscripcion_correcto)
 		ronda1_correcto = FactoryGirl.build(:ronda, numero: 1)
 		ronda2_correcto = FactoryGirl.build(:ronda, numero: 2)
 		ronda3_correcto = FactoryGirl.build(:ronda, numero: 3)
 		fill_in("torneo_titulo", :with => torneo_correcto.titulo)
 		fill_in("torneo_paginaweb", :with => torneo_correcto.paginaweb)	    
 		choose "juego_1"
-		fill_in("torneo_cierre_inscripcion_fecha", :with => torneo_correcto.cierre_inscripcion_fecha.strftime("%d/%m/%Y"))
-		fill_in("torneo_cierre_inscripcion_tiempo", :with => torneo_correcto.cierre_inscripcion_tiempo.strftime("%I:%M %p"))
+		fill_in("cierre_inscripcion_fecha", :with => torneo_correcto.cierre_inscripcion.strftime("%d/%m/%Y"))
+		fill_in("cierre_inscripcion_hora", :with => torneo_correcto.cierre_inscripcion.strftime("%I:%M %p"))
 		if periodo_confirmacion_en_minutos== 30
 			select(periodo_confirmacion_en_minutos, :from => 'torneo_periodo_confirmacion_en_minutos')
 		end

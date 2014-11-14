@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20141020220459) do
     t.integer  "posicion_en_ronda"
     t.integer  "ronda_id"
     t.foreign_key :rondas
-    t.string   "flag_ganador"
+    t.integer   "gamer_ganador_id"
     t.string   "descripcion"
     t.integer  "encuentro_anterior_a_id"
     t.string   "encuentro_anterior_b_id"

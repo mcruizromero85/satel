@@ -72,7 +72,7 @@ attr_writer :attr_names
   end
 
   def mis_torneos
-    @torneos=Torneo.all.where("gamer_id = :gamer_id ",{gamer_id: current_gamer.id }).order(cierre_inscripcion: :desc) 
+    @torneos=Torneo.all.where("gamer_id = :gamer_id ",{gamer_id: current_gamer.id }).order(cierre_inscripcion: :asc) 
   end
 
   def iniciar_torneo

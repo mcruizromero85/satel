@@ -20,7 +20,13 @@ module TorneosHelper
     contador=0
          
     torneo.rondas.first.encuentros.each do | encuentro |
-      array_id_encuentros[contador] = [0,0,encuentro.id]
+    	if encuentro.gamer_ganador == encuentro.gamera
+    		array_id_encuentros[contador] = [1,0,encuentro.id]
+    	elsif encuentro.gamer_ganador == encuentro.gamerb
+    		array_id_encuentros[contador] = [0,1,encuentro.id]
+    	else
+    		array_id_encuentros[contador] = [0,0,encuentro.id]
+    	end	
       contador=contador+1
     end
 		
