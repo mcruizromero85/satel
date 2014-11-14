@@ -6329,7 +6329,7 @@ th.hidden-print, td.hidden-print {
 }
 
 .datepicker, .hasTimepicker, #torneo_cierre_inscripcion_tiempo{
-    width: 35%;
+    width: 40%;
 }
 
 .links_cabecera:hover {
@@ -6370,6 +6370,22 @@ th.hidden-print, td.hidden-print {
     text-align: center;
 }
 
+.input-lg-InsFEc{
+    font-size: 18px;
+    height: 30px;
+    line-height: 1.33;
+    width: 20%;
+    text-align: center;
+}
+
+.input-lg-InsT1{
+    font-size: 18px;
+    height: 30px;
+    line-height: 1.33;
+    width: 1%;
+    text-align: center;
+}
+
 .AnchoCelda{
     width: 43%;
     }
@@ -6388,3 +6404,103 @@ th.hidden-print, td.hidden-print {
     background-color: #DCE9F9;
     width: 18%;
     }
+
+/* Cambiando el estilo del titulo*/
+.input-DatosForm{
+    padding: 10px 10px;
+    border-radius: 6px;
+    width: 95%; 
+    height: 40px; 
+    line-height: 1.33;
+    font-size: 18px;
+
+
+}
+
+.FRM_Registro{
+   width: 100%;
+
+     }
+
+.TituloFormulario{
+ font-size: 24px;
+ font-family: "Exo 2.0";
+  color: #726C6C;
+ transition: background-color 0.5s ease 0s;
+ height: 30px;
+ width: 26%;
+}    
+
+.PaginaWeb{
+ font-size: 24px;
+ font-family: "Exo 2.0";
+ color: #726C6C;
+ transition: background-color 0.5s ease 0s;
+ height: 30px;
+ width: 26%;
+}    
+.SeleccionJuego{
+ font-size: 24px;
+ font-family: "Exo 2.0";
+ color: #726C6C;
+ transition: background-color 0.5s ease 0s;
+ height: 30px;
+ width: 26%;
+}    
+.Vacantes{
+ font-size: 24px;
+ font-family: "Exo 2.0";
+ color: #726C6C;
+ transition: background-color 0.5s ease 0s;
+ height: 30px;
+ width: 14.5%;
+}    
+
+.FechCierre{
+ font-size: 24px;
+ font-family: "Exo 2.0";
+ color: #726C6C;
+ transition: background-color 0.5s ease 0s;
+ height: 30px;
+ width: 26%;
+}    
+
+.HCierre{
+ font-size: 24px;
+ font-family: "Exo 2.0";
+ color: #726C6C;
+ transition: background-color 0.5s ease 0s;
+ height: 30px;
+ width: 40%;
+}    
+
+.Pconfirmacion{
+ font-size: 24px;
+ font-family: "Exo 2.0";
+ color: #726C6C;
+ transition: background-color 0.5s ease 0s;
+ height: 30px;
+ width: 26%;
+}    
+.text-center{
+ font-size: 24px;
+ font-family: "Exo 2.0";
+ color: #726C6C;
+ transition: background-color 0.5s ease 0s;
+ height: 30px;
+ width: 100%;
+ font-weight: bold;
+}    
+
+.CuadroJ{
+ 
+ width: 57%;
+}    
+
+.CuadroV{
+  width: 100%;
+}    
+
+.Cuadrocierre{
+  width: 100%;
+}    
