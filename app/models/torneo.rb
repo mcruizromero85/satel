@@ -30,6 +30,7 @@ class Torneo < ActiveRecord::Base
 	end
 
 	def agregar_ronda(ronda)
+
 		if ronda.valid?
       self.rondas << ronda
     end

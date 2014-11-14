@@ -27,7 +27,7 @@ function cargarRegistroDeRondas(vacantes){
   for (var i=0;i<numeroRondas;i++){
      var rowTemplate = "<tr><td>{0}</td><td><input type='hidden' id='ronda{7}_numero' name='ronda{7}[numero]' value='{7}' /> <input type='text' id='{1}' name='{2}' class='string required form-control input-lg datepicker' placeholder='dd/mm/yyyy' value='{8}' {10} /> </td><td><input type='text' id='{3}' name='{4}' class='string required form-control input-lg' placeholder='hh:mm AM/PM' value='{9}' {10} /></td><td><select id='{5}' name='{6}' class='string required form-control input-lg' ><option value='1'>Mejor de 1</option><option value='3'>Mejor de 3</option><option value='5'>Mejor de 5</option></select></td></tr>";
     contador=i+1;
-    rowTemplate = reemplazarCon(rowTemplate,0,"Ronda "+contador);
+    rowTemplate = reemplazarCon(rowTemplate,0, contador);
     rowTemplate = reemplazarCon(rowTemplate,1,"ronda"+contador+"_inicio_fecha");
     rowTemplate = reemplazarCon(rowTemplate,2,"ronda"+contador+"[inicio_fecha]");
     rowTemplate = reemplazarCon(rowTemplate,3,"ronda"+contador+"_inicio_tiempo");
@@ -169,32 +169,6 @@ function cargarRegistroDeRondas(vacantes){
 
 </table>
 
-
-<!-- Retirado, para que encaje en la tabla
-
-  <div class="field">
-    <div class="labelFormulario">Juego</div>    -->
-   
-  <!--  <div class="field">-->
-   <!-- <label class="labelFormulario">Vacantes</label>    -->
-   <!-- <div id="cuadro_de_vacantes">-->
-    
-   <!-- </div>-->
-  <!--</div>-->
-<!--  <div class="field">-->
-    <!--
-    <label class="labelFormulario">Fecha cierre inscripci&oacute;n </label>-->
-    
- <!--</div>  -->
-
- <!-- <div class="field">
-    <label class="labelFormulario">Periodo de confirmaci&oacute;n</label>-->
-     <!-- <div 
-
-      </div>
-  </div>  
-
-  <br/>-->
   <h4 class="text-center">Fecha de Rondas y modo de ganar</h4>
 
    <div class="field">
@@ -238,6 +212,10 @@ function cargarRegistroDeRondas(vacantes){
 
 <% end %>
 <script type="text/javascript">
+
+  <% if @torneo.rondas.count == 0 %>
+  cargarRegistroDeRondas(<%=@torneo.vacantes%>);
+  <% end %>
   
   $( "#tipo_generacion" ).buttonset();
 
