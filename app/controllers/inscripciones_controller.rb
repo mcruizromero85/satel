@@ -60,23 +60,6 @@ class InscripcionesController < ApplicationController
 
   end
 
-  # PATCH/PUT /inscripciones/1
-  # PATCH/PUT /inscripciones/1.json
-  def update
-
-    inscripcion = inscripciones.
-
-    respond_to do |format|
-      if @inscripcion.update(inscripcion_params)
-        format.html { redirect_to @inscripcion, notice: 'Inscripcion was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @inscripcion.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /inscripciones/1
   # DELETE /inscripciones/1.json
   def destroy

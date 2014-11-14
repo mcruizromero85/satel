@@ -100,12 +100,12 @@ function cargarRegistroDeRondas(vacantes){
   <div class="field">
     <label class="labelFormulario">Fecha cierre inscripci&oacute;n </label>
     <div id="cuadro_tiempo_inicio_torneo">
-      <% if @torneo.cierre_inscripcion_fecha.nil? || @torneo.cierre_inscripcion_tiempo.nil? %>      
-        <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="" />       
-        <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="" />
+      <% if @torneo.cierre_inscripcion.nil?  %>      
+        <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="" />       
+        <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="" />
       <% else %>
-        <input type="text" id="torneo_cierre_inscripcion_fecha" name='torneo[cierre_inscripcion_fecha]' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %>" />       
-        <input type="text" id="torneo_cierre_inscripcion_tiempo"  name='torneo[cierre_inscripcion_tiempo]' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="<%= @torneo.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>" />        
+        <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' class="string required form-control input-lg datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y") %>" />       
+        <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' class="string required form-control input-lg" placeholder="Hora Inicio check-in"  value="<%= @torneo.cierre_inscripcion.strftime("%I:%M %p") %>" />        
       <% end %>  
     </div>
   </div>  
@@ -171,10 +171,10 @@ function cargarRegistroDeRondas(vacantes){
   
   $( "#tipo_generacion" ).buttonset();
 
-  $("#torneo_cierre_inscripcion_tiempo").timepicker({
+  $("#cierre_inscripcion_hora").timepicker({
         showPeriod: true,
         showLeadingZero: true
   });
-  $( "#torneo_cierre_inscripcion_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
+  $( "#cierre_inscripcion_fecha" ).datepicker({ dateFormat: "dd/mm/yy" });
 
 </script>

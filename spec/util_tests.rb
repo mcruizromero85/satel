@@ -84,5 +84,12 @@
 			inscribirse_como(nombre_gamer,nombre_gamer.downcase + "gmail.com")
 		end					
 	end
+	
+	def inscribirme_al_torneo
+		click_link('link_inscripcion_torneo_'+@id_torneo_registrado)
+		click_button("Inscribirme")
+		expect(page).to have_content("Lista de inscritos")
+	end
+
 
 

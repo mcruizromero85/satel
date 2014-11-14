@@ -28,7 +28,7 @@
                       <td><%= torneo.juego.nombre %></td>
                       <td><%= torneo.vacantes %></td>                      
                       <td><a href="/inscripciones?id_torneo=<%=torneo.id%>" ><%= torneo.inscripciones.count %><a/></td>
-                      <td><%= torneo.cierre_inscripcion_fecha.strftime("%d/%m/%Y") %> <%= torneo.cierre_inscripcion_tiempo.strftime("%I:%M %p") %>
+                      <td><%= torneo.cierre_inscripcion.strftime("%d/%m/%Y") %> <%= torneo.cierre_inscripcion.strftime("%I:%M %p") %>
                       </td>
                       <td>
                           <ul class="btnInscribir">
