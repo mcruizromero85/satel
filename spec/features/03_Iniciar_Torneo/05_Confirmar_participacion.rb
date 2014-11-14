@@ -42,12 +42,6 @@ feature "Confirmar Participación" do
 		click_link('link_cerrar_sesion')		
 	end
 
-	def inscribirme_al_torneo
-		click_link('link_inscripcion_torneo_'+@id_torneo_registrado)
-		click_button("Inscribirme")
-		expect(page).to have_content("Lista de inscritos")
-	end
-
 	def confirmar_participacion
 		visit "/"			
 		click_link('link_confirmar_torneo_'+@id_torneo_registrado)	

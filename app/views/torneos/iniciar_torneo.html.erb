@@ -3,24 +3,28 @@
             var minimalData = {
               <% contador=0 %>
               <%   cantidad_inscripciones=@torneo.vacantes %>
-              teams : <%=raw @torneo.array_encuentros_para_generar_llaves%>,
-              results: <%=raw @torneo.array_resultado_encuentros_para_generar_llaves%>
+              teams : <%=raw TorneosHelper.obtener_array_para_llaves(@torneo)%>,
+              results: <%=raw TorneosHelper.obtener_array_para_resultado_llaves(@torneo)%>
             }
           $(function() {
             $('#llaves').bracket({
-            init: minimalData, 
-            onMatchClick: registrarGanador}
-            )
+            init: minimalData
+            <% if @torneo.estado == "Iniciado" && @current_gamer==@torneo.gamer %>
+            ,onMatchClick: registrarGanador
+            <% end %>
+            })
           })
-
-          function registrarGanador(data) {
-            alert(data);            
-          }
+          <% if @torneo.estado == "Iniciado" && @current_gamer==@torneo.gamer %>
+            function registrarGanador(data) {
+              location.href="/encuentros/"+data+"/edit";
+            }
+          <% end %>
 
           </script> 
 
 <div class="container">
   <div class="row">
+    
     <%   if cantidad_inscripciones <= 8 then %>
       <div class="tile" style="height: 640px;">
     <%   elsif cantidad_inscripciones <= 16 then %>

@@ -14,69 +14,44 @@ module TorneosHelper
 		end
 	end
 
-    def self.obtener_array_resultados_para_llaves(array_id_gamers_aleatorio,vacantes)
-        array_id_encuentros = Array.new(vacantes/2){[-1,-1]}
-        contador_array_encuentros=0
-        contador=1
+	def self.obtener_array_para_resultado_llaves(torneo)
+
+    array_id_encuentros = Array.new(torneo.rondas.first.encuentros.count){[0,0]}
+    contador=0
          
-        array_id_gamers_aleatorio.each do | id |
-           if contador % 2 == 0
-               array_id_encuentros[contador_array_encuentros] = [0,0,'Match ' + (contador_array_encuentros +1).to_s]
-               contador_array_encuentros=contador_array_encuentros+1
-           else
-               primer_gamer=0
-               array_id_encuentros[contador_array_encuentros] = [0,-1,'Match ' + (contador_array_encuentros +1).to_s]
-           end
-           contador=contador+1
-        end
-        return array_id_encuentros
+    torneo.rondas.first.encuentros.each do | encuentro |
+      array_id_encuentros[contador] = [0,0,encuentro.id]
+      contador=contador+1
     end
+		
+		return array_id_encuentros
+  end
 
-	def self.obtener_array_doble_de_encuentros(array_id_gamers_aleatorio,vacantes)
-        array_id_encuentros = Array.new(vacantes/2){[-1,-1]}
-        contador_array_encuentros=0
-        contador=1
-        primer_gamer=-1
-         
-        array_id_gamers_aleatorio.each do | id |
-           if contador % 2 == 0
-               array_id_encuentros[contador_array_encuentros] = [primer_gamer,id]
-               contador_array_encuentros=contador_array_encuentros+1
-           else
-               primer_gamer=id
-               array_id_encuentros[contador_array_encuentros] = [primer_gamer,-1]
-           end
-           contador=contador+1
-        end
-        return array_id_encuentros
-	end
+	def self.obtener_array_para_llaves(torneo)
+		array_para_llaves="["
+		contador=1
+		torneo.rondas.first.encuentros.each do | encuentro |
+			if encuentro.gamera != nil 
+				array_para_llaves.concat("[\""+encuentro.gamera.nombres+"\",")
+			else
+				array_para_llaves.concat("[\"\",")						
+			end
 
-    def self.obtener_array_para_llaves(array_gamers,cantidad_vacantes)
-        contador=1
-        array_para_llaves="["
-        
-        if array_gamers.count < cantidad_vacantes
-            array_complementario = Array.new(cantidad_vacantes - array_gamers.count,"")
-            array_gamers = array_gamers + array_complementario 
-        end
+			if encuentro.gamerb != nil 
+				array_para_llaves.concat("\""+encuentro.gamerb.nombres+"\"]")
+			else
+				array_para_llaves.concat("\"\"]")			
+			end
 
-        array_gamers.each do | gamer |
-           if contador > cantidad_vacantes
-               break 
-           end
-            
-           if contador % 2 == 0 
-               array_para_llaves.concat("\""+gamer+"\"]")
-               if contador != cantidad_vacantes
-                   array_para_llaves.concat(",")
-               end
-           else
-               array_para_llaves.concat("[\""+gamer+"\",")
-           end
-           contador=contador+1
-        end
-        array_para_llaves.concat("]")
-    end
+			if torneo.rondas.first.encuentros.count != contador
+				array_para_llaves.concat(",")
+			end
+			contador=contador+1
+		end
+		array_para_llaves.concat("]")
+		
+		return array_para_llaves
+  end
 
 	def self.obtener_rondas_por_vacantes vacantes
 		Math.log(vacantes, 2).ceil
@@ -157,4 +132,5 @@ module TorneosHelper
 		return formatoCuentaRegresiva
 	end
 
+	
 end
