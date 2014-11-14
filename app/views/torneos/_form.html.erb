@@ -68,36 +68,30 @@ function cargarRegistroDeRondas(vacantes){
 
 <table class="FRM_Registro" border="0">
   <td class="TituloFormulario">Titulo del torneo</td>
-      <td width=100>
+      <td width="100">
 <!--Moviendo los inputs titulo y pagina web a una tabla-->
     <input id="torneo_titulo" class="string required form-control input-DatosForm" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" value="<%=@torneo.titulo%>" />
     <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Creado" />
     </td>
-
-
-   
+  
     <tr>
-    <td height=10></td>
-    <td height=10></td>
+    <td height="10"></td>
+    <td height="10"></td>
     <tr>
       <td class="PaginaWeb">Pagina web del torneo</td>
 
-      <td width=100>
+      <td width="100">
 
         <input id="torneo_paginaweb"  class="string required form-control input-DatosForm" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" value="<%=@torneo.paginaweb%>" />
       </td>
 
       <tr>
-<td height=10></td>
-    <td height=10></td>
+<td height="10"></td>
+    <td height="10"></td>
     <tr>
         <td class="SeleccionJuego">Seleccione el juego</td>
 
-
- <td width="100">
-  
-   <table border="0">
-           <td class="CuadroJ" id="cuadro_de_juegos">
+             <td class="CuadroJ" id="cuadro_de_juegos">
 
         <% 
               Juego.all.each do | juego | %>   
@@ -110,8 +104,8 @@ function cargarRegistroDeRondas(vacantes){
 
            </td>
 <tr>
-  <td height=10></td>
-    <td height=10></td>
+  <td height="10"></td>
+    <td height="10"></td>
     <tr>
   <td class="Vacantes">Vacantes</td>
   <td class="CuadroV" id="cuadro_de_vacantes">
@@ -127,8 +121,8 @@ function cargarRegistroDeRondas(vacantes){
 
 
    <tr>
-    <td height=10></td>
-    <td height=10></td>
+    <td height="10"></td>
+    <td height="10"></td>
     <tr>
 
 <td class="FechCierre">Fecha cierre inscripci&oacute;n</td>
@@ -136,15 +130,15 @@ function cargarRegistroDeRondas(vacantes){
 <td align="Left" id="cuadro_tiempo_inicio_torneo">
        <% if @torneo.cierre_inscripcion.nil?  %>       
         <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' class="string required form-control input-lg-InsFEc datepicker" placeholder="Fecha inicio check-in"  value="" />   
-        <table border=0>
+        <table border="0">
         <td class= "HCierre">Hora de cierre</td>
         <td class="Cuadrocierre">   
         <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' class="string required form-control input-lg-InsT1" placeholder="Hora Inicio check-in"  value="" />
         <td/>
-      </table>
+     </table> 
       <% else %>
          <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' class="string required form-control input-lg-InsFEc datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y") %>" />     
-           <table border=0>
+           <table border="0">
   <td class= "HCierre">Hora de cierre</td>
         <td class="Cuadrocierre">  
         <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' class="string required form-control input-lg-InsT1" placeholder="Hora Inicio check-in"  value="<%= @torneo.cierre_inscripcion.strftime("%I:%M %p") %>" />   
@@ -153,8 +147,8 @@ function cargarRegistroDeRondas(vacantes){
       <% end %>  
     </td>
     <tr>
-      <td height=10></td>
-    <td height=10></td>
+      <td height="10"></td>
+    <td height="10"></td>
     <tr>
       <td class="Pconfirmacion">Periodo de confirmaci&oacute;n</td>
       <td id="cuadro_de_confirmacion">
@@ -168,8 +162,8 @@ function cargarRegistroDeRondas(vacantes){
 
       </td>
       <tr>
-        <td height=10></td>
-    <td height=10></td>
+        <td height="10"></td>
+    <td height="10"></td>
     <tr>
     
 
