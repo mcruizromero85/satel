@@ -11,9 +11,9 @@
       }
     </script>
       <div class="row">
-        <div class="text-center">
-            <div class="tile">
-                <table class="table table-hover table-striped tablesorter">
+        <div class="text-center1">
+            <div class="tile1">
+                <table class="table table-hover table-striped tablesorter" >
                   <tbody id="torneosPortadaInscritos">
 
                         <% @torneos_confirmados.each do |torneo_confirmado| %>
@@ -82,22 +82,26 @@
 
     <% end %>
     
+    <br>
+    <br>
+   
 
     <div class="row">
-      <div class="text-center">
-          <div class="tile">
-            <h3><i class="fa fa-users"></i>&nbsp;Noticias del fanpage de la web</h3>
+      <div class="text-center1">
+          <div class="tile1">
+            <h3 class="FontPortada"><i class="fa fa-users"></i>&nbsp;Noticias del fanpage de la web</h3>
           </div>
       </div>
   </div>
-  
+  <br>
+<br>
   <div class="row">
-      <div class="text-center">
-          <div class="tile">
-            <h3>Participa en todos los torneos que puedas</h3>
+      <div class="text-center2">
+          <div class="tile2">
+            <h3 class="FontPortada">Participa en todos los torneos que puedas</h3>
              <div class="table-responsive">
               <% if @torneos.empty?   then %>
-                <h4>En estos momentos no existen torneos disponibles para inscribirse, organiza el tuyo!!, <a href="torneos/new" >organizar mi torneo</a></h4>
+                <h4 class="FontPortada">En estos momentos no existen torneos disponibles para inscribirse, organiza el tuyo!!, <a href="torneos/new" >organizar mi torneo</a></h4>
               <% else %>
 
               <script type="text/javascript">
@@ -150,7 +154,4 @@
       </div>
   </div>
 </div>
-
-<br>
-
 

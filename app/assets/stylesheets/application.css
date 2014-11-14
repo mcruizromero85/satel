@@ -2110,12 +2110,17 @@ textarea.input-sm {
     height: auto;
 }
 .input-lg {
-    padding: 10px 10px;
+    /*padding: 10px 10px;
     border-radius: 6px;
     width: 75%; 
     height: 45px; 
     line-height: 1.33;
-    font-size: 18px;
+    font-size: 18px;*/
+     font-size: 18px;
+    height: 30px;
+    line-height: 1.33;
+    width: 75%;
+    text-align: center;
 
 }
 select.input-lg {
@@ -6329,7 +6334,7 @@ th.hidden-print, td.hidden-print {
 }
 
 .datepicker, .hasTimepicker, #torneo_cierre_inscripcion_tiempo{
-    width: 40%;
+    width: 80%;
 }
 
 .links_cabecera:hover {
@@ -6378,11 +6383,12 @@ th.hidden-print, td.hidden-print {
     text-align: center;
 }
 
-.input-lg-InsT1{
-    font-size: 18px;
-    height: 30px;
-    line-height: 1.33;
-    width: 1%;
+
+.input-lg-Periodo{
+  font-size: 18px;
+    height: 35px;
+     line-height: 1.33;
+    width: 90%;
     text-align: center;
 }
 
@@ -6409,17 +6415,17 @@ th.hidden-print, td.hidden-print {
 .input-DatosForm{
     padding: 10px 10px;
     border-radius: 6px;
-    width: 95%; 
-    height: 40px; 
+    width: 85%; 
+    height: 35px; 
     line-height: 1.33;
     font-size: 18px;
-
+padding: 6px 12px;
 
 }
 
 .FRM_Registro{
    width: 100%;
-
+/*border: 1px solid #dddddd;*/
      }
 
 .TituloFormulario{
@@ -6465,14 +6471,7 @@ th.hidden-print, td.hidden-print {
  width: 26%;
 }    
 
-.HCierre{
- font-size: 24px;
- font-family: "Exo 2.0";
- color: #726C6C;
- transition: background-color 0.5s ease 0s;
- height: 30px;
- width: 40%;
-}    
+
 
 .Pconfirmacion{
  font-size: 24px;
@@ -6502,5 +6501,50 @@ th.hidden-print, td.hidden-print {
 }    
 
 .Cuadrocierre{
-  width: 100%;
+  width: 20%;
 }    
+.HCierre{
+ font-size: 24px;
+ font-family: "Exo 2.0";
+ color: #726C6C;
+ transition: background-color 0.5s ease 0s;
+ height: 30px;
+ width: 30%;
+}    
+
+/*areglando la portada*/
+.tile1 {
+    background-color: #ffffe5;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    padding: 30px;
+
+}
+
+.text-center1 {
+    text-align: center;
+    font-family: "Exo 2.0";
+}
+
+.tile2 {
+    background-color: #ffffe5;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    padding: 30px;
+     
+}
+
+.text-center2 {
+    text-align: center;
+}
+.FontPortada{
+   font-family: "Exo 2.0";
+   }
+
+   .input-lg-InsT1{
+    font-size: 18px;
+    height: 30px;
+    line-height: 1.33;
+    width: 10%;
+    text-align: center;
+}

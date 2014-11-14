@@ -65,13 +65,19 @@ function cargarRegistroDeRondas(vacantes){
     </div>
   <% end %>
 
-<table class="FRM_Registro" border=0>
+<table class="FRM_Registro" border=0 >
   <td class="TituloFormulario">Titulo del torneo</td>
       <td width=100>
 <!--Moviendo los inputs titulo y pagina web a una tabla-->
     <input id="torneo_titulo" class="string required form-control input-DatosForm" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" value="<%=@torneo.titulo%>" />
     <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Creado" />
     </td>
+
+
+   
+    <tr>
+    <td height=10></td>
+    <td height=10></td>
     <tr>
       <td class="PaginaWeb">Pagina web del torneo</td>
 
@@ -81,25 +87,27 @@ function cargarRegistroDeRondas(vacantes){
       </td>
 
       <tr>
-
+<td height=10></td>
+    <td height=10></td>
+    <tr>
         <td class="SeleccionJuego">Seleccione el juego</td>
 
- <td width=100>
-  
-   <table border=0>
            <td class="CuadroJ" id="cuadro_de_juegos">
 
         <% 
               Juego.all.each do | juego | %>   
                 <input type="radio" id='juego_<%=juego.id%>' name='juego[id]' value="<%=juego.id%>" checked='checked'>
                 <label for="juego_<%=juego.id%>"><%= juego.nombre %></label>
-                <!--Quitando en forma de lista-->
-                <!--<br/>-->
+              
+                <br/>
                
               <% end %>
 
            </td>
-
+<tr>
+  <td height=10></td>
+    <td height=10></td>
+    <tr>
   <td class="Vacantes">Vacantes</td>
   <td class="CuadroV" id="cuadro_de_vacantes">
        <input type="radio" id='torneo_vacantes1' name='torneo[vacantes]' value="4" onclick="javascript:cargarRegistroDeRondas(4)"
@@ -112,11 +120,11 @@ function cargarRegistroDeRondas(vacantes){
       <% if @torneo.vacantes == 32 then %> checked='checked'  <% end %> /><label for="torneo_vacantes4">32</label>
     </td>
 
-   </table>
-
-  </td>
 
    <tr>
+    <td height=10></td>
+    <td height=10></td>
+    <tr>
 
 <td class="FechCierre">Fecha cierre inscripci&oacute;n</td>
 
@@ -140,10 +148,13 @@ function cargarRegistroDeRondas(vacantes){
       <% end %>  
     </td>
     <tr>
+      <td height=10></td>
+    <td height=10></td>
+    <tr>
       <td class="Pconfirmacion">Periodo de confirmaci&oacute;n</td>
       <td id="cuadro_de_confirmacion">
         
-        <select id='torneo_periodo_confirmacion_en_minutos' name='torneo[periodo_confirmacion_en_minutos]' class='string required form-control input-lg' >
+        <select id='torneo_periodo_confirmacion_en_minutos' name='torneo[periodo_confirmacion_en_minutos]' class='string required form-control input-lg-Periodo' >
           <option value='0'>Sin confirmaci&oacute;n</option>          
           <option <% if @torneo.periodo_confirmacion_en_minutos == 10 then %> selected <% end %>value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
           <option <% if @torneo.periodo_confirmacion_en_minutos == 20 then %> selected <% end %>value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
@@ -152,9 +163,10 @@ function cargarRegistroDeRondas(vacantes){
 
       </td>
       <tr>
-      <td height=40 ></td>
-      <td height=40 ></td>
-      
+        <td height=10></td>
+    <td height=10></td>
+    <tr>
+    
 
 </table>
 
