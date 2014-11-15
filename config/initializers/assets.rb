@@ -1,0 +1,1 @@
+ Rails.application.config.assets.precompile += ['jquery-ui.css','jquery.bracket.min.css']

@@ -1,49 +1,47 @@
-<%= form_for(@encuentro) do |f| %>
-  <% if @encuentro.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@encuentro.errors.count, "error") %> prohibited this encuentro from being saved:</h2>
+  <div class="container">
+    <div class="row">
+        <div >
+            <div class="tile">
 
-      <ul>
-      <% @encuentro.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+                <span id="mensajeError"></span>
+
+                  <%= form_for(@encuentro) do |f| %>
+
+                    <% if @encuentro.errors.any? %>
+                      <div id="error_explanation">
+                        <h2><%= pluralize(@encuentro.errors.count, "error") %> prohibited this encuentro from being saved:</h2>
+
+                        <ul>
+                        <% @encuentro.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+
+                    <div class="table-responsive">
+                    <div class="field">
+                      <h4 class="text-center"><%=@encuentro.gamera.nombres%> vs <%=@encuentro.gamerb.nombres%></h4>
+                    </div>
+                    <div class="field">
+                      <h4 class="text-center">
+                        <h4 class="text-center">Ganador:</h4>
+                        <select id='encuentro_gamer_ganador_id' name='encuentro_gamer_ganador_id' class='string required form-control input-lg' >
+                          <option value='<%=@encuentro.gamera.id%>'><%=@encuentro.gamera.nombres%></option>
+                          <option value='<%=@encuentro.gamerb.id%>'><%=@encuentro.gamerb.nombres%></option>
+                        </select>
+                      </h4>
+                    </div>
+                  </div>
+                    <div id="tipo_generacion" class="ui-buttonset">
+                      <center> <%= f.submit "Actualizar" %></center>
+                    </div>  
+                  <% end %>
+
+        </div>
     </div>
-  <% end %>
+  </div>
+  <script type="text/javascript">  
+    $( "#tipo_generacion" ).buttonset();
+  </script>
 
-  <div class="field">
-    <%= f.label :gamera_id %><br>
-    <%= f.number_field :gamera_id %>
-  </div>
-  <div class="field">
-    <%= f.label :gamerb_id %><br>
-    <%= f.number_field :gamerb_id %>
-  </div>
-  <div class="field">
-    <%= f.label :posicion_en_ronda %><br>
-    <%= f.number_field :posicion_en_ronda %>
-  </div>
-  <div class="field">
-    <%= f.label :ronda_id %><br>
-    <%= f.number_field :ronda_id %>
-  </div>
-  <div class="field">
-    <%= f.label :flag_ganador %><br>
-    <%= f.text_field :flag_ganador %>
-  </div>
-  <div class="field">
-    <%= f.label :descripcion %><br>
-    <%= f.text_field :descripcion %>
-  </div>
-  <div class="field">
-    <%= f.label :encuentro_anterior_a_id %><br>
-    <%= f.number_field :encuentro_anterior_a_id %>
-  </div>
-  <div class="field">
-    <%= f.label :encuentro_anterior_b_id %><br>
-    <%= f.text_field :encuentro_anterior_b_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>

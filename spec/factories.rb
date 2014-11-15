@@ -21,8 +21,7 @@ FactoryGirl.define do
     titulo "TORNEO DE CS 1.6 ONLINE - THE LAST CHANCE"
     paginaweb "http://www.bloodzone.net/forums/f25/torneo-de-cs-1-6-online-last-chance-108544/"
     vacantes "8"
-    cierre_inscripcion_fecha { |cierre_inscripcion_fecha| (Time.new + (60*60*24*2)).strftime("%d/%m/%Y") }
-    cierre_inscripcion_tiempo "01:40 AM"
+    cierre_inscripcion { |cierre_inscripcion_fecha| (Time.new + (60*60*24*2)) }
     
   end  
 end

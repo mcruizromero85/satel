@@ -3,7 +3,8 @@ class Ronda < ActiveRecord::Base
 	validates_presence_of :inicio_tiempo, :message => ", las horas de las rondas no pueden estar vacias"
 	
 	belongs_to :torneo
-	has_many :encuentros, autosave: false
+	has_many :encuentros, -> { order('posicion_en_ronda ASC') }, autosave: false 
+
 
 	def inicio_ronda
 		fecha=self.inicio_fecha
