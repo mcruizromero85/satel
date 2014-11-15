@@ -21,15 +21,21 @@
 
                     <div class="table-responsive">
                     <div class="field">
-                      <h4 class="text-center"><%=@encuentro.gamera.nombres%> vs <%=@encuentro.gamerb.nombres%></h4>
+                      <h4 class="text-center1"><%=@encuentro.gamera.nombres%> vs <%=@encuentro.gamerb.nombres%></h4>
                     </div>
                     <div class="field">
                       <h4 class="text-center">
+                        <table class="table table-bordered table-hover table-striped tablesorter" border="1">
+                          <td class="TituloFormulario">
                         <h4 class="text-center">Ganador:</h4>
+                      </td>
+                   <td>
                         <select id='encuentro_gamer_ganador_id' name='encuentro_gamer_ganador_id' class='string required form-control input-lg' >
                           <option value='<%=@encuentro.gamera.id%>'><%=@encuentro.gamera.nombres%></option>
                           <option value='<%=@encuentro.gamerb.id%>'><%=@encuentro.gamerb.nombres%></option>
                         </select>
+                      </td>
+                         </table>
                       </h4>
                     </div>
                   </div>
