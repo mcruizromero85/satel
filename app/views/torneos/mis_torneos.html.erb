@@ -2,8 +2,8 @@
   <div class="container">
 
   <div class="row">
-      <div class="text-center">
-          <div class="tile">
+      <div class="text-center1">
+          <div class="tile1">
             <h3>Mis torneos Organizados</h3>
              <div class="table-responsive">
               <% if @torneos.empty?   then %>
@@ -24,7 +24,7 @@
                 <tbody id="torneosPortada">
                   <% @torneos.each do |torneo| %>
                     <tr>
-                      <td><a href="/torneos/<%=torneo.id%>"><%= torneo.titulo %><a/></td>
+                      <td><a class="T_torneo" href="/torneos/<%=torneo.id%>"><%= torneo.titulo %><a/></td>
                       <td><%= torneo.juego.nombre %></td>
                       <td><%= torneo.vacantes %></td>                      
                       <td><a href="/inscripciones?id_torneo=<%=torneo.id%>" ><%= torneo.inscripciones.count %><a/></td>
@@ -50,24 +50,7 @@
       </div>
   </div>
   <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 </div>
 
 
