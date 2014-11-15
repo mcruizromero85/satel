@@ -36,9 +36,9 @@
 
                         <% @torneos_confirmados.each do |torneo_confirmado| %>
                          <tr id="torneo_confirmados">
-                          <td><a href="/torneos/<%=torneo_confirmado.id%>"><%= torneo_confirmado.titulo %></a></td>
-                          <td><%= torneo_confirmado.juego.nombre %></td>
-                          <td><%= torneo_confirmado.vacantes %></td>
+                          <td><a class="LNK_Confirmados" href="/torneos/<%=torneo_confirmado.id%>"><%= torneo_confirmado.titulo %></a></td>
+                          <td class="TD_Confirmados"><%= torneo_confirmado.juego.nombre %></td>
+                          <td class="TD_Confirmados"><%= torneo_confirmado.vacantes %></td>
                           <td>
                               <font color="green"><b>
                               <% if torneo_confirmado.cierre_inscripcion.to_i - Time.new.to_i >= 0 then %>   
@@ -67,9 +67,9 @@
 
                       <% @torneos_inscritos.each do |torneo_inscrito| %>
                          <tr id="torneo_inscrito">
-                          <td><%= torneo_inscrito.titulo %></td>
-                          <td><%= torneo_inscrito.juego.nombre %></td>
-                          <td><%= torneo_inscrito.vacantes %></td>
+                          <td class="TD_Inscritos"><%= torneo_inscrito.titulo %></td>
+                          <td class="TD_Inscritos"><%= torneo_inscrito.juego.nombre %></td>
+                          <td class="TD_Inscritos"><%= torneo_inscrito.vacantes %></td>
                           <td>
                             <% 
                             un_dias_en_segundos=60 * 60 * 24
