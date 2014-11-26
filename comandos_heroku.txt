@@ -15,3 +15,6 @@ rake db:migrate
 rake db:migrate RAILS_ENV=development 
 rake db:migrate:redo VERSION=20140323174242
 
+heroku pg:reset DATABASE
+heroku run rake db:setup
+heroku run rake db:seed

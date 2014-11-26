@@ -62,7 +62,7 @@ attr_writer :attr_names
     
     respond_to do |format|
       if @torneo.save then
-        format.html { redirect_to @torneo, notice: 'Torneo was successfully created.' }
+        format.html { render action: 'datos_inscripcion'}
         format.json { render action: 'show', status: :created, location: @torneo }
       else
         format.html { render action: 'new' }

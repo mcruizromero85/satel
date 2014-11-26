@@ -11,7 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141020220459) do
+ActiveRecord::Schema.define(version: 20141123225154) do
+
+  create_table "authentications", force: true do |t|
+    t.integer  "gamer_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "datos_inscripciones", force: true do |t|
+    t.integer  "torneo_id"
+    t.string   "nombre_dato"
+    t.string   "descripcion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "encuentros", force: true do |t|
+    t.integer  "gamera_id"
+    t.integer  "gamerb_id"
+    t.integer  "posicion_en_ronda"
+    t.integer  "ronda_id"
+    t.integer  "gamer_ganador_id"
+    t.string   "descripcion"
+    t.integer  "encuentro_anterior_a_id"
+    t.string   "encuentro_anterior_b_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "gamers", force: true do |t|
     t.string   "nick"
@@ -23,11 +52,10 @@ ActiveRecord::Schema.define(version: 20141020220459) do
     t.datetime "updated_at"
   end
 
-  create_table "authentications", force: true do |t|
+  create_table "inscripciones", force: true do |t|
+    t.integer  "torneo_id"
     t.integer  "gamer_id"
-    t.foreign_key :gamers
-    t.string   "provider"
-    t.string   "uid"
+    t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,6 +63,17 @@ ActiveRecord::Schema.define(version: 20141020220459) do
   create_table "juegos", force: true do |t|
     t.string   "nombre"
     t.string   "descripcion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rondas", force: true do |t|
+    t.integer  "numero"
+    t.date     "inicio_fecha"
+    t.time     "inicio_tiempo"
+    t.string   "modo_ganar"
+    t.integer  "torneo_id"
+    t.integer  "ronda_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,45 +91,20 @@ ActiveRecord::Schema.define(version: 20141020220459) do
     t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.foreign_key :juegos
-    t.foreign_key :gamers
   end
 
-  create_table "rondas", force: true do |t|
-    t.integer  "numero"
-    t.date     "inicio_fecha"
-    t.time     "inicio_tiempo"
-    t.string   "modo_ganar"
-    t.integer  "torneo_id"
-    t.foreign_key :torneos
-    t.integer  "ronda_id"
-    t.foreign_key :rondas
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"
 
-  create_table "encuentros", force: true do |t|
-    t.integer  "gamera_id"
-    t.integer  "gamerb_id"
-    t.integer  "posicion_en_ronda"
-    t.integer  "ronda_id"
-    t.foreign_key :rondas
-    t.integer   "gamer_ganador_id"
-    t.string   "descripcion"
-    t.integer  "encuentro_anterior_a_id"
-    t.string   "encuentro_anterior_b_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_foreign_key "encuentros", "rondas", name: "encuentros_ronda_id_fk"
 
-  create_table "inscripciones", force: true do |t|
-    t.integer  "torneo_id"
-    t.foreign_key :torneos
-    t.integer  "gamer_id"
-    t.foreign_key :gamers
-    t.string   "estado"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_foreign_key "inscripciones", "gamers", name: "inscripciones_gamer_id_fk"
+  add_foreign_key "inscripciones", "torneos", name: "inscripciones_torneo_id_fk"
+  add_foreign_key "datos_inscripciones", "torneos", name: "datos_inscripciones_torneo_id_fk"
+
+  add_foreign_key "rondas", "rondas", name: "rondas_ronda_id_fk"
+  add_foreign_key "rondas", "torneos", name: "rondas_torneo_id_fk"
+
+  add_foreign_key "torneos", "gamers", name: "torneos_gamer_id_fk"
+  add_foreign_key "torneos", "juegos", name: "torneos_juego_id_fk"
 
 end
