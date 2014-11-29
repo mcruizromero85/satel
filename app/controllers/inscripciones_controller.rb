@@ -32,7 +32,7 @@ class InscripcionesController < ApplicationController
     @inscripcion.torneo = Torneo.find(params[:id_torneo])
 
     respond_to do |format|
-      if @inscripcion.registrar
+      if @inscripcion.save
         format.html { redirect_to :action => 'index', :id_torneo => params[:id_torneo], :mensaje_inscripcion => @inscripcion.mensaje_inscripcion }
         format.json { render action: 'show', status: :created, location: @inscripcion }
       else

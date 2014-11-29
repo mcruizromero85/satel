@@ -3,13 +3,11 @@ class Inscripcion < ActiveRecord::Base
 	belongs_to :gamer
 	belongs_to :torneo  , autosave: false
 
-	def registrar		
+	def save		
 		if self.torneo.periodo_confirmacion_en_minutos == 0
-			self.estado = "Confirmado"
-		else
-			self.estado = "No confirmado"
-		end		
-		self.save		
+			self.estado = "Confirmado"		
+		end
+		super
 	end
 
 	def mensaje_inscripcion

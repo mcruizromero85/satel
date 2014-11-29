@@ -1,12 +1,13 @@
 class Torneo < ActiveRecord::Base
 	validates_presence_of :titulo, :message => ", el título es un dato obligatorio" 
+	validates_presence_of :estado, :message => ", el estado es un dato obligatorio" 
 	validates_length_of :titulo, :within => 30..100, :message => ", el título debe estar entre 30 y 100 caracteres"
 	validates_format_of(:paginaweb, :with => URI::regexp(%w(http https)), :on => :create, :message=>", la página web debe tener el formato de una url, incluido http:// o https://")
 	validate :fecha_cierre_mayor_que_actual
 	validate :fecha_registro_entre_rondas
 	validate :ronda_numero_uno_mayor_fecha_inscripcion
-	validate :rondas_existentes_por_vacantes
 	validate :cantidad_minima_confirmados
+	validate :rondas_existentes_por_vacantes
 	validates_numericality_of :periodo_confirmacion_en_minutos
 	belongs_to :gamer
 	belongs_to :juego , autosave: false
@@ -30,7 +31,6 @@ class Torneo < ActiveRecord::Base
 	end
 
 	def agregar_ronda(ronda)
-
 		if ronda.valid?
       self.rondas << ronda
     end
@@ -83,8 +83,9 @@ class Torneo < ActiveRecord::Base
 		end
   	end
 
-  	def ronda_numero_uno_mayor_fecha_inscripcion
-  		if rondas.size > 0 then
+  def ronda_numero_uno_mayor_fecha_inscripcion
+
+  	if rondas.size > 0 then
 			if ( rondas[0].inicio_ronda.to_i - cierre_inscripcion.to_i) < 0 then 
 				errors.add(:cierre_inscripcion, ", la fecha de la primera ronda debe ser mayor a la fecha de cierre de inscripcion")
 			end		
@@ -103,7 +104,7 @@ class Torneo < ActiveRecord::Base
 	    end
 	end
 
-	def rondas_existentes_por_vacantes
+	def rondas_existentes_por_vacantes		
 		if rondas.size != TorneosHelper.obtener_rondas_por_vacantes(vacantes) then
 			errors.add(:rondas,", todas las rondas deben estar definidas")
 		end
