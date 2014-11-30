@@ -20,9 +20,9 @@ module TorneosHelper
     contador=0
          
     torneo.rondas.first.encuentros.each do | encuentro |
-    	if encuentro.gamer_ganador == encuentro.gamera
+    	if encuentro.gamerinscrito_ganador == encuentro.gamerinscritoa
     		array_id_encuentros[contador] = [1,0,encuentro.id]
-    	elsif encuentro.gamer_ganador == encuentro.gamerb
+    	elsif encuentro.gamerinscrito_ganador == encuentro.gamerinscritob
     		array_id_encuentros[contador] = [0,1,encuentro.id]
     	else
     		array_id_encuentros[contador] = [0,0,encuentro.id]
@@ -37,14 +37,14 @@ module TorneosHelper
 		array_para_llaves="["
 		contador=1
 		torneo.rondas.first.encuentros.each do | encuentro |
-			if encuentro.gamera != nil 
-				array_para_llaves.concat("[\""+encuentro.gamera.nombres+"\",")
+			if encuentro.gamerinscritoa != nil 
+				array_para_llaves.concat("[\""+encuentro.gamerinscritoa.gamer.nombres+"\",")
 			else
 				array_para_llaves.concat("[\"\",")						
 			end
 
-			if encuentro.gamerb != nil 
-				array_para_llaves.concat("\""+encuentro.gamerb.nombres+"\"]")
+			if encuentro.gamerinscritob != nil 
+				array_para_llaves.concat("\""+encuentro.gamerinscritob.gamer.nombres+"\"]")
 			else
 				array_para_llaves.concat("\"\"]")			
 			end

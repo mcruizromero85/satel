@@ -4,8 +4,12 @@ class Inscripcion < ActiveRecord::Base
 	belongs_to :torneo  , autosave: false
 
 	def save		
-		if self.torneo.periodo_confirmacion_en_minutos == 0
+		if self.new_record?
+			self.estado="No confirmado"
+		elsif self.torneo.periodo_confirmacion_en_minutos == 0 and self.new_record?
 			self.estado = "Confirmado"		
+		else
+			self.estado="Confirmado"
 		end
 		super
 	end

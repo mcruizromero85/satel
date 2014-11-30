@@ -70,12 +70,12 @@ ActiveRecord::Schema.define(version: 20141020220459) do
   end
 
   create_table "encuentros", force: true do |t|
-    t.integer  "gamera_id"
-    t.integer  "gamerb_id"
+    t.integer  "gamerinscritoa_id"
+    t.integer  "gamerinscritob_id"
     t.integer  "posicion_en_ronda"
     t.integer  "ronda_id"
     t.foreign_key :rondas
-    t.integer   "gamer_ganador_id"
+    t.integer   "gamerinscrito_ganador_id"
     t.string   "descripcion"
     t.integer  "encuentro_anterior_a_id"
     t.string   "encuentro_anterior_b_id"

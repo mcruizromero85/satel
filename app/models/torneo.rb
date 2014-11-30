@@ -112,10 +112,10 @@ class Torneo < ActiveRecord::Base
 
 	def generar_encuentros
 		if self.estado != "Iniciado"
-			array_gamers_confirmados = Gamer.joins(:inscripciones).where("inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado" , torneo_id: self.id, estado: "Confirmado").limit(self.vacantes).order('inscripciones.id')
-			cantidad_slots=obtener_cantidad_de_slots_segun_gamers_confirmados(array_gamers_confirmados.count)
-			array_gamers_confirmados_y_emparejados=array_gamers_confirmados.sample(cantidad_slots)
-			self.rondas.first.armar_encuentros_con_gamers_confirmados(array_gamers_confirmados_y_emparejados,cantidad_slots)
+			array_inscritos_confirmados = Inscripcion.where("torneo_id = :torneo_id and estado = :estado" , torneo_id: self.id, estado: "Confirmado").limit(self.vacantes).order('inscripciones.id')
+			cantidad_slots=obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)
+			array_inscritos_confirmados_y_emparejados=array_inscritos_confirmados.sample(cantidad_slots)
+			self.rondas.first.armar_encuentros_con_gamers_confirmados(array_inscritos_confirmados_y_emparejados,cantidad_slots)
 		end
 	end
 

@@ -29,8 +29,8 @@ class Ronda < ActiveRecord::Base
   	array_gamers_confirmados_y_emparejados.each do | gamer |
   		if contador_gamer % 2 == 0   			
 	    	encuentro = Encuentro.new
-	    	encuentro.gamera=gamera
-	    	encuentro.gamerb=gamer
+	    	encuentro.gamerinscritoa=gamera
+	    	encuentro.gamerinscritob=gamer
 	    	encuentro.posicion_en_ronda=contador_posicion_en_ronda
 	    	self.encuentros << encuentro
 	    	contador_posicion_en_ronda=contador_posicion_en_ronda+1
@@ -42,7 +42,7 @@ class Ronda < ActiveRecord::Base
 
   	if contador_gamer % 2 == 0
   		encuentro = Encuentro.new
-	    encuentro.gamera=gamera	    
+	    encuentro.gamerinscritoa=gamera	    
 	    encuentro.posicion_en_ronda=contador_posicion_en_ronda
 	    self.encuentros << encuentro
 	    contador_posicion_en_ronda=contador_posicion_en_ronda+1

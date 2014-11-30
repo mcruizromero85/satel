@@ -13,7 +13,7 @@ feature "Confirmar Participación" do
 	end
 
 	def confirmar_participacion
-		visit "/"			
+		visit "/"		
 		click_link('link_confirmar_torneo_'+@id_torneo_registrado)	
 	end
 
