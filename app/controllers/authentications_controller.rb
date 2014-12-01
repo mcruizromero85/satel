@@ -1,5 +1,5 @@
 class AuthenticationsController < ApplicationController
-  before_action :set_authentication, only: [:show, :edit, :update, :destroy]
+ 
 
   # GET /authentications/1/edit
   def edit
@@ -54,14 +54,5 @@ class AuthenticationsController < ApplicationController
     redirect_to :action => 'index', :controller=>"torneos"  
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_authentication
-      @authentication = Authentication.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def authentication_params
-      params.require(:authentication).permit(:user_id, :provider, :uid, :index, :create, :destroy)
-    end
 end

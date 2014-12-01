@@ -4,7 +4,7 @@ require "util_tests"
 feature "Iniciar Torneo" do
 
 
-	scenario "Dado que me inscribe a un torneo de 8 vacantes y lo iniciaron con 4 confirmados, entonces debería ver 'Torneo en curso' en la porta", :js => true do
+	scenario "Dado que me inscribe a un torneo de 8 vacantes y lo iniciaron con 4 confirmados, entonces debería ver 'Torneo en curso' en la portada", :js => true do
 		autenticarse_como_organizador
 		registrar_torneo		
 		inscribir_y_confirmar_gamers 3
@@ -27,6 +27,15 @@ feature "Iniciar Torneo" do
 		iniciar_torneo
 		expect(page).not_to have_content("Volver a generar")
 		expect(page).not_to have_content("Iniciar Torneo!!!")	
+	end
+
+	scenario "Dado que registre un torneo para 8 vacantes y tengo 1 confirmado, entonces no debería poder iniciar el torneo", :js => true do
+		autenticarse_como_organizador
+		registrar_torneo		
+		inscribir_y_confirmar_gamers 1	
+		autenticarse_como_organizador			
+		iniciar_torneo
+		expect(page).to have_content("El Torneo debe tener como mínimo 4 gamers confirmados")
 	end
 
 	def inscribirme_y_confirmar

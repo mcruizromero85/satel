@@ -95,17 +95,6 @@ attr_writer :attr_names
       end
   end
 
-
-  # DELETE /torneos/1
-  # DELETE /torneos/1.json
-  def destroy
-    @torneo.destroy
-    respond_to do |format|
-      format.html { redirect_to torneos_url }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_torneo

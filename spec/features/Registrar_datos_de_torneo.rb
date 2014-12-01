@@ -5,8 +5,13 @@ feature "Registrar datos de torneo" do
 
 	#Como organizador quiero registrar los datos de mi torneo, para poder promocionarlo.
 
-	scenario "Dado que se ha introducido correctamente todos los datos, cuando se publica el torneo debe salir un mensaje exitoso", :js => true do
+	scenario "Dado que el usuario no se encuentra logueado y seleccionar organizar torneo, entonces debe redireccionar al login de facebook", :js => true do
+		visit "/"
+		click_link("link_cabecera_registrar_torneo")
+		expect(page).to have_content("User Info")#Tìtulo de página fake de facebook
+	end
 
+	scenario "Dado que se ha introducido correctamente todos los datos, cuando se publica el torneo debe salir un mensaje exitoso", :js => true do
 		autenticarse_como_organizador		
 		llenar_formulario_con_datos_correctos	    				 		
 		click_button 'Registrar Torneo'		

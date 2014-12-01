@@ -48,20 +48,6 @@ class Ronda < ActiveRecord::Base
 	    contador_posicion_en_ronda=contador_posicion_en_ronda+1
   	end
 
-  	total_de_encuentros_que_deberian_existir=cantidad_slots/2
-
-  	if total_de_encuentros_que_deberian_existir > self.encuentros.count 
-  		encuentros_vacios_faltantes=total_de_encuentros_que_deberian_existir-self.encuentros.count
-
-  		for encuentro_vacio in 1..encuentros_vacios_faltantes
-				encuentro = Encuentro.new
-		    encuentro.posicion_en_ronda=contador_posicion_en_ronda
-		    self.encuentros << encuentro
-		    contador_posicion_en_ronda=contador_posicion_en_ronda+1
-    	end
-
-  	end
-
 
   end
 
