@@ -2,7 +2,7 @@ module TorneosHelper
 	require 'active_support/core_ext/date'
 	require 'uri'
 
-	def self.obtener_bracket_segun_cantidad_confirmados(cantidad_gamers_confirmados)
+	def self.bracket_segun_cantidad_confirmados(cantidad_gamers_confirmados)
 		if cantidad_gamers_confirmados <= 8 
 			8
 		elsif cantidad_gamers_confirmados <= 16 
@@ -33,7 +33,7 @@ module TorneosHelper
 		return array_id_encuentros
   end
 
-	def self.obtener_array_para_llaves(torneo)
+	def self.array_para_llaves(torneo)
 		array_para_llaves="["
 		contador=1
 		torneo.rondas.first.encuentros.each do | encuentro |
@@ -92,7 +92,7 @@ module TorneosHelper
 		return conjunto.sample(cantidad_vacantes)		
 	end
 
-	def self.obtenerFormatoCuentaRegresivaHastaLaFecha(fecha_cierre_inscripcion)
+	def self.formatoCuentaRegresiva(fecha_cierre_inscripcion)
 
 		diferencia_segundos_cierre_inscripcion_y_hoy=fecha_cierre_inscripcion.to_i - Time.new.to_i		
 		formatoCuentaRegresiva=""

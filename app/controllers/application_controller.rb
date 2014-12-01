@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
     if @current_gamer != nil || session[:gamer_id] != nil then
       @current_gamer ||= Gamer.find(session[:gamer_id])  
     end 
-    
   end
 
   def signed_in?
@@ -23,8 +22,8 @@ class ApplicationController < ActionController::Base
     session[:gamer_id] = gamer.id
   end
 
-  def revisa_si_existe_gamer_en_sesion
-    if current_gamer == nil then
+  def revisa_si_existe_gamer_en_sesion  
+    if current_gamer == nil 
       session[:last_url_pre_login] = '/'
       if ENV["RAILS_ENV"] == 'test'
         redirect_to '/auth/developer'

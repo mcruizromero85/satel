@@ -3,7 +3,7 @@
             var minimalData = {
               <% contador=0 %>
               <%   cantidad_inscripciones=@torneo.vacantes %>
-              teams : <%=raw TorneosHelper.obtener_array_para_llaves(@torneo)%>,
+              teams : <%=raw TorneosHelper.array_para_llaves(@torneo)%>,
               results: <%=raw TorneosHelper.obtener_array_para_resultado_llaves(@torneo)%>
             }
           $(function() {
