@@ -1,5 +1,5 @@
   def registrar_torneo
-    registrar(30,30)
+    registrar(30, 30)
     click_button('Registrar Torneo')
     @id_torneo_registrado = find('#id_torneo_registrado').text
     click_link('link_cerrar_sesion')
@@ -24,9 +24,9 @@
     fill_in('ronda1_inicio_fecha', with: primera_ronda.strftime('%d/%m/%Y'))
     fill_in('ronda1_inicio_tiempo', with: primera_ronda.strftime('%I:%M %p'))
     fill_in('ronda2_inicio_fecha', with: segunda_ronda.strftime('%d/%m/%Y'))
-    fill_in('ronda2_inicio_tiempo', with: segunda_ronda.strftime('%I:%M %p'))  
+    fill_in('ronda2_inicio_tiempo', with: segunda_ronda.strftime('%I:%M %p'))
     fill_in('ronda3_inicio_fecha', with: tercera_ronda.strftime('%d/%m/%Y'))
-    fill_in('ronda3_inicio_tiempo', with: tercera_ronda.strftime('%I:%M %p'))  
+    fill_in('ronda3_inicio_tiempo', with: tercera_ronda.strftime('%I:%M %p'))
   end
 
   def autenticarse_como_organizador
@@ -38,7 +38,7 @@
   end
 
   def autenticarse_como_gamer
-    visit '/'		
+    visit '/'
     click_link('autenticarse')
     fill_in('name', with: 'Mauro')
     fill_in('email', with: 'mcruizromero85@gmail.com')
@@ -59,7 +59,7 @@
   end
 
   def confirmar_gamers(confirmados = 8)
-    array_gamers_ejemplo = Array.new
+    array_gamers_ejemplo = []
     array_gamers_ejemplo << 'Mauro'
     array_gamers_ejemplo << 'Mateo'
     array_gamers_ejemplo << 'EddyArn'

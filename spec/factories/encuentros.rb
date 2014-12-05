@@ -6,9 +6,9 @@ FactoryGirl.define do
     gamerb_id 1
     posicion_en_ronda 1
     id_ronda 1
-    flag_ganador "MyString"
-    descripcion "MyString"
+    flag_ganador 'MyString'
+    descripcion 'MyString'
     encuentro_anterior_a_id 1
-    encuentro_anterior_b_id "MyString"
+    encuentro_anterior_b_id 'MyString'
   end
 end
