@@ -13,10 +13,12 @@ AllCops:
 MethodLength:
   Max: 20
 LineLength:
-  Max: 160
+  Max: 270
 HasAndBelongsToMany:
   Enabled: false
 AbcSize:
   Enabled: false
 DefaultScope:
+  Enabled: false
+Documentation:
   Enabled: false

@@ -57,11 +57,11 @@ describe TorneosHelper do
     en_96_horas = fecha_actual + (60 * 60 * 96)
     en_120_horas = fecha_actual + (60 * 60 * 120)
     en_840_horas = fecha_actual + (60 * 60 * 840)
-    expect(TorneosHelper.formatoCuentaRegresiva(en_48_horas)).to eq '2d'
-    expect(TorneosHelper.formatoCuentaRegresiva(en_72_horas)).to eq '3d'
-    expect(TorneosHelper.formatoCuentaRegresiva(en_96_horas)).to eq '4d'
-    expect(TorneosHelper.formatoCuentaRegresiva(en_120_horas)).to eq '5d'
-    expect(TorneosHelper.formatoCuentaRegresiva(en_840_horas)).to eq '35d'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_48_horas)).to eq '2d'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_72_horas)).to eq '3d'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_96_horas)).to eq '4d'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_120_horas)).to eq '5d'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_840_horas)).to eq '35d'
   end
 
   it 'Cierre de inscripciones menores a 2 días con horas y segundos' do
@@ -70,18 +70,18 @@ describe TorneosHelper do
     en_27_horas = fecha_actual + (60 * 60 * 27)
     en_12335_sec = fecha_actual + 11_375
     en_14499_sec = fecha_actual + 14_499
-    expect(TorneosHelper.formatoCuentaRegresiva(en_35_horas)).to eq '1d 11h'
-    expect(TorneosHelper.formatoCuentaRegresiva(en_27_horas)).to eq '1d 3h'
-    expect(TorneosHelper.formatoCuentaRegresiva(en_12335_sec)).to eq '3h 9m 35s'
-    expect(TorneosHelper.formatoCuentaRegresiva(en_14499_sec)).to eq '4h 1m 39s'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_35_horas)).to eq '1d 11h'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_27_horas)).to eq '1d 3h'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_12335_sec)).to eq '3h 9m 35s'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_14499_sec)).to eq '4h 1m 39s'
   end
 
   it 'Redondeado al mayor para cierre de inscripciones mayores a 2 días' do
     fecha_actual = Time.new
     en_59_horas = fecha_actual + (60 * 60 * 59)
     en_66_horas = fecha_actual + (60 * 60 * 66)
-    expect(TorneosHelper.formatoCuentaRegresiva(en_59_horas)).to eq '2d'
-    expect(TorneosHelper.formatoCuentaRegresiva(en_66_horas)).to eq '3d'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_59_horas)).to eq '2d'
+    expect(TorneosHelper.formato_cuenta_regresiva(en_66_horas)).to eq '3d'
   end
 
 end

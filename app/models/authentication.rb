@@ -1,7 +1,7 @@
 class Authentication < ActiveRecord::Base
-	belongs_to :gamer
-	validates_presence_of :gamer_id, :uid, :provider
-    validates_uniqueness_of :uid, :scope => :provider
-
-
+  belongs_to :gamer
+  validates :gamer_id, presence: true
+  validates :uid, presence: true
+  validates :provider, presence: true
+  validates :uid, uniqueness: { scope: :provider }
 end

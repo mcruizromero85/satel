@@ -1,3 +1,3 @@
 class Juego < ActiveRecord::Base
-	has_many :torneos
+  has_many :torneos
 end

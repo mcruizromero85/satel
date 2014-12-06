@@ -5,7 +5,7 @@ class InscripcionesController < ApplicationController
   # GET /inscripciones.json
   def index
     @inscripciones = Inscripcion.where(torneo_id:  params[:id_torneo]).order(:created_at)
-    @mensaje_inscripcion= params[:mensaje_inscripcion]
+    @mensaje_inscripcion = params[:mensaje_inscripcion]
   end
 
   # GET /inscripciones/1
@@ -14,7 +14,7 @@ class InscripcionesController < ApplicationController
   end
 
   # GET /inscripciones/new
-  def new    
+  def new
     @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.new
   end
@@ -32,27 +32,25 @@ class InscripcionesController < ApplicationController
 
     respond_to do |format|
       if @inscripcion.save
-        format.html { redirect_to :action => 'index', :id_torneo => params[:id_torneo], :mensaje_inscripcion => @inscripcion.mensaje_inscripcion }
+        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
       else
         @torneo = Torneo.find(params[:id_torneo])
-        format.html {render action: 'new' }
+        format.html { render action: 'new' }
       end
     end
   end
 
   def confirmar
-    @inscripcion=Inscripcion.find_by(torneo_id: params[:id_torneo],gamer_id: current_gamer.id)
-    @inscripcion.estado="Confirmado"
+    @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
+    @inscripcion.estado = 'Confirmado'
 
     respond_to do |format|
       if @inscripcion.save
-        format.html { redirect_to :action => 'index', :id_torneo => params[:id_torneo],:mensaje_inscripcion => @inscripcion.mensaje_inscripcion }
+        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
       else
         @torneo = Torneo.find(params[:id_torneo])
-        format.html {render action: 'new' }
+        format.html { render action: 'new' }
       end
     end
-
   end
-  
 end

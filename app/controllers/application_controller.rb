@@ -5,14 +5,13 @@ class ApplicationController < ActionController::Base
 
   before_action :signed_in?
 
-  def current_gamer  
-    if @current_gamer != nil || session[:gamer_id] != nil then
-      @current_gamer ||= Gamer.find(session[:gamer_id])  
-    end 
+  def current_gamer
+    return unless !@current_gamer.nil? || !session[:gamer_id].nil?
+    @current_gamer ||= Gamer.find(session[:gamer_id])
   end
 
   def signed_in?
-    !!current_gamer
+    !current_gamer.nil?
   end
 
   helper_method :current_gamer, :signed_in?
@@ -22,15 +21,13 @@ class ApplicationController < ActionController::Base
     session[:gamer_id] = gamer.id
   end
 
-  def revisa_si_existe_gamer_en_sesion  
-    if current_gamer == nil 
-      session[:last_url_pre_login] = '/'
-      if ENV["RAILS_ENV"] == 'test'
-        redirect_to '/auth/developer'
-      else
-        redirect_to '/auth/facebook'
-      end  
+  def revisa_si_existe_gamer_en_sesion
+    return unless current_gamer.nil?
+    session[:last_url_pre_login] = '/'
+    if ENV['RAILS_ENV'] == 'test'
+      redirect_to '/auth/developer'
+    else
+      redirect_to '/auth/facebook'
     end
   end
-
 end

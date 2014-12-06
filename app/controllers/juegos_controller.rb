@@ -62,13 +62,14 @@ class JuegosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_juego
-      @juego = Juego.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def juego_params
-      params.require(:juego).permit(:nombre, :descripcion, :asociado_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_juego
+    @juego = Juego.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def juego_params
+    params.require(:juego).permit(:nombre, :descripcion, :asociado_id)
+  end
 end
