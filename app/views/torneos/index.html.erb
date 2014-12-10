@@ -75,7 +75,7 @@
                             un_dias_en_segundos=60 * 60 * 24
                             if torneo_inscrito.inicio_fecha_hora_confirmacion.to_i - Time.new.to_i >= un_dias_en_segundos then %>   
                                <font color="orange"><b>Confirmaci&oacute;n en..</b></font>                             
-                              <%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo_inscrito.inicio_fecha_hora_confirmacion) %>
+                              <%= TorneosHelper.formato_cuenta_regresiva(torneo_inscrito.inicio_fecha_hora_confirmacion) %>
                             <% elsif (torneo_inscrito.inicio_fecha_hora_confirmacion.to_i - Time.new.to_i) < 0  %>                              
                               <font color='red'><b><a class="estilo_confirmacion" id="link_confirmar_torneo_<%=torneo_inscrito.id%>" href='/inscripciones/confirmar/<%= torneo_inscrito.id %>'>CONFIRMAR YA!!!!</a></b></font>
                             <% else %>

@@ -1,0 +1,24 @@
+AllCops:
+  RunRailsCops: true
+  Include:
+  - '**/Rakefile'
+  - '**/config.ru'
+  Exclude:
+  - 'bin/**/*'
+  - 'db/**/*'
+  - 'config/**/*'
+  - 'script/**/*'
+  - 'node_modules/**/*'
+  - ''
+MethodLength:
+  Max: 20
+LineLength:
+  Max: 270
+HasAndBelongsToMany:
+  Enabled: false
+AbcSize:
+  Enabled: false
+DefaultScope:
+  Enabled: false
+Documentation:
+  Enabled: false

@@ -62,13 +62,14 @@ class RondasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ronda
-      @ronda = Ronda.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def ronda_params
-      params.require(:ronda).permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar, :torneo_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ronda
+    @ronda = Ronda.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def ronda_params
+    params.require(:ronda).permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar, :torneo_id)
+  end
 end

@@ -1,27 +1,36 @@
 class Inscripcion < ActiveRecord::Base
-	validates :torneo, uniqueness: { scope: :gamer, message: ", Ya estas inscrito en este torneo" }
-	belongs_to :gamer
-	belongs_to :torneo  , autosave: false
+  validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
+  belongs_to :gamer
+  belongs_to :torneo, autosave: false
 
-	def registrar		
-		if self.torneo.periodo_confirmacion_en_minutos == 0
-			self.estado = "Confirmado"
-		else
-			self.estado = "No confirmado"
-		end		
-		self.save		
-	end
+  def self.total_confirmados_por_torneo(torneo)
+    Gamer.joins(:inscripciones).where('inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado', torneo_id: torneo.id, estado: 'Confirmado').count
+  end
 
-	def mensaje_inscripcion
-		if self.new_record? == false and self.estado == "Confirmado"
-			mensaje="Tu confirmación se realizó con exito"
-			if self.torneo.inscripciones.count > self.torneo.vacantes
-				mensaje=mensaje + "\n Tu posición es " + self.torneo.inscripciones.count.to_s + " de " + self.torneo.vacantes.to_s + " vacantes, estás en cola"
-			end
-		else
-			mensaje="Tu Inscripción se realizó con exito"
-		end
-		return mensaje
-	end
+  def self.inscritos_confirmados_en_el_torneo(torneo)
+    Inscripcion.where('torneo_id = :torneo_id and estado = :estado', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
+  end
 
+  def save
+    if self.new_record?
+      self.estado = 'No confirmado'
+    elsif torneo.periodo_confirmacion_en_minutos == 0 && self.new_record?
+      self.estado = 'Confirmado'
+    else
+      self.estado = 'Confirmado'
+    end
+    super
+  end
+
+  def mensaje_inscripcion
+    if self.new_record? == false && estado == 'Confirmado'
+      mensaje = 'Tu confirmación se realizó con exito'
+      if torneo.inscripciones.count > torneo.vacantes
+        mensaje = mensaje + "\n Tu posición es " + torneo.inscripciones.count.to_s + ' de ' + torneo.vacantes.to_s + ' vacantes, estás en cola'
+      end
+    else
+      mensaje = 'Tu Inscripción se realizó con exito'
+    end
+    mensaje
+  end
 end

@@ -58,6 +58,8 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem "factory_girl_rails", "~> 4.0"
   gem 'database_cleaner', '~> 1.3.0'
+  gem 'simplecov', :require => false
+  gem 'rubocop', require: false
 end
 gem 'omniauth'
 gem 'omniauth-facebook'

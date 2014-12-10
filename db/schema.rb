@@ -23,8 +23,7 @@ ActiveRecord::Schema.define(version: 20141123225154) do
 
   create_table "datos_inscripciones", force: true do |t|
     t.integer  "torneo_id"
-    t.string   "nombre_dato"
-    t.string   "descripcion"
+    t.string   "nombre"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -92,11 +91,22 @@ ActiveRecord::Schema.define(version: 20141123225154) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  
+  create_table "encuentros", force: true do |t|
+    t.integer  "gamerinscritoa_id"
+    t.integer  "gamerinscritob_id"
+    t.integer  "posicion_en_ronda"
+    t.integer  "ronda_id"
+    t.foreign_key :rondas
+    t.integer   "gamerinscrito_ganador_id"
+    t.string   "descripcion"
+    t.integer  "encuentro_anterior_a_id"
+    t.string   "encuentro_anterior_b_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"
-
-  add_foreign_key "encuentros", "rondas", name: "encuentros_ronda_id_fk"
-
   add_foreign_key "inscripciones", "gamers", name: "inscripciones_gamer_id_fk"
   add_foreign_key "inscripciones", "torneos", name: "inscripciones_torneo_id_fk"
   add_foreign_key "datos_inscripciones", "torneos", name: "datos_inscripciones_torneo_id_fk"

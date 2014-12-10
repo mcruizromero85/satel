@@ -32,7 +32,7 @@
                             allowAddN: true,
                             maxFormsCount: 10,
                             minFormsCount: 0,
-                            iniFormsCount: 2
+                            iniFormsCount: 0
                         });
                      
                     });
@@ -62,22 +62,16 @@
              
               <!-- Form template-->
               <div id="datos_inscripcion_template">
-                <label for="datos_inscripcion#index#_phone">Nombre de dato <span id="datos_inscripcion_label"></span></label>
-                <input id="datos_inscripcion#index#_nombre_dato" name="datos_inscripcion#index#[nombre_dato]" type="text"/>
-                <label for="datos_inscripcion#index#_phone">Descripci&oacute;n de dato <span id="datos_inscripcion_label"></span></label>
-                <input id="datos_inscripcion#index#_descripcion" name="datos_inscripcion#index#[descripcion]" type="text"/>
-                <a id="datos_inscripcion_remove_current">
+                <label for="datos_inscripcion#index#_phone">Dato de inscripci&oacute;n requerido <span id="datos_inscripcion_label"></span></label>
+                <input id="datos_inscripcion#index#_nombre" name="datos_inscripcion#index#[nombre]" type="text"/>
                   <img class="delete" src="assets/cross.png" width="16" height="16" border="0">
                 </a>
               </div>
-              <div id="datos_inscripcion_noforms_template">Sin Datos de inscripci&oacute;n</div>
+              <div id="datos_inscripcion_noforms_template">Selecciona agregar, si deseas solicitar a los gamers datos adicionales de inscripci&oacute;n </div>
               <div id="datos_inscripcion_controls">
                 <div id="datos_inscripcion_add" class="btn form add"><a><span>Agregar dato de inscripci&oacute;n</span></a></div>
                 <div id="datos_inscripcion_remove_last" class="btn form remove"><a><span>Eliminar</span></a></div>
-                <div id="datos_inscripcion_remove_all" class="btn form removeAll"><a><span>Eliminar todos</span></a></div>
-                <div id="datos_inscripcion_add_n">
-                  <input id="datos_inscripcion_add_n_input" type="text" size="4" />
-                  <div id="datos_inscripcion_add_n_button" class="btn form add"><a><span>Agregar</span></a></div></div>
+                <div id="datos_inscripcion_remove_all" class="btn form removeAll"><a><span>Eliminar todos</span></a></div>                
               </div>
             </div>
            <div class="actions">

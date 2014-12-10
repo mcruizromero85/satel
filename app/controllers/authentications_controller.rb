@@ -1,67 +1,34 @@
 class AuthenticationsController < ApplicationController
-  before_action :set_authentication, only: [:show, :edit, :update, :destroy]
-
   # GET /authentications/1/edit
   def edit
   end
 
-  # POST /authentications
-  # POST /authentications.json
   def create
-
-    auth = request.env["omniauth.auth"]
-    
-
-    unless @auth = Authentication.where("uid = ? AND provider = ?", auth['uid'],auth['provider']).first
-      # Create a new user or add an auth to existing user, depending on
-      # whether there is already a user signed in.
+    auth = request.env['omniauth.auth']    
+    unless @auth = Authentication.where('uid = ? AND provider = ?', auth['uid'], auth['provider']).first
       facebook_gamer = auth['info']
-      gamer = Gamer.new
-      gamer.correo = facebook_gamer.email
-      if params[:provider] == "developer"
+      gamer = Gamer.new(correo: facebook_gamer.email, apellidos: facebook_gamer.last_name)
+      if params[:provider] == 'developer'
         gamer.nombres = facebook_gamer.name
       else
         gamer.nombres = facebook_gamer.first_name
       end
-      gamer.apellidos = facebook_gamer.last_name
       gamer.save
 
-      authentication = Authentication.new
-      authentication.provider =  auth['provider']
-      authentication.uid = auth['uid']
-      authentication.gamer = gamer
+      authentication = Authentication.new(provider: auth['provider'], uid: auth['uid'], gamer: gamer)
       authentication.save
       @auth = authentication
     end
-    # Log the authorizing user in.
     self.current_gamer = @auth.gamer
-
-    if session[:last_url_pre_login] != nil
-      redirect_to session[:last_url_pre_login]
-    else
-      redirect_to :action => 'index', :controller=>"torneos"    
-    end
-
-    
+    redirect_to action: 'index', controller: 'torneos'
   end
 
   def destroy
   end
 
-  def cerrar_sesion    
+  def cerrar_sesion
     @current_gamer = nil
     session[:gamer_id] = nil
-    redirect_to :action => 'index', :controller=>"torneos"  
+    redirect_to action: 'index', controller: 'torneos'
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_authentication
-      @authentication = Authentication.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def authentication_params
-      params.require(:authentication).permit(:user_id, :provider, :uid, :index, :create, :destroy)
-    end
 end
