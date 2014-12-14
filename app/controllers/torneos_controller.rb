@@ -92,7 +92,7 @@ class TorneosController < ApplicationController
 
     respond_to do |format|
       if @torneo.save then
-        format.html { render action: 'datos_inscripcion'}
+        format.html { redirect_to @torneo, notice: 'Torneo was successfully created.' }
         format.json { render action: 'show', status: :created, location: @torneo }
       else
         format.html { render action: 'new' }

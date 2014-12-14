@@ -1,5 +1,7 @@
 Satel::Application.routes.draw do
 
+  resources :datos_inscripcion_registrados
+
   resources :datos_inscripciones
 
   resources :inscripciones

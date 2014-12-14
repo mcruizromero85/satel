@@ -2,6 +2,11 @@ class Inscripcion < ActiveRecord::Base
   validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
   belongs_to :gamer
   belongs_to :torneo, autosave: false
+  has_many :datos_inscripcion_registrado
+
+  def agregar_dato_inscripcion_registrado(datos_inscripcion_registrado)
+    self.datos_inscripcion_registrado << datos_inscripcion_registrado
+  end
 
   def self.total_confirmados_por_torneo(torneo)
     Gamer.joins(:inscripciones).where('inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado', torneo_id: torneo.id, estado: 'Confirmado').count
@@ -13,7 +18,7 @@ class Inscripcion < ActiveRecord::Base
 
   def save
     if self.new_record?
-      self.estado = 'No confirmado'
+      self.estado = 'En verificación de datos'
     elsif torneo.periodo_confirmacion_en_minutos == 0 && self.new_record?
       self.estado = 'Confirmado'
     else

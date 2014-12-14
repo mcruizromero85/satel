@@ -17,6 +17,7 @@ class InscripcionesController < ApplicationController
   def new
     @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.new
+    @datos_requeridos = DatosInscripcion.where(torneo_id:  params[:id_torneo]);
   end
 
   # GET /inscripciones/1/edit
@@ -29,6 +30,16 @@ class InscripcionesController < ApplicationController
     @inscripcion = Inscripcion.new
     @inscripcion.gamer = current_gamer
     @inscripcion.torneo = Torneo.find(params[:id_torneo])
+
+    contador = 0 
+    loop do      
+      break if params['datos_inscripcion_registrado' + contador.to_s] == nil
+      dato_inscripcion_registrado = DatosInscripcionRegistrado.new(params['datos_inscripcion_registrado' + contador.to_s].permit(:valor))
+      dato_inscripcion_registrado.datos_inscripcion = DatosInscripcion.new(id: params['datos_inscripcion_registrado' + contador.to_s].permit(:datos_inscripcion_id))
+      @inscripcion.agregar_dato_inscripcion_registrado(dato_inscripcion_registrado)
+      contador += 1            
+    end 
+
 
     respond_to do |format|
       if @inscripcion.save
