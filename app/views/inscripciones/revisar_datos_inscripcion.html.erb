@@ -1,4 +1,10 @@
-  <div class="container">
+   <div class="container">
+    <div class="row">
+        <div >
+            <div class="tile">
+              <h3 class="text-center">Inscribite Ya!!!</h3>
+               <div class="table-responsive">
+                  <div class="container">
     <div class="row">
         <div >
             <div class="tile">
@@ -18,10 +24,9 @@
                         </ul>
                       </div>
                     <% end %>
-
                     <div id="tipo_generacion" class="ui-buttonset">
-                      <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
-                      <center> <%= f.submit "Inscribirme" %></center>
+                      <a href="/inscripciones/validar/<%=@inscripcion.id%>">Validar Inscrito</a>
+                      <a href="/inscripciones/invalidar/<%=@inscripcion.id%>">Invalidar Inscrito</a>
                     </div>  
 
                   <div class="table-responsive">
@@ -32,15 +37,14 @@
                           <th class="header">Valor</th>                
                         </tr>
                       </thead>
+                      <% @inscripcion.datos_inscripcion_registrado.each do | dato_inscripcion_registrado| %>
                       <% contador = 0 %>
-                      <% @datos_requeridos.each do | dato_inscripcion | %>                      
                       <tr>
                         <td class="TituloFormulario">
-                          <%=dato_inscripcion.nombre%>
+                          <%=dato_inscripcion_registrado.valor%>
                         </td>
                         <td width="80">
-                          <input type="text" name="datos_inscripcion_registrado<%= contador.to_s %>[valor]" />
-                          <input type="hidden" name="datos_inscripcion_registrado<%= contador.to_s %>[datos_inscripcion_id]" value="<%=dato_inscripcion.id%>" />
+                        	<%=dato_inscripcion_registrado.datos_inscripcion.nombre %>
                         </td>
                       </tr>
                       <% contador += 1 %>
@@ -58,3 +62,9 @@
   $( "#tipo_generacion" ).buttonset();
 
 </script>  
+              </div>
+
+            </div>
+        </div>
+    </div>
+  </div>

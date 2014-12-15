@@ -4,6 +4,16 @@ class Inscripcion < ActiveRecord::Base
   belongs_to :torneo, autosave: false
   has_many :datos_inscripcion_registrado
 
+  def validar
+    self.estado = 'Validado'
+    self.save
+  end
+
+  def invalidar
+    self.estado = 'Invalido'
+    self.destroy
+  end
+
   def agregar_dato_inscripcion_registrado(datos_inscripcion_registrado)
     self.datos_inscripcion_registrado << datos_inscripcion_registrado
   end
@@ -16,15 +26,14 @@ class Inscripcion < ActiveRecord::Base
     Inscripcion.where('torneo_id = :torneo_id and estado = :estado', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
   end
 
-  def save
-    if self.new_record?
-      self.estado = 'En verificación de datos'
-    elsif torneo.periodo_confirmacion_en_minutos == 0 && self.new_record?
-      self.estado = 'Confirmado'
-    else
-      self.estado = 'Confirmado'
-    end
-    super
+  def inscribir
+    self.estado = 'En verificación de datos'
+    self.save    
+  end
+
+  def confirmar
+    self.estado = 'Confirmado'
+    self.save
   end
 
   def mensaje_inscripcion
