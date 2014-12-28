@@ -27,7 +27,7 @@ class Inscripcion < ActiveRecord::Base
   end
 
   def inscribir
-    self.estado = 'En verificación de datos'
+    self.estado = 'En revisión'
     self.save    
   end
 

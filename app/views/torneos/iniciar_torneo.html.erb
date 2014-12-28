@@ -10,14 +10,28 @@
             $('#llaves').bracket({
             init: minimalData
             <% if @torneo.estado == "Iniciado" && @current_gamer==@torneo.gamer %>
-            ,onMatchClick: registrarGanador
+            ,onMatchClick: registrarGanador,
+            decorator: {edit: edit_fn,render: render_fn}})
             <% end %>
-            })
-          })
+          })          
           <% if @torneo.estado == "Iniciado" && @current_gamer==@torneo.gamer %>
             function registrarGanador(data) {
               location.href="/encuentros/"+data+"/edit";
             }
+
+            function edit_fn(container, data, doneCb) {
+              var input = $('<input type="text">')
+              input.val(data.name)
+              container.html(input)
+              input.focus()
+              input.blur(function() { doneCb({name: input.val()}) })
+            }
+
+            function render_fn(container, data, score) {
+              $('#llaves div .tools').addClass('ocultar_contenido');
+              container.append(data);
+            }
+
           <% end %>
 
           </script> 

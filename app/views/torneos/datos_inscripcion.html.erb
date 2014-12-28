@@ -8,6 +8,7 @@
                 <br/>
                 <span id="mensajeError"></span>
                 <%= form_for(@torneo) do |f| %>
+                <input type="hidden" name="torneo[estado]" value="Creado" />
                   <% if @torneo.errors.any? %>
                     <div id="error_explanation">
                       <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>

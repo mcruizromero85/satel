@@ -48,6 +48,14 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones
   # POST /inscripciones.json
   def create
+
+    gamer_params = params.require(:gamer).permit(:nick)
+
+    if current_gamer.nick != gamer_params[:nick]
+      current_gamer.nick = gamer_params[:nick]
+      current_gamer.save
+    end
+
     @inscripcion = Inscripcion.new
     @inscripcion.gamer = current_gamer
     @inscripcion.torneo = Torneo.find(params[:id_torneo])

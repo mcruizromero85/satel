@@ -83,34 +83,36 @@ class TorneosController < ApplicationController
   # PATCH/PUT /torneos/1
   # PATCH/PUT /torneos/1.json
   def update
-    contador = 0 
-    loop do      
-      break if params['datos_inscripcion' + contador.to_s] == nil
-      @torneo.agregar_dato_inscripcion(DatosInscripcion.new(params['datos_inscripcion' + contador.to_s].permit(:nombre)))
-      contador += 1            
-    end 
+    if torneo_params[:estado] != 'Iniciado'
+      contador = 0 
+      loop do      
+        break if params['datos_inscripcion' + contador.to_s] == nil
+        @torneo.agregar_dato_inscripcion(DatosInscripcion.new(params['datos_inscripcion' + contador.to_s].permit(:nombre)))
+        contador += 1            
+      end
 
-    respond_to do |format|
-      if @torneo.save then
-        format.html { redirect_to @torneo, notice: 'Torneo was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @torneo }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @torneo.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @torneo.save         
+          format.html { redirect_to @torneo, notice: 'Torneo was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @torneo }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @torneo.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @torneo.estado = torneo_params[:estado]
+      respond_to do |format|
+        if @torneo.save
+          @torneo.generar_encuentros
+          format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }
+        else
+          @torneo.estado = 'Creado'
+          format.html { render action: 'iniciar_torneo', notice: 'Error' }
+        end
       end
     end
-
-    #@torneo.estado = 'Iniciado'
-    #respond_to do |format|
-    #  if @torneo.save
-    #    @torneo.generar_encuentros
-    #    format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }
-    #  else
-    #    @torneo.estado = 'Creado'
-    #    format.html { render action: 'iniciar_torneo', notice: 'Error' }
-    #  end
-    #end
-  end
+  end    
 
   private
 

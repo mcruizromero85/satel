@@ -32,6 +32,10 @@
                           <th class="header">Valor</th>                
                         </tr>
                       </thead>
+                      <tr>
+                        <td class="TituloFormulario">Nick o nombre de equipo</td>
+                        <td><input type="text" name="gamer[nick]" value="<%=current_gamer.nick%>" /></td>
+                      </tr>
                       <% contador = 0 %>
                       <% @datos_requeridos.each do | dato_inscripcion | %>                      
                       <tr>
@@ -47,14 +51,11 @@
                       <% end %>
                     </table> 
                    </div>
-
                   <% end %>
         </div>
     </div>
   </div>
 
 <script type="text/javascript">
-  
   $( "#tipo_generacion" ).buttonset();
-
 </script>  

@@ -89,3 +89,8 @@
       inscripcion.save
     end
   end
+
+  def reportar_resultado_encuentro_por_ronda_llave(torneo, posicion_ronda, posicion_encuentro_en_ronda)    
+    encuentro_para_reportar_ganador = torneo.rondas[posicion_ronda].encuentros[posicion_encuentro_en_ronda]
+    encuentro_para_reportar_ganador.gano_gamer_a
+  end

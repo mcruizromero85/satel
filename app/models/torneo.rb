@@ -16,7 +16,7 @@ class Torneo < ActiveRecord::Base
   validates :periodo_confirmacion_en_minutos, numericality: true
   belongs_to :gamer
   belongs_to :juego, autosave: false
-  has_many :rondas, autosave: true
+  has_many :rondas, -> { order('numero ASC') }, autosave: true
   has_many :inscripciones, autosave: true
   has_many :datos_inscripciones, autosave: true
 
@@ -29,7 +29,7 @@ class Torneo < ActiveRecord::Base
   end
 
   def self.obtener_torneos_ya_inscrito(gamer_logeado)
-    Torneo.joins(:inscripciones).where('torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado ', fecha_actual: Time.new, gamer_id: gamer_logeado.id, estado: 'No confirmado').order(cierre_inscripcion: :asc)
+    Torneo.joins(:inscripciones).where('torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado in (:estado_inscrito, :estado_en_revision) ', fecha_actual: Time.new, gamer_id: gamer_logeado.id, estado_inscrito: 'Inscrito', estado_en_revision: "En revisión").order(cierre_inscripcion: :asc)
   end
 
   def self.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados)
@@ -38,6 +38,9 @@ class Torneo < ActiveRecord::Base
 
   def agregar_ronda(ronda)
     return unless ronda.valid?
+    if rondas.size > 0
+      rondas[rondas.size-1].ronda_siguiente = ronda      
+    end
     rondas << ronda
   end
 
@@ -104,7 +107,7 @@ class Torneo < ActiveRecord::Base
     array_inscritos_confirmados = Inscripcion.inscritos_confirmados_en_el_torneo(self)
     cantidad_slots = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)
     array_inscritos_confirmados_y_emparejados = array_inscritos_confirmados.sample(cantidad_slots)
-    rondas.first.armar_encuentros_con_gamers_confirmados(array_inscritos_confirmados_y_emparejados)
+    rondas.where(numero: 1).first.armar_encuentros_con_gamers_confirmados(array_inscritos_confirmados_y_emparejados)
   end
 
   def agregar_dato_inscripcion(dato_inscripcion)

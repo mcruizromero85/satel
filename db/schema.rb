@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.time     "inicio_tiempo"
     t.string   "modo_ganar"
     t.integer  "torneo_id"
-    t.integer  "ronda_id"
+    t.integer  "ronda_siguiente_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -109,7 +109,6 @@ ActiveRecord::Schema.define(version: 20141214025352) do
   add_foreign_key "inscripciones", "gamers", name: "inscripciones_gamer_id_fk"
   add_foreign_key "inscripciones", "torneos", name: "inscripciones_torneo_id_fk"
 
-  add_foreign_key "rondas", "rondas", name: "rondas_ronda_id_fk"
   add_foreign_key "rondas", "torneos", name: "rondas_torneo_id_fk"
 
   add_foreign_key "torneos", "gamers", name: "torneos_gamer_id_fk"

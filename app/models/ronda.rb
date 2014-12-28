@@ -1,9 +1,13 @@
 class Ronda < ActiveRecord::Base
   validates :inicio_fecha, presence: { message: ', las fechas de las rondas no pueden estar vacias' }
   validates :inicio_tiempo, presence: { message: ', las horas de las rondas no pueden estar vacias' }
-
+  belongs_to :ronda_siguiente, class_name: 'Ronda'
   belongs_to :torneo
   has_many :encuentros, -> { order('posicion_en_ronda ASC') }, autosave: false
+
+  def encuentros_que_deberia_tener
+    
+  end
 
   def inicio_ronda
     fecha = inicio_fecha

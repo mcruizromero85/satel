@@ -2,6 +2,21 @@ require 'spec_helper'
 require 'util_tests'
 
 describe TorneosHelper do
+
+  it 'Generar llaves de 8 jugadores en primera ronda' do
+    torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new + 10)
+    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 1))
+    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 2))
+    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 3))
+    torneo.save
+    generar_inscripciones_confirmadas(8, torneo)
+    torneo.generar_encuentros
+    torneo.estado = 'Iniciado'
+    torneo.save
+    reportar_resultado_encuentro_por_ronda_llave(torneo, 0, 1)
+     expect(TorneosHelper.obtener_array_para_resultado_llaves(torneo).to_s).to eq '[[[0, 0, 1], [1, 0, 2], [0, 0, 3], [0, 0, 4]], [[1, 0, 5], [0, 0, "0"]], [[0, 0, "0"]]]'
+  end
+
   it 'Generar arreglo de llaves con 4 jugadores y 4 vacantes' do
     torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new + 10)
     torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 1))
@@ -83,5 +98,7 @@ describe TorneosHelper do
     expect(TorneosHelper.formato_cuenta_regresiva(en_59_horas)).to eq '2d'
     expect(TorneosHelper.formato_cuenta_regresiva(en_66_horas)).to eq '3d'
   end
+
+
 
 end
