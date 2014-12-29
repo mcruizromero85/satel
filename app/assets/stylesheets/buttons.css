@@ -78,7 +78,7 @@
 .btn.form {
 	line-height:16px; 
 	padding:0 1px 0 5px;
-	background:url(../images/btn_bg_left_grey.png) no-repeat left top;
+	background:url(/assets/btn_bg_left_grey.png) no-repeat left top;
 }
 
 .btn.form:hover {
@@ -87,7 +87,7 @@
 
 .btn.form a {
 	padding:4px 13px 4px 4px;
-	background:url(../assets/btn_bg_grey.png) no-repeat right top;
+	background:url(/assets/btn_bg_grey.png) no-repeat right top;
 	color:#333;
 }
 
@@ -102,10 +102,10 @@
 	display:block;
 }
 
-.btn.form.add span { background:url(../assets/add.png) no-repeat left center; }
-.btn.form.remove span { background:url(../assets/delete.png) no-repeat left center; }
-.btn.form.removeAll span { background:url(../assets/decline.png) no-repeat left center; }
-.btn.form.accept span { background:url(../assets/accept.png) no-repeat left center; }
-.btn.form.cancel span { background:url(../assets/delete.png) no-repeat left center; }
-.btn.form.examine span { background:url(../assets/disk-magnify.png) no-repeat left center; }
+.btn.form.add span { background:url(/assets/add.png) no-repeat left center; }
+.btn.form.remove span { background:url(/assets/delete.png) no-repeat left center; }
+.btn.form.removeAll span { background:url(/assets/decline.png) no-repeat left center; }
+.btn.form.accept span { background:url(/assets/accept.png) no-repeat left center; }
+.btn.form.cancel span { background:url(/assets/delete.png) no-repeat left center; }
+.btn.form.examine span { background:url(/assets/disk-magnify.png) no-repeat left center; }
 

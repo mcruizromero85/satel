@@ -41,7 +41,7 @@ class Torneo < ActiveRecord::Base
     if rondas.size > 0
       rondas[rondas.size-1].ronda_siguiente = ronda      
     end
-    rondas << ronda
+    rondas << ronda 
   end
 
   def inicializar_valores_por_defecto

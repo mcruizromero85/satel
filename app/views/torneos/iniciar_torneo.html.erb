@@ -8,12 +8,13 @@
             }
           $(function() {
             $('#llaves').bracket({
-            init: minimalData
+            init: minimalData,
+            skipConsolationRound: true
             <% if @torneo.estado == "Iniciado" && @current_gamer==@torneo.gamer %>
             ,onMatchClick: registrarGanador,
             decorator: {edit: edit_fn,render: render_fn}})
             <% end %>
-          })          
+          })
           <% if @torneo.estado == "Iniciado" && @current_gamer==@torneo.gamer %>
             function registrarGanador(data) {
               location.href="/encuentros/"+data+"/edit";
@@ -31,7 +32,8 @@
               $('#llaves div .tools').addClass('ocultar_contenido');
               container.append(data);
             }
-
+          <% else %>
+          })
           <% end %>
 
           </script> 
