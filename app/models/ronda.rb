@@ -5,10 +5,6 @@ class Ronda < ActiveRecord::Base
   belongs_to :torneo
   has_many :encuentros, -> { order('posicion_en_ronda ASC') }, autosave: false
 
-  def encuentros_que_deberia_tener
-    
-  end
-
   def inicio_ronda
     fecha = inicio_fecha
     tiempo = inicio_tiempo

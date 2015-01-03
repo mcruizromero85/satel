@@ -3,12 +3,17 @@ require 'util_tests'
 
 describe Encuentro do
 
+	it 'Para un torneo de 4 rondas, Al encuentro 7 de la ronda 1, le sigue el encuentro 4 de la ronda 2 ' do
+  	torneo = torneo_iniciado_con_vacantes_confirmadas(16)
+  	reportar_resultado_encuentro_por_ronda_llave(torneo, 1, 7)
+  	torneo = Torneo.find(torneo.id)
+  	expect(torneo.rondas[1].encuentros[0].posicion_en_ronda).to eq 4
+  end
+
 	it 'Para un torneo de 4 rondas, Al encuentro 5 de la ronda 1, le sigue el encuentro 3 de la ronda 2 ' do
   	torneo = torneo_iniciado_con_vacantes_confirmadas(16)
   	reportar_resultado_encuentro_por_ronda_llave(torneo, 1, 5)
-  	torneo = Torneo.find(torneo.id)  	
-  	print "\n"
-  	print TorneosHelper.obtener_array_para_resultado_llaves(torneo).to_s  	  	  	
+  	torneo = Torneo.find(torneo.id)
   	expect(torneo.rondas[1].encuentros[0].posicion_en_ronda).to eq 3
   end
 

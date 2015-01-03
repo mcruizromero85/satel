@@ -53,7 +53,8 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    DatabaseCleaner.strategy = :transaction
+    #DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.strategy = :truncation
   end
 
   config.before(:each, js: true) do
@@ -67,6 +68,9 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+
+
 
   config.order = 'seed 1234'
   config.include FactoryGirl::Syntax::Methods

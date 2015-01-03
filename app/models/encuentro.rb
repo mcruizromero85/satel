@@ -32,7 +32,13 @@ class Encuentro < ActiveRecord::Base
 
   def obtener_posicion_en_siguiente_ronda
     cantidad_rondas = self.ronda.torneo.rondas.size
-    if self.posicion_en_ronda > 4
+    if self.posicion_en_ronda > 10
+      8
+    elsif self.posicion_en_ronda > 8
+      6
+    elsif self.posicion_en_ronda > 6
+      4
+    elsif self.posicion_en_ronda > 4
       3
     elsif self.posicion_en_ronda > 2
       2
