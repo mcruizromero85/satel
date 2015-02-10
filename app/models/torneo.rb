@@ -104,10 +104,12 @@ class Torneo < ActiveRecord::Base
 
   def generar_encuentros
     return unless estado != 'Iniciado'
-    array_inscritos_confirmados = Inscripcion.inscritos_confirmados_en_el_torneo(self)
-    cantidad_slots = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)
-    array_inscritos_confirmados_y_emparejados = array_inscritos_confirmados.sample(cantidad_slots)
-    rondas.where(numero: 1).first.armar_encuentros_con_gamers_confirmados(array_inscritos_confirmados_y_emparejados)
+    self.rondas.each do | ronda |
+      ronda.encuentros.destroy_all
+    end
+    array_inscritos_confirmados = Inscripcion.inscritos_confirmados_en_el_torneo_con_free_wins(self)    
+    self.rondas.where(numero: 1).first.armar_encuentros_con_gamers_confirmados(array_inscritos_confirmados)
+    self.reload
   end
 
   def agregar_dato_inscripcion(dato_inscripcion)

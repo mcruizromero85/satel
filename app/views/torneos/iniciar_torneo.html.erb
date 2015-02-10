@@ -18,7 +18,7 @@
           <% if @torneo.estado == "Iniciado" && @current_gamer==@torneo.gamer %>
             function registrarGanador(data) {
               if (data == "0"){
-                alert("No existe contrincantes definidos");                
+                alert("No existe ambos contrincantes");                
               }else{
                 location.href="/encuentros/"+data+"/edit";  
               }
@@ -33,7 +33,6 @@
             }
 
             function render_fn(container, data, score) {
-              alert(data);
               $('#llaves div .tools').addClass('ocultar_contenido');
               container.append(data);
             }

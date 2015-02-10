@@ -53,6 +53,7 @@
     fill_in('email', with: correo)
     click_button('autenticar')
     click_link('link_inscripcion_torneo_' + @id_torneo_registrado)
+    fill_in('gamer_nick', with: nombre)    
     click_button('Inscribirme')
     visit '/'
     click_link('link_confirmar_torneo_' + @id_torneo_registrado)

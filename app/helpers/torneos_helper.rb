@@ -15,6 +15,7 @@ module TorneosHelper
   end
 
   def self.obtener_array_para_resultado_llaves(torneo)
+
     array_id_encuentros = Array.new(torneo.rondas.count) {  }
     cantidad_de_encuentros_en_ronda = torneo.rondas.first.encuentros.count 
     contador_rondas = 0
@@ -24,9 +25,9 @@ module TorneosHelper
 
       ronda.encuentros.each do | encuentro |
         if encuentro.gamerinscrito_ganador == encuentro.gamerinscritoa
-          array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1 ] = [1, 0, encuentro.id]
+          array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1 ] = [1, 0, "0"]
         elsif encuentro.gamerinscrito_ganador == encuentro.gamerinscritob
-          array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1] = [0, 1, encuentro.id]
+          array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1] = [0, 1, "0"]
         else
           array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1] = [0, 0, encuentro.id]
         end

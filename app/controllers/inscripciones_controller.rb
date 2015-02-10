@@ -50,8 +50,7 @@ class InscripcionesController < ApplicationController
   def create
 
     gamer_params = params.require(:gamer).permit(:nick)
-
-    if current_gamer.nick != gamer_params[:nick]
+    if current_gamer.nick != gamer_params[:nick] and current_gamer.nick != ""
       current_gamer.nick = gamer_params[:nick]
       current_gamer.save
     end
@@ -73,6 +72,7 @@ class InscripcionesController < ApplicationController
         format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
       else
         @torneo = Torneo.find(params[:id_torneo])
+        @datos_requeridos = DatosInscripcion.where(torneo_id:  params[:id_torneo]);
         format.html { render action: 'new' }
       end
     end

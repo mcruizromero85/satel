@@ -4,6 +4,29 @@ class Inscripcion < ActiveRecord::Base
   belongs_to :torneo, autosave: false
   has_many :datos_inscripcion_registrado
 
+  def self.inscritos_confirmados_en_el_torneo_con_free_wins(torneo)
+    array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
+    cantidad_slots_que_deberia_tener = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)    
+
+    free_wins_faltantes = cantidad_slots_que_deberia_tener - array_inscritos_confirmados.count
+    if free_wins_faltantes > 0
+      inscribir_free_wins(torneo, free_wins_faltantes)
+      array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
+    end
+    array_inscritos_confirmados.sample(cantidad_slots_que_deberia_tener)
+  end
+
+  def self.inscribir_free_wins(torneo, free_wins_faltantes)
+    free_wins_faltantes.times do | contador_free_win |
+      gamer = Gamer.find_by(nick: 'Free win ' + (contador_free_win + 1).to_s)
+      inscripcion = Inscripcion.new
+      inscripcion.torneo = torneo
+      inscripcion.gamer = gamer      
+      inscripcion.estado = 'Confirmado'
+      inscripcion.save
+    end
+  end
+
   def validar
     self.estado = 'Validado'
     self.save
@@ -19,7 +42,7 @@ class Inscripcion < ActiveRecord::Base
   end
 
   def self.total_confirmados_por_torneo(torneo)
-    Gamer.joins(:inscripciones).where('inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado', torneo_id: torneo.id, estado: 'Confirmado').count
+    Gamer.joins(:inscripciones).where('inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado and gamers.nick not like \'%Free win%\'', torneo_id: torneo.id, estado: 'Confirmado').count
   end
 
   def self.inscritos_confirmados_en_el_torneo(torneo)
@@ -27,6 +50,10 @@ class Inscripcion < ActiveRecord::Base
   end
 
   def inscribir
+    if self.gamer.nick == nil
+      errors.add(:gamer, ', Debes colocar tu nick')
+      return
+    end
     self.estado = 'En revisión'
     self.save    
   end
