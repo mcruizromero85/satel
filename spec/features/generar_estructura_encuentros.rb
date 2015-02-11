@@ -51,7 +51,6 @@ feature 'Iniciar Torneo' do
   def iniciar_torneo
     click_link('link_mis_torneos')
     click_link('link_iniciar_torneo_' + @id_torneo_registrado)
-    sleep 10
     click_button('Iniciar Torneo!!!')
   end
 end

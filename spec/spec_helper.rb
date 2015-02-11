@@ -49,7 +49,7 @@ RSpec.configure do |config|
   #     --seed 1234
 
   config.before(:suite) do
-    DatabaseCleaner.clean_with(:truncation, except: ('juegos'))
+    DatabaseCleaner.clean_with(:truncation, {:except => %w[juegos gamers]})
   end
 
   config.before(:each) do
@@ -57,7 +57,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each, js: true) do
-    DatabaseCleaner.strategy = :truncation, { except: ('juegos') }
+    DatabaseCleaner.strategy = :truncation, {:except => %w[juegos gamers]}
   end
 
   config.before(:each) do

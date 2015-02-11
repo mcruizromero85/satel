@@ -24,11 +24,6 @@ class Ronda < ActiveRecord::Base
     gamera = nil    
     gamers_emparejados.each do | gamer |
       if contador_gamer.even?
-        print "inscripcion gamer a: \n"
-        print gamera
-        print "inscripcion gamer b: \n"
-        print gamer
-        print "----------------\n"
         encuentro = Encuentro.new(gamerinscritoa: gamera, gamerinscritob: gamer, posicion_en_ronda: contador_posicion_en_ronda)
         encuentros << encuentro
         

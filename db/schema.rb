@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
 
   create_table "inscripciones", force: true do |t|
     t.integer  "torneo_id"
-    t.integer  "gamer_id"
+    t.belongs_to :gamer, null: false
     t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
