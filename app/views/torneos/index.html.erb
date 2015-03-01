@@ -1,152 +1,30 @@
-<div class="marketing">
-  <div class="container">
-    <% if @torneos_inscritos.size != 0 or @torneos_confirmados.size != 0 or @torneos_iniciados.size != 0 %>
-    <script type="text/javascript">
-      function generarContadorPorTorneoInscrito(idTorneo,fecha_inicio_confirmacion){        
-        $('#countdown_torneo_inscrito_'+idTorneo).countdown({until: fecha_inicio_confirmacion, format: 'dhmS',expiryText: "<font color='red'><a class='estilo_confirmacion' href='/inscripciones/confirmar/"+idTorneo+"'>CONFIRMAR YA!!!!</a></font>" }); 
-      }
-
-      function generarContadorPorTorneoConfirmado(idTorneo,fecha_cierre_inscripcion){        
-        $('#countdown_torneo_confirmado_'+idTorneo).countdown({until: fecha_cierre_inscripcion, format: 'dhmS',expiryText: "<font color='green'><a class='estilo_listo' href='/torneo/inicio_torneo/"+idTorneo+"'>Esperando generaci&oacute;n de llaves</a></font>" }); 
-      }
-    </script>
-      <div class="row">
-        <div class="text-center1">
-            <div class="tile1">
-                <table class="table table-hover table-striped tablesorter" >
-                  <tbody id="torneosPortadaInscritos">
-
-                      <% @torneos_iniciados.each do |torneo_inciado| %>
-                         <tr id="torneo_confirmados">
-                          <td><a href="/torneos/<%=torneo_inciado.id%>"><%= torneo_inciado.titulo %></a></td>
-                          <td><%= torneo_inciado.juego.nombre %></td>
-                          <td><%= torneo_inciado.vacantes %></td>
-                          <td>
-                              <font color="green"><b>
-                                  <font color='green'><a class='estilo_listo' href='/torneos/iniciar/<%=torneo_inciado.id%>'>Torneo Iniciado!!!</a></font>
-                              </b></font> 
-                          </td>
-                          <td><ul class="btnConfirmado">
-                                <li class="active"><a class="estilo_listo" href="/inscripciones?id_torneo=<%=torneo_inciado.id%>">Ver inscritos</a></li>
-                              </ul>
-                          </td>                      
-                        <tr> 
-                      <% end %>
-
-
-                        <% @torneos_confirmados.each do |torneo_confirmado| %>
-                         <tr id="torneo_confirmados">
-                          <td><a class="LNK_Confirmados" href="/torneos/<%=torneo_confirmado.id%>"><%= torneo_confirmado.titulo %></a></td>
-                          <td class="TD_Confirmados"><%= torneo_confirmado.juego.nombre %></td>
-                          <td class="TD_Confirmados"><%= torneo_confirmado.vacantes %></td>
-                          <td>
-                              <font color="green"><b>
-                              <% if torneo_confirmado.cierre_inscripcion.to_i - Time.new.to_i >= 0 then %>   
-                                <div id='countdown_torneo_confirmado_<%=torneo_confirmado.id%>'></div>
-                                <script type="text/javascript">
-                                  generarContadorPorTorneoConfirmado('<%=torneo_confirmado.id%>', new Date(<%= torneo_confirmado.cierre_inscripcion.to_i * 1000 %>));
-                                </script>
-                              <% else %> 
-                                <% if torneo_confirmado.estado == "Iniciado" %> 
-                                  <font color='green'><a class='estilo_listo' href='/torneos/iniciar/<%=torneo_confirmado.id%>'>En curso</a></font>
-                                <% else %>
-                                  <font color='green'>Esperando generaci&oacute;n de llaves</font>
-                                <% end %>
-                                
-                              <% end %>
-
-                              </b></font> 
-                          </td>
-                          <td><ul class="btnConfirmado">
-                                <li class="active"><a class="estilo_listo" href="/inscripciones?id_torneo=<%=torneo_confirmado.id%>">Ver inscritos</a></li>
-                              </ul>
-                          </td>                      
-                        <tr> 
-                      <% end %>
-
-
-                      <% @torneos_inscritos.each do |torneo_inscrito| %>
-                         <tr id="torneo_inscrito">
-                          <td class="TD_Inscritos"><%= torneo_inscrito.titulo %></td>
-                          <td class="TD_Inscritos"><%= torneo_inscrito.juego.nombre %></td>
-                          <td class="TD_Inscritos"><%= torneo_inscrito.vacantes %></td>
-                          <td>
-                            <% 
-                            un_dias_en_segundos=60 * 60 * 24
-                            if torneo_inscrito.inicio_fecha_hora_confirmacion.to_i - Time.new.to_i >= un_dias_en_segundos then %>   
-                               <font color="orange"><b>Confirmaci&oacute;n en..</b></font>                             
-                              <%= TorneosHelper.formato_cuenta_regresiva(torneo_inscrito.inicio_fecha_hora_confirmacion) %>
-                            <% elsif (torneo_inscrito.inicio_fecha_hora_confirmacion.to_i - Time.new.to_i) < 0  %>                              
-                              <font color='red'><b><a class="estilo_confirmacion" id="link_confirmar_torneo_<%=torneo_inscrito.id%>" href='/inscripciones/confirmar/<%= torneo_inscrito.id %>'>CONFIRMAR YA!!!!</a></b></font>
-                            <% else %>
-                              <font color="orange"><b>Confirmaci&oacute;n en..</b></font>  
-                              <div id='countdown_torneo_inscrito_<%=torneo_inscrito.id%>'></div>
-                              <script type="text/javascript">
-                                generarContadorPorTorneoInscrito('<%=torneo_inscrito.id%>', new Date(<%= torneo_inscrito.inicio_fecha_hora_confirmacion.to_i * 1000 %>));
-                              </script>
-                            <% end %>
-                          </td>
-                          <td><ul class="btnInscrito">
-                                <li class="active"><a class="estilo_confirmacion" href="/inscripciones?id_torneo=<%=torneo_inscrito.id%>">Ver inscritos</a></li>
-                              </ul>
-                          </td>                      
-                        <tr> 
-                      <% end %>
-                  </tbody>
-                </table>
-            </div>
-        </div>
-      </div>
-
-    <% end %>
-    
-    <br>
-    <br>
-   
-
-    <div class="row">
-      <div class="text-center1">
-          <div class="tile1">
-            <h3 class="FontPortada"><i class="fa fa-users"></i>&nbsp;Noticias del fanpage de la web</h3>
-          </div>
-      </div>
-  </div>
-  <br>
-<br>
-  <div class="row">
-      <div class="text-center2">
-          <div class="tile2">
-            <h3 class="FontPortada">Participa en todos los torneos que puedas</h3>
-             <div class="table-responsive">
-              <% if @torneos.empty?   then %>
-                <h4 class="FontPortada">En estos momentos no existen torneos disponibles para inscribirse, organiza el tuyo!!, <a href="torneos/new" >organizar mi torneo</a></h4>
-              <% else %>
-
-              <script type="text/javascript">
+     <script type="text/javascript">
                 function generarContadorPorTorneo(idTorneo,fecha_cierre_inscripcion){
                   $('#countdown_'+idTorneo).countdown({until: fecha_cierre_inscripcion, format: 'dhmS',expiryText: "<font color='red'>Inscripciones Cerradas</font>" }); 
                 }
               </script>
+  <section class="Anuncios">
+           <article >Destacar Torneo</article>
+           <article>Torneo Dota 2 <br/> Confirmar en 10:59</article>
+           <article>Torneo League of Legend<br/> Confirmar en 9:00 </article>
+           <article>Torneo de Poker<br/> Confirmar en 9:00 </article>
+          <article>Torneo de Ajedrez<br/> Confirmar en 5:20 </article>
+    </section>
 
-              <table class="table table-bordered table-hover table-striped tablesorter">
-                <thead>
-                  <tr>
-                    <th class="header">Nombre</th>
-                    <th class="header">Juego</th>
-                    <th class="header">Vacantes</th>
-                    <th class="header">Cierre inscripcion</th>
-                     <th class="header">Acci&oacute;n</th>
-                  </tr>
-                </thead>
-
-                <tbody id="torneosPortada">
-                  <% @torneos.each do |torneo| %>
-                    <tr>
-                      <td><%= torneo.titulo %></td>
-                      <td><%= torneo.juego.nombre %></td>
-                      <td><%= torneo.vacantes %></td>
-                      <td>
-                        <% 
+    <section class="Marketing1">
+          <h1>Zona de Marketing 1</h1>
+    </section>
+    
+    <section class="Torneos">
+      <article>
+         <h1>Torneos</h1>
+           <% @torneos.each do |torneo| %>
+              <article id="ContenidoTorneo">
+                <img  src="<%= image_path("versus.jpg") %>" alt="Encuentro">
+                <article>
+                 <h2><%= torneo.titulo %></h2>
+                  <p><%= torneo.juego.nombre %>, <%= torneo.vacantes %> slots .</br>
+                    <% 
                         un_dias_en_segundos=60 * 60 * 24
                         if torneo.cierre_inscripcion.to_i - Time.new.to_i >= un_dias_en_segundos then %>  
                           <%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo.cierre_inscripcion) %>
@@ -156,20 +34,13 @@
                             generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion.to_i * 1000 %>));
                           </script>
                         <% end %>
-                      </td>
-                      <td>
-                          <ul class="btnInscribir">
-                            <li class="active"><a id="link_inscripcion_torneo_<%=torneo.id%>" href="/inscripciones/new/<%=torneo.id%>">Inscribirme ya!!!</a></li>
-                          </ul>
-                      </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
-              <% end %>
-            </div>
-          </div>
-      </div>
-  </div>
-</div>
+                  </p>
+                </article>
+           </article>
+           <% end %>
+         </article>
 
+
+      </article>
+      <aside>Zona de Marketing 2</aside>
+    </section>

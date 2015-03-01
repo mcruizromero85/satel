@@ -16,77 +16,68 @@
 </head>
 <body>
 
-<header id="header">
-    <nav class="navbar" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">
-      <img alt="Satel logo" class="logo-main" src="<%= image_path("logo.png") %>">
-</a>    </div>
-    <div class="navbar-collapse navbar-ex1-collapse in" style="height: auto;float: left">
+<header>
+  <a href="/">
+    <img class="logo" src="<%= image_path("logo.png") %>" alt="Satel"/>
+  </a>  
+     <nav>
+      <ul><!--Lista de navegación-->
+        <li><a id="link_cabecera_registrar_torneo" href="/torneos/new">Organizar un torneo</a></li>
+        <li><a id="link_mis_torneos" href="/torneos/mis_torneos">Mis torneos</a></li>
+        </ul>
+      </nav>
 
-      <ul class="nav nav-pills navbar-left">
-        <li class="active"><a id="link_cabecera_registrar_torneo" href="/torneos/new" class="enlacesCabecera" >Organizar un Torneo</a></li>
-
-<!--<li class="active"><a href="#">Buscar m&aacute;s torneos</a></li> -->
-       
-<!--Cambio 2, se adiciona a la list el menu el boton del logon-->
-        <li class="active"><a id="link_mis_torneos" href="/torneos/mis_torneos"><font color="red">Mis Torneos Organizados</font></a></li>
-        <li class="active">
-    <% if @current_gamer == nil %>
+<% if @current_gamer == nil %>
         <% if ENV["RAILS_ENV"] == 'test'%>
-          <a id="autenticarse" class="navbar-brand"  style="color: rgb(255, 255, 255); font-size: 13px; padding-top: 0px; padding-bottom: 0px;" href="/auth/developer" > 
-            <img alt="Ingresar con facebook" height="60px" width="290px" src="<%= image_path("facebook-ingreso.png") %>"  />
+          <a id="autenticarse" href="/auth/developer" > 
+             <button class="btnFacebook" type="button">Ingrese con Facebook</button>
           </a>    
         <% else %>
-          <a id="autenticarse" class="navbar-brand"  style="color: rgb(255, 255, 255); font-size: 13px; padding-top: 0px; padding-bottom: 0px;" href="/auth/facebook" > 
-            <img alt="Ingresar con facebook" height="60px" width="290px" src="<%= image_path("facebook-ingreso.png") %>" />
+          <a id="autenticarse" href="/auth/facebook" > 
+             <button class="btnFacebook" type="button">Ingrese con Facebook</button>
           </a> 
         <% end %>
     <% else %>
-     <li class="active">
-      <a id="link_cerrar_sesion" href="/cerrar_sesion" > Cerrar Sesi&oacute;n</a>
-    </li>
-        <a class="navbar-brand"  style="color: #FFFFFF;font-size:13px; background-image: url('<%= image_path("facebook-logeado.png") %>');height=60px; width: 300px; padding-left: 0px;padding-right: 0px; background-size: 325px 60px;"  href="#" >
-          <b Style="margin-left:80px"> Bienvenid@: <%=@current_gamer.nombres%></b>
-          </a> 
-   </li>
+
+   <b class="WelcomeUSer"> Bienvenid@: <%=@current_gamer.nombres%></b> 
+    <a  id="link_cerrar_sesion" href="/cerrar_sesion" > 
+       <button class="btnFacebookC" type="button">Cerrar Sesi&oacute;n</button>
+    </a>
+
+     
+    
     <% end %>
-      </ul>
-    </div>
-  </div>
-</nav>
-  </header>
+
+
+
+
+     
+</header>
+
+
+
 <%= yield %>
-<footer>
-  <div class="social-iconos-gris">
-    <font color="white"><b>Síguenos en</b></font>
-    <br>
-    <a target="_blank" href="https://www.facebook.com/satel">
-      <span class="fa-stack facebook fa-2x">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-    <a target="_blank" href="https://twitter.com/satel">
-      <span class="fa-stack twitter fa-2x">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-    <a target="_blank" href="https://plus.google.com/+satel/posts">
-      <span class="fa-stack google-plus fa-2x">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-    <a target="_blank" href="https://www.youtube.com/user/satel">
-      <span class="fa-stack youtube fa-2x">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-youtube fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </div>  
+ <footer>
+      <p>Siguenos o contactanos a traves de:</p>
+    <section class="Enlaces">
+  
+           <article>
+            <img src="<%= image_path("google-plus.png") %>">
+          </article>
+
+          <article>
+            <img src="<%= image_path("twitter.png") %>">
+          </article>
+
+          <article>
+          <img src="<%= image_path("facebook.png") %>">
+          </article>
+
+         <article>
+        
+          </article>
+</section>
+
 </footer>
 </body>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
