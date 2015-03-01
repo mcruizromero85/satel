@@ -6553,3 +6553,7 @@ background-color: #fbf8e9;
  .celda1{   
     width:60px;
  }  
+
+.ocultar_contenido{
+    display: none;
+}

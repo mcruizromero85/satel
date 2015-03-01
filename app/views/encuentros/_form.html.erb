@@ -21,7 +21,7 @@
 
                     <div class="table-responsive">
                     <div class="field">
-                      <h4 class="text-center1"><%=@encuentro.gamera.nombres%> vs <%=@encuentro.gamerb.nombres%></h4>
+                      <h4 class="text-center1"><%=@encuentro.gamerinscritoa.gamer.nick%> vs <%=@encuentro.gamerinscritob.gamer.nick%></h4>
                     </div>
                     <div class="field">
                       <h4 class="text-center">
@@ -30,9 +30,9 @@
                         <h4 class="text-center">Ganador:</h4>
                       </td>
                    <td>
-                        <select id='encuentro_gamer_ganador_id' name='encuentro_gamer_ganador_id' class='string required form-control input-lg' >
-                          <option value='<%=@encuentro.gamera.id%>'><%=@encuentro.gamera.nombres%></option>
-                          <option value='<%=@encuentro.gamerb.id%>'><%=@encuentro.gamerb.nombres%></option>
+                        <select id='encuentro_inscrito_ganador_id' name='encuentro_inscrito_ganador_id' class='string required form-control input-lg' >
+                          <option value='<%=@encuentro.gamerinscritoa.id%>'><%=@encuentro.gamerinscritoa.gamer.nick%></option>
+                          <option value='<%=@encuentro.gamerinscritob.id%>'><%=@encuentro.gamerinscritob.gamer.nick%></option>
                         </select>
                       </td>
                          </table>

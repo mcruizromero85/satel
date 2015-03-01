@@ -1,7 +1,7 @@
 class Ronda < ActiveRecord::Base
   validates :inicio_fecha, presence: { message: ', las fechas de las rondas no pueden estar vacias' }
   validates :inicio_tiempo, presence: { message: ', las horas de las rondas no pueden estar vacias' }
-
+  belongs_to :ronda_siguiente, class_name: 'Ronda'
   belongs_to :torneo
   has_many :encuentros, -> { order('posicion_en_ronda ASC') }, autosave: false
 
@@ -21,12 +21,22 @@ class Ronda < ActiveRecord::Base
   def armar_encuentros_con_gamers_confirmados(gamers_emparejados)
     contador_gamer = 1
     contador_posicion_en_ronda = 1
-    gamera = nil
-    encuentros.destroy_all
+    gamera = nil    
     gamers_emparejados.each do | gamer |
       if contador_gamer.even?
         encuentro = Encuentro.new(gamerinscritoa: gamera, gamerinscritob: gamer, posicion_en_ronda: contador_posicion_en_ronda)
         encuentros << encuentro
+        
+        if encuentro.gamerinscritoa.gamer.nick['Free win'] != nil
+          encuentro.gamerinscrito_ganador = encuentro.gamerinscritob
+          encuentro.registrar_ganador
+        end
+
+        if encuentro.gamerinscritob.gamer.nick['Free win'] != nil
+          encuentro.gamerinscrito_ganador = encuentro.gamerinscritoa
+          encuentro.registrar_ganador
+        end
+        
         contador_posicion_en_ronda += 1
       else
         gamera = gamer

@@ -19,6 +19,7 @@ FactoryGirl.define do
 
   factory :gamer do
     nombres 'Matt'
+    nick 'Matt'
     apellidos 'Horner'
     correo 'matt@gmail.com'
   end

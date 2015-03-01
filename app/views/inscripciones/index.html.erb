@@ -5,34 +5,41 @@
       <div class="text-center1">
           <div class="tile1">
             <h3>Lista de inscritos</h3>
-            <h3><%=@inscripciones.first.torneo.titulo%></h3>
-            <h4><%=@mensaje_inscripcion%></h4>
-            <h4><a class="B_regresar" href="/">Regresar</a></h4>
-             <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped tablesorter">
-              <thead>
-                <tr>
-                  <th class="header">Orden</th>
-                  <th class="header">Nombre</th>
-                  <th class="header">Fecha Inscripci&oacute;n</th>
-                  <th class="header">Estado</th>
-                </tr>
-              </thead>
-              <tbody id="torneosPortada">
-                 <% posicion=1 %>
-                 <% @inscripciones.each do |inscripcion| %>
+            <% if @inscripciones.size > 0 %>
+              <h3><%=@inscripciones.first.torneo.titulo%></h3>
+              <h4><%=@mensaje_inscripcion%></h4>
+              <h4><a class="B_regresar" href="/">Regresar</a></h4>
+               <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped tablesorter">
+                <thead>
                   <tr>
-                    <td><%= posicion %></td>
-                    <td><%= inscripcion.gamer.nombres %></td>
-                    <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
-                    <td><%= inscripcion.estado %></td>        
+                    <th class="header">Orden</th>
+                    <th class="header">Nombre</th>
+                    <th class="header">Fecha Inscripci&oacute;n</th>
+                    <th class="header">Estado</th>
                   </tr>
-                  <% posicion = posicion + 1 %>
-                <% end %>
-              </tbody>
-            </table>
-           </div>
-
+                </thead>
+                <tbody id="torneosPortada">
+                   <% posicion=1 %>
+                   <% @inscripciones.each do |inscripcion| %>
+                    <tr>
+                      <td><%= posicion %></td>
+                      <td><%= inscripcion.gamer.nombres %></td>
+                      <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
+                        <% if @current_gamer == inscripcion.torneo.gamer %>
+                          <td><a href="/inscripciones/revisar_datos_inscripcion/<%=inscripcion.id%>">Validar</a></td>
+                        <% else %>
+                          <td><%=inscripcion.estado%></td>
+                        <% end %>
+                    </tr>
+                    <% posicion += 1 %>
+                  <% end %>
+                </tbody>
+              </table>
+             </div>
+            <% else %>
+              A&oacute;n no hay inscritos en este torneo
+            <% end %>
           </div>
 
       </div>

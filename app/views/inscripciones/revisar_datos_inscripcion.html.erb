@@ -1,0 +1,70 @@
+   <div class="container">
+    <div class="row">
+        <div >
+            <div class="tile">
+              <h3 class="text-center">Inscribite Ya!!!</h3>
+               <div class="table-responsive">
+                  <div class="container">
+    <div class="row">
+        <div >
+            <div class="tile">
+
+                <span id="mensajeError"></span>
+
+                  <%= form_for(@inscripcion) do |f| %>
+
+                    <% if @inscripcion.errors.any? %>
+                      <div id="error_explanation">
+                        <h2><%= pluralize(@inscripcion.errors.count, "error") %> para inscripci&oacute;n</h2>
+
+                        <ul>
+                        <% @inscripcion.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+                    <div id="tipo_generacion" class="ui-buttonset">
+                      <a href="/inscripciones/validar/<%=@inscripcion.id%>">Validar Inscrito</a>
+                      <a href="/inscripciones/invalidar/<%=@inscripcion.id%>">Invalidar Inscrito</a>
+                    </div>  
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped tablesorter" border="1" id="tabla_datos_inscripcion">
+                      <thead>
+                        <tr>
+                          <th class="header">Dato requerido</th>
+                          <th class="header">Valor</th>                
+                        </tr>
+                      </thead>
+                      <% @inscripcion.datos_inscripcion_registrado.each do | dato_inscripcion_registrado| %>
+                      <% contador = 0 %>
+                      <tr>
+                        <td class="TituloFormulario">
+                          <%=dato_inscripcion_registrado.valor%>
+                        </td>
+                        <td width="80">
+                        	<%=dato_inscripcion_registrado.datos_inscripcion.nombre %>
+                        </td>
+                      </tr>
+                      <% contador += 1 %>
+                      <% end %>
+                    </table> 
+                   </div>
+
+                  <% end %>
+        </div>
+    </div>
+  </div>
+
+<script type="text/javascript">
+  
+  $( "#tipo_generacion" ).buttonset();
+
+</script>  
+              </div>
+
+            </div>
+        </div>
+    </div>
+  </div>

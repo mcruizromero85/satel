@@ -23,58 +23,39 @@
                       <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
                       <center> <%= f.submit "Inscribirme" %></center>
                     </div>  
-                  <% end %>              
-               <div class="table-responsive">
-                  <div class="field">
-                    <h4 class="text-center"><%=@torneo.titulo%></h4>
-                  </div>
-                  <div class="field">
-                    <h4 class="text-center"><%=@torneo.paginaweb%></h4>
-                  </div>
-                  <div class="field">
-                    <h4 class="text-center">Juego: <%=@torneo.juego.nombre%></h4>
-                  </div>
-                  <div class="field">
-                     <h4 class="text-center">Fecha cierre inscripci&oacute;n 
-                    <%=@torneo.cierre_inscripcion.strftime("%d/%m/%Y") %>
-                    <%=@torneo.cierre_inscripcion.strftime("%I:%M %p") %>
-                    </h4>
-                  </div>
-                  <div class="field">
-                    <h4 class="text-center">Minutos previos para confirmar: <%=@torneo.periodo_confirmacion_en_minutos%></h4>
-                  </div> 
 
-                   <div class="field">
-                      <table class="table table-bordered table-hover table-striped tablesorter">
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped tablesorter" border="1" id="tabla_datos_inscripcion">
                       <thead>
                         <tr>
-                          <td class="header">Ronda</td>
-                          <td class="header">Fecha de inicio</td>
-                          <td class="header">Hora de inicio</td>
-                          <td class="header">Modo de ganar</td>
+                          <th class="header">Dato requerido</th>
+                          <th class="header">Valor</th>                
                         </tr>
                       </thead>
-                      <tbody id="rondas">
-                        <% @torneo.rondas.order(:numero).each do |ronda| %>
-                          <tr>
-                            <td><%=ronda.numero%></td>
-                            <td><%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %></td>
-                            <td><%=ronda.inicio_tiempo.strftime("%I:%M %p")  %></td>
-                            <td>Mejor de <%=ronda.modo_ganar%></td></tr>
-                        <% end %>
-                      </tbody>
-                    </table>
+                      <tr>
+                        <td class="TituloFormulario">Nick o nombre de equipo</td>
+                        <td><input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" /></td>
+                      </tr>
+                      <% contador = 0 %>
+                      <% @datos_requeridos.each do | dato_inscripcion | %>                      
+                      <tr>
+                        <td class="TituloFormulario">
+                          <%=dato_inscripcion.nombre%>
+                        </td>
+                        <td width="80">
+                          <input type="text" name="datos_inscripcion_registrado<%= contador.to_s %>[valor]" />
+                          <input type="hidden" name="datos_inscripcion_registrado<%= contador.to_s %>[datos_inscripcion_id]" value="<%=dato_inscripcion.id%>" />
+                        </td>
+                      </tr>
+                      <% contador += 1 %>
+                      <% end %>
+                    </table> 
                    </div>
-                   <div class="field">
-              </div>
-
-            </div>
+                  <% end %>
         </div>
     </div>
   </div>
 
 <script type="text/javascript">
-  
   $( "#tipo_generacion" ).buttonset();
-
 </script>  

@@ -67,14 +67,14 @@ function cargarRegistroDeRondas(vacantes){
 
 
 <table class="table table-bordered table-hover table-striped tablesorter" border="1">
-  <td class="TituloFormulario">Titulo del torneo</td>
+    <tr>
+      <td class="TituloFormulario">Titulo del torneo</td>
       <td width="80">
-<!--Moviendo los inputs titulo y pagina web a una tabla-->
-    <input id="torneo_titulo" class="string required form-control input-DatosForm" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" value="<%=@torneo.titulo%>" />
-    <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Creado" />
-    </td>
-  
-
+  <!--Moviendo los inputs titulo y pagina web a una tabla-->
+      <input id="torneo_titulo" class="string required form-control input-DatosForm" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" value="<%=@torneo.titulo%>" />
+      <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Creado" />
+      </td>
+    </tr>
     <tr>
       <td class="TituloFormulario">Pagina web del torneo</td>
 
@@ -109,8 +109,6 @@ function cargarRegistroDeRondas(vacantes){
       <% if @torneo.vacantes == 8 then %> checked='checked'  <% end %> /><label for="torneo_vacantes2">8</label>
       <input type="radio" id="torneo_vacantes3" name='torneo[vacantes]' value="16" onclick="javascript:cargarRegistroDeRondas(16)"
       <% if @torneo.vacantes == 16 then %> checked='checked'  <% end %> /><label for="torneo_vacantes3">16</label>
-      <input type="radio" id="torneo_vacantes4" name='torneo[vacantes]' value="32" onclick="javascript:cargarRegistroDeRondas(32)"
-      <% if @torneo.vacantes == 32 then %> checked='checked'  <% end %> /><label for="torneo_vacantes4">32</label>
     </td>
 
 
@@ -187,7 +185,7 @@ function cargarRegistroDeRondas(vacantes){
 
    </div>
      <div id="tipo_generacion" class="ui-buttonset">
-      <center> <%= f.submit "Registrar Torneo" %></center>
+      <center> <%= f.submit "Siguiente" %></center>
      </div>   
   </div>
 
