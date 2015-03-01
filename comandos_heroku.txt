@@ -18,3 +18,4 @@ rake db:migrate:redo VERSION=20140323174242
 heroku pg:reset DATABASE
 heroku run rake db:setup
 heroku run rake db:seed
+/home/vagrant/.rvm/gems/ruby-2.0.0-p247/gems/omniauth-1.2.2/lib/omniauth/form.rb 

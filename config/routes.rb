@@ -38,6 +38,7 @@ Satel::Application.routes.draw do
   root 'torneos#index'
   
   get '/auth/:provider/callback' => 'authentications#create'
+  post '/auth/:provider/callback' => 'authentications#create'
   get '/cerrar_sesion' => 'authentications#cerrar_sesion'
   
   

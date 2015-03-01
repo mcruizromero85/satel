@@ -35,7 +35,7 @@
     click_link('autenticarse')
     fill_in('name', with: 'Gissella')
     fill_in('email', with: 'gcarhuamacaquispe@gmail.com')
-    click_button('autenticar')
+    find('button').click
   end
 
   def autenticarse_como_gamer
@@ -43,7 +43,7 @@
     click_link('autenticarse')
     fill_in('name', with: 'Mauro')
     fill_in('email', with: 'mcruizromero85@gmail.com')
-    click_button('autenticar')
+    find('button').click
   end
 
   def inscribirse_como(nombre, correo)
@@ -51,7 +51,7 @@
     click_link('autenticarse')
     fill_in('name', with: nombre)
     fill_in('email', with: correo)
-    click_button('autenticar')
+    find('button').click
     click_link('link_inscripcion_torneo_' + @id_torneo_registrado)
     fill_in('gamer_nick', with: nombre)    
     click_button('Inscribirme')
