@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Inscripcion:</strong>
+  <%= @datos_inscripcion.inscripcion_id %>
+</p>
+
+<p>
+  <strong>Nombre dato:</strong>
+  <%= @datos_inscripcion.nombre_dato %>
+</p>
+
+<p>
+  <strong>Valor dato:</strong>
+  <%= @datos_inscripcion.valor_dato %>
+</p>
+
+<%= link_to 'Edit', edit_datos_inscripcion_path(@datos_inscripcion) %> |
+<%= link_to 'Back', datos_inscripciones_path %>

@@ -17,4 +17,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'inscripcion', 'inscripciones'
+  inflect.irregular 'datos_inscripcion', 'datos_inscripciones'
 end

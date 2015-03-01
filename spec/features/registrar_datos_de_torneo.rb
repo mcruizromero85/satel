@@ -12,7 +12,8 @@ feature 'Registrar datos de torneo' do
   scenario 'Dado que se ha introducido correctamente todos los datos, cuando se publica el torneo debe salir un mensaje exitoso', js: true do
     autenticarse_como_organizador
     registrar
-    click_button('Registrar Torneo')
+    click_button('Siguiente')
+    click_button('Registrar torneo')
     expect(page).to have_content('Torneo registrado correctamente')
   end
 
@@ -21,7 +22,7 @@ feature 'Registrar datos de torneo' do
     registrar
     fill_in('cierre_inscripcion_fecha', with: 'adasdadas')
     fill_in('cierre_inscripcion_hora', with: 'ggggg')
-    click_button('Registrar Torneo')
+    click_button('Siguiente')
     expect(page).to have_content('la fecha de cierre de inscripciones tiene que ser mayor a la actual')
   end
 end

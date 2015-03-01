@@ -1,0 +1,26 @@
+<%= form_for(@datos_inscripcion) do |f| %>
+  <% if @datos_inscripcion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@datos_inscripcion.errors.count, "error") %> prohibited this datos_inscripcion from being saved:</h2>
+
+      <ul>
+      <% @datos_inscripcion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :torneo_id %><br>
+    <%= f.number_field :torneo_id %>
+  </div>
+  <div class="field">
+    <%= f.label :nombre_dato %><br>
+    <%= f.text_field :nombre_dato %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

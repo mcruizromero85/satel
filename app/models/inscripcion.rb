@@ -1,25 +1,66 @@
 class Inscripcion < ActiveRecord::Base
   validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
-  belongs_to :gamer
+  belongs_to :gamer 
   belongs_to :torneo, autosave: false
+  has_many :datos_inscripcion_registrado
+
+  def self.inscritos_confirmados_en_el_torneo_con_free_wins(torneo)
+    array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
+    cantidad_slots_que_deberia_tener = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)    
+
+    free_wins_faltantes = cantidad_slots_que_deberia_tener - array_inscritos_confirmados.count
+    if free_wins_faltantes > 0
+      inscribir_free_wins(torneo, free_wins_faltantes)
+      array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
+    end
+    array_inscritos_confirmados.sample(cantidad_slots_que_deberia_tener)
+  end
+
+  def self.inscribir_free_wins(torneo, free_wins_faltantes)
+    free_wins_faltantes.times do | contador_free_win |
+      gamer = Gamer.find_by(nick: 'Free win ' + (contador_free_win + 1).to_s)
+      inscripcion = Inscripcion.new
+      inscripcion.torneo = torneo
+      inscripcion.gamer = gamer      
+      inscripcion.estado = 'Confirmado'
+      inscripcion.save
+    end
+  end
+
+  def validar
+    self.estado = 'Validado'
+    self.save
+  end
+
+  def invalidar
+    self.estado = 'Invalido'
+    self.destroy
+  end
+
+  def agregar_dato_inscripcion_registrado(datos_inscripcion_registrado)
+    self.datos_inscripcion_registrado << datos_inscripcion_registrado
+  end
 
   def self.total_confirmados_por_torneo(torneo)
-    Gamer.joins(:inscripciones).where('inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado', torneo_id: torneo.id, estado: 'Confirmado').count
+    Gamer.joins(:inscripciones).where('inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado and gamers.nick not like \'%Free win%\'', torneo_id: torneo.id, estado: 'Confirmado').count
   end
 
   def self.inscritos_confirmados_en_el_torneo(torneo)
     Inscripcion.where('torneo_id = :torneo_id and estado = :estado', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
   end
 
-  def save
-    if self.new_record?
-      self.estado = 'No confirmado'
-    elsif torneo.periodo_confirmacion_en_minutos == 0 && self.new_record?
-      self.estado = 'Confirmado'
-    else
-      self.estado = 'Confirmado'
+  def inscribir
+    if self.gamer.nick == nil
+      errors.add(:gamer, ', Debes colocar tu nick')
+      return
     end
-    super
+    self.estado = 'En revisión'
+    self.save    
+  end
+
+  def confirmar
+    self.estado = 'Confirmado'
+    self.save
   end
 
   def mensaje_inscripcion

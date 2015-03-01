@@ -1,0 +1,91 @@
+ <div class="marketing">
+  <div class="container">
+  
+  <div class="row">
+      <div class="text-center1">
+          <div class="tile1">
+            <h3>Datos requeridos para la inscripci&oacute;n del torneo</h3>
+                <br/>
+                <span id="mensajeError"></span>
+                <%= form_for(@torneo) do |f| %>
+                <input type="hidden" name="torneo[estado]" value="Creado" />
+                  <% if @torneo.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>
+
+                      <ul>
+                      <% @torneo.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                      <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+                <br/>
+                <script type='text/javascript'>
+                    $(document).ready(function() {
+     
+                        var datos_inscripcion = $('#datos_inscripcion').sheepIt({
+                            separator: '',
+                            allowRemoveLast: true,
+                            allowRemoveCurrent: true,
+                            allowRemoveAll: true,
+                            allowAdd: true,
+                            allowAddN: true,
+                            maxFormsCount: 10,
+                            minFormsCount: 0,
+                            iniFormsCount: 0
+                        });
+                     
+                    });
+                </script>
+            
+             <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped tablesorter" border="1" id="tabla_datos_inscripcion">
+                <thead>
+                  <tr>
+                    <th class="header">Nombre</th>
+                    <th class="header">Juego</th>                
+                  </tr>
+                </thead>
+                <tr>
+                  <td class="TituloFormulario">
+                    Nick &oacute; Nombre del equipo
+                  </td>
+                  <td width="80">
+                    Puede ser el nick del jugador o nombre del equipo por si el torneo es MOBA
+                  </td>
+                </tr>
+              </table> 
+             </div>
+
+             <!-- sheepIt Form -->
+            <div id="datos_inscripcion">
+             
+              <!-- Form template-->
+              <div id="datos_inscripcion_template">
+                <label for="datos_inscripcion#index#_phone">Dato de inscripci&oacute;n requerido <span id="datos_inscripcion_label"></span></label>
+                <input id="datos_inscripcion#index#_nombre" name="datos_inscripcion#index#[nombre]" type="text"/>
+                  <img class="delete" src="assets/cross.png" width="16" height="16" border="0">
+                </a>
+              </div>
+              <div id="datos_inscripcion_noforms_template">Selecciona agregar, si deseas solicitar a los gamers datos adicionales de inscripci&oacute;n </div>
+              <div id="datos_inscripcion_controls">
+                <div id="datos_inscripcion_add" class="btn form add"><a><span>Agregar dato de inscripci&oacute;n</span></a></div>
+                <div id="datos_inscripcion_remove_last" class="btn form remove"><a><span>Eliminar</span></a></div>
+                <div id="datos_inscripcion_remove_all" class="btn form removeAll"><a><span>Eliminar todos</span></a></div>                
+              </div>
+            </div>
+           <div class="actions">
+            <%= f.submit "Registrar torneo" %>
+           </div>
+          <% end %>
+          </div>
+      </div>
+  </div>
+
+</div>
+</div>
+
+
+
+
