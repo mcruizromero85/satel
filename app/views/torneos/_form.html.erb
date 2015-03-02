@@ -65,27 +65,68 @@ function cargarRegistroDeRondas(vacantes){
     </div>
   <% end %>
 
+<label id="Titulo_Torneos">Titulo del torneo <input type="text" name="txtTtitulo" placeholder="<%=@torneo.titulo%>"size="12"></label>
+
+<label id="PaginaWeb_Torneo">Pàgina web del torneo <input type="text" name="txtPaginaWebTorneo" placeholder="<%=@torneo.paginaweb%>" size="12"></label>
+
+<label id="SeleccionJuegos_Torneos">Seleccione el juego:</label>          
+
+              <% 
+              Juego.all.each do | juego | %>   
+                <input type="radio" class="Radio_juego" id='juego_<%=juego.id%>' name='juego[id]' value="<%=juego.id%>" checked='checked'>
+                <label for="juego_<%=juego.id%>"><%= juego.nombre %></label>
+                              
+              <% end %>
+
+           
+</br>
+</br>
+
+<label id="Vacantes_Torneos">Vacantes: 
+     
+    <input type="radio" class="Radio_vacantes" id='torneo_vacantes1' name='torneo[vacantes]' value="4" onclick="javascript:cargarRegistroDeRondas(4)"
+        <% if @torneo.vacantes == 4 then %> checked='checked'  <% end %> /><label for="torneo_vacantes1">4</label> 
+        <input type="radio" class="Radio_vacantes" id="torneo_vacantes2" name='torneo[vacantes]' value="8" onclick="javascript:cargarRegistroDeRondas(8)" 
+        <% if @torneo.vacantes == 8 then %> checked='checked'  <% end %> /><label for="torneo_vacantes2">8</label>
+        <input type="radio" class="Radio_vacantes" id="torneo_vacantes3" name='torneo[vacantes]' value="16" onclick="javascript:cargarRegistroDeRondas(16)"
+        <% if @torneo.vacantes == 16 then %> checked='checked'  <% end %> /><label for="torneo_vacantes3">16</label>
+</label>
+
+<br>
+<br>
+
+<label id="Fecha_inscripcion">Fecha cierre inscripci&oacute;n:
+
+<br>
+ <% if @torneo.cierre_inscripcion.nil?  %>       
+        <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' class="string required form-control input-lg-InsFEc datepicker" placeholder="Fecha inicio check-in"  value="" />   
+     
+        <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' class="string required form-control input-lg-InsT1" placeholder="Hora Inicio check-in"  value="" />
+ 
+    
+      <% else %>
+         <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' class="string required form-control input-lg-InsFEc datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y") %>" />     
+
+        <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' class="string required form-control input-lg-InsT1" placeholder="Hora Inicio check-in"  value="<%= @torneo.cierre_inscripcion.strftime("%I:%M %p") %>" />   
+            
+      <% end %>  
+ </label>     
+
+<label id="Confirmacion_torneo">Periodo de confirmaci&oacute;n:
+
+ <select id='torneo_periodo_confirmacion_en_minutos' name='torneo[periodo_confirmacion_en_minutos]' class='string required form-control input-lg-Periodo' >
+          <option value='0'>Sin confirmaci&oacute;n</option>          
+          <option <% if @torneo.periodo_confirmacion_en_minutos == 10 then %> selected <% end %>value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
+          <option <% if @torneo.periodo_confirmacion_en_minutos == 20 then %> selected <% end %>value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
+          <option <% if @torneo.periodo_confirmacion_en_minutos == 30 then %> selected <% end %>value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
+        </select>
+</label>
+
+
 
 <table class="table table-bordered table-hover table-striped tablesorter" border="1">
-    <tr>
-      <td class="TituloFormulario">Titulo del torneo</td>
-      <td width="80">
-  <!--Moviendo los inputs titulo y pagina web a una tabla-->
-      <input id="torneo_titulo" class="string required form-control input-DatosForm" placeholder="Título de tu torneo" type="text" name="torneo[titulo]" maxlength="200" value="<%=@torneo.titulo%>" />
-      <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Creado" />
-      </td>
-    </tr>
-    <tr>
-      <td class="TituloFormulario">Pagina web del torneo</td>
 
-      <td width="100">
-
-        <input id="torneo_paginaweb"  class="string required form-control input-DatosForm" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" type="text" name="torneo[paginaweb]" maxlength="200" value="<%=@torneo.paginaweb%>" />
-      </td>
-
-  
-    <tr>
-        <td class="TituloFormulario">Seleccione el juego</td>
+            <td class="TituloFormulario">Seleccione el juego</td>
 
              <td class="CuadroJ" id="cuadro_de_juegos">
 
@@ -114,44 +155,12 @@ function cargarRegistroDeRondas(vacantes){
 
    <tr>
    
-
-<td class="TituloFormulario">Fecha cierre inscripci&oacute;n</td>
-
-<td align="Left" id="cuadro_tiempo_inicio_torneo">
-       <% if @torneo.cierre_inscripcion.nil?  %>       
-        <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' class="string required form-control input-lg-InsFEc datepicker" placeholder="Fecha inicio check-in"  value="" />   
-     
-        <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' class="string required form-control input-lg-InsT1" placeholder="Hora Inicio check-in"  value="" />
- 
-    
-      <% else %>
-         <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' class="string required form-control input-lg-InsFEc datepicker" placeholder="Fecha inicio check-in"  value="<%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y") %>" />     
-
-        <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' class="string required form-control input-lg-InsT1" placeholder="Hora Inicio check-in"  value="<%= @torneo.cierre_inscripcion.strftime("%I:%M %p") %>" />   
-            
-      <% end %>  
-   </td>
-    <tr>
-    
-      <td class="TituloFormulario">Periodo de confirmaci&oacute;n</td>
-      <td id="cuadro_de_confirmacion">
-        
-        <select id='torneo_periodo_confirmacion_en_minutos' name='torneo[periodo_confirmacion_en_minutos]' class='string required form-control input-lg-Periodo' >
-          <option value='0'>Sin confirmaci&oacute;n</option>          
-          <option <% if @torneo.periodo_confirmacion_en_minutos == 10 then %> selected <% end %>value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
-          <option <% if @torneo.periodo_confirmacion_en_minutos == 20 then %> selected <% end %>value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
-          <option <% if @torneo.periodo_confirmacion_en_minutos == 30 then %> selected <% end %>value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
-        </select>
-
-      </td>
-      
-
 </table>
 
-  <h4 class="text-center">Fecha de Rondas y modo de ganar</h4>
+  <h1>Fecha de Rondas y modo de ganar</h4>
 
-   <div class="field">
-      <table class="table table-bordered table-hover tablesorter">
+   <section class="Rondas">
+      <table class="Detalle_rondas" border="1px">
       <thead>
         <tr>
           <th class="header1">Ronda</td>
@@ -181,6 +190,7 @@ function cargarRegistroDeRondas(vacantes){
       </tbody>
     </table>
    </div>
+
    <div class="field">
 
    </div>
