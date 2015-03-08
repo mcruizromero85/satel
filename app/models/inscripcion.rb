@@ -54,7 +54,7 @@ class Inscripcion < ActiveRecord::Base
       errors.add(:gamer, ', Debes colocar tu nick')
       return
     end
-    self.estado = 'En revisión'
+    self.estado = 'Inscrito'
     self.save    
   end
 

@@ -1,14 +1,24 @@
-     <script type="text/javascript">
-                function generarContadorPorTorneo(idTorneo,fecha_cierre_inscripcion){
-                  $('#countdown_'+idTorneo).countdown({until: fecha_cierre_inscripcion, format: 'dhmS',expiryText: "<font color='red'>Inscripciones Cerradas</font>" }); 
-                }
-              </script>
+  <script type="text/javascript">
+    function generarContadorPorTorneo(idTorneo,fecha_cierre_inscripcion){
+      $('#countdown_'+idTorneo).countdown({until: fecha_cierre_inscripcion, format: 'dhmS',expiryText: "<font color='red'>Inscripciones Cerradas</font>" }); 
+      }
+  </script>
   <section class="Anuncios">
-           <article >Destacar Torneo</article>
-           <article>Torneo Dota 2 <br/> Confirmar en 10:59</article>
-           <article>Torneo League of Legend<br/> Confirmar en 9:00 </article>
-           <article>Torneo de Poker<br/> Confirmar en 9:00 </article>
-          <article>Torneo de Ajedrez<br/> Confirmar en 5:20 </article>
+    <% if @torneos_inscritos_y_confirmados != nil and @torneos_inscritos_y_confirmados.size > 0 %>
+      <% @torneos_inscritos_y_confirmados.each do |torneo| %>
+        <article><%=torneo.titulo%><br/>
+          <%= TorneosHelper.formato_cuenta_regresiva(torneo.inicio_fecha_hora_confirmacion) %>
+          <br/>
+          <%=torneo.estado %>
+          <% if torneo.estado == 'Creado' and
+              @torneos_inscritos_y_confirmados.bsearch{|torneo_confirmado| torneo_confirmado == torneo } == nil %>
+            <a id="link_confirmar_torneo_<%=torneo.id%>" href='/inscripciones/confirmar/<%= torneo.id %>'>CONFIRMAR YA!!!!</a>
+          <% else %>
+            <a id="link_confirmar_torneo_<%=torneo.id%>" href='/torneos/iniciar/<%=torneo.id%>'>Confirmado</a>
+          <% end %>
+        </article>
+      <% end %>
+    <% end %>
     </section>
 
     <section class="Marketing1">
@@ -23,17 +33,19 @@
                 <img  src="<%= image_path("versus.jpg") %>" alt="Encuentro">
                 <article>
                  <h2><%= torneo.titulo %></h2>
-                  <p><%= torneo.juego.nombre %>, <%= torneo.vacantes %> slots .</br>
+                  <p><b><%= torneo.juego.nombre %></b>, m&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
+                    Las incripciones cierran en: <b>
                     <% 
                         un_dias_en_segundos=60 * 60 * 24
                         if torneo.cierre_inscripcion.to_i - Time.new.to_i >= un_dias_en_segundos then %>  
-                          <%= TorneosHelper.obtenerFormatoCuentaRegresivaHastaLaFecha(torneo.cierre_inscripcion) %>
+                          <%= TorneosHelper.formato_cuenta_regresiva(torneo.cierre_inscripcion) %>
                         <% else %>
                           <div id='countdown_<%=torneo.id%>'></div>
                           <script type="text/javascript">
                             generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion.to_i * 1000 %>));
                           </script>
                         <% end %>
+                    </b>, inscribete dando click <b><a id="link_inscripcion_torneo_<%=torneo.id%>" href="/inscripciones/new/<%=torneo.id%>">aqu&iacute;</a></b>
                   </p>
                 </article>
            </article>

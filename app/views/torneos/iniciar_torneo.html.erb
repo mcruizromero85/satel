@@ -78,7 +78,7 @@
             <% end %>
             <br/>
             <%= form_for @torneo do |f|   %>
-             <% if @torneo.estado != "Iniciado" %>
+             <% if @torneo.estado != "Iniciado" and @torneo.gamer == current_gamer %>
              <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Iniciado" />
                 <center>
                   <a class = "Lkn_DetalleTorneo" href="/torneos/iniciar/<%=@torneo.id%>">Volver a generar</a>       

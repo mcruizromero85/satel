@@ -14,7 +14,7 @@
                 <thead>
                   <tr>
                     <th class="header">Orden</th>
-                    <th class="header">Nombre</th>
+                    <th class="header">Nick / Nombre Equipo</th>
                     <th class="header">Fecha Inscripci&oacute;n</th>
                     <th class="header">Estado</th>
                   </tr>
@@ -24,7 +24,7 @@
                    <% @inscripciones.each do |inscripcion| %>
                     <tr>
                       <td><%= posicion %></td>
-                      <td><%= inscripcion.gamer.nombres %></td>
+                      <td><%= inscripcion.gamer.nick %></td>
                       <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
                         <% if @current_gamer == inscripcion.torneo.gamer %>
                           <td><a href="/inscripciones/revisar_datos_inscripcion/<%=inscripcion.id%>">Validar</a></td>

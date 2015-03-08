@@ -6,30 +6,31 @@ class TorneosController < ApplicationController
 
   # GET /torneos GET /torneos.json
   def index
+    @torneos_inscritos_y_confirmados = Array.new
     if !current_gamer.nil?
 
       @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)
-      if @torneos_iniciados.size > 0
-        ids_torneos_inscritos_y_confirmados = @torneos_iniciados.pluck(:id)
-      else
-        ids_torneos_inscritos_y_confirmados = [-1]
-      end
+      @torneos_inscritos_y_confirmados = @torneos_iniciados if @torneos_iniciados.size > 0
 
       @torneos_confirmados = Torneo.obtener_torneos_ya_confirmados(current_gamer)
 
       if @torneos_confirmados.size > 0
-        ids_torneos_inscritos_y_confirmados.concat(@torneos_confirmados.pluck(:id))
+        @torneos_inscritos_y_confirmados.concat(@torneos_confirmados)
       end
 
       @torneos_inscritos = Torneo.obtener_torneos_ya_inscrito(current_gamer)
-      ids_torneos_inscritos_y_confirmados.concat(@torneos_inscritos.pluck(:id))
+      @torneos_inscritos_y_confirmados.concat(@torneos_inscritos)
     else
       @torneos_iniciados = []
       @torneos_confirmados = []
       @torneos_inscritos = []
-      ids_torneos_inscritos_y_confirmados = [-1]
     end
-    @torneos = Torneo.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados)
+    if @torneos_inscritos_y_confirmados.size == 0
+      @torneos = Torneo.obtener_torneos_disponibles_para_inscribir
+    else
+      @torneos = Torneo.obtener_torneos_disponibles_para_inscribir(@torneos_inscritos_y_confirmados.map(&:id))
+    end
+    
   end
 
   # GET /torneos/1
@@ -77,7 +78,9 @@ class TorneosController < ApplicationController
 
   def iniciar_torneo
     @torneo = Torneo.find(params[:id_torneo])
-    @torneo.generar_encuentros
+    if current_gamer == @torneo.gamer
+      @torneo.generar_encuentros
+    end
   end
 
   # PATCH/PUT /torneos/1

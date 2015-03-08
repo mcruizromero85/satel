@@ -32,7 +32,7 @@ class Torneo < ActiveRecord::Base
     Torneo.joins(:inscripciones).where('torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado in (:estado_inscrito, :estado_en_revision) ', fecha_actual: Time.new, gamer_id: gamer_logeado.id, estado_inscrito: 'Inscrito', estado_en_revision: "En revisión").order(cierre_inscripcion: :asc)
   end
 
-  def self.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados)
+  def self.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados = [-1] )    
     Torneo.all.order(cierre_inscripcion: :asc).limit(20).where('cierre_inscripcion > :fecha_actual and id not in (:ids_torneos_inscritos_y_confirmados) ', fecha_actual: Time.new, ids_torneos_inscritos_y_confirmados: ids_torneos_inscritos_y_confirmados)
   end
 
