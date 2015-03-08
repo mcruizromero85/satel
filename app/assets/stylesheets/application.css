@@ -224,6 +224,65 @@ text-align: center;
 }
 
 
+.FrmRegistrarTorneo{
+    color: white;
+    width: 60%;
+    margin-top: 2%;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 18%;
+   
+}
+
+.FrmRegistrarTorneo h1{
+    text-align: center;
+    width: 100%;
+ }   
+
+.FrmRegistrarTorneo input[type="text"]{
+    font-size: 15px;
+    box-sizing: border-box;
+    margin: 15px 0 15px 0;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #7ac9b7;
+}  
+
+
+
+.Radio_juego {
+    margin-left: 7%;
+} 
+
+.Radio_vacantes{
+    margin-left: 15%;
+} 
+
+#cierre_inscripcion_fecha{
+    width: 70%;
+}
+
+#cierre_inscripcion_hora
+{
+    width: 29%;
+}
+#torneo_periodo_confirmacion_en_minutos {
+    font-size: 15px;
+    box-sizing: border-box;
+    margin: 15px 0 15px 0;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #7ac9b7;
+}
+
+.Detalle_rondas {
+   
+    width: 100%;
+   
+}
+
 
 
 footer{
@@ -250,6 +309,9 @@ footer p{
     cursor: pointer;
 }
 
+
+
+
 @media screen and (max-width: 900px){
 
 header{
@@ -275,5 +337,4 @@ header{
 
 .Torneos article h1{
     margin: 0;
-}
 }
