@@ -2,9 +2,7 @@ body{
     font-size: 16px;
     margin: 0;
     font-family: Calibri;
-    background-color: #16243A;
-
-
+    background-color: #312B2B;
 }
 
 header{
@@ -189,7 +187,7 @@ margin-top: 10px;
 .Torneos article{
 float: left;
 height: 500px;
-background-color: #ffffe5;
+background-color: #6A6E77;
 margin-left: 5%;
 margin-right: 14px;
 width: 60%;
@@ -217,7 +215,7 @@ text-align: center;
 .Torneos aside{
     color: black;
     float: left;
-    background-color: #ffffe5;
+    background-color: #6A6E77;
     width: 29%;
     height: 500px;
     border-radius: 4px;
@@ -249,6 +247,18 @@ text-align: center;
     border: 1px solid #7ac9b7;
 }  
 
+.FrmRegistrarTorneo input[type="submit"] {
+    background-color: #4180c5;
+    border: 1px solid #7ac9b7;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 15px 0;
+    padding: 15px;
+    width: 100%;
+}
 
 
 .Radio_juego {
@@ -260,12 +270,12 @@ text-align: center;
 } 
 
 #cierre_inscripcion_fecha{
-    width: 70%;
+    width: 63%;
 }
 
 #cierre_inscripcion_hora
 {
-    width: 29%;
+    width: 30%;
 }
 #torneo_periodo_confirmacion_en_minutos {
     font-size: 15px;
@@ -286,7 +296,7 @@ text-align: center;
 
 
 footer{
-    background-color:  #16243A;
+    background-color:  #312B2B;
     height: 200px;
     color: white;
 }

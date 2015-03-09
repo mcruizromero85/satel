@@ -8,10 +8,8 @@ class TorneosController < ApplicationController
   def index
     @torneos_inscritos_y_confirmados = Array.new
     if !current_gamer.nil?
-
       @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)
       @torneos_inscritos_y_confirmados = @torneos_iniciados if @torneos_iniciados.size > 0
-
       @torneos_confirmados = Torneo.obtener_torneos_ya_confirmados(current_gamer)
 
       if @torneos_confirmados.size > 0
@@ -56,10 +54,6 @@ class TorneosController < ApplicationController
     @torneo.fecha_y_hora_inscripcion(params['cierre_inscripcion_fecha'], params['cierre_inscripcion_hora'])
     @torneo.gamer = current_gamer
     @torneo.juego = Juego.new(id: params['juego'].permit(:id)[:id])
-
-    TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes).times do | i |
-      @torneo.agregar_ronda(Ronda.new(params['ronda' + (i + 1).to_s].permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar)))
-    end
 
     respond_to do |format|
       if @torneo.save then

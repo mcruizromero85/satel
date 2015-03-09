@@ -1,91 +1,49 @@
- <div class="marketing">
-  <div class="container">
-  
-  <div class="row">
-      <div class="text-center1">
-          <div class="tile1">
-            <h3>Datos requeridos para la inscripci&oacute;n del torneo</h3>
-                <br/>
-                <span id="mensajeError"></span>
-                <%= form_for(@torneo) do |f| %>
-                <input type="hidden" name="torneo[estado]" value="Creado" />
-                  <% if @torneo.errors.any? %>
-                    <div id="error_explanation">
-                      <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>
+<section class="FrmRegistrarTorneo">
+  <h1>Registra tu torneo</h1>
+  <br/>
+  <span id="mensajeError"></span>
+  <%= form_for @torneo,  html: {class: "frm-registro"} do |f| %>
+    <% if @torneo.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>
 
-                      <ul>
-                      <% @torneo.errors.full_messages.each do |msg| %>
-                        <li><%= msg %></li>
-                      <% end %>
-                      </ul>
-                    </div>
-                  <% end %>
-                <br/>
-                <script type='text/javascript'>
-                    $(document).ready(function() {
-     
-                        var datos_inscripcion = $('#datos_inscripcion').sheepIt({
-                            separator: '',
-                            allowRemoveLast: true,
-                            allowRemoveCurrent: true,
-                            allowRemoveAll: true,
-                            allowAdd: true,
-                            allowAddN: true,
-                            maxFormsCount: 10,
-                            minFormsCount: 0,
-                            iniFormsCount: 0
-                        });
-                     
-                    });
-                </script>
-            
-             <div class="table-responsive">
-              <table class="table table-bordered table-hover table-striped tablesorter" border="1" id="tabla_datos_inscripcion">
-                <thead>
-                  <tr>
-                    <th class="header">Nombre</th>
-                    <th class="header">Juego</th>                
-                  </tr>
-                </thead>
-                <tr>
-                  <td class="TituloFormulario">
-                    Nick &oacute; Nombre del equipo
-                  </td>
-                  <td width="80">
-                    Puede ser el nick del jugador o nombre del equipo por si el torneo es MOBA
-                  </td>
-                </tr>
-              </table> 
-             </div>
-
-             <!-- sheepIt Form -->
-            <div id="datos_inscripcion">
-             
-              <!-- Form template-->
-              <div id="datos_inscripcion_template">
-                <label for="datos_inscripcion#index#_phone">Dato de inscripci&oacute;n requerido <span id="datos_inscripcion_label"></span></label>
-                <input id="datos_inscripcion#index#_nombre" name="datos_inscripcion#index#[nombre]" type="text"/>
-                  <img class="delete" src="assets/cross.png" width="16" height="16" border="0">
-                </a>
-              </div>
-              <div id="datos_inscripcion_noforms_template">Selecciona agregar, si deseas solicitar a los gamers datos adicionales de inscripci&oacute;n </div>
-              <div id="datos_inscripcion_controls">
-                <div id="datos_inscripcion_add" class="btn form add"><a><span>Agregar dato de inscripci&oacute;n</span></a></div>
-                <div id="datos_inscripcion_remove_last" class="btn form remove"><a><span>Eliminar</span></a></div>
-                <div id="datos_inscripcion_remove_all" class="btn form removeAll"><a><span>Eliminar todos</span></a></div>                
-              </div>
-            </div>
-           <div class="actions">
-            <%= f.submit "Registrar torneo" %>
-           </div>
-          <% end %>
-          </div>
+        <ul>
+        <% @torneo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
       </div>
-  </div>
+    <% end %>
 
-</div>
-</div>
-
-
-
+  <table class="Detalle_rondas" border="1px">
+      <thead>
+        <tr>
+          <th class="header1">Ronda</td>
+          <th class="header2">Fecha de inicio</td>
+          <th class="header3">Hora de inicio</td>
+          <th class="header">Modo de ganar</td>
+        </tr>
+      </thead>
+      <tbody id="rondas">
+        <% @torneo.rondas.each do | ronda | %>
+        <tr>
+          <td align="Center"><%=ronda.numero%></td>
+          <td align="Center"><input type='hidden' id='ronda<%=ronda.numero%>_numero' name='ronda<%=ronda.numero%>[numero]' value='<%=ronda.numero%>' /> 
+            <input type='text' id='ronda<%=ronda.numero%>_inicio_fecha' name='ronda<%=ronda.numero%>[inicio_fecha]' class='string required form-control input-lg-inFec datepicker1' placeholder='dd/mm/yyyy' value='<%=ronda.inicio_fecha.strftime("%d/%m/%Y")%>'  /> 
+          </td>
+          <td align="Center"><input type='text' id='ronda<%=ronda.numero%>_inicio_tiempo' name='ronda<%=ronda.numero%>[inicio_tiempo]' class='string required form-control input-lg-inTi' placeholder='hh:mm AM/PM' value='<%=ronda.inicio_tiempo.strftime("%I:%M %p")%>' />
+          </td>
+          <td align="Center">
+            <select id='ronda<%=ronda.numero%>_modo_ganar' name='ronda<%=ronda.numero%>[modo_ganar]' class='string required form-control input-lg' >
+              <option <% if ronda.modo_ganar == 1 then %> selected="true" <% end %> value='1'>Mejor de 1</option>
+              <option <% if ronda.modo_ganar == 3 then %> selected="true" <% end %> value='3'>Mejor de 3</option>
+              <option <% if ronda.modo_ganar == 5 then %>  selected="true" <% end %> value='5'>Mejor de 5</option>
+            </select>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>  
+  </section>
 

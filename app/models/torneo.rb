@@ -1,6 +1,5 @@
 class Torneo < ActiveRecord::Base
   validates :titulo, presence: { message: ', el título es un dato obligatorio' }
-  validates :estado, presence: { message: ', el estado es un dato obligatorio' }
   validates :titulo, length: {
     minimum: 30,
     maximum: 100,
@@ -12,13 +11,27 @@ class Torneo < ActiveRecord::Base
   validate :fecha_registro_entre_rondas
   validate :ronda_numero_uno_mayor_fecha_inscripcion
   validate :cantidad_minima_confirmados
-  validate :rondas_existentes_por_vacantes
   validates :periodo_confirmacion_en_minutos, numericality: true
   belongs_to :gamer
   belongs_to :juego, autosave: false
   has_many :rondas, -> { order('numero ASC') }, autosave: true
   has_many :inscripciones, autosave: true
   has_many :datos_inscripciones, autosave: true
+  before_save :asignar_valores_por_defectos
+
+  def asignar_valores_por_defectos
+    self.estado = 'Creado'
+    cantidad_de_rondas = TorneosHelper.obtener_rondas_por_vacantes(vacantes)
+    cantidad_de_rondas.times do | contador |
+       self.agregar_ronda(Ronda.new(numero: contador + 1, inicio_fecha: self.cierre_inscripcion + contador ))
+    end
+  end
+
+  def rondas_existentes_por_vacantes
+    return unless rondas.size != TorneosHelper.obtener_rondas_por_vacantes(vacantes)
+    errors.add(:rondas, ', todas las rondas deben estar definidas')
+  end
+
 
   def self.obtener_torneos_iniciados(gamer_logeado)
     Torneo.joins(:inscripciones).where('torneos.estado = :estado and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado_inscripcion ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Iniciado').order(cierre_inscripcion: :asc)
@@ -95,11 +108,6 @@ class Torneo < ActiveRecord::Base
         ronda_anterior = ronda
       end
     end
-  end
-
-  def rondas_existentes_por_vacantes
-    return unless rondas.size != TorneosHelper.obtener_rondas_por_vacantes(vacantes)
-    errors.add(:rondas, ', todas las rondas deben estar definidas')
   end
 
   def generar_encuentros
