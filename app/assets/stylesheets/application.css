@@ -38,7 +38,7 @@ nav ul{
 
 nav ul li a{
     color: white;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 nav ul li a:hover{
@@ -325,6 +325,10 @@ footer p{
 
 @media screen and (max-width: 350px){
 
+.Torneos aside{
+    display: none;
+}
+
 header{
     padding-right: 10px;
     padding-left:10px;
@@ -332,13 +336,14 @@ header{
     }
 .logo {
     width: 100px;
-    margin-top: 10px;
+  position: relative;
+  top: 10px;
 }
 
 nav {
   display: inline-block;
   vertical-align: top;
-  width: 65%;
+  width: 48%;
 }
 
 nav ul {
@@ -350,9 +355,9 @@ nav ul {
 nav ul li {
   display: inline-block;
   margin-right: 10px;
-  
-  font-weight: normal;
+  line-height: 45px
 }
+
 
 .Anuncios {
     height: 40px;
@@ -366,9 +371,66 @@ nav ul li {
 
 .btnFacebook {
                 
-                margin-right: 1%;
-            }
+ margin-right: 20%;
+ margin-top: 0;
+ font-size: 14px;
+ line-height: 1.42857143;
+ border: 1px solid transparent;
+ border-radius: 4px;
+ cursor: pointer;
+ padding: 3px 6px;
+ }
 
+ .btnFacebookC {
+  position: relative;
+  padding:0;
+  margin-top: 0px;
+  font-size: 10px;
+  margin-right: 5%;
+ 
+}
+
+.WelcomeUSer {
+  position: relative;
+  padding: 3px 6px;
+  margin-top: 0px;
+  font-size: 10px;
+  margin-right: 14%;
+}
+
+.Torneos article {
+  width: 90%;
+  height: 90%;
+}
+
+#ContenidoTorneo {
+  width: 95%;
+  margin: 5px;
+  height: 80%;
+ }
+
+ #ContenidoTorneo img {
+  height: 50%;
+  width: 98%;
+  margin: 1%;
+}
+
+#ContenidoTorneo article {
+  height: 25%;
+  width: 90%;
+  }
 .Torneos article h1{
     margin: 0;
 }
+
+footer p {
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.Enlaces {
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+
