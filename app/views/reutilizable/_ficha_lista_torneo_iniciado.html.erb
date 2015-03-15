@@ -1,0 +1,11 @@
+<article id="ContenidoTorneo">
+  <img  src="<%= image_path("versus.jpg") %>" alt="Encuentro">
+  <article>
+  <h2><%= torneo.titulo %></h2>
+    <p><b><%= torneo.juego.nombre %></b>, m&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
+    La confirmaci&oacute;n cierra en: <b>
+	<font color="green"><b>
+	<font color='green'><a class='estilo_listo' href='/torneos/iniciar/<%=torneo_inciado.id%>'>Torneo Iniciado!!!</a></font>
+	</b></font>
+  </article>
+</article>

@@ -1,0 +1,17 @@
+<article id="ContenidoTorneo">
+  <img  src="<%= image_path("versus.jpg") %>" alt="Encuentro">
+  <article>
+  <h2><%= torneo.titulo %></h2>
+    <p><b><%= torneo.juego.nombre %></b>, m&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
+    La confirmaci&oacute;n cierra en: <b>
+    <% if TorneosHelper.debe_mostrar_contador_estatico(torneo.cierre_inscripcion) %>
+      <%= TorneosHelper.formato_cuenta_regresiva(torneo.cierre_inscripcion) %>
+    <% else %>
+      <b class="contador" id='countdown_<%=torneo.id%>'></b>
+    <% end %>
+    <font color='green'>Esperando generaci&oacute;n de llaves</font>
+    <script type="text/javascript">
+      generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion.to_i * 1000 %>));
+    </script>
+  </article>
+</article>
