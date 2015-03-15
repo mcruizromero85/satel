@@ -6,7 +6,6 @@
     <% if @torneo.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>
-
         <ul>
         <% @torneo.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -43,7 +42,8 @@
         </tr>
         <% end %>
       </tbody>
-    </table>
-  <% end %>  
+    </table>  
+  <center> <%= f.submit "Registrar Torneo" %></center>
+  <% end %>
   </section>
 

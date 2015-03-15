@@ -59,3 +59,69 @@
 <script type="text/javascript">
   $( "#tipo_generacion" ).buttonset();
 </script>  
+
+=============0
+
+ <h1>Inscribete</h1>
+        <br/>
+<span id="mensajeError"></span>
+<%= form_for @inscripcion,  html: {class: "frm-registro"} do |f| %>
+  <% if @inscripcion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inscripcion.errors.count, "error") %> No permiten registrar la inscripcion:</h2>
+
+      <ul>
+      <% @inscripcion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<label id="torneo_titulo">Titulo del torneo <input type="text" name="torneo[titulo]" placeholder="<%=@torneo.titulo%>"size="12" /></label>
+<label id="torneo_paginaweb">P&aacute;gina web del torneo <input type="text" name="torneo[paginaweb]" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" value="<%=@torneo.paginaweb%>" size="12"/></label>
+
+<label id="cuadro_de_juegos">Seleccione el juego: 
+              <% Juego.all.each do | juego | %>   
+                <input type="radio" class="Radio_juego" id='juego_<%=juego.id%>' name='juego[id]' value="<%=juego.id%>" checked='checked'>
+                <label for="juego_<%=juego.id%>"><%= juego.nombre %></label>
+              <% end %>
+</label> 
+</br>
+</br>
+
+<label id="cuadro_de_vacantes">Vacantes: 
+    <input type="radio" class="Radio_vacantes" id='torneo_vacantes1' name='torneo[vacantes]' value="4" 
+        <% if @torneo.vacantes == 4 then %> checked='checked'  <% end %> /><label for="torneo_vacantes1">4</label> 
+        <input type="radio" class="Radio_vacantes" id="torneo_vacantes2" name='torneo[vacantes]' value="8"  
+        <% if @torneo.vacantes == 8 then %> checked='checked'  <% end %> /><label for="torneo_vacantes2">8</label>
+        <input type="radio" class="Radio_vacantes" id="torneo_vacantes3" name='torneo[vacantes]' value="16" 
+        <% if @torneo.vacantes == 16 then %> checked='checked'  <% end %> /><label for="torneo_vacantes3">16</label>
+</label>
+<br>
+<br>
+<label id="Fecha_inscripcion">Fecha cierre inscripci&oacute;n:
+
+<br>
+ <% if @torneo.cierre_inscripcion.nil?  %>       
+        <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' placeholder="Fecha inicio check-in"  />   
+     
+        <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' placeholder="Hora Inicio check-in"  />
+      <% else %>
+         <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' placeholder="dd/mm/yyyy"  value="<%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y") %>" />     
+        <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' placeholder="HH:mm AM/PM"  value="<%= @torneo.cierre_inscripcion.strftime("%I:%M %p") %>" />  
+ <% end %>  
+ </label>     
+<br>
+<br>
+<label id="Confirmacion_torneo">Periodo de confirmaci&oacute;n:
+
+ <select id='torneo_periodo_confirmacion_en_minutos' name='torneo[periodo_confirmacion_en_minutos]' class='string required form-control input-lg-Periodo' >
+          <option value='0'>Sin confirmaci&oacute;n</option>          
+          <option <% if @torneo.periodo_confirmacion_en_minutos == 10 then %> selected <% end %>value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
+          <option <% if @torneo.periodo_confirmacion_en_minutos == 20 then %> selected <% end %>value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
+          <option <% if @torneo.periodo_confirmacion_en_minutos == 30 then %> selected <% end %>value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
+        </select>
+</label>
+      <center> <%= f.submit "Siguiente" %></center>
+<% end %>

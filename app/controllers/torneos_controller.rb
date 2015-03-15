@@ -40,7 +40,7 @@ class TorneosController < ApplicationController
   # GET /torneos/new
   def new
     @torneo = Torneo.new
-    @torneo.inicializar_valores_por_defecto
+    @torneo.inicializar_valores
   end
 
   # GET /torneos/1/edit
@@ -80,7 +80,13 @@ class TorneosController < ApplicationController
   # PATCH/PUT /torneos/1
   # PATCH/PUT /torneos/1.json
   def update
-    if torneo_params[:estado] != 'Iniciado'
+    @torneo = Torneo.find(params[:id])
+    if @torneo.estado != 'Iniciado'
+      @torneo.estado = 'Creado'
+      @torneo.rondas.destroy_all
+      TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes).times do | i |
+        @torneo.agregar_ronda(Ronda.new(params['ronda' + (i + 1).to_s].permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar)))
+      end
       contador = 0 
       loop do      
         break if params['datos_inscripcion' + contador.to_s] == nil
@@ -90,10 +96,10 @@ class TorneosController < ApplicationController
 
       respond_to do |format|
         if @torneo.save         
-          format.html { redirect_to @torneo, notice: 'Torneo was successfully created.' }
+          format.html { redirect_to action: 'index', notice: 'Torneo was successfully created.' }
           format.json { render action: 'show', status: :created, location: @torneo }
         else
-          format.html { render action: 'new' }
+          format.html { render action: 'datos_inscripcion' }
           format.json { render json: @torneo.errors, status: :unprocessable_entity }
         end
       end

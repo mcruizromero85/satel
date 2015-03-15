@@ -20,10 +20,12 @@ class Torneo < ActiveRecord::Base
   before_save :asignar_valores_por_defectos
 
   def asignar_valores_por_defectos
-    self.estado = 'Creado'
-    cantidad_de_rondas = TorneosHelper.obtener_rondas_por_vacantes(vacantes)
-    cantidad_de_rondas.times do | contador |
-       self.agregar_ronda(Ronda.new(numero: contador + 1, inicio_fecha: self.cierre_inscripcion + contador ))
+    numero_de_rondas_totales = TorneosHelper.obtener_rondas_por_vacantes(vacantes)
+    self.rondas.destroy_all
+    numero_de_rondas_totales.times do | numero |
+      ronda = Ronda.new
+      ronda.inicializar_valores_por_defecto(numero + 1)
+      agregar_ronda(ronda)
     end
   end
 
@@ -57,15 +59,10 @@ class Torneo < ActiveRecord::Base
     rondas << ronda 
   end
 
-  def inicializar_valores_por_defecto
+  def inicializar_valores
+    self.estado = 'Pendiente'
     self.vacantes = 8
     self.cierre_inscripcion = (Time.new + (60 * 60 * 0.5))
-    numero_de_rondas_totales = TorneosHelper.obtener_rondas_por_vacantes(vacantes)
-    numero_de_rondas_totales.times do | numero |
-      ronda = Ronda.new
-      ronda.inicializar_valores_por_defecto(numero + 1)
-      agregar_ronda(ronda)
-    end
   end
 
   def fecha_y_hora_inscripcion(fecha, hora)
