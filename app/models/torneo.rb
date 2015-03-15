@@ -17,7 +17,7 @@ class Torneo < ActiveRecord::Base
   has_many :rondas, -> { order('numero ASC') }, autosave: true
   has_many :inscripciones, autosave: true
   has_many :datos_inscripciones, autosave: true
-  before_save :asignar_valores_por_defectos
+  before_save :asignar_valores_por_defectos, if: "estado == 'Pendiente'"
 
   def asignar_valores_por_defectos
     numero_de_rondas_totales = TorneosHelper.obtener_rondas_por_vacantes(vacantes)
@@ -54,9 +54,10 @@ class Torneo < ActiveRecord::Base
   def agregar_ronda(ronda)
     return unless ronda.valid?
     if rondas.size > 0
-      rondas[rondas.size-1].ronda_siguiente = ronda      
+      rondas[rondas.size-1].ronda_siguiente = ronda
+      rondas[rondas.size-1].save
     end
-    rondas << ronda 
+    rondas << ronda
   end
 
   def inicializar_valores
@@ -108,7 +109,7 @@ class Torneo < ActiveRecord::Base
   end
 
   def generar_encuentros
-    return unless estado != 'Iniciado'
+    return unless self.estado != 'Iniciado'
     self.rondas.each do | ronda |
       ronda.encuentros.destroy_all
     end

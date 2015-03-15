@@ -1,8 +1,3 @@
-  <div class="container">
-    <div class="row">
-        <div >
-            <div class="tile">
-
                 <span id="mensajeError"></span>
 
                   <%= form_for(@encuentro) do |f| %>
@@ -19,35 +14,12 @@
                       </div>
                     <% end %>
 
-                    <div class="table-responsive">
-                    <div class="field">
                       <h4 class="text-center1"><%=@encuentro.gamerinscritoa.gamer.nick%> vs <%=@encuentro.gamerinscritob.gamer.nick%></h4>
-                    </div>
-                    <div class="field">
-                      <h4 class="text-center">
-                        <table class="table table-bordered table-hover table-striped tablesorter" border="1">
-                          <td class="TituloFormulario">
                         <h4 class="text-center">Ganador:</h4>
-                      </td>
-                   <td>
                         <select id='encuentro_inscrito_ganador_id' name='encuentro_inscrito_ganador_id' class='string required form-control input-lg' >
                           <option value='<%=@encuentro.gamerinscritoa.id%>'><%=@encuentro.gamerinscritoa.gamer.nick%></option>
                           <option value='<%=@encuentro.gamerinscritob.id%>'><%=@encuentro.gamerinscritob.gamer.nick%></option>
                         </select>
-                      </td>
-                         </table>
                       </h4>
-                    </div>
-                  </div>
-                    <div id="tipo_generacion" class="ui-buttonset">
                       <center> <%= f.submit "Actualizar" %></center>
-                    </div>  
                   <% end %>
-
-        </div>
-    </div>
-  </div>
-  <script type="text/javascript">  
-    $( "#tipo_generacion" ).buttonset();
-  </script>
-

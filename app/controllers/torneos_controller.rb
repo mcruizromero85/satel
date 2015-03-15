@@ -54,7 +54,7 @@ class TorneosController < ApplicationController
     @torneo.fecha_y_hora_inscripcion(params['cierre_inscripcion_fecha'], params['cierre_inscripcion_hora'])
     @torneo.gamer = current_gamer
     @torneo.juego = Juego.new(id: params['juego'].permit(:id)[:id])
-
+    @torneo.estado = 'Pendiente'
     respond_to do |format|
       if @torneo.save then
         format.html { render action: 'datos_inscripcion'}
@@ -77,42 +77,44 @@ class TorneosController < ApplicationController
     end
   end
 
+  def comenzar
+    @torneo = Torneo.find(params[:id_torneo])
+    @torneo.estado = params['estado']
+    respond_to do |format|
+      if @torneo.save
+        @torneo.generar_encuentros
+        format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }
+      else
+        @torneo.estado = 'Creado'
+        format.html { render action: 'iniciar_torneo', notice: 'Error' }
+      end
+    end
+  end
+
+
   # PATCH/PUT /torneos/1
   # PATCH/PUT /torneos/1.json
   def update
     @torneo = Torneo.find(params[:id])
-    if @torneo.estado != 'Iniciado'
-      @torneo.estado = 'Creado'
-      @torneo.rondas.destroy_all
-      TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes).times do | i |
-        @torneo.agregar_ronda(Ronda.new(params['ronda' + (i + 1).to_s].permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar)))
-      end
-      contador = 0 
-      loop do      
-        break if params['datos_inscripcion' + contador.to_s] == nil
-        @torneo.agregar_dato_inscripcion(DatosInscripcion.new(params['datos_inscripcion' + contador.to_s].permit(:nombre)))
-        contador += 1            
-      end
+    @torneo.estado = 'Creado'
+    @torneo.rondas.destroy_all
+    TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes).times do | i |
+      @torneo.agregar_ronda(Ronda.new(params['ronda' + (i + 1).to_s].permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar)))
+    end
+    contador = 0 
+    loop do      
+      break if params['datos_inscripcion' + contador.to_s] == nil
+      @torneo.agregar_dato_inscripcion(DatosInscripcion.new(params['datos_inscripcion' + contador.to_s].permit(:nombre)))
+      contador += 1            
+    end
 
-      respond_to do |format|
-        if @torneo.save         
-          format.html { redirect_to action: 'index', notice: 'Torneo was successfully created.' }
-          format.json { render action: 'show', status: :created, location: @torneo }
-        else
-          format.html { render action: 'datos_inscripcion' }
-          format.json { render json: @torneo.errors, status: :unprocessable_entity }
-        end
-      end
-    else
-      @torneo.estado = torneo_params[:estado]
-      respond_to do |format|
-        if @torneo.save
-          @torneo.generar_encuentros
-          format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }
-        else
-          @torneo.estado = 'Creado'
-          format.html { render action: 'iniciar_torneo', notice: 'Error' }
-        end
+    respond_to do |format|
+      if @torneo.save         
+        format.html { redirect_to action: 'index', notice: 'Torneo was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @torneo }
+      else
+        format.html { render action: 'datos_inscripcion' }
+        format.json { render json: @torneo.errors, status: :unprocessable_entity }
       end
     end
   end    

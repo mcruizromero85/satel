@@ -1,5 +1,7 @@
 Satel::Application.routes.draw do
 
+  post '/comenzar' => 'torneos#comenzar'
+
   resources :datos_inscripcion_registrados
 
   resources :datos_inscripciones
@@ -34,8 +36,9 @@ Satel::Application.routes.draw do
   resources :rondas
 
   resources :torneos
+
+  post '/comenzar' => 'torneos#comenzar'
   root 'torneos#index'
-  
   get '/auth/:provider/callback' => 'authentications#create'
   post '/auth/:provider/callback' => 'authentications#create'
   get '/cerrar_sesion' => 'authentications#cerrar_sesion'

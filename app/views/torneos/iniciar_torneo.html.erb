@@ -1,7 +1,6 @@
           <script type="text/javascript">
 
             var minimalData = {
-              <% contador=0 %>
               <%   cantidad_inscripciones=@torneo.vacantes %>
               teams : <%=raw TorneosHelper.array_para_llaves(@torneo)%>,
               results: <%=raw TorneosHelper.obtener_array_para_resultado_llaves(@torneo)%>
@@ -41,23 +40,11 @@
           <% end %>
 
           </script> 
-
-<div class="container">
-  <div class="row">
-    
-    <%   if cantidad_inscripciones <= 8 then %>
-      <div class="tile" style="height: 640px;">
-    <%   elsif cantidad_inscripciones <= 16 then %>
-      <div class="tile" style="height: 900px;">
-    <%   elsif cantidad_inscripciones <= 32 then %>
-      <div class="tile" style="height: 1300px;">
-    <%   else %>
-      <div class="tile" style="height: 256px;">
-    <% end %>
+          <section class="FrmRegistrarTorneo">
             <% if @torneo.estado == "Iniciado"  %>  
-              <h3 class="text-center"><u>Torneo en Curso</u></h1>
+              <h1 class="text-center"><u>Torneo en Curso</u></h1>
             <% else%>
-              <h3 class="text-center"><u>Prepara tu torneo antes de iniciar</u></h1>
+              <h1 class="text-center"><u>Prepara tu torneo antes de iniciar</u></h1>
             <% end %>  
             <h3 class="text-center"><%= @torneo.titulo %></h2>
             <h4 class="text-center"><%= @torneo.paginaweb %></h4>
@@ -68,7 +55,6 @@
             <% if @torneo.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>
-
                 <ul>
                 <% @torneo.errors.full_messages.each do |msg| %>
                   <li><%= msg %></li>
@@ -77,25 +63,16 @@
               </div>
             <% end %>
             <br/>
-            <%= form_for @torneo do |f|   %>
+            <%= form_tag({controller: "torneos", action: "comenzar"}, method: "post") %>
              <% if @torneo.estado != "Iniciado" and @torneo.gamer == current_gamer %>
-             <input id="torneo_estado" type="hidden" name="torneo[estado]" value="Iniciado" />
+             <input id="estado" type="hidden" name="estado" value="Iniciado" />
                 <center>
                   <a class = "Lkn_DetalleTorneo" href="/torneos/iniciar/<%=@torneo.id%>">Volver a generar</a>       
                     <br>
                        <br>
-                       
-                      <div id="boton_generar">
-                        <center><%= f.submit "Iniciar Torneo!!!"%></center>
-                      </div>
-                      
+                        <center><input name="commit" type="submit" value="Iniciar Torneo!!!" /></center>
+                        <input name="id_torneo" type="hidden" value="<%=@torneo.id%>" />
                 </center>
             <% end %>
-            <% end %>
-          <div id="llaves" class="table-responsive" ></div>       
-      </div>      
-  </div>  
-</div>  
-  <script type="text/javascript">
-    $( "#boton_generar" ).buttonset();
-  </script>
+          <div id="llaves" class="table-responsive" ></div> 
+</section>

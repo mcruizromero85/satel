@@ -23,7 +23,9 @@
           <td><%= inscripcion.gamer.nick %></td>
           <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
           <td><%= inscripcion.estado %></td>
-          <td><a href="/inscripciones/<%=inscripcion.id%>/eliminar">Eliminar</a></td>
+          <% if inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer  %>
+            <td><a href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a></td>
+          <% end %>
         </tr>
         <% posicion+=1 %>
         <% end %>

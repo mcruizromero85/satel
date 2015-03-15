@@ -11,8 +11,9 @@ class Encuentro < ActiveRecord::Base
     self.save
   end
 
-
   def armar_siguiente_encuentro
+    print "GGGG"
+    print self.ronda.ronda_siguiente
     return unless self.ronda.ronda_siguiente != nil
     encuentro = Encuentro.where('ronda_id = ? and posicion_en_ronda = ?',self.ronda.ronda_siguiente.id, obtener_posicion_en_siguiente_ronda).first
     encuentro = Encuentro.new if encuentro == nil  	

@@ -1,59 +1,34 @@
- <div class="marketing">
-  <div class="container">
-
-  <div class="row">
-      <div class="text-center1">
-          <div class="tile1">
-            <h3>Mis torneos Organizados</h3>
-             <div class="table-responsive">
-              <% if @torneos.empty?   then %>
-                <h4>A&uacute;n no has organizado un torneo, que esperas <a href="/torneos/new" >organizalo!!!</a></h4>
+<section class="FrmRegistrarTorneo">
+  <h1>Mis torneos Organizados</h3>
+  <table class="Detalle_rondas" border="1px">
+    <thead>
+      <tr>
+        <th class="header">Nombre</th>
+        <th class="header">Juego</th>
+        <th class="header">Vacantes</th>
+        <th class="header">Inscritos</th>
+        <th class="header">Cierre inscripcion</th>
+        <th class="header">Acci&oacute;n</th>
+      </tr>
+    </thead>
+      <tbody id="torneosPortada">
+        <% @torneos.each do |torneo| %>
+          <tr>
+            <td><a class="T_torneo" href="/torneos/<%=torneo.id%>"><%= torneo.titulo %><a/></td>
+            <td><%= torneo.juego.nombre %></td>
+            <td><%= torneo.vacantes %></td>                      
+            <td ><a class="N_Inscritos" href="/inscripciones?id_torneo=<%=torneo.id%>" ><%= torneo.inscripciones.count %><a/></td>
+            <td><%= torneo.cierre_inscripcion.strftime("%d/%m/%Y") %> <%= torneo.cierre_inscripcion.strftime("%I:%M %p") %>
+            </td>
+            <td>
+              <% if torneo.estado == "Iniciado"%>
+                <a id="link_seguimiento_torneo_<%=torneo.id%>" href="/torneos/iniciar/<%=torneo.id%>"><font color="green">Seguimiento</font></a>
               <% else %>
-              <table class="table table-bordered table-hover table-striped tablesorter">
-                <thead>
-                  <tr>
-                    <th class="header">Nombre</th>
-                    <th class="header">Juego</th>
-                    <th class="header">Vacantes</th>
-                    <th class="header">Inscritos</th>
-                    <th class="header">Cierre inscripcion</th>
-                     <th class="header">Acci&oacute;n</th>
-                  </tr>
-                </thead>
-
-                <tbody id="torneosPortada">
-                  <% @torneos.each do |torneo| %>
-                    <tr>
-                      <td><a class="T_torneo" href="/torneos/<%=torneo.id%>"><%= torneo.titulo %><a/></td>
-                      <td><%= torneo.juego.nombre %></td>
-                      <td><%= torneo.vacantes %></td>                      
-                      <td ><a class="N_Inscritos" href="/inscripciones?id_torneo=<%=torneo.id%>" ><%= torneo.inscripciones.count %><a/></td>
-                      <td><%= torneo.cierre_inscripcion.strftime("%d/%m/%Y") %> <%= torneo.cierre_inscripcion.strftime("%I:%M %p") %>
-                      </td>
-                      <td>
-                          <ul class="btnInscribir">
-                           
-                              <% if torneo.estado == "Iniciado"%>
-                               <li class="active"><a id="link_seguimiento_torneo_<%=torneo.id%>" href="/torneos/iniciar/<%=torneo.id%>"><font color="green">Seguimiento</font></a></li>
-                              <% else %>
-                                <li class="active"><a id="link_iniciar_torneo_<%=torneo.id%>" href="/torneos/iniciar/<%=torneo.id%>">Iniciar ya!!!</a></li>                                
-                              <% end %>
-                          </ul>
-                      </td>
-                    </tr>
-                  <% end %>
-                </tbody>
-              </table>
+                <a id="link_iniciar_torneo_<%=torneo.id%>" href="/torneos/iniciar/<%=torneo.id%>">Iniciar ya!!!</a> 
               <% end %>
-            </div>
-          </div>
-      </div>
-  </div>
-  <br>
-
-</div>
-
-
-
-
-
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+</section>
