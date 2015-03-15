@@ -1,27 +1,6 @@
 class InscripcionesController < ApplicationController
   before_action :revisa_si_existe_gamer_en_sesion, only: [:new]
 
-  def validar
-    @inscripcion = Inscripcion.find(params[:id]);
-    @inscripcion.validar
-    respond_to do |format|
-      format.html { redirect_to action: 'index', id_torneo: @inscripcion.torneo.id, mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
-    end
-  end
-
-  def invalidar
-    @inscripcion = Inscripcion.find(params[:id]);
-    id_torneo = @inscripcion.torneo.id
-    @inscripcion.invalidar
-    respond_to do |format|
-      format.html { redirect_to action: 'index', id_torneo: id_torneo }
-    end
-  end
-
-  def revisar_datos_inscripcion
-    @inscripcion = Inscripcion.find(params[:id]);
-  end
-
   # GET /inscripciones
   # GET /inscripciones.json
   def index
@@ -50,11 +29,9 @@ class InscripcionesController < ApplicationController
   def create
 
     gamer_params = params.require(:gamer).permit(:nick)
-    if current_gamer.nick != gamer_params[:nick] and current_gamer.nick != ""
-      current_gamer.nick = gamer_params[:nick]
-      current_gamer.save
-    end
-
+    current_gamer.nick = gamer_params[:nick]
+    current_gamer.save
+    
     @inscripcion = Inscripcion.new
     @inscripcion.gamer = current_gamer
     @inscripcion.torneo = Torneo.find(params[:id_torneo])
@@ -89,6 +66,16 @@ class InscripcionesController < ApplicationController
         @torneo = Torneo.find(params[:id_torneo])
         format.html { render action: 'new' }
       end
+    end
+  end
+  # DELETE /gamers/1
+  # DELETE /gamers/1.json
+  def destroy
+    inscripcion = Inscripcion.find(params[:id])
+    inscripcion.destroy
+    respond_to do |format|
+      format.html { redirect_to action: 'index', id_torneo: inscripcion.torneo.id }
+      format.json { head :no_content }
     end
   end
 end

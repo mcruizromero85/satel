@@ -29,8 +29,7 @@ Satel::Application.routes.draw do
   get '/torneos/mis_torneos' => 'torneos#mis_torneos'
   get '/torneos/iniciar/:id_torneo' => 'torneos#iniciar_torneo'
   get '/inscripciones/revisar_datos_inscripcion/:id' => 'inscripciones#revisar_datos_inscripcion'
-  get '/inscripciones/validar/:id' => 'inscripciones#validar'
-  get '/inscripciones/invalidar/:id' => 'inscripciones#invalidar'
+  get '/inscripciones/:id/eliminar' => 'inscripciones#destroy'
 
   resources :rondas
 

@@ -2,6 +2,11 @@ module TorneosHelper
   require 'active_support/core_ext/date'
   require 'uri'
 
+  def self.debe_mostrar_contador_estatico(fecha)
+     un_dias_en_segundos=60 * 60 * 24
+     return (fecha.to_i - Time.new.to_i >= un_dias_en_segundos)
+  end
+
   def self.bracket_segun_cantidad_confirmados(cantidad_gamers_confirmados)
     if cantidad_gamers_confirmados <= 8
       8
