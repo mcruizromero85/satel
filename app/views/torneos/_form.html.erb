@@ -28,12 +28,14 @@
 <label id="torneo_titulo">Titulo del torneo <input type="text" name="torneo[titulo]" placeholder="<%=@torneo.titulo%>"size="12" /></label>
 <label id="torneo_paginaweb">P&aacute;gina web del torneo <input type="text" name="torneo[paginaweb]" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" value="<%=@torneo.paginaweb%>" size="12"/></label>
 
-<label id="cuadro_de_juegos">Seleccione el juego: 
+<label >Seleccione el juego: </label> 
+  <p id="cuadro_de_juegos">
               <% Juego.all.each do | juego | %>   
                 <input type="radio" class="Radio_juego" id='juego_<%=juego.id%>' name='juego[id]' value="<%=juego.id%>" checked='checked'>
                 <label for="juego_<%=juego.id%>"><%= juego.nombre %></label>
               <% end %>
-</label> 
+            </p>
+
 </br>
 </br>
 
