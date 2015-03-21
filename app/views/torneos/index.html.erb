@@ -13,6 +13,22 @@
         <%= render partial: "reutilizable/ficha_lista_torneo_confirmado", collection: @torneos_confirmados, as: :torneo %>
         <%= render partial: "reutilizable/ficha_lista_torneo_inscrito", collection: @torneos_inscritos, as: :torneo %>
         <%= render partial: "reutilizable/ficha_lista_torneo_disponible", collection: @torneos, as: :torneo %>
+        <% if @torneos.size == 0 and @torneos_inscritos_y_confirmados.size == 0 %>
+          <h1>No existe torneos disponibles para inscripci&oacute;n, pero puedes revisar torneos anteriores y el ranking</h1>
+        <% end %>
       </article>
-      <aside>Zona de Marketing 2</aside>
+        
+      <aside>
+        <div id="fb-root"></div>
+        <script>
+          (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&appId=686458234757061&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <div class="fb-comments" data-href="http://satel-staging.herokuapp.com/" data-numposts="5" data-colorscheme="light"></div>
+      </aside>
     </section>
