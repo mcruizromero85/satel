@@ -1,7 +1,5 @@
   def registrar_torneo
-    registrar(30, 30)
-    click_button('Siguiente')
-    click_button('Registrar torneo')    
+    registrar(30, 30)  
     @id_torneo_registrado = find('#id_torneo_registrado').text
     click_link('link_cerrar_sesion')
   end
@@ -22,12 +20,14 @@
     if minutos_confirmacion > 0
       select(minutos_confirmacion, from: 'torneo_periodo_confirmacion_en_minutos')
     end
+    click_button('Siguiente')
     fill_in('ronda1_inicio_fecha', with: primera_ronda.strftime('%d/%m/%Y'))
     fill_in('ronda1_inicio_tiempo', with: primera_ronda.strftime('%I:%M %p'))
     fill_in('ronda2_inicio_fecha', with: segunda_ronda.strftime('%d/%m/%Y'))
     fill_in('ronda2_inicio_tiempo', with: segunda_ronda.strftime('%I:%M %p'))
     fill_in('ronda3_inicio_fecha', with: tercera_ronda.strftime('%d/%m/%Y'))
     fill_in('ronda3_inicio_tiempo', with: tercera_ronda.strftime('%I:%M %p'))
+    click_button('Registrar Torneo')
   end
 
   def autenticarse_como_organizador

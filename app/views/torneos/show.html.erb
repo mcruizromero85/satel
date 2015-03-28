@@ -1,65 +1,60 @@
-  <div class="container">
-    <div class="row">
-        <div >
-            <div class="tile">
-              <h3 class="text-center"><font color="#008000"><b><u>Torneo registrado correctamente</u></b></font></h3>
-              <br/>
-               <div class="table-responsive">
-                  <div class="field">
-                    <h4 class="text-center"><%=@torneo.titulo%></h4>
-                   <div id="id_torneo_registrado"><font color="#FFFFE5"><%=@torneo.id%></font></div>
-                  </div>
-                  <div class="field">
-                    <h4 class="text-center"><%=@torneo.paginaweb%></h4>
-                  </div>
-                  <div class="field">
-                    <h4 class="text-center">Juego: <%=@torneo.juego.nombre%></h4>
-                  </div>
-                  <div class="field">
-                     <h4 class="text-center">Fecha cierre inscripci&oacute;n 
-                    <%=@torneo.cierre_inscripcion.strftime("%d/%m/%Y") %>
-                    <%=@torneo.cierre_inscripcion.strftime("%I:%M %p") %>
-                    </h4>
-                  </div>
-                  <div class="field">
-                    <h4 class="text-center">Minutos previos para confirmar: <%=@torneo.periodo_confirmacion_en_minutos%></h4>
-                  </div>  
-                  <% if @torneo.inscripciones.count > 0 %>
-                  <div class="field">
-                    <h4 class="text-center1"> <a class="B_regresar" href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a></h4>
-                  </div> 
-                  <% end %>
+<section class="FrmRegistrarTorneo">
+  <h1>Detalle del Torneo</h1>
+          <br/>
+  <span id="mensajeError"></span>
+  <%= form_for @torneo,  html: {class: "frm-registro"} do |f| %>
+    <% if @torneo.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar la inscripcion:</h2>
 
-                   <div class="field">
-                      <table class="table table-bordered table-hover table-striped tablesorter">
-                      <thead>
-                        <tr>
-                          <td class="header">Ronda</td>
-                          <td class="header">Fecha de inicio</td>
-                          <td class="header">Hora de inicio</td>
-                          <td class="header">Modo de ganar</td>
-                        </tr>
-                      </thead>
-                      <tbody id="rondas">
-                        <% @torneo.rondas.order(:numero).each do |ronda| %>
-                          <tr>
-                            <td><%=ronda.numero%></td>
-                            <td><%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %></td>
-                            <td><%=ronda.inicio_tiempo.strftime("%I:%M %p")  %></td>
-                            <td>Mejor de <%=ronda.modo_ganar%></td></tr>
-                        <% end %>
-                      </tbody>
-                    </table>
-                   </div>
-                   <div class="field">
-               
-                <script type="text/javascript">                  
-                  $( "#tipo_generacion" ).buttonset();
-                </script>
-
-              </div>
-
-            </div>
-        </div>
-    </div>
-  </div>
+        <ul>
+        <% @torneo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <label id="torneo_id"><b>Id del torneo:</b> <span id="id_torneo_registrado"><%=@torneo.id %></span></label>
+  <br/>
+  <br/>
+  <label id="torneo_titulo"><b>Titulo del torneo:</b> <%=@torneo.titulo%></label>
+  <br/>
+  <br/>
+  <label id="torneo_paginaweb"><b>P&aacute;gina web del torneo:</b> <%=@torneo.paginaweb%></label>
+  </br>
+  </br>
+  <label id="cuadro_de_juegos"><b>Juego:</b> <%=@torneo.juego.nombre%>
+  </br>
+  </br>
+  <label id="cuadro_de_vacantes"><b>Vacantes: </b><%=@torneo.vacantes%></label>
+  <br>
+  <br>
+  <label id="Fecha_inscripcion"><b>Fecha cierre inscripci&oacute;n:</b> <%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %></label>
+  <br>
+  <br>
+  <table class="Detalle_rondas">
+    <thead>
+      <tr>
+        <td class="header">Ronda</td>
+        <td class="header">Fecha de inicio</td>
+        <td class="header">Hora de inicio</td>
+        <td class="header">Modo de ganar</td>
+      </tr>
+    </thead>
+    <tbody id="rondas">
+    <% @torneo.rondas.order(:numero).each do |ronda| %>
+      <tr>
+        <td><%=ronda.numero%></td>
+        <td><%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %></td>
+        <td><%=ronda.inicio_tiempo.strftime("%I:%M %p")  %></td>
+        <td>Mejor de <%=ronda.modo_ganar%></td></tr>
+    <% end %>
+    </tbody>
+  </table>
+  <br/>
+    <center><a href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a></center>
+  <br/>
+    <center><a href="javascript:goBack();">Volver</a></center>
+  <br/>
+  <% end %>
+</section>

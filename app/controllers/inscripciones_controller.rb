@@ -4,7 +4,7 @@ class InscripcionesController < ApplicationController
   # GET /inscripciones
   # GET /inscripciones.json
   def index
-    @inscripciones = Inscripcion.where(torneo_id:  params[:id_torneo]).order(:created_at)
+    @inscripciones = Inscripcion.where(torneo_id:  params[:id_torneo], tipo_inscripcion: nil).order(:created_at)
     @mensaje_inscripcion = params[:mensaje_inscripcion]
   end
 

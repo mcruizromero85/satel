@@ -113,9 +113,14 @@ class Torneo < ActiveRecord::Base
     self.rondas.each do | ronda |
       ronda.encuentros.destroy_all
     end
+    self.limpiar_freewins
     array_inscritos_confirmados = Inscripcion.inscritos_confirmados_en_el_torneo_con_free_wins(self)    
     self.rondas.where(numero: 1).first.armar_encuentros_con_gamers_confirmados(array_inscritos_confirmados)
     self.reload
+  end
+
+  def limpiar_freewins
+    self.inscripciones.where('tipo_inscripcion = :tipo_freewin' , tipo_freewin: 1).destroy_all
   end
 
   def agregar_dato_inscripcion(dato_inscripcion)

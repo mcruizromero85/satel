@@ -62,7 +62,6 @@
                 </ul>
               </div>
             <% end %>
-            <br/>
             <%= form_tag({controller: "torneos", action: "comenzar"}, method: "post") %>
              <% if @torneo.estado != "Iniciado" and @torneo.gamer == current_gamer %>
              <input id="estado" type="hidden" name="estado" value="Iniciado" />

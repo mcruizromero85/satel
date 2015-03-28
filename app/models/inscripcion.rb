@@ -21,20 +21,11 @@ class Inscripcion < ActiveRecord::Base
       gamer = Gamer.find_by(nick: 'Free win ' + (contador_free_win + 1).to_s)
       inscripcion = Inscripcion.new
       inscripcion.torneo = torneo
-      inscripcion.gamer = gamer      
+      inscripcion.gamer = gamer
+      inscripcion.tipo_inscripcion = 1
       inscripcion.estado = 'Confirmado'
       inscripcion.save
     end
-  end
-
-  def validar
-    self.estado = 'Validado'
-    self.save
-  end
-
-  def invalidar
-    self.estado = 'Invalido'
-    self.destroy
   end
 
   def agregar_dato_inscripcion_registrado(datos_inscripcion_registrado)

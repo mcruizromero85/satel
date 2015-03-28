@@ -4,7 +4,8 @@
     <h1>A&uacute;n no se cuenta con inscripciones</h1>
   <% else %>
   <label id="torneo_titulo"><b>Titulo del torneo:</b> <%=@inscripciones[0].torneo.titulo%></label>
-
+  <br/>
+  <br/>
   <table class="Detalle_rondas" border="1px">
       <thead>
         <tr>
@@ -32,6 +33,9 @@
       </tbody>
     </table> 
     <% end %>
+    <br/>
+      <center><a href="javascript:goBack();">Volver</a></center>
+    <br/>
 </section>
 
 

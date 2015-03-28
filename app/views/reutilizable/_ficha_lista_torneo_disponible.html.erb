@@ -2,7 +2,7 @@
                 <img  src="<%= image_path("versus.jpg") %>" alt="Encuentro">
                 <article>
 
-                 <h2><%= torneo.titulo %></h2><br>
+                 <h2><a href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2><br>
                   <p><b><%= torneo.juego.nombre %></b>, m&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
                     Las incripciones cierran en: <b>
                     <% if TorneosHelper.debe_mostrar_contador_estatico(torneo.cierre_inscripcion) then %>  

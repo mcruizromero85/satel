@@ -30,7 +30,6 @@
 <br>
 <br>
 <label id="torneo_titulo"><b>Nick o N&oacute;mbre del clan<b/> <input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" size="15" maxlength="20" /></label>
-<br>
-<br><input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
-      <center> <%= f.submit "Inscribirme" %></center>
+<input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
+<%= f.submit "Inscribirme" %>
 <% end %>

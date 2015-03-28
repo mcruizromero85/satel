@@ -3,10 +3,6 @@
       $('#countdown_'+idTorneo).countdown({until: fecha_limite, format: 'dhmS',expiryText: "<font color='red'><a href='/'>Recarga la p&aacute;gina</a></font>" }); 
       }
   </script>
-  <!-- 
-  <section class="Anuncios">
-  </section>
-  -->
     <section class="Torneos">
       <article>
         <%= render partial: "reutilizable/ficha_lista_torneo_iniciado", collection: @torneos_iniciados, as: :torneo %>
