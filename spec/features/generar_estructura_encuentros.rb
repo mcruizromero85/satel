@@ -3,15 +3,6 @@ require 'util_tests'
 
 feature 'Iniciar Torneo' do
 
-  scenario 'Dado que registre un torneo para 8 vacantes y tengo 1 confirmado, entonces no debería poder iniciar el torneo', js: true do
-    autenticarse_como_organizador
-    registrar_torneo
-    confirmar_gamers 1
-    autenticarse_como_organizador
-    iniciar_torneo
-    expect(page).to have_content('El Torneo debe tener como mínimo 4 gamers confirmados')
-  end
-
   scenario 'Dado que me inscribe a un torneo de 8 vacantes y lo iniciaron con 4 confirmados, entonces debería verlo en la portado como iniciado', js: true do
     autenticarse_como_organizador
     registrar_torneo
@@ -25,6 +16,15 @@ feature 'Iniciar Torneo' do
     expect(page).to have_content('Torneo Iniciado!!!')
     visit '/'
     expect(page).to have_content('Torneo Iniciado!!!')
+  end
+
+  scenario 'Dado que registre un torneo para 8 vacantes y tengo 1 confirmado, entonces no debería poder iniciar el torneo', js: true do
+    autenticarse_como_organizador
+    registrar_torneo
+    confirmar_gamers 1
+    autenticarse_como_organizador
+    iniciar_torneo
+    expect(page).to have_content('El Torneo debe tener como mínimo 4 gamers confirmados')
   end
 
   scenario 'Dado que registre un torneo para 8 vacantes y tengo 4 confirmados, entonces debería poder iniciar el torneo', js: true do

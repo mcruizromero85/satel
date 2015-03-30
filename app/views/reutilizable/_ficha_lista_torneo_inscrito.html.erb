@@ -4,7 +4,7 @@
   <h2><a href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
     <p><b><%= torneo.juego.nombre %></b>, m&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
     <% if  Time.new > torneo.inicio_fecha_hora_confirmacion %>
-      Haz clic <b><a id="link_inscripcion_torneo_<%=torneo.id%>" href="/inscripciones/confirmar/<%=torneo.id%>">aqu&iacute;</a></b>
+      Haz clic <b><a id="link_confirmar_torneo_<%=torneo.id%>" href="/inscripciones/confirmar/<%=torneo.id%>">aqu&iacute;</a></b>
       para confirmar tu participaci&oacute;n, te queda:
       <b class="contador" id='countdown_<%=torneo.id%>'></b>
       <script type="text/javascript">

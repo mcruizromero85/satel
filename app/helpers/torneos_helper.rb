@@ -24,10 +24,9 @@ module TorneosHelper
     array_id_encuentros = Array.new(torneo.rondas.count) {  }
     cantidad_de_encuentros_en_ronda = torneo.rondas.first.encuentros.count 
     contador_rondas = 0
-    torneo.rondas.each do | ronda |      
-      cantidad_de_encuentros_en_ronda /= 2 if ronda.numero != 1      
+    torneo.rondas.each do | ronda |
+      cantidad_de_encuentros_en_ronda /= 2 if ronda.numero != 1
       array_id_encuentros_ronda = Array.new(cantidad_de_encuentros_en_ronda) { [0, 0, "0"] }
-
       ronda.encuentros.each do | encuentro |
         if encuentro.gamerinscrito_ganador == encuentro.gamerinscritoa
           array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1 ] = [1, 0, encuentro.id]

@@ -53,7 +53,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :truncation, {:except => %w[juegos gamers]}
   end
 
   config.before(:each, js: true) do
@@ -65,11 +65,8 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    #DatabaseCleaner.clean
+    DatabaseCleaner.clean
   end
-
-
-
 
   config.order = 'seed 1234'
   config.include FactoryGirl::Syntax::Methods

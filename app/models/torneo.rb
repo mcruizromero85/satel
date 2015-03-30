@@ -1,5 +1,6 @@
 class Torneo < ActiveRecord::Base
   validates :titulo, presence: { message: ', el título es un dato obligatorio' }
+  validates :cierre_inscripcion, presence: { message: ', la fecha de cierre de inscripciones tiene que ser mayor a la actual' }
   validates :titulo, length: {
     minimum: 30,
     maximum: 100,
@@ -86,7 +87,7 @@ class Torneo < ActiveRecord::Base
   end
 
   def fecha_cierre_mayor_que_actual
-    return unless estado == 'Creado'
+    return unless estado == 'Pendiente'
     return unless (cierre_inscripcion.to_i - Time.new.to_i) < 0
     errors.add(:cierre_inscripcion, ', la fecha de cierre de inscripciones tiene que ser mayor a la actual')
   end
@@ -114,7 +115,7 @@ class Torneo < ActiveRecord::Base
       ronda.encuentros.destroy_all
     end
     self.limpiar_freewins
-    array_inscritos_confirmados = Inscripcion.inscritos_confirmados_en_el_torneo_con_free_wins(self)    
+    array_inscritos_confirmados = Inscripcion.inscritos_confirmados_en_el_torneo_con_free_wins(self)
     self.rondas.where(numero: 1).first.armar_encuentros_con_gamers_confirmados(array_inscritos_confirmados)
     self.reload
   end

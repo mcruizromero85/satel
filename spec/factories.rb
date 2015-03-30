@@ -12,7 +12,7 @@ FactoryGirl.define do
     titulo 'TORNEO DE CS 1.6 ONLINE - THE LAST CHANCE'
     paginaweb 'http://www.bloodzone.net/forums/f25/torneo-de-cs-1-6-online-last-chance-108544/'
     vacantes '8'
-    estado 'Creado'
+    estado 'Pendiente'
     cierre_inscripcion Time.new + (60 * 60 * 24 * 2)
     periodo_confirmacion_en_minutos '20'
   end
@@ -26,6 +26,7 @@ FactoryGirl.define do
 
   factory :inscripcion do
     estado 'No Confirmado'
+    tipo_inscripcion 0
     association :gamer, strategy: :build
     torneo
   end

@@ -21,21 +21,6 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.datetime "updated_at"
   end
 
-  create_table "datos_inscripcion_registrados", force: true do |t|
-    t.integer  "datos_inscripcion_id"
-    t.string   "valor"
-    t.integer  "inscripcion_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "datos_inscripciones", force: true do |t|
-    t.integer  "torneo_id"
-    t.string   "nombre"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "encuentros", force: true do |t|
     t.integer  "gamerinscritoa_id"
     t.integer  "gamerinscritob_id"
@@ -90,7 +75,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.string   "titulo"
     t.string   "paginaweb"
     t.integer  "vacantes"
-    t.datetime "cierre_inscripcion"
+    t.datetime "cierre_inscripcion", null: false
     t.integer  "periodo_confirmacion_en_minutos"
     t.string   "tipo_torneo"
     t.string   "tipo_generacion"
@@ -102,8 +87,6 @@ ActiveRecord::Schema.define(version: 20141214025352) do
   end
 
   add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"
-
-  add_foreign_key "datos_inscripciones", "torneos", name: "datos_inscripciones_torneo_id_fk"
 
   add_foreign_key "encuentros", "rondas", name: "encuentros_ronda_id_fk"
 

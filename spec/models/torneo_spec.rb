@@ -32,12 +32,6 @@ describe Torneo do
     expect(torneo.errors[:cierre_inscripcion].size).to eq 1
   end
 
-  it 'Error con el número de rondas, Las rondas deben ser equivalentes al número de vacantes' do
-    torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new - 60)
-    torneo.save
-    expect(torneo.errors[:rondas].size).to eq 1
-  end
-
   it 'Error cuando la fecha de primera ronda es mayor a la de cierre de inscripción' do
     torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new + 10)
     torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 1, inicio_fecha: (Time.new - (60 * 60 * 24 * 2)).strftime('%d/%m/%Y')))

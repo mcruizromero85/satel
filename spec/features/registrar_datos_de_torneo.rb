@@ -12,14 +12,16 @@ feature 'Registrar datos de torneo' do
   scenario 'Dado que se ha introducido correctamente todos los datos, cuando se publica el torneo debe salir un mensaje exitoso', js: true do
     autenticarse_como_organizador
     registrar
-    click_button('Siguiente')
-    click_button('Registrar torneo')
-    expect(page).to have_content('Torneo registrado correctamente')
+    expect(page).to have_content('Detalle del Torneo')
   end
 
   scenario 'Dado que se ha introducido como fecha de cierre de inscripcion formatos invalidos, el sistema debe advertirlo', js: true do
     autenticarse_como_organizador
-    registrar
+    click_link('link_cabecera_registrar_torneo')
+    torneo = FactoryGirl.build(:torneo)
+    fill_in('torneo_titulo', with: torneo.titulo)
+    fill_in('torneo_paginaweb', with: torneo.paginaweb)
+    choose 'juego_1'
     fill_in('cierre_inscripcion_fecha', with: 'adasdadas')
     fill_in('cierre_inscripcion_hora', with: 'ggggg')
     click_button('Siguiente')
