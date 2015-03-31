@@ -9,9 +9,9 @@ AllCops:
   - 'config/**/*'
   - 'script/**/*'
   - 'node_modules/**/*'
-  - ''
+  - 'spec/spec_helper.rb'
 MethodLength:
-  Max: 20
+  Max: 25
 LineLength:
   Max: 270
 HasAndBelongsToMany:

@@ -6,7 +6,7 @@ class TorneosController < ApplicationController
 
   # GET /torneos GET /torneos.json
   def index
-    @torneos_inscritos_y_confirmados = Array.new
+    @torneos_inscritos_y_confirmados = []
     if !current_gamer.nil?
       @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)
       @torneos_inscritos_y_confirmados = @torneos_iniciados if @torneos_iniciados.size > 0
@@ -28,7 +28,6 @@ class TorneosController < ApplicationController
     else
       @torneos = Torneo.obtener_torneos_disponibles_para_inscribir(@torneos_inscritos_y_confirmados.map(&:id))
     end
-    
   end
 
   # GET /torneos/1
@@ -56,8 +55,8 @@ class TorneosController < ApplicationController
     @torneo.juego = Juego.new(id: params['juego'].permit(:id)[:id])
     @torneo.estado = 'Pendiente'
     respond_to do |format|
-      if @torneo.save then
-        format.html { render action: 'datos_inscripcion'}
+      if @torneo.save
+        format.html { render action: 'datos_inscripcion' }
         format.json { render action: 'show', status: :created, location: @torneo }
       else
         format.html { render action: 'new' }
@@ -72,9 +71,7 @@ class TorneosController < ApplicationController
 
   def iniciar_torneo
     @torneo = Torneo.find(params[:id_torneo])
-    if current_gamer == @torneo.gamer
-      @torneo.generar_encuentros
-    end
+    @torneo.generar_encuentros if current_gamer == @torneo.gamer
   end
 
   def comenzar
@@ -91,7 +88,6 @@ class TorneosController < ApplicationController
     end
   end
 
-
   # PATCH/PUT /torneos/1
   # PATCH/PUT /torneos/1.json
   def update
@@ -101,15 +97,15 @@ class TorneosController < ApplicationController
     TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes).times do | i |
       @torneo.agregar_ronda(Ronda.new(params['ronda' + (i + 1).to_s].permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar)))
     end
-    contador = 0 
-    loop do      
-      break if params['datos_inscripcion' + contador.to_s] == nil
+    contador = 0
+    loop do
+      break if params['datos_inscripcion' + contador.to_s].nil?
       @torneo.agregar_dato_inscripcion(DatosInscripcion.new(params['datos_inscripcion' + contador.to_s].permit(:nombre)))
-      contador += 1            
+      contador += 1
     end
 
     respond_to do |format|
-      if @torneo.save         
+      if @torneo.save
         format.html { redirect_to action: 'show', notice: 'Torneo was successfully created.' }
         format.json { render action: 'show', status: :created, location: @torneo }
       else
@@ -117,7 +113,7 @@ class TorneosController < ApplicationController
         format.json { render json: @torneo.errors, status: :unprocessable_entity }
       end
     end
-  end    
+  end
 
   private
 

@@ -17,7 +17,7 @@ class InscripcionesController < ApplicationController
   def new
     @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.new
-    @datos_requeridos = DatosInscripcion.where(torneo_id:  params[:id_torneo]);
+    @datos_requeridos = DatosInscripcion.where(torneo_id:  params[:id_torneo])
   end
 
   # GET /inscripciones/1/edit
@@ -27,29 +27,27 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones
   # POST /inscripciones.json
   def create
-
     gamer_params = params.require(:gamer).permit(:nick)
     current_gamer.nick = gamer_params[:nick]
     current_gamer.save
-    
     @inscripcion = Inscripcion.new
     @inscripcion.gamer = current_gamer
     @inscripcion.torneo = Torneo.find(params[:id_torneo])
-    contador = 0 
-    loop do      
-      break if params['datos_inscripcion_registrado' + contador.to_s] == nil
-      dato_inscripcion_registrado = DatosInscripcionRegistrado.new(params['datos_inscripcion_registrado' + contador.to_s].permit(:valor))      
+    contador = 0
+    loop do
+      break if params['datos_inscripcion_registrado' + contador.to_s].nil?
+      dato_inscripcion_registrado = DatosInscripcionRegistrado.new(params['datos_inscripcion_registrado' + contador.to_s].permit(:valor))
       dato_inscripcion_registrado.datos_inscripcion = DatosInscripcion.find(params['datos_inscripcion_registrado' + contador.to_s].permit(:datos_inscripcion_id)[:datos_inscripcion_id])
       @inscripcion.agregar_dato_inscripcion_registrado(dato_inscripcion_registrado)
-      contador += 1            
-    end 
+      contador += 1
+    end
 
     respond_to do |format|
       if @inscripcion.inscribir
         format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
       else
         @torneo = Torneo.find(params[:id_torneo])
-        @datos_requeridos = DatosInscripcion.where(torneo_id:  params[:id_torneo]);
+        @datos_requeridos = DatosInscripcion.where(torneo_id:  params[:id_torneo])
         format.html { render action: 'new' }
       end
     end

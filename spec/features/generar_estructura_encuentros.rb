@@ -37,8 +37,6 @@ feature 'Iniciar Torneo' do
     expect(page).not_to have_content('Iniciar Torneo!!!')
   end
 
-
-
   def inscribirme_y_confirmar
     click_link('link_inscripcion_torneo_' + @id_torneo_registrado)
     click_button('Inscribirme')

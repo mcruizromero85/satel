@@ -1,5 +1,5 @@
   def registrar_torneo
-    registrar(30, 30)  
+    registrar(30, 30)
     @id_torneo_registrado = find('#id_torneo_registrado').text
     click_link('link_cerrar_sesion')
   end
@@ -53,7 +53,7 @@
     fill_in('email', with: correo)
     find('button').click
     click_link('link_inscripcion_torneo_' + @id_torneo_registrado)
-    fill_in('gamer_nick', with: nombre)    
+    fill_in('gamer_nick', with: nombre)
     click_button('Inscribirme')
     visit '/'
     click_link('link_confirmar_torneo_' + @id_torneo_registrado)
@@ -92,9 +92,9 @@
     end
   end
 
-  def reportar_resultado_encuentro_por_ronda_llave(torneo, posicion_ronda, posicion_encuentro_en_ronda,flag_ganador = "A")
+  def reportar_resultado_encuentro_por_ronda_llave(torneo, posicion_ronda, posicion_encuentro_en_ronda, flag_ganador = 'A')
     encuentro_para_reportar_ganador = torneo.rondas[posicion_ronda - 1].encuentros[posicion_encuentro_en_ronda - 1]
-    if flag_ganador == "A"
+    if flag_ganador == 'A'
       encuentro_para_reportar_ganador.gamerinscrito_ganador = encuentro_para_reportar_ganador.gamerinscritoa
     else
       encuentro_para_reportar_ganador.gamerinscrito_ganador = encuentro_para_reportar_ganador.gamerinscritob
@@ -103,17 +103,16 @@
   end
 
   def torneo_iniciado_con_vacantes_confirmadas(vacantes_confirmadas = 8)
-    vacantes_confirmadas_calculado=TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(vacantes_confirmadas)
+    vacantes_confirmadas_calculado = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(vacantes_confirmadas)
     torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new + 10, vacantes: vacantes_confirmadas_calculado)
     torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 1))
     torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 2))
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 3)) if vacantes_confirmadas > 4 
+    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 3)) if vacantes_confirmadas > 4
     torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 4)) if vacantes_confirmadas > 8
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 5)) if vacantes_confirmadas > 16    
+    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 5)) if vacantes_confirmadas > 16
     torneo.save
     generar_inscripciones_confirmadas(vacantes_confirmadas, torneo)
     torneo.generar_encuentros
     torneo.estado = 'Iniciado'
     torneo.save
-    return torneo
   end

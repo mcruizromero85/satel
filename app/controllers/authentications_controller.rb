@@ -4,8 +4,9 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-    auth = request.env['omniauth.auth']    
-    unless @auth = Authentication.where('uid = ? AND provider = ?', auth['uid'], auth['provider']).first
+    auth = request.env['omniauth.auth']
+    @auth = Authentication.where('uid = ? AND provider = ?', auth['uid'], auth['provider']).first
+    unless @auth
       facebook_gamer = auth['info']
       gamer = Gamer.new(correo: facebook_gamer.email, apellidos: facebook_gamer.last_name)
       if params[:provider] == 'developer'

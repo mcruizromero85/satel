@@ -30,20 +30,6 @@ describe TorneosHelper do
     expect(TorneosHelper.array_para_llaves(torneo)).to eq array_de_solo_4_gamers
   end
 
-  it 'Generar arreglo de llaves con 3 jugadores y 4 vacantes' do
-    torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new + 10)
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 1))
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 2))
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 3))
-    torneo.save
-    generar_inscripciones_confirmadas(3, torneo)
-    torneo.generar_encuentros
-    torneo.estado = 'Iniciado'
-    torneo.save
-    array_de_solo_3_gamers = '[["Matt","Matt"],["Matt","Free win 1"]]'
-    #expect(TorneosHelper.array_para_llaves(torneo)).to eq array_de_solo_3_gamers
-  end
-
   it 'Si tengo 5 gamers confirmados, debo tener un bracket de 8 slots' do
     expect(TorneosHelper.bracket_segun_cantidad_confirmados(5)).to eq 8
   end
@@ -97,7 +83,4 @@ describe TorneosHelper do
     expect(TorneosHelper.formato_cuenta_regresiva(en_59_horas)).to eq '2d'
     expect(TorneosHelper.formato_cuenta_regresiva(en_66_horas)).to eq '3d'
   end
-
-
-
 end
