@@ -17,7 +17,6 @@ class InscripcionesController < ApplicationController
   def new
     @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.new
-    @datos_requeridos = DatosInscripcion.where(torneo_id:  params[:id_torneo])
   end
 
   # GET /inscripciones/1/edit

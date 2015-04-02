@@ -1,12 +1,12 @@
 class Inscripcion < ActiveRecord::Base
   validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
-  belongs_to :gamer 
+  belongs_to :gamer
   belongs_to :torneo, autosave: false
   has_many :datos_inscripcion_registrado
 
   def self.inscritos_confirmados_en_el_torneo_con_free_wins(torneo)
     array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
-    cantidad_slots_que_deberia_tener = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)    
+    cantidad_slots_que_deberia_tener = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)
 
     free_wins_faltantes = cantidad_slots_que_deberia_tener - array_inscritos_confirmados.count
     if free_wins_faltantes > 0
@@ -41,17 +41,17 @@ class Inscripcion < ActiveRecord::Base
   end
 
   def inscribir
-    if self.gamer.nick == nil
+    if gamer.nick.nil?
       errors.add(:gamer, ', Debes colocar tu nick')
       return
     end
     self.estado = 'Inscrito'
-    self.save    
+    save
   end
 
   def confirmar
     self.estado = 'Confirmado'
-    self.save
+    save
   end
 
   def mensaje_inscripcion

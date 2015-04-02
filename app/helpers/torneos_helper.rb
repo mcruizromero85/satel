@@ -3,8 +3,8 @@ module TorneosHelper
   require 'uri'
 
   def self.debe_mostrar_contador_estatico(fecha)
-     un_dias_en_segundos=60 * 60 * 24
-     return (fecha.to_i - Time.new.to_i >= un_dias_en_segundos)
+    un_dias_en_segundos = 60 * 60 * 24
+    (fecha.to_i - Time.new.to_i >= un_dias_en_segundos)
   end
 
   def self.bracket_segun_cantidad_confirmados(cantidad_gamers_confirmados)
@@ -20,16 +20,15 @@ module TorneosHelper
   end
 
   def self.obtener_array_para_resultado_llaves(torneo)
-
-    array_id_encuentros = Array.new(torneo.rondas.count) {  }
-    cantidad_de_encuentros_en_ronda = torneo.rondas.first.encuentros.count 
+    array_id_encuentros = Array.new(torneo.rondas.count) {}
+    cantidad_de_encuentros_en_ronda = torneo.rondas.first.encuentros.count
     contador_rondas = 0
     torneo.rondas.each do | ronda |
       cantidad_de_encuentros_en_ronda /= 2 if ronda.numero != 1
-      array_id_encuentros_ronda = Array.new(cantidad_de_encuentros_en_ronda) { [0, 0, "0"] }
+      array_id_encuentros_ronda = Array.new(cantidad_de_encuentros_en_ronda) { [0, 0, '0'] }
       ronda.encuentros.each do | encuentro |
         if encuentro.gamerinscrito_ganador == encuentro.gamerinscritoa
-          array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1 ] = [1, 0, encuentro.id]
+          array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1] = [1, 0, encuentro.id]
         elsif encuentro.gamerinscrito_ganador == encuentro.gamerinscritob
           array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1] = [0, 1, encuentro.id]
         else
@@ -39,7 +38,7 @@ module TorneosHelper
       array_id_encuentros[contador_rondas] = array_id_encuentros_ronda
       contador_rondas += 1
     end
-    return array_id_encuentros
+    array_id_encuentros
   end
 
   def self.array_para_llaves(torneo)
@@ -125,13 +124,7 @@ module TorneosHelper
     if diferencia_segundos_cierre_inscripcion_y_hoy > 60 && diferencia_dias < 1
       formato_cuenta_regresiva += ' ' if formato_cuenta_regresiva != ''
       diferencia_minutos = diferencia_segundos_cierre_inscripcion_y_hoy * 1.0 / 60
-      diferencia_segundos_cierre_inscripcion_y_hoy -= (diferencia_minutos.floor * 60)
       formato_cuenta_regresiva += diferencia_minutos.floor.to_s + 'm'
-    end
-
-    if diferencia_segundos_cierre_inscripcion_y_hoy > 0 && diferencia_dias < 1
-      formato_cuenta_regresiva += ' ' if formato_cuenta_regresiva != ''
-      formato_cuenta_regresiva += (diferencia_segundos_cierre_inscripcion_y_hoy).to_s + 's'
     end
     formato_cuenta_regresiva
   end

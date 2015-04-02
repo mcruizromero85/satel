@@ -18,25 +18,24 @@ class Ronda < ActiveRecord::Base
     self.modo_ganar = 1
   end
 
-  def armar_encuentros_con_gamers_confirmados(gamers_emparejados)
+  def armar_encuentros_con_confirmados(gamers)
     contador_gamer = 1
     contador_posicion_en_ronda = 1
-    gamera = nil    
-    gamers_emparejados.each do | gamer |
+    gamera = nil
+    gamers.each do | gamer |
       if contador_gamer.even?
         encuentro = Encuentro.new(gamerinscritoa: gamera, gamerinscritob: gamer, posicion_en_ronda: contador_posicion_en_ronda)
         encuentros << encuentro
-        
-        if encuentro.gamerinscritoa.gamer.nick['Free win'] != nil
+
+        unless encuentro.gamerinscritoa.gamer.nick['Free win'].nil?
           encuentro.gamerinscrito_ganador = encuentro.gamerinscritob
           encuentro.registrar_ganador
         end
 
-        if encuentro.gamerinscritob.gamer.nick['Free win'] != nil
+        unless encuentro.gamerinscritob.gamer.nick['Free win'].nil?
           encuentro.gamerinscrito_ganador = encuentro.gamerinscritoa
           encuentro.registrar_ganador
         end
-        
         contador_posicion_en_ronda += 1
       else
         gamera = gamer
@@ -45,10 +44,7 @@ class Ronda < ActiveRecord::Base
     end
 
     return unless contador_gamer.even?
-    encuentro = Encuentro.new
-    encuentro.gamerinscritoa = gamera
-    encuentro.posicion_en_ronda = contador_posicion_en_ronda
+    encuentro = Encuentro.new(gamerinscritoa: gamera, posicion_en_ronda: contador_posicion_en_ronda)
     encuentros << encuentro
-    contador_posicion_en_ronda += 1
   end
 end

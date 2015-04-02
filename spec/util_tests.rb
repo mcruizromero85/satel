@@ -115,4 +115,5 @@
     torneo.generar_encuentros
     torneo.estado = 'Iniciado'
     torneo.save
+    torneo
   end

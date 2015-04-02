@@ -64,16 +64,12 @@ describe TorneosHelper do
     expect(TorneosHelper.formato_cuenta_regresiva(en_840_horas)).to eq '35d'
   end
 
-  it 'Cierre de inscripciones menores a 2 días con horas y segundos' do
+  it 'Cierre de inscripciones menores a 2 días con horas y minutos' do
     fecha_actual = Time.new
     en_35_horas = fecha_actual + (60 * 60 * 35)
     en_27_horas = fecha_actual + (60 * 60 * 27)
-    en_12335_sec = fecha_actual + 11_375
-    en_14499_sec = fecha_actual + 14_499
     expect(TorneosHelper.formato_cuenta_regresiva(en_35_horas)).to eq '1d 11h'
     expect(TorneosHelper.formato_cuenta_regresiva(en_27_horas)).to eq '1d 3h'
-    expect(TorneosHelper.formato_cuenta_regresiva(en_12335_sec)).to eq '3h 9m 35s'
-    expect(TorneosHelper.formato_cuenta_regresiva(en_14499_sec)).to eq '4h 1m 39s'
   end
 
   it 'Redondeado al mayor para cierre de inscripciones mayores a 2 días' do

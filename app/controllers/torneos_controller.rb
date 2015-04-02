@@ -39,7 +39,9 @@ class TorneosController < ApplicationController
   # GET /torneos/new
   def new
     @torneo = Torneo.new
-    @torneo.inicializar_valores
+    @torneo.estado = 'Pendiente'
+    @torneo.vacantes = 8
+    @torneo.cierre_inscripcion = (Time.new + (60 * 60 * 0.5))
   end
 
   # GET /torneos/1/edit
@@ -57,10 +59,8 @@ class TorneosController < ApplicationController
     respond_to do |format|
       if @torneo.save
         format.html { render action: 'datos_inscripcion' }
-        format.json { render action: 'show', status: :created, location: @torneo }
       else
         format.html { render action: 'new' }
-        format.json { render json: @torneo.errors, status: :unprocessable_entity }
       end
     end
   end

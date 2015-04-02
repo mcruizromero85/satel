@@ -7,7 +7,7 @@ class Torneo < ActiveRecord::Base
     too_short: ', el título debe estar entre 30 y 100 caracteres',
     too_long: ', el título debe estar entre 30 y 100 caracteres'
   }
-  validates :paginaweb, format: { with: URI.regexp(%w(http https)), message: 'only allows letters' }
+  validates :paginaweb, format: { with: URI.regexp(%w(http https)), message: 'Formato incorrecto, recuerde incluir http / https' }
   validate :fecha_cierre_mayor_que_actual
   validate :fecha_registro_entre_rondas
   validate :ronda_numero_uno_mayor_fecha_inscripcion
@@ -22,7 +22,7 @@ class Torneo < ActiveRecord::Base
 
   def asignar_valores_por_defectos
     numero_de_rondas_totales = TorneosHelper.obtener_rondas_por_vacantes(vacantes)
-    self.rondas.destroy_all
+    rondas.destroy_all
     numero_de_rondas_totales.times do | numero |
       ronda = Ronda.new
       ronda.inicializar_valores_por_defecto(numero + 1)
@@ -35,7 +35,6 @@ class Torneo < ActiveRecord::Base
     errors.add(:rondas, ', todas las rondas deben estar definidas')
   end
 
-
   def self.obtener_torneos_iniciados(gamer_logeado)
     Torneo.joins(:inscripciones).where('torneos.estado = :estado and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado_inscripcion ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Iniciado').order(cierre_inscripcion: :asc)
   end
@@ -44,27 +43,21 @@ class Torneo < ActiveRecord::Base
     Torneo.joins(:inscripciones).where('torneos.estado = :estado and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado_inscripcion ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Creado').order(cierre_inscripcion: :asc)
   end
 
-  def self.obtener_torneos_ya_inscrito(gamer_logeado)
-    Torneo.joins(:inscripciones).where('torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado in (:estado_inscrito, :estado_en_revision) ', fecha_actual: Time.new, gamer_id: gamer_logeado.id, estado_inscrito: 'Inscrito', estado_en_revision: "En revisión").order(cierre_inscripcion: :asc)
+  def self.obtener_torneos_ya_inscrito(gamer)
+    Torneo.joins(:inscripciones).where('torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado in(:estado, :estado)', fecha_actual: Time.new, gamer_id: gamer.id, estado: 'Inscrito').order(cierre_inscripcion: :asc)
   end
 
-  def self.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados = [-1] )    
-    Torneo.all.order(cierre_inscripcion: :asc).limit(20).where('cierre_inscripcion > :fecha_actual and id not in (:ids_torneos_inscritos_y_confirmados) ', fecha_actual: Time.new, ids_torneos_inscritos_y_confirmados: ids_torneos_inscritos_y_confirmados)
+  def self.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados = [-1])
+    Torneo.all.order(cierre_inscripcion: :asc).limit(20).where('cierre_inscripcion > :fecha_actual and id not in (:ids_torneos_inscritos_y_confirmados)', fecha_actual: Time.new, ids_torneos_inscritos_y_confirmados: ids_torneos_inscritos_y_confirmados)
   end
 
   def agregar_ronda(ronda)
     return unless ronda.valid?
     if rondas.size > 0
-      rondas[rondas.size-1].ronda_siguiente = ronda
-      rondas[rondas.size-1].save
+      rondas[rondas.size - 1].ronda_siguiente = ronda
+      rondas[rondas.size - 1].save
     end
     rondas << ronda
-  end
-
-  def inicializar_valores
-    self.estado = 'Pendiente'
-    self.vacantes = 8
-    self.cierre_inscripcion = (Time.new + (60 * 60 * 0.5))
   end
 
   def fecha_y_hora_inscripcion(fecha, hora)
@@ -110,21 +103,13 @@ class Torneo < ActiveRecord::Base
   end
 
   def generar_encuentros
-    return unless self.estado != 'Iniciado'
-    self.rondas.each do | ronda |
+    return unless estado != 'Iniciado'
+    rondas.each do | ronda |
       ronda.encuentros.destroy_all
     end
-    self.limpiar_freewins
+    inscripciones.where('tipo_inscripcion = :tipo_freewin', tipo_freewin: 1).destroy_all
     array_inscritos_confirmados = Inscripcion.inscritos_confirmados_en_el_torneo_con_free_wins(self)
-    self.rondas.where(numero: 1).first.armar_encuentros_con_gamers_confirmados(array_inscritos_confirmados)
-    self.reload
-  end
-
-  def limpiar_freewins
-    self.inscripciones.where('tipo_inscripcion = :tipo_freewin' , tipo_freewin: 1).destroy_all
-  end
-
-  def agregar_dato_inscripcion(dato_inscripcion)
-    self.datos_inscripciones << dato_inscripcion
+    rondas.where(numero: 1).first.armar_encuentros_con_confirmados(array_inscritos_confirmados)
+    reload
   end
 end

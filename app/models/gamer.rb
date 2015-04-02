@@ -4,10 +4,10 @@ class Gamer < ActiveRecord::Base
   has_many :authentications, autosave: true
 
   def etiqueta_para_bracket
-  	if self.nick == nil or self.nick == ''
-  		return self.nombres
-  	else
-  		return self.nick
-  	end	
+    if nick.nil? || nick == ''
+      return nombres
+    else
+      return nick
+    end
   end
 end
