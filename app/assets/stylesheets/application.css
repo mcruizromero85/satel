@@ -221,6 +221,7 @@ border-radius: 4px;
     width: 29%;
     height: 500px;
     border-radius: 4px;
+    overflow: auto;
 }
 
 .fb-comments {
