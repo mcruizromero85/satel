@@ -9,7 +9,7 @@
   <label ><b><%=@mensaje_inscripcion%></b></label>
   <br/>
   <br/>
-  <table class="Detalle_rondas" border="1px">
+  <table class="Detalle_rondas" >
       <thead>
         <tr>
           <th class="header">Orden</th>
@@ -28,7 +28,7 @@
           <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
           <td><%= inscripcion.estado %></td>
           <% if inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer  %>
-            <td><a href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a></td>
+            <td><a class="Enlace_torneosDisponibles" href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a></td>
           <% end %>
         </tr>
         <% posicion+=1 %>
