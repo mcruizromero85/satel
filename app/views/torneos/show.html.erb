@@ -32,7 +32,7 @@
   <label id="Fecha_inscripcion"><b>Fecha cierre inscripci&oacute;n:</b> <%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %></label>
   <br>
   <br>
-  <table class="Detalle_rondas">
+  <table class="Detalle_rondas" >
     <thead>
       <tr>
         <td class="header">Ronda</td>
@@ -47,14 +47,18 @@
         <td><%=ronda.numero%></td>
         <td><%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %></td>
         <td><%=ronda.inicio_tiempo.strftime("%I:%M %p")  %></td>
-        <td>Mejor de <%=ronda.modo_ganar%></td></tr>
+        <td>Mejor de <%=ronda.modo_ganar%></td>
+      </tr>
     <% end %>
     </tbody>
   </table>
   <br/>
-    <center><a href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a></center>
-  <br/>
-    <center><a href="javascript:goBack();">Volver</a></center>
-  <br/>
+    <center>
+          <a class="Enlace_detalle_registrarTorneo" href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a>
+    <br/>
+    <br/>
+          <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a>
+    </center>
+    <br/>
   <% end %>
 </section>

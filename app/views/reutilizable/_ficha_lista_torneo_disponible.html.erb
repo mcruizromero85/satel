@@ -1,19 +1,19 @@
 <article id="ContenidoTorneo">
-                <img  src="<%= image_path("versus.jpg") %>" alt="Encuentro">
-                <article>
-
-                 <h2><a href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2><br>
-                  <p><b><%= torneo.juego.nombre %></b>, m&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
-                    Las incripciones cierran en: <b>
-                    <% if TorneosHelper.debe_mostrar_contador_estatico(torneo.cierre_inscripcion) then %>  
-                      <%= TorneosHelper.formato_cuenta_regresiva(torneo.cierre_inscripcion) %>
-                    <% else %>
-                      <b class="contador" id='countdown_<%=torneo.id%>'></b>
-                    <% end %>
-                    </b>, inscribete dando click <b><a id="link_inscripcion_torneo_<%=torneo.id%>" href="/inscripciones/new/<%=torneo.id%>">aqu&iacute;</a></b>
-                  </p>
-                  <script type="text/javascript">
-                    generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion.to_i * 1000 %>));
-                  </script>
-                </article>
+  <img  src="<%= image_path("versus.jpg") %>" alt="Encuentro">
+    <article>
+      <h2 ><a  href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
+      <br>
+      <p><b><%= torneo.juego.nombre %></b>, m&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
+      Las incripciones cierran en: <b>
+      <% if TorneosHelper.debe_mostrar_contador_estatico(torneo.cierre_inscripcion) then %>  
+                        <%= TorneosHelper.formato_cuenta_regresiva(torneo.cierre_inscripcion) %>
+                      <% else %>
+                        <b class="contador" id='countdown_<%=torneo.id%>'></b>
+                      <% end %>
+                      </b>, inscribete dando click <b><a class="Enlace_torneosDisponibles" id="link_inscripcion_torneo_<%=torneo.id%>" href="/inscripciones/new/<%=torneo.id%>">aqu&iacute;</a></b>
+                    </p>
+                    <script type="text/javascript">
+                      generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion.to_i * 1000 %>));
+                    </script>
+    </article>
 </article>
