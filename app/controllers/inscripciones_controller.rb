@@ -5,6 +5,7 @@ class InscripcionesController < ApplicationController
   # GET /inscripciones.json
   def index
     @inscripciones = Inscripcion.where(torneo_id:  params[:id_torneo], tipo_inscripcion: nil).order(:created_at)
+    @torneo = Torneo.find(params[:id_torneo])
     @mensaje_inscripcion = params[:mensaje_inscripcion]
   end
 
@@ -38,8 +39,7 @@ class InscripcionesController < ApplicationController
         format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
       else
         @torneo = Torneo.find(params[:id_torneo])
-        @datos_requeridos = DatosInscripcion.where(torneo_id:  params[:id_torneo])
-        format.html { render action: 'new' }
+        format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }        
       end
     end
   end

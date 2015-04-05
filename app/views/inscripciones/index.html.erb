@@ -3,11 +3,9 @@
   <% if @inscripciones.size == 0 %>
     <h1>A&uacute;n no se cuenta con inscripciones</h1>
   <% else %>
-  <label id="torneo_titulo"><b>Titulo del torneo:</b> <%=@inscripciones[0].torneo.titulo%></label>
+  <center><b><u><%=@mensaje_inscripcion%></u></b></center>
   <br/>
-  <br/>
-  <label ><b><%=@mensaje_inscripcion%></b></label>
-  <br/>
+  <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
   <br/>
   <table class="Detalle_rondas" >
       <thead>
@@ -27,9 +25,11 @@
           <td><%= inscripcion.gamer.nick %></td>
           <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
           <td><%= inscripcion.estado %></td>
-          <% if inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer  %>
-            <td><a class="Enlace_torneosDisponibles" href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a></td>
-          <% end %>
+          <td>
+            <% if inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer  %>
+              <a class="Enlace_torneosDisponibles" href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a>
+            <% end %>
+          </td>
         </tr>
         <% posicion+=1 %>
         <% end %>
@@ -37,9 +37,12 @@
     </table> 
     <% end %>
     <br/>
-      <center><a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>
+      <center>
+        <% if @mensaje_inscripcion.nil? %>
+          <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>
+        <% else %>
+          <a class="Enlace_detalle_registrarTorneo" href="/">Volver</a>
+        <% end %>
+      </center>
     <br/>
 </section>
-
-
-

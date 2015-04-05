@@ -56,12 +56,12 @@ class Inscripcion < ActiveRecord::Base
 
   def mensaje_inscripcion
     if self.new_record? == false && estado == 'Confirmado'
-      mensaje = 'Tu confirmación se realizó con exito'
+      mensaje = 'Tu confirmación se realizó con éxito'
       if torneo.inscripciones.count > torneo.vacantes
         mensaje = mensaje + "\n Tu posición es " + torneo.inscripciones.count.to_s + ' de ' + torneo.vacantes.to_s + ' vacantes, estás en cola'
       end
     else
-      mensaje = 'Tu Inscripción se realizó con exito'
+      mensaje = 'Tu Inscripción se realizó con éxito'
     end
     mensaje
   end

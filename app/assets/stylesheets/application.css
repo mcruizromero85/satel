@@ -10,7 +10,7 @@ background-color: black;
 height: 80px;
 padding-right: 64px;
 padding-left: 64px;
-width:100%;
+
 }
 
 .logo{
@@ -25,9 +25,13 @@ nav{
 
 nav ul li{
     display: inline-block;
-    margin-right: 32px; 
+    padding-right: 32px;
     line-height: 80px;
     font-weight: normal;
+}
+
+nav ul li:hover{
+  background-color:#2B2B2B;
 }
 
 nav ul{
@@ -38,11 +42,12 @@ nav ul{
 
 nav ul li a{
     color: white;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 nav ul li a:hover{
-    color: #d1d1d1;
+    color: white;
+    text-decoration: underline;
 }
 
 
@@ -59,7 +64,7 @@ nav ul li a:hover{
     border: 1px solid transparent;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 10%;
+    
 }
 
 .btnFacebookC {
@@ -91,9 +96,6 @@ nav ul li a:hover{
     vertical-align: middle;
     border: 1px solid transparent;
     border-radius: 4px;
-     margin-right: 10%;
-    
-
     }
 
 .Anuncios{
@@ -211,6 +213,11 @@ margin-top: 10px;
 
 .Torneos article h1{
     text-align: center;
+    
+}
+#Lista_vacia{
+  margin-top: 25%;
+  color: white;
 }
 
 .Torneos article img{
@@ -263,6 +270,8 @@ margin-top: 10px;
     border: 1px solid #7ac9b7;
 }  
 
+
+
 .FrmRegistrarTorneo input[type="submit"] {
     background-color: #4180c5;
     border: 1px solid #7ac9b7;
@@ -303,6 +312,9 @@ margin-top: 10px;
 .Radio_vacantes{
     margin-left: 15%;
 } 
+#Registro_Rondas{
+  width: 95%;
+}
 
 #cierre_inscripcion_fecha{
     width: 63%;
@@ -310,7 +322,7 @@ margin-top: 10px;
 
 #cierre_inscripcion_hora
 {
-    width: 30%;
+    width: 36%;
 }
 #torneo_periodo_confirmacion_en_minutos {
     font-size: 15px;
@@ -328,7 +340,7 @@ table {
    border-radius: 3px;
    border-collapse: separate; 
    text-align: left; 
-   width: 110%; 
+   width: 100%; 
 }
 
 table thead {
@@ -404,9 +416,9 @@ nav ul li {
   line-height: 45px
 }
 
-
 .Anuncios {
     height: 40px;
+
 }
 .Anuncios article{
     margin-right: 2px;
@@ -436,13 +448,6 @@ nav ul li {
  
 }
 
-.WelcomeUSer {
-  position: relative;
-  padding: 3px 6px;
-  margin-top: 0px;
-  font-size: 10px;
-  margin-right: 14%;
-}
 
 .Torneos article {
   width: 90%;
@@ -500,8 +505,6 @@ footer p {
   margin-left: 5%;
 }
 
-.FrmRegistrarTorneo input[type="text"] {
-  font-size: 14px;
- }
+
 }
 

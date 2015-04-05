@@ -28,9 +28,9 @@
         <tr>
           <td align="Center"><%=ronda.numero%></td>
           <td align="Center"><input type='hidden' id='ronda<%=ronda.numero%>_numero' name='ronda<%=ronda.numero%>[numero]' value='<%=ronda.numero%>' /> 
-            <input type='text' id='ronda<%=ronda.numero%>_inicio_fecha' name='ronda<%=ronda.numero%>[inicio_fecha]' class='string required form-control input-lg-inFec datepicker1' placeholder='dd/mm/yyyy' value='<%=ronda.inicio_fecha.strftime("%d/%m/%Y")%>'  /> 
+            <input type='text' id="Registro_Rondas" id='ronda<%=ronda.numero%>_inicio_fecha' name='ronda<%=ronda.numero%>[inicio_fecha]' class='string required form-control input-lg-inFec datepicker1' placeholder='dd/mm/yyyy' value='<%=ronda.inicio_fecha.strftime("%d/%m/%Y")%>'  /> 
           </td>
-          <td align="Center"><input type='text' id='ronda<%=ronda.numero%>_inicio_tiempo' name='ronda<%=ronda.numero%>[inicio_tiempo]' class='string required form-control input-lg-inTi' placeholder='hh:mm AM/PM' value='<%=ronda.inicio_tiempo.strftime("%I:%M %p")%>' />
+          <td align="Center"><input type='text' id="Registro_Rondas" id='ronda<%=ronda.numero%>_inicio_tiempo' name='ronda<%=ronda.numero%>[inicio_tiempo]' class='string required form-control input-lg-inTi' placeholder='hh:mm AM/PM' value='<%=ronda.inicio_tiempo.strftime("%I:%M %p")%>' />
           </td>
           <td align="Center">
             <select id='ronda<%=ronda.numero%>_modo_ganar' name='ronda<%=ronda.numero%>[modo_ganar]' class='string required form-control input-lg' >
