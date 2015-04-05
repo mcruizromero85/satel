@@ -101,6 +101,7 @@ module TorneosHelper
   end
 
   def self.formato_cuenta_regresiva(fecha_cierre_inscripcion)
+    
     diferencia_segundos_cierre_inscripcion_y_hoy = fecha_cierre_inscripcion.to_i - Time.new.to_i
     formato_cuenta_regresiva = ''
     diferencia_dias = 0

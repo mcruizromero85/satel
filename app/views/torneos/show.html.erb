@@ -1,64 +1,19 @@
 <section class="FrmRegistrarTorneo">
   <h1>Detalle del Torneo</h1>
+  <%= render partial: "reutilizable/ficha_presentacion_torneo", object: @torneo, as: :torneo %>
   <br/>
-  <span id="mensajeError"></span>
-  <%= form_for @torneo,  html: {class: "frm-registro"} do |f| %>
-    <% if @torneo.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar la inscripcion:</h2>
-
-        <ul>
-        <% @torneo.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
+    <% if @mensaje_de_guardado.nil? %>
+      <center>
+        <a class="Enlace_detalle_registrarTorneo" href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a>
+        <br/>
+        <br/>
+        <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a>
+      </center>
+      <br/>
+    <% else %>
+      <center>
+        <a class="Enlace_detalle_registrarTorneo" href="/">Volver</a>
+      </center>
     <% end %>
-  <label id="torneo_id"><b>Id del torneo:</b> <span id="id_torneo_registrado"><%=@torneo.id %></span></label>
-  <br/>
-  <br/>
-  <label id="torneo_titulo"><b>Titulo del torneo:</b> <%=@torneo.titulo%></label>
-  <br/>
-  <br/>
-  <label id="torneo_paginaweb"><b>P&aacute;gina web del torneo:</b> <%=@torneo.paginaweb%></label>
-  </br>
-  </br>
-  <label id="cuadro_de_juegos"><b>Juego:</b> <%=@torneo.juego.nombre%>
-  </br>
-  </br>
-  <label id="cuadro_de_vacantes"><b>Vacantes: </b><%=@torneo.vacantes%></label>
-  <br>
-  <br>
-  <label id="Fecha_inscripcion"><b>Fecha cierre inscripci&oacute;n:</b> <%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %></label>
-  <br>
-  <br>
-  <table class="Detalle_rondas" >
-    <thead>
-      <tr>
-        <td class="header">Ronda</td>
-        <td class="header">Fecha de inicio</td>
-        <td class="header">Hora de inicio</td>
-        <td class="header">Modo de ganar</td>
-      </tr>
-    </thead>
-    <tbody id="rondas">
-    <% @torneo.rondas.order(:numero).each do |ronda| %>
-      <tr>
-        <td><%=ronda.numero%></td>
-        <td><%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %></td>
-        <td><%=ronda.inicio_tiempo.strftime("%I:%M %p")  %></td>
-        <td>Mejor de <%=ronda.modo_ganar%></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-  <br/>
-    <center>
-          <a class="Enlace_detalle_registrarTorneo" href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a>
     <br/>
-    <br/>
-          <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a>
-    </center>
-    <br/>
-  <% end %>
 </section>

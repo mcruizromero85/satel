@@ -33,6 +33,7 @@ class TorneosController < ApplicationController
   # GET /torneos/1
   # GET /torneos/1.json
   def show
+    @mensaje_de_guardado = params[:notice]
   end
 
   attr_writer :attr_names
@@ -41,6 +42,7 @@ class TorneosController < ApplicationController
     @torneo = Torneo.new
     @torneo.estado = 'Pendiente'
     @torneo.vacantes = 8
+    @torneo.paginaweb = "https://"
     @torneo.cierre_inscripcion = (Time.new + (60 * 60 * 0.5))
   end
 
@@ -97,11 +99,9 @@ class TorneosController < ApplicationController
     TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes).times do | i |
       @torneo.agregar_ronda(Ronda.new(params['ronda' + (i + 1).to_s].permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar)))
     end
-    contador = 0
-
     respond_to do |format|
       if @torneo.save
-        format.html { redirect_to action: 'show', notice: 'Torneo was successfully created.' }
+        format.html { redirect_to action: 'show', notice: 'Torneo creado correctamente' }
         format.json { render action: 'show', status: :created, location: @torneo }
       else
         format.html { render action: 'datos_inscripcion' }

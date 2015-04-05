@@ -1,0 +1,12 @@
+<article id="ContenidoTorneo">
+   <img  src="<%= image_path(torneo.juego.nombre_imagen) %>" >
+  <article>
+  <h2><a href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
+   <p><a href="<%= torneo.paginaweb %>" target="_blank">
+   	<%= torneo.paginaweb %></a><br/>
+    M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
+    <b>Cierre de inscripci&oacute;n:</b> <%= torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %></br>
+    <a href="/torneos/<%=torneo.id%>">Ver m&aacute;s</a>
+    </p>	
+  </article>
+</article>

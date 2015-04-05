@@ -3,7 +3,7 @@
     <article>
       <h2 ><a  href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
       <br>
-      <p><b><%= torneo.juego.nombre %></b>, m&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
+      <p>M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
       Las incripciones cierran en: <b>
       <% if TorneosHelper.debe_mostrar_contador_estatico(torneo.cierre_inscripcion) then %>  
                         <%= TorneosHelper.formato_cuenta_regresiva(torneo.cierre_inscripcion) %>
