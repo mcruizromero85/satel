@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
   create_table "juegos", force: true do |t|
     t.string   "nombre"
     t.string   "descripcion"
+    t.string   "nombre_imagen"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

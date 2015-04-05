@@ -75,7 +75,7 @@ class TorneosController < ApplicationController
   end
 
   def comenzar
-    @torneo = Torneo.find(params[:id_torneo])
+    @torneo = Torneo.find_by(id: params[:id_torneo], gamer_id: current_gamer.id)
     @torneo.estado = params['estado']
     respond_to do |format|
       if @torneo.save
@@ -91,18 +91,13 @@ class TorneosController < ApplicationController
   # PATCH/PUT /torneos/1
   # PATCH/PUT /torneos/1.json
   def update
-    @torneo = Torneo.find(params[:id])
+    @torneo = Torneo.find_by(id: params[:id], gamer_id: current_gamer.id)
     @torneo.estado = 'Creado'
     @torneo.rondas.destroy_all
     TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes).times do | i |
       @torneo.agregar_ronda(Ronda.new(params['ronda' + (i + 1).to_s].permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar)))
     end
     contador = 0
-    loop do
-      break if params['datos_inscripcion' + contador.to_s].nil?
-      @torneo.agregar_dato_inscripcion(DatosInscripcion.new(params['datos_inscripcion' + contador.to_s].permit(:nombre)))
-      contador += 1
-    end
 
     respond_to do |format|
       if @torneo.save

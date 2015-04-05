@@ -13,9 +13,9 @@ feature 'Iniciar Torneo' do
     iniciar_torneo
     click_link('link_cerrar_sesion')
     autenticarse_como_gamer
-    expect(page).to have_content('Torneo Iniciado!!!')
+    expect(page).to have_content('Torneo iniciado!!!')
     visit '/'
-    expect(page).to have_content('Torneo Iniciado!!!')
+    expect(page).to have_content('Torneo iniciado!!!')
   end
 
   scenario 'Dado que registre un torneo para 8 vacantes y tengo 1 confirmado, entonces no debería poder iniciar el torneo', js: true do
