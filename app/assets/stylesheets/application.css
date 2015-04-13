@@ -159,7 +159,7 @@ nav ul li a:hover{
 }
 
 #ContenidoTorneo img{
-    height: 85%;
+    height: 106px;
     width: 25%;
     border-radius: 0px;
     margin: 1%;
@@ -202,7 +202,7 @@ margin-top: 10px;
 
 .Torneos article{
   float: left;
-  height: 500px;
+  #height: 500px;
   background-color: #47474D;
   margin-left: 5%;
   margin-right: 14px;
@@ -227,7 +227,7 @@ margin-top: 10px;
 }
 
 .Torneos iframe{
-    width: 10%;
+    #width: 10%;
 }
 
 .Torneos aside{
@@ -454,7 +454,7 @@ nav ul li {
   height: 90%;
 }
 
-#ContenidoTorneo {
+#ContenidoTorneo{
   width: 95%;
   margin: 5px;
   height: 80%;
@@ -504,6 +504,8 @@ footer p {
   margin-bottom: 0px; 
   margin-left: 5%;
 }
+
+
 
 
 }

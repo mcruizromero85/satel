@@ -40,19 +40,30 @@
           <% end %>
 
           </script> 
-          <section class="Torneos">
-            <article >
-            <% if @torneo.estado == "Iniciado"  %>  
+  <section class="Torneos">
+            
+               <script>
+                $(function() {
+                  $( "#tabs" ).tabs();
+                });
+                </script>
+                               <script>
+                $(function() {
+                  $( "#tabs_comentario" ).tabs();
+                });
+                </script>
+  <article id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Brackets</a></li>
+    <li><a href="#tabs-2">En vivo!!!</a></li>
+    <li><a href="#tabs-3">Detalle Torneo</a></li>
+  </ul>
+  <article id="tabs-1">
+        <% if @torneo.estado == "Iniciado"  %>  
               <h1 ><u>Torneo en Curso</u></h1>
             <% else%>
               <h1 ><u>Prepara tu torneo antes de iniciar</u></h1>
             <% end %>  
-            <h3 ><%= @torneo.titulo %></h3>
-            <h4 ><%= @torneo.paginaweb %></h4>
-            <center>
-              <a class = "Lkn_DetalleTorneo" href="/torneos/<%=@torneo.id%>">Ver detalle del detalle del torneo</a>
-            </center>
-            <br/>
             <% if @torneo.errors.any? %>
               <div id="error_explanation">
                 <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>
@@ -69,16 +80,32 @@
                 <center>
                   <a class = "Lkn_DetalleTorneo" href="/torneos/iniciar/<%=@torneo.id%>">Volver a generar</a>       
                     <br>
-                       <br>
                         <center><input name="commit" type="submit" value="Iniciar Torneo!!!" /></center>
                         <input name="id_torneo" type="hidden" value="<%=@torneo.id%>" />
                 </center>
             <% end %>
-              <article id="llaves">
-              </article>
-             </article>          
+    <article id="llaves"></article> 
+  </article> 
+  <article id="tabs-2">
+    <iframe src="http://www.twitch.tv/starcraft_lima2/embed" frameborder="0" scrolling="no" height="378" width="620"></iframe><a href="http://www.twitch.tv/starcraft_lima2?tt_medium=live_embed&tt_content=text_link" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline;">Watch live video from Starcraft_lima2 on www.twitch.tv</a>
+  </article>
+  <article id="tabs-3">
+    <%= render partial: "reutilizable/ficha_presentacion_torneo_detallado", object: @torneo, as: :torneo %>
+  </article>
+</article>
           <aside>
             <br/>
-              <div class="fb-comments" data-href="http://satel-staging.herokuapp.com/" data-width="380" data-numposts="5" data-colorscheme="light"></div>
+            <article id="tabs_comentario">
+                <ul>
+                  <li><a href="#tabs_comentario-1">Comentarios</a></li>
+                  <li><a href="#tabs_comentario-2">Chat</a></li>                  
+                </ul>
+              <article id="tabs_comentario-1">
+                <div class="fb-comments" data-href="http://satel-staging.herokuapp.com/" data-width="380" data-numposts="5" data-colorscheme="light"></div>
+              </article>
+              <article id="tabs_comentario-2">
+                <iframe src="http://www.twitch.tv/starcraft_lima2/chat?popout=" frameborder="0" scrolling="no" height="500" width="350"></iframe>
+              </article>
+            </article>
           </aside>
 </section>

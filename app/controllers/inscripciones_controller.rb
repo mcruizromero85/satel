@@ -61,7 +61,7 @@ class InscripcionesController < ApplicationController
   # DELETE /gamers/1.json
   def destroy
     inscripcion = Inscripcion.find(params[:id])
-    inscripcion.destroy
+    inscripcion.destroy if current_gamer.id == inscripcion.gamer.id || current_gamer.id == inscripcion.torneo.gamer.id
     respond_to do |format|
       format.html { redirect_to action: 'index', id_torneo: inscripcion.torneo.id }
       format.json { head :no_content }

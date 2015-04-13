@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
   create_table "torneos", force: true do |t|
     t.string   "titulo"
     t.string   "paginaweb"
+    t.string   "urlstreeming"
     t.integer  "vacantes"
     t.datetime "cierre_inscripcion", null: false
     t.integer  "periodo_confirmacion_en_minutos"
