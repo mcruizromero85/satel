@@ -1,0 +1,62 @@
+<br/>
+  <label id="torneo_id"><b>Id del torneo:</b> <span id="id_torneo_registrado"><%=torneo.id %></span></label>
+  <br/>
+  <br/>
+  <label id="torneo_titulo"><b>Titulo del torneo:</b> <%=torneo.titulo%></label>
+  <br/>
+  <br/>
+  <label id="torneo_paginaweb"><b>P&aacute;gina web del torneo:</b> <%=torneo.paginaweb%></label>
+  </br>
+  </br>
+  <label id="cuadro_de_juegos"><b>Juego:</b> <%=torneo.juego.nombre%>
+  </br>
+  </br>
+  <label id="cuadro_de_vacantes"><b>Vacantes: </b><%=torneo.vacantes%></label>
+  <br>
+  <br>
+  <label id="Fecha_inscripcion"><b>Fecha cierre inscripci&oacute;n:</b> <%= torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %></label>
+  <br>
+  <br>
+  <table class="Detalle_rondas" >
+    <thead>
+      <tr>
+        <td class="header">Ronda</td>
+        <td class="header">Fecha de inicio</td>
+        <td class="header">Hora de inicio</td>
+        <td class="header">Modo de ganar</td>
+      </tr>
+    </thead>
+    <tbody id="rondas">
+    <% torneo.rondas.order(:numero).each do |ronda| %>
+      <tr>
+        <td><%=ronda.numero%></td>
+        <td><%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %></td>
+        <td><%=ronda.inicio_tiempo.strftime("%I:%M %p")  %></td>
+        <td>Mejor de <%=ronda.modo_ganar%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<h1>Lista de inscritos</h1>
+    <table class="Detalle_rondas" >
+      <thead>
+        <tr>
+          <th class="header">Orden</th>
+          <th class="header">Nick / Nombre Equipo</th>
+          <th class="header">Fecha Inscripci&oacute;n</th>
+          <th class="header">Estado</th>
+        </tr>
+      </thead>
+      <tbody id="rondas">
+      <% posicion=1 %>
+      <% torneo.inscripciones.each do |inscripcion| %>
+        <tr>
+          <td><%= posicion %></td>
+          <td><%= inscripcion.gamer.nick %></td>
+          <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
+          <td><%= inscripcion.estado %></td>
+        </tr>
+        <% posicion+=1 %>
+        <% end %>
+      </tbody>
+    </table> 
