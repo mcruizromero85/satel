@@ -1,0 +1,706 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: authentications; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+CREATE TABLE authentications (
+    id integer NOT NULL,
+    gamer_id integer,
+    provider character varying(255),
+    uid character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.authentications OWNER TO vagrant;
+
+--
+-- Name: authentications_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+--
+
+CREATE SEQUENCE authentications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.authentications_id_seq OWNER TO vagrant;
+
+--
+-- Name: authentications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+--
+
+ALTER SEQUENCE authentications_id_seq OWNED BY authentications.id;
+
+
+--
+-- Name: encuentros; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+CREATE TABLE encuentros (
+    id integer NOT NULL,
+    gamerinscritoa_id integer,
+    gamerinscritob_id integer,
+    posicion_en_ronda integer,
+    ronda_id integer,
+    gamerinscrito_ganador_id integer,
+    descripcion character varying(255),
+    encuentro_anterior_a_id integer,
+    encuentro_anterior_b_id character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.encuentros OWNER TO vagrant;
+
+--
+-- Name: encuentros_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+--
+
+CREATE SEQUENCE encuentros_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.encuentros_id_seq OWNER TO vagrant;
+
+--
+-- Name: encuentros_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+--
+
+ALTER SEQUENCE encuentros_id_seq OWNED BY encuentros.id;
+
+
+--
+-- Name: gamers; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+CREATE TABLE gamers (
+    id integer NOT NULL,
+    nick character varying(255),
+    correo character varying(255),
+    nombres character varying(255),
+    apellidos character varying(255),
+    fecha_ultimo_login date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.gamers OWNER TO vagrant;
+
+--
+-- Name: gamers_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+--
+
+CREATE SEQUENCE gamers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.gamers_id_seq OWNER TO vagrant;
+
+--
+-- Name: gamers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+--
+
+ALTER SEQUENCE gamers_id_seq OWNED BY gamers.id;
+
+
+--
+-- Name: inscripciones; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+CREATE TABLE inscripciones (
+    id integer NOT NULL,
+    torneo_id integer,
+    gamer_id integer NOT NULL,
+    estado character varying(255),
+    tipo_inscripcion integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.inscripciones OWNER TO vagrant;
+
+--
+-- Name: inscripciones_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+--
+
+CREATE SEQUENCE inscripciones_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.inscripciones_id_seq OWNER TO vagrant;
+
+--
+-- Name: inscripciones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+--
+
+ALTER SEQUENCE inscripciones_id_seq OWNED BY inscripciones.id;
+
+
+--
+-- Name: juegos; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+CREATE TABLE juegos (
+    id integer NOT NULL,
+    nombre character varying(255),
+    descripcion character varying(255),
+    nombre_imagen character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.juegos OWNER TO vagrant;
+
+--
+-- Name: juegos_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+--
+
+CREATE SEQUENCE juegos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.juegos_id_seq OWNER TO vagrant;
+
+--
+-- Name: juegos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+--
+
+ALTER SEQUENCE juegos_id_seq OWNED BY juegos.id;
+
+
+--
+-- Name: rondas; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+CREATE TABLE rondas (
+    id integer NOT NULL,
+    numero integer,
+    inicio_fecha date,
+    inicio_tiempo time without time zone,
+    modo_ganar character varying(255),
+    torneo_id integer,
+    ronda_siguiente_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.rondas OWNER TO vagrant;
+
+--
+-- Name: rondas_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+--
+
+CREATE SEQUENCE rondas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.rondas_id_seq OWNER TO vagrant;
+
+--
+-- Name: rondas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+--
+
+ALTER SEQUENCE rondas_id_seq OWNED BY rondas.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO vagrant;
+
+--
+-- Name: torneos; Type: TABLE; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+CREATE TABLE torneos (
+    id integer NOT NULL,
+    titulo character varying(255),
+    paginaweb character varying(255),
+    vacantes integer,
+    cierre_inscripcion timestamp without time zone NOT NULL,
+    periodo_confirmacion_en_minutos integer,
+    tipo_torneo character varying(255),
+    tipo_generacion character varying(255),
+    gamer_id integer,
+    juego_id integer,
+    estado character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.torneos OWNER TO vagrant;
+
+--
+-- Name: torneos_id_seq; Type: SEQUENCE; Schema: public; Owner: vagrant
+--
+
+CREATE SEQUENCE torneos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.torneos_id_seq OWNER TO vagrant;
+
+--
+-- Name: torneos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: vagrant
+--
+
+ALTER SEQUENCE torneos_id_seq OWNED BY torneos.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY authentications ALTER COLUMN id SET DEFAULT nextval('authentications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY encuentros ALTER COLUMN id SET DEFAULT nextval('encuentros_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY gamers ALTER COLUMN id SET DEFAULT nextval('gamers_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY inscripciones ALTER COLUMN id SET DEFAULT nextval('inscripciones_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY juegos ALTER COLUMN id SET DEFAULT nextval('juegos_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY rondas ALTER COLUMN id SET DEFAULT nextval('rondas_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY torneos ALTER COLUMN id SET DEFAULT nextval('torneos_id_seq'::regclass);
+
+
+--
+-- Data for Name: authentications; Type: TABLE DATA; Schema: public; Owner: vagrant
+--
+
+COPY authentications (id, gamer_id, provider, uid, created_at, updated_at) FROM stdin;
+1	17	facebook	10152650542088277	2015-04-12 15:35:08.554589	2015-04-12 15:35:08.554589
+2	18	developer	zeratul@gmail.com	2015-04-16 20:33:02.310686	2015-04-16 20:33:02.310686
+3	19	developer	otaru@gmail.com	2015-04-16 20:33:41.792845	2015-04-16 20:33:41.792845
+4	20	developer	garfield@gmail.com	2015-04-16 20:34:29.386027	2015-04-16 20:34:29.386027
+5	21	developer	carlos@gmail.com	2015-04-16 20:35:38.991512	2015-04-16 20:35:38.991512
+6	22	developer	silvestre@gmail.com	2015-04-16 20:36:13.02183	2015-04-16 20:36:13.02183
+7	23	developer	bruce@gmail.com	2015-04-16 20:36:44.022993	2015-04-16 20:36:44.022993
+8	24	developer	roger@gmail.com	2015-04-16 20:37:14.729738	2015-04-16 20:37:14.729738
+\.
+
+
+--
+-- Name: authentications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+--
+
+SELECT pg_catalog.setval('authentications_id_seq', 8, true);
+
+
+--
+-- Data for Name: encuentros; Type: TABLE DATA; Schema: public; Owner: vagrant
+--
+
+COPY encuentros (id, gamerinscritoa_id, gamerinscritob_id, posicion_en_ronda, ronda_id, gamerinscrito_ganador_id, descripcion, encuentro_anterior_a_id, encuentro_anterior_b_id, created_at, updated_at) FROM stdin;
+52	1	54	1	4	1	\N	\N	\N	2015-04-12 19:29:15.61444	2015-04-12 19:29:15.630982
+53	1	53	1	5	\N	\N	52	54	2015-04-12 19:29:15.626592	2015-04-12 19:29:15.659939
+54	53	55	2	4	53	\N	\N	\N	2015-04-12 19:29:15.635901	2015-04-12 19:29:15.664918
+91	58	59	1	34	\N	\N	\N	\N	2015-04-16 20:38:26.883926	2015-04-16 20:38:26.883926
+93	\N	61	1	35	\N	\N	\N	92	2015-04-16 20:38:26.902098	2015-04-16 20:38:26.902098
+92	77	61	2	34	61	\N	\N	\N	2015-04-16 20:38:26.891894	2015-04-16 20:38:26.905964
+94	62	60	3	34	\N	\N	\N	\N	2015-04-16 20:38:26.911886	2015-04-16 20:38:26.911886
+96	\N	57	2	35	\N	\N	\N	95	2015-04-16 20:38:26.930554	2015-04-16 20:38:26.930554
+95	78	57	4	34	57	\N	\N	\N	2015-04-16 20:38:26.920205	2015-04-16 20:38:26.934984
+\.
+
+
+--
+-- Name: encuentros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+--
+
+SELECT pg_catalog.setval('encuentros_id_seq', 96, true);
+
+
+--
+-- Data for Name: gamers; Type: TABLE DATA; Schema: public; Owner: vagrant
+--
+
+COPY gamers (id, nick, correo, nombres, apellidos, fecha_ultimo_login, created_at, updated_at) FROM stdin;
+1	Free win 1	Free win 1@freewin.com	Free win 1	\N	\N	2015-04-12 12:43:49.96345	2015-04-12 12:43:49.96345
+2	Free win 2	Free win 2@freewin.com	Free win 2	\N	\N	2015-04-12 12:43:49.967881	2015-04-12 12:43:49.967881
+3	Free win 3	Free win 3@freewin.com	Free win 3	\N	\N	2015-04-12 12:43:49.970851	2015-04-12 12:43:49.970851
+4	Free win 4	Free win 4@freewin.com	Free win 4	\N	\N	2015-04-12 12:43:49.973678	2015-04-12 12:43:49.973678
+5	Free win 5	Free win 5@freewin.com	Free win 5	\N	\N	2015-04-12 12:43:49.976184	2015-04-12 12:43:49.976184
+6	Free win 6	Free win 6@freewin.com	Free win 6	\N	\N	2015-04-12 12:43:49.978603	2015-04-12 12:43:49.978603
+7	Free win 7	Free win 7@freewin.com	Free win 7	\N	\N	2015-04-12 12:43:49.981697	2015-04-12 12:43:49.981697
+8	Free win 8	Free win 8@freewin.com	Free win 8	\N	\N	2015-04-12 12:43:49.984191	2015-04-12 12:43:49.984191
+9	Free win 9	Free win 9@freewin.com	Free win 9	\N	\N	2015-04-12 12:43:49.986682	2015-04-12 12:43:49.986682
+10	Free win 10	Free win 10@freewin.com	Free win 10	\N	\N	2015-04-12 12:43:49.989247	2015-04-12 12:43:49.989247
+11	Free win 11	Free win 11@freewin.com	Free win 11	\N	\N	2015-04-12 12:43:49.991777	2015-04-12 12:43:49.991777
+12	Free win 12	Free win 12@freewin.com	Free win 12	\N	\N	2015-04-12 12:43:49.994242	2015-04-12 12:43:49.994242
+13	Free win 13	Free win 13@freewin.com	Free win 13	\N	\N	2015-04-12 12:43:49.996769	2015-04-12 12:43:49.996769
+14	Free win 14	Free win 14@freewin.com	Free win 14	\N	\N	2015-04-12 12:43:49.999108	2015-04-12 12:43:49.999108
+15	Free win 15	Free win 15@freewin.com	Free win 15	\N	\N	2015-04-12 12:43:50.001235	2015-04-12 12:43:50.001235
+16	Free win 16	Free win 16@freewin.com	Free win 16	\N	\N	2015-04-12 12:43:50.003626	2015-04-12 12:43:50.003626
+17	Kripty	mcruizromero85@gmail.com	Mauro	Ruiz	\N	2015-04-12 15:35:08.518788	2015-04-12 15:42:23.330101
+18	\N	zeratul@gmail.com	Zeratul	\N	\N	2015-04-16 20:33:02.302431	2015-04-16 20:33:02.302431
+19	Otaru	otaru@gmail.com	Otaru	\N	\N	2015-04-16 20:33:41.78329	2015-04-16 20:33:50.773602
+20	Garfield	garfield@gmail.com	Garfield	\N	\N	2015-04-16 20:34:29.379106	2015-04-16 20:34:37.818477
+21	Locopiedra	carlos@gmail.com	Carlos	\N	\N	2015-04-16 20:35:38.985261	2015-04-16 20:35:50.833933
+22	Silvestron	silvestre@gmail.com	Silvestre	\N	\N	2015-04-16 20:36:13.015852	2015-04-16 20:36:21.325502
+23	Brucefulus	bruce@gmail.com	Bruce	\N	\N	2015-04-16 20:36:44.017184	2015-04-16 20:36:50.768748
+24	Roger	roger@gmail.com	Roger	\N	\N	2015-04-16 20:37:14.723625	2015-04-16 20:37:23.179852
+\.
+
+
+--
+-- Name: gamers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+--
+
+SELECT pg_catalog.setval('gamers_id_seq', 24, true);
+
+
+--
+-- Data for Name: inscripciones; Type: TABLE DATA; Schema: public; Owner: vagrant
+--
+
+COPY inscripciones (id, torneo_id, gamer_id, estado, tipo_inscripcion, created_at, updated_at) FROM stdin;
+1	1	17	Confirmado	\N	2015-04-12 15:42:23.344612	2015-04-12 15:42:27.357924
+56	5	17	Inscrito	\N	2015-04-16 20:32:47.007876	2015-04-16 20:32:47.007876
+57	6	19	Confirmado	\N	2015-04-16 20:33:50.863841	2015-04-16 20:34:11.749309
+58	6	20	Confirmado	\N	2015-04-16 20:34:37.826321	2015-04-16 20:34:43.278864
+59	6	21	Confirmado	\N	2015-04-16 20:35:50.908834	2015-04-16 20:35:57.403134
+60	6	22	Confirmado	\N	2015-04-16 20:36:21.333912	2015-04-16 20:36:30.545133
+61	6	23	Confirmado	\N	2015-04-16 20:36:50.841677	2015-04-16 20:36:56.089133
+62	6	24	Confirmado	\N	2015-04-16 20:37:23.189124	2015-04-16 20:37:29.047891
+77	6	1	Confirmado	1	2015-04-16 20:38:26.869046	2015-04-16 20:38:26.869046
+78	6	2	Confirmado	1	2015-04-16 20:38:26.876178	2015-04-16 20:38:26.876178
+53	1	1	Confirmado	1	2015-04-12 19:29:15.533424	2015-04-12 19:29:15.533424
+54	1	2	Confirmado	1	2015-04-12 19:29:15.541574	2015-04-12 19:29:15.541574
+55	1	3	Confirmado	1	2015-04-12 19:29:15.548206	2015-04-12 19:29:15.548206
+\.
+
+
+--
+-- Name: inscripciones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+--
+
+SELECT pg_catalog.setval('inscripciones_id_seq', 78, true);
+
+
+--
+-- Data for Name: juegos; Type: TABLE DATA; Schema: public; Owner: vagrant
+--
+
+COPY juegos (id, nombre, descripcion, nombre_imagen, created_at, updated_at) FROM stdin;
+1	Dota2	Dota2	dota2.jpg	2015-04-12 12:43:49.885576	2015-04-12 12:43:49.885576
+2	Heroes of The Storm	Heroes of The Storm	hots.jpg	2015-04-12 12:43:49.926937	2015-04-12 12:43:49.926937
+3	League of Legends	League of Legends	lol.jpg	2015-04-12 12:43:49.930037	2015-04-12 12:43:49.930037
+4	Smite	Smite	smite.png	2015-04-12 12:43:49.932922	2015-04-12 12:43:49.932922
+5	Otros	Otros	otros.jpg	2015-04-12 12:43:49.935369	2015-04-12 12:43:49.935369
+\.
+
+
+--
+-- Name: juegos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+--
+
+SELECT pg_catalog.setval('juegos_id_seq', 5, true);
+
+
+--
+-- Data for Name: rondas; Type: TABLE DATA; Schema: public; Owner: vagrant
+--
+
+COPY rondas (id, numero, inicio_fecha, inicio_tiempo, modo_ganar, torneo_id, ronda_siguiente_id, created_at, updated_at) FROM stdin;
+4	1	2015-04-12	16:42:00	1	1	5	2015-04-12 15:42:16.8523	2015-04-12 15:42:16.860423
+5	2	2015-04-12	17:42:00	1	1	6	2015-04-12 15:42:16.858537	2015-04-12 15:42:16.872992
+6	3	2015-04-12	18:42:00	1	1	\N	2015-04-12 15:42:16.870988	2015-04-12 15:42:16.877237
+34	1	2015-04-16	21:33:00	1	6	35	2015-04-16 20:33:22.292393	2015-04-16 20:33:22.299647
+35	2	2015-04-16	22:33:00	3	6	36	2015-04-16 20:33:22.297795	2015-04-16 20:33:22.387023
+36	3	2015-04-16	23:33:00	5	6	\N	2015-04-16 20:33:22.38487	2015-04-16 20:33:22.391551
+10	1	2015-04-12	19:11:00	1	2	11	2015-04-12 18:11:35.055072	2015-04-12 18:11:35.062132
+11	2	2015-04-12	20:11:00	1	2	12	2015-04-12 18:11:35.060193	2015-04-12 18:11:35.074207
+12	3	2015-04-12	21:11:00	1	2	\N	2015-04-12 18:11:35.072339	2015-04-12 18:11:35.080355
+16	1	2015-04-12	19:12:00	1	3	17	2015-04-12 18:12:30.28471	2015-04-12 18:12:30.291089
+17	2	2015-04-12	20:12:00	1	3	18	2015-04-12 18:12:30.289473	2015-04-12 18:12:30.305364
+18	3	2015-04-12	21:12:00	1	3	\N	2015-04-12 18:12:30.302858	2015-04-12 18:12:30.310137
+22	1	2015-04-12	19:13:00	1	4	23	2015-04-12 18:13:49.601114	2015-04-12 18:13:49.609154
+23	2	2015-04-12	20:13:00	1	4	24	2015-04-12 18:13:49.606684	2015-04-12 18:13:49.684726
+24	3	2015-04-12	21:13:00	1	4	\N	2015-04-12 18:13:49.682665	2015-04-12 18:13:49.688836
+28	1	2015-04-16	21:32:00	1	5	29	2015-04-16 20:32:39.598059	2015-04-16 20:32:39.605661
+29	2	2015-04-16	22:32:00	1	5	30	2015-04-16 20:32:39.603606	2015-04-16 20:32:39.617299
+30	3	2015-04-16	23:32:00	3	5	\N	2015-04-16 20:32:39.615571	2015-04-16 20:32:39.621295
+\.
+
+
+--
+-- Name: rondas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+--
+
+SELECT pg_catalog.setval('rondas_id_seq', 36, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: vagrant
+--
+
+COPY schema_migrations (version) FROM stdin;
+20141214025352
+20140412192319
+20140817033501
+20140810225253
+20141123225154
+20140323192709
+20140412192350
+20131210145649
+20141020220459
+20131230234849
+\.
+
+
+--
+-- Data for Name: torneos; Type: TABLE DATA; Schema: public; Owner: vagrant
+--
+
+COPY torneos (id, titulo, paginaweb, vacantes, cierre_inscripcion, periodo_confirmacion_en_minutos, tipo_torneo, tipo_generacion, gamer_id, juego_id, estado, created_at, updated_at) FROM stdin;
+1	TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT	https://	8	2015-04-12 16:12:00	30	\N	\N	17	2	Creado	2015-04-12 15:42:15.304758	2015-04-12 15:42:16.885945
+2	TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT	https://www.google.com	8	2015-04-12 18:41:00	30	\N	\N	17	5	Creado	2015-04-12 18:11:30.056639	2015-04-12 18:11:35.087193
+3	TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT	https://www.google.com	8	2015-04-12 18:42:00	30	\N	\N	17	1	Creado	2015-04-12 18:12:24.831307	2015-04-12 18:12:30.317298
+4	TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT	https://www.google.com	8	2015-04-12 18:43:00	30	\N	\N	17	5	Creado	2015-04-12 18:13:44.32108	2015-04-12 18:13:49.695973
+5	Torneo Bloodzone Primera Liga Dota2	https://www.google.com	8	2015-04-16 21:02:00	30	\N	\N	17	2	Creado	2015-04-16 20:32:34.720051	2015-04-16 20:32:39.628834
+6	aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa	https://www.google.com	8	2015-04-16 21:03:00	30	\N	\N	18	2	Creado	2015-04-16 20:33:16.407075	2015-04-16 20:33:22.3981
+\.
+
+
+--
+-- Name: torneos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: vagrant
+--
+
+SELECT pg_catalog.setval('torneos_id_seq', 6, true);
+
+
+--
+-- Name: authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+ALTER TABLE ONLY authentications
+    ADD CONSTRAINT authentications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: encuentros_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+ALTER TABLE ONLY encuentros
+    ADD CONSTRAINT encuentros_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: gamers_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+ALTER TABLE ONLY gamers
+    ADD CONSTRAINT gamers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: inscripciones_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+ALTER TABLE ONLY inscripciones
+    ADD CONSTRAINT inscripciones_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: juegos_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+ALTER TABLE ONLY juegos
+    ADD CONSTRAINT juegos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: rondas_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+ALTER TABLE ONLY rondas
+    ADD CONSTRAINT rondas_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: torneos_pkey; Type: CONSTRAINT; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+ALTER TABLE ONLY torneos
+    ADD CONSTRAINT torneos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: vagrant; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: authentications_gamer_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY authentications
+    ADD CONSTRAINT authentications_gamer_id_fk FOREIGN KEY (gamer_id) REFERENCES gamers(id);
+
+
+--
+-- Name: encuentros_ronda_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY encuentros
+    ADD CONSTRAINT encuentros_ronda_id_fk FOREIGN KEY (ronda_id) REFERENCES rondas(id);
+
+
+--
+-- Name: inscripciones_gamer_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY inscripciones
+    ADD CONSTRAINT inscripciones_gamer_id_fk FOREIGN KEY (gamer_id) REFERENCES gamers(id);
+
+
+--
+-- Name: inscripciones_torneo_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY inscripciones
+    ADD CONSTRAINT inscripciones_torneo_id_fk FOREIGN KEY (torneo_id) REFERENCES torneos(id);
+
+
+--
+-- Name: rondas_torneo_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY rondas
+    ADD CONSTRAINT rondas_torneo_id_fk FOREIGN KEY (torneo_id) REFERENCES torneos(id);
+
+
+--
+-- Name: torneos_gamer_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY torneos
+    ADD CONSTRAINT torneos_gamer_id_fk FOREIGN KEY (gamer_id) REFERENCES gamers(id);
+
+
+--
+-- Name: torneos_juego_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: vagrant
+--
+
+ALTER TABLE ONLY torneos
+    ADD CONSTRAINT torneos_juego_id_fk FOREIGN KEY (juego_id) REFERENCES juegos(id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
