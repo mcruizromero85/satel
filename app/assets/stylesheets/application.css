@@ -202,7 +202,7 @@ margin-top: 10px;
 
 .Torneos article{
   float: left;
-  #height: 500px;
+  /*height: 500px; -->Se retira para hacer dinamica la pagina*/
   background-color: #47474D;
   margin-left: 5%;
   margin-right: 14px;
