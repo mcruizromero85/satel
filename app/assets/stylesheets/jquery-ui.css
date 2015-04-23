@@ -725,7 +725,7 @@ body .ui-tooltip {
     border-width: 2px;
 }
 .ui-widget {
-    font-family: Verdana,Arial,sans-serif;
+   /* font-family: Verdana,Arial,sans-serif;*/
     font-size: 1.1em;
 }
 .ui-widget .ui-widget {
@@ -1388,4 +1388,24 @@ body .ui-tooltip {
     margin: -8px 0 0 -8px;
     opacity: 0.3;
     padding: 8px;
+}
+
+@media screen and (max-width: 350px){
+
+.ui-helper-reset {
+    font-size: 76%;
+`}
+
+
+.ui-widget-content a {
+  color: white;
+  }
+
+  .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited{
+    display: none;
+  }
+
+  .ui-tabs .ui-tabs-panel {
+    padding: 0 0 0 0;
+    }
 }
