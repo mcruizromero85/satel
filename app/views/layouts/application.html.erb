@@ -8,28 +8,20 @@
   <%= stylesheet_link_tag "jquery-ui", media: "all", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag "jquery.bracket.min", media: "all", "data-turbolinks-track" => true %>
   
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <script src="/assets/jquery-ui.js"></script>
   <%= csrf_meta_tags %>
   <script type="text/javascript" src="/assets/jquery.bracket.min.js"></script>  
   <script type="text/javascript" src="/assets/jquery.sheepItPlugin.js"></script>
 </head>
-<body>
-        <div id="fb-root"></div>
-        <script>
-          (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&appId=686458234757061&version=v2.0";
-            fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
-        </script>
-        <script>
-          function goBack() {
-              window.history.back()
-          }
-        </script>
+<body data-no-turbolink >
+<div id="fb-root"></div>
+<script>
+  function goBack() {
+    window.history.back()
+  }
+</script>
+
 <header>
   <a href="/">
     <img class="logo" src="<%= image_path("logo.png") %>" alt="Satel"/>

@@ -73,14 +73,14 @@ ActiveRecord::Schema.define(version: 20141214025352) do
   end
 
   create_table "torneos", force: true do |t|
-    t.string   "titulo"
-    t.string   "paginaweb"
+    t.string   "titulo", null: false
+    t.string   "post_detalle_torneo"
     t.string   "urlstreeming"
-    t.integer  "vacantes"
+    t.integer  "vacantes", null: false
     t.datetime "cierre_inscripcion", null: false
-    t.integer  "periodo_confirmacion_en_minutos"
-    t.string   "tipo_torneo"
-    t.string   "tipo_generacion"
+    t.integer  "periodo_confirmacion_en_minutos", null: false
+    t.string   "tipo_torneo"# Individual / Moba
+    t.string   "tipo_generacion" #Simple / Doble / Grupos Round Robin / Grupos Round Robin doble llave
     t.integer  "gamer_id"
     t.integer  "juego_id"
     t.string   "estado"

@@ -11,10 +11,10 @@ class Ronda < ActiveRecord::Base
     Time.local(fecha.year, fecha.month, fecha.day, tiempo.hour, tiempo.min, tiempo.sec)
   end
 
-  def inicializar_valores_por_defecto(numero)
+  def inicializar_valores_por_defecto(numero, cierre_inscripcion)
     self.numero = numero
-    self.inicio_fecha = Time.new + (60 * 60 * numero)
-    self.inicio_tiempo = Time.new + (60 * 60 * numero)
+    self.inicio_fecha = cierre_inscripcion + (60 * 60 * numero)
+    self.inicio_tiempo = cierre_inscripcion + (60 * 60 * numero)
     self.modo_ganar = 1
   end
 

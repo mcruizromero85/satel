@@ -7,7 +7,6 @@ class Torneo < ActiveRecord::Base
     too_short: ', el título debe estar entre 30 y 100 caracteres',
     too_long: ', el título debe estar entre 30 y 100 caracteres'
   }
-  validates :paginaweb, format: { with: URI.regexp(%w(http https)), message: 'Formato incorrecto, recuerde incluir http / https' }
   validate :fecha_cierre_mayor_que_actual
   validate :fecha_registro_entre_rondas
   validate :ronda_numero_uno_mayor_fecha_inscripcion
@@ -18,14 +17,14 @@ class Torneo < ActiveRecord::Base
   has_many :rondas, -> { order('numero ASC') }, autosave: true
   has_many :inscripciones, autosave: true
   has_many :datos_inscripciones, autosave: true
-  before_save :asignar_valores_por_defectos, if: "estado == 'Pendiente'"
+  before_save :asignar_valores_por_defectos, if: "estado == 'Creado'"
 
   def asignar_valores_por_defectos
     numero_de_rondas_totales = TorneosHelper.obtener_rondas_por_vacantes(vacantes)
     rondas.destroy_all
     numero_de_rondas_totales.times do | numero |
       ronda = Ronda.new
-      ronda.inicializar_valores_por_defecto(numero + 1)
+      ronda.inicializar_valores_por_defecto(numero + 1, cierre_inscripcion)
       agregar_ronda(ronda)
     end
   end

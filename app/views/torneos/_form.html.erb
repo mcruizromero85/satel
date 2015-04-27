@@ -26,8 +26,7 @@
   <% end %>
 
 <label id="torneo_titulo_label">Titulo del torneo <input type="text" name="torneo[titulo]" id="torneo_titulo" placeholder="<%=@torneo.titulo%>"size="12" /></label>
-<label id="torneo_paginaweb_label">Fanpage del torneo <input type="text" name="torneo[paginaweb]" id="torneo_paginaweb" placeholder="Link de tu p&aacute;gina, fanpage, o foro con el detalle de tu torneo" value="<%=@torneo.paginaweb%>" size="12"/></label>
-
+<label id="torneo_paginaweb_label">Post de facebook con informaci&oacute;n del torneo(opcional) <input type="text" name="torneo[post_detalle_torneo]" id="torneo_post_detalle_torneo" placeholder="Link del post facebook con el detalle de tu torneo" value="<%=@torneo.post_detalle_torneo%>" size="12"/></label>
 <label >Seleccione el juego: </label> 
   <p id="cuadro_de_juegos">
               <% Juego.all.each do | juego | %>   
@@ -73,7 +72,7 @@
           <option <% if @torneo.periodo_confirmacion_en_minutos == 30 then %> selected <% end %>value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
         </select>
 </label>
-      <center> <%= f.submit "Siguiente" %></center>
+      <center> <%= f.submit "Registrar" %></center>
       <br/>
       <center><a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>
       <br/>

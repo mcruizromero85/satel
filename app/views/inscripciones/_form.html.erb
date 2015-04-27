@@ -4,7 +4,6 @@
   <% if @inscripcion.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@inscripcion.errors.count, "error") %> No permiten registrar la inscripcion:</h2>
-
       <ul>
       <% @inscripcion.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

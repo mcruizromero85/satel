@@ -3,12 +3,11 @@
   <br/>
   <br/>
   <label id="torneo_titulo"><b>Titulo del torneo:</b> <%=torneo.titulo%></label>
-  <br/>
-  <br/>
-  <label id="torneo_paginaweb"><b>P&aacute;gina web del torneo:</b> <%=torneo.paginaweb%></label>
   </br>
   </br>
-  <label id="cuadro_de_juegos"><b>Juego:</b> <%=torneo.juego.nombre%>
+  <label id="cuadro_de_juegos"><b>Juego:</b> <%=torneo.juego.nombre%><br/>
+    <img  height="106px" width="25%" src="<%= image_path(torneo.juego.nombre_imagen) %>" >
+  </label>
   </br>
   </br>
   <label id="cuadro_de_vacantes"><b>Vacantes: </b><%=torneo.vacantes%></label>
@@ -17,23 +16,6 @@
   <label id="Fecha_inscripcion"><b>Fecha cierre inscripci&oacute;n:</b> <%= torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %></label>
   <br>
   <br>
-  <table class="Detalle_rondas" >
-    <thead>
-      <tr>
-        <td class="header">Ronda</td>
-        <td class="header">Fecha de inicio</td>
-        <td class="header">Hora de inicio</td>
-        <td class="header">Modo de ganar</td>
-      </tr>
-    </thead>
-    <tbody id="rondas">
-    <% torneo.rondas.order(:numero).each do |ronda| %>
-      <tr>
-        <td><%=ronda.numero%></td>
-        <td><%=ronda.inicio_fecha.strftime("%d/%m/%Y")  %></td>
-        <td><%=ronda.inicio_tiempo.strftime("%I:%M %p")  %></td>
-        <td>Mejor de <%=ronda.modo_ganar%></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+  <div class="fb-post" data-href="<%=torneo.post_detalle_torneo%>" data-width="500"></div>
+  <br/>
+  <br/>  

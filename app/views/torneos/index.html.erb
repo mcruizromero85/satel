@@ -10,7 +10,7 @@
         <%= render partial: "reutilizable/ficha_lista_torneo_inscrito", collection: @torneos_inscritos, as: :torneo %>
         <%= render partial: "reutilizable/ficha_lista_torneo_disponible", collection: @torneos, as: :torneo %>
         <% if @torneos.size == 0 and @torneos_inscritos_y_confirmados.size == 0 %>
-          <h1 id="Lista_vacia">A&uacute;n no existe torneos registrados, puedes registrar el tuyo haciendo clic aqu&iacute;</h1>
+          <h1 id="Lista_vacia">A&uacute;n no existe torneos registrados, puedes registrar el tuyo haciendo clic <a href="/torneos/new">aqu&iacute;</a></h1>
         <% end %>
       </article>
         

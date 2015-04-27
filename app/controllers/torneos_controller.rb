@@ -34,6 +34,10 @@ class TorneosController < ApplicationController
   # GET /torneos/1.json
   def show
     @mensaje_de_guardado = params[:notice]
+    respond_to do |format|
+      format.html { render action: 'show', notice: 'Torneo creado correctamente' }      
+    end
+    
   end
 
   attr_writer :attr_names
@@ -56,11 +60,11 @@ class TorneosController < ApplicationController
     @torneo = Torneo.new(torneo_params)
     @torneo.fecha_y_hora_inscripcion(params['cierre_inscripcion_fecha'], params['cierre_inscripcion_hora'])
     @torneo.gamer = current_gamer
-    @torneo.juego = Juego.new(id: params['juego'].permit(:id)[:id])
-    @torneo.estado = 'Pendiente'
+    @torneo.juego = Juego.find(params['juego'].permit(:id)[:id])
+    @torneo.estado = 'Creado'
     respond_to do |format|
       if @torneo.save
-        format.html { render action: 'datos_inscripcion' }
+        format.html { render action: 'show', notice: 'Torneo creado correctamente' }
       else
         format.html { render action: 'new' }
       end
@@ -90,26 +94,6 @@ class TorneosController < ApplicationController
     end
   end
 
-  # PATCH/PUT /torneos/1
-  # PATCH/PUT /torneos/1.json
-  def update
-    @torneo = Torneo.find_by(id: params[:id], gamer_id: current_gamer.id)
-    @torneo.estado = 'Creado'
-    @torneo.rondas.destroy_all
-    TorneosHelper.obtener_rondas_por_vacantes(@torneo.vacantes).times do | i |
-      @torneo.agregar_ronda(Ronda.new(params['ronda' + (i + 1).to_s].permit(:numero, :inicio_fecha, :inicio_tiempo, :modo_ganar)))
-    end
-    respond_to do |format|
-      if @torneo.save
-        format.html { redirect_to action: 'show', notice: 'Torneo creado correctamente' }
-        format.json { render action: 'show', status: :created, location: @torneo }
-      else
-        format.html { render action: 'datos_inscripcion' }
-        format.json { render json: @torneo.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -119,6 +103,6 @@ class TorneosController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def torneo_params
-    params.require(:torneo).permit(:titulo, :paginaweb, :vacantes, :cierre_inscripcion, :periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego)
+    params.require(:torneo).permit(:titulo, :paginaweb, :vacantes, :cierre_inscripcion, :post_detalle_torneo,:periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego)
   end
 end
