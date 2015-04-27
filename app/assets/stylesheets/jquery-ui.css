@@ -1396,17 +1396,24 @@ body .ui-tooltip {
     font-size: 76%;
 }
 
-
 .ui-widget-content a {
   color: white;
-  }
-
+}
 
 #ui-id-2{
     display: none;
 }
-
-  .ui-tabs .ui-tabs-panel {
+.ui-tabs .ui-tabs-panel {
     padding: 0 0 0 0;
     }
 }
+
+@media screen and (max-width: 1024px){
+
+.ui-tabs .ui-tabs-panel{
+    margin-left: -2px;
+    padding: 0 0 0 0;
+}
+
+}
+

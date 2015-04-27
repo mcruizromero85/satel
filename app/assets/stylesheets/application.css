@@ -557,10 +557,40 @@ table thead {
   font-size: 11px;
   }
 
-  table tbody {
+table tbody {
     font-size: 10px;
 }
 
+}
+
+@media screen and (max-width: 1024px){
+
+#ContenidoTorneo {
+    width: 99%;
+    margin: 2px;
+  }
+
+#ContenidoTorneo article {
+    width: 69%;
+  }
+
+.Torneos article {
+  width: 60.4%;
+}
+
+ body {
+  font-size: 12px;
+}
+
+#tabs_comentario {
+    width: 158%;
+    margin-top: -20px;
+}
+
+#ember397-flash-player{
+ width: 60%;
+
+}
 
 
 }
