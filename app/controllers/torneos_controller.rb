@@ -46,7 +46,6 @@ class TorneosController < ApplicationController
     @torneo = Torneo.new
     @torneo.estado = 'Pendiente'
     @torneo.vacantes = 8
-    @torneo.paginaweb = "https://"
     @torneo.cierre_inscripcion = (Time.new + (60 * 60 * 0.5))
   end
 
