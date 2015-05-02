@@ -1,3 +1,7 @@
+
+nav {
+  display: none;
+}
 body{
     font-size: 16px;
     margin: 0;
@@ -173,7 +177,7 @@ nav ul li a:hover{
 
 #ContenidoTorneo{
     width: 98%;
-    margin: 10px;
+    margin: 1%;;
     border-radius: 4px;
     background-color: black;
     height: 25%;
@@ -191,15 +195,15 @@ nav ul li a:hover{
     float: right;
     height: 90%;
     width: 70%;
-    margin: 10px;
-    background-color: black;
+    margin: 1%;
+   
     overflow: hidden;
 }
 
 #ContenidoTorneo article h2 a{
     text-decoration: none;
     color: #D0D0D0;
-    font-size: 20px;
+    font-size: 19px;
 }
 
 #ContenidoTorneo article h2 a:hover{
@@ -214,12 +218,15 @@ overflow-x:hidden;
 overflow-y:hidden; 
 position: relative;
 text-overflow: ellipsis;
+font-size:90%;
 }
 
 .Torneos{
 overflow: hidden;
 margin-bottom: 20px;
 margin-top: 10px;
+  margin-left: 0%;
+  margin-right: 2%;
 
 }
 
@@ -270,7 +277,7 @@ margin-top: 10px;
 
 .FrmRegistrarTorneo{
     color: white;
-    width: 60%;
+    width: 69%;
     margin-top: 2%;
     margin-right: 0px;
     margin-bottom: 0px;
@@ -426,11 +433,13 @@ footer p{
   color: white;
 }
 
+
+
 /*MEDIA QUERY*/
 @media only screen and (max-width : 470px) {
 
-  header {
-    position: absolute;
+  aside{
+    display: none;
   }
 
   #menu-icon {
@@ -441,7 +450,7 @@ footer p{
     display: none;
     position: absolute;
     padding: 20px;
-    background: #fff;
+  /*  background: #fff;*/
     border: 5px solid #444;
     right: 20px;
     top: 60px;
@@ -458,9 +467,55 @@ footer p{
   }
 
   nav:hover ul {
-
     display: block;
+  }
 
+
+.Torneos article {
+  float: left;
+  background-color: #47474D;
+  margin-left: 5%;
+  margin-right: 14px;
+  width: 94%;
+  border-radius: 4px;
+}
+#ContenidoTorneo img {
+  height: 134px;
+  width: 95%;
+}
+#ContenidoTorneo article {
+  
+  width: 95%;
+   
+}
+
+footer p {
+  margin-right: 9%;
+  margin-left: 9%;
+}
+
+}
+@media only screen and (max-width : 1023px){
+  
+ aside{
+    display: none;
+  }
+
+.Torneos article {
+  width: 93%;
+  }
+
+footer p {
+  margin-right: 20%;
+  margin-left: 46%;
+}
+
+}
+
+@media only screen and (max-width : 960px){
+
+  #ContenidoTorneo {
+  height: 135px;
   }
 }
 

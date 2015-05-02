@@ -1,4 +1,6 @@
 <h1>Inscribete</h1>
+<%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
+<br/>
 <span id="mensajeError"></span>
 <%= form_for @inscripcion,  html: {class: "frm-registro"} do |f| %>
   <% if @inscripcion.errors.any? %>
@@ -11,9 +13,6 @@
       </ul>
     </div>
   <% end %>
-
-<%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
-<br/>
 <label id="torneo_titulo"><b>Nick o N&oacute;mbre del clan<b/> <input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" size="15" maxlength="20" /></label>
 <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
 <%= f.submit "Inscribirme" %>
