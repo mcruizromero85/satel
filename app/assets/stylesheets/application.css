@@ -1,7 +1,5 @@
 
-nav {
-  display: none;
-}
+
 body{
     font-size: 16px;
     margin: 0;
@@ -196,8 +194,8 @@ nav ul li a:hover{
     height: 90%;
     width: 70%;
     margin: 1%;
-   
     overflow: hidden;
+    background-color: black;
 }
 
 #ContenidoTorneo article h2 a{
@@ -483,6 +481,7 @@ footer p{
   height: 134px;
   width: 95%;
 }
+
 #ContenidoTorneo article {
   
   width: 95%;
@@ -494,7 +493,49 @@ footer p {
   margin-left: 9%;
 }
 
+table thead {
+    
+    font-size: 10px;
+   
 }
+table tbody{
+   
+   font-size: 10px;
+   
+}
+
+
+}
+
+@media only screen and (max-width : 600px){
+  
+ aside{
+    display: none;
+  }
+
+#ContenidoTorneo{
+    height: 297px;
+}
+
+#ContenidoTorneo img {
+  height: 135px;
+  width: 99%;
+  }
+#ContenidoTorneo article{
+  height: 45%;
+  width: 96%;
+  }
+}
+
+@media only screen and (max-width : 780px){
+.FrmRegistrarTorneo{
+  width: 92%;
+  margin-left: 5%;
+
+}
+
+}
+
 @media only screen and (max-width : 1023px){
   
  aside{
@@ -510,12 +551,5 @@ footer p {
   margin-left: 46%;
 }
 
-}
-
-@media only screen and (max-width : 960px){
-
-  #ContenidoTorneo {
-  height: 135px;
-  }
 }
 
