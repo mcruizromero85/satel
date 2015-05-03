@@ -1,21 +1,21 @@
   <br/>
   <label class ="MostrarTorneo_datos" id="torneo_id"><b>Id del torneo:</b> <span id="id_torneo_registrado"><%=torneo.id %></span></label>
   <br/>
-  <br/>
+
   <label class ="MostrarTorneo_datos" id="torneo_titulo"><b>Titulo del torneo:</b> <%=torneo.titulo%></label>
   </br>
-  </br>
+
   <label class ="MostrarTorneo_datos" id="cuadro_de_juegos"><b>Juego:</b> <%=torneo.juego.nombre%><br/>
     <img class = "Img_registroTorneo" src="<%= image_path(torneo.juego.nombre_imagen) %>" >
   </label>
   </br>
-  </br>
+
   <label class ="MostrarTorneo_datos" id="cuadro_de_vacantes"><b>Vacantes: </b><%=torneo.vacantes%></label>
   <br>
-  <br>
+ 
   <label class ="MostrarTorneo_datos" id="Fecha_inscripcion"><b>Fecha cierre inscripci&oacute;n:</b> <%= torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %></label>
   <br>
-  <br>
+
   <div  class="fb-post" data-href="<%=torneo.post_detalle_torneo%>" ></div>
   <br/>
   <br/>  
