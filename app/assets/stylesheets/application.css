@@ -22,7 +22,6 @@ header{
 }
 
 nav {
-  background-color: #383838;
   float: right;
   height: 99%;
   line-height: 29px;
@@ -48,7 +47,6 @@ nav ul li{
     display: inline-block;
     float: left;
     padding: 10px;
-    border: 1px solid #484848;
 }
 
 nav ul li:hover{
@@ -461,18 +459,6 @@ footer p{
     display:inline-block;
   }
 
-  nav ul, nav:active ul { 
-    display: none;
-    position: absolute;
-    padding: 20px;
-  /*  background: #fff;*/
-    border: 5px solid #444;
-    right: 20px;
-    top: 60px;
-    width: 50%;
-    border-radius: 4px 0 4px 4px;
-  }
-
   nav li {
     text-align: center;
     width: 100%;
@@ -611,6 +597,7 @@ footer p {
     left:-100%;
     margin:0;
     position: fixed;
+    z-index: 100;
   }
   header nav ul li {
     background-color: #111;
