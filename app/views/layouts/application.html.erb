@@ -12,6 +12,7 @@
   <%= csrf_meta_tags %>
   <script type="text/javascript" src="/assets/jquery.bracket.min.js"></script>  
   <script type="text/javascript" src="/assets/jquery.sheepItPlugin.js"></script>
+
 </head>
 <body data-no-turbolink >
 <div id="fb-root"></div>
@@ -26,7 +27,9 @@
     <img class="logo" src="<%= image_path("logo.png") %>" alt="Satel"/>
   </a>  
      <nav role="navigation">
+
       <a id="menu-icon" href="#"></a>
+      
       <ul><!--Lista de navegación-->
         <li><a id="link_cabecera_registrar_torneo" href="/torneos/new">Organizar un torneo</a></li>
         <li><a id="link_mis_torneos" href="/torneos/mis_torneos">Mis torneos</a></li>
@@ -47,6 +50,7 @@
       </nav>
 </header>
 <%= yield %>
+
  <footer>
   <br/>
   <p><u>Pr&oacute;ximamente en redes sociales</u></p><br>  

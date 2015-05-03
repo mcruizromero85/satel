@@ -1,3 +1,4 @@
+
 body{
     font-size: 16px;
     margin: 0;
@@ -21,6 +22,7 @@ header{
 }
 
 nav {
+  background-color: #383838;
   float: right;
   height: 99%;
   line-height: 29px;
@@ -29,6 +31,7 @@ nav {
 }
 
 #menu-icon {
+  display: hidden;
   width: 40px;
   height: 40px;
   background: #000 url(../assets/menu-icon.png) center;
@@ -46,6 +49,11 @@ nav ul li{
     display: inline-block;
     float: left;
     padding: 10px;
+    border: 1px solid #484848;
+}
+
+nav ul li:hover{
+  background-color:#505050 ;
 }
 
 nav ul{
@@ -277,7 +285,8 @@ margin-top: 10px;
 .FrmRegistrarTorneo h1{
     text-align: center;
     width: 100%;
- }   
+     margin-left: -6%;
+ }  
 
 .FrmRegistrarTorneo input[type="text"]{
     font-size: 15px;
@@ -309,6 +318,7 @@ margin-top: 10px;
     font-size: 20px;
     text-decoration: none;
     font-weight: bold;
+    margin-left: -20%;
 }
 
 .Enlace_detalle_registrarTorneo:hover{
@@ -422,6 +432,22 @@ footer p{
   color: white;
 }
 
+/*Estilos para mostrar el torneo registrado*/
+.Img_registroTorneo{
+  width: 56.8%;
+  margin-left: 14%;
+}
+
+.MostrarTorneo_datos{
+  
+  margin-left: 14%;
+}
+
+.fb-post{
+  margin-left: 14%;
+ 
+}
+
 
 
 /*MEDIA QUERY*/
@@ -430,6 +456,35 @@ footer p{
   aside{
     display: none;
   }
+
+  #menu-icon {
+    display:inline-block;
+  }
+
+  nav ul, nav:active ul { 
+    display: none;
+    position: absolute;
+    padding: 20px;
+  /*  background: #fff;*/
+    border: 5px solid #444;
+    right: 20px;
+    top: 60px;
+    width: 50%;
+    border-radius: 4px 0 4px 4px;
+  }
+
+  nav li {
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    margin: 0;
+
+  }
+
+  nav:hover ul {
+    display: block;
+  }
+
 
 .Torneos article {
   float: left;
@@ -515,44 +570,3 @@ footer p {
 
 }
 
-@media only screen and (max-width : 960px){
-
-  #ContenidoTorneo {
-  height: 135px;
-  }
-}
-
-@media only screen and (max-width : 737px){
-  #menu-icon {
-    display:inline-block;
-  }
-
-  nav {
-    background-color: #000;
-  }
-
-  nav ul, nav:active ul { 
-    display: none;
-    position: absolute;
-    padding: 20px;
-    background: #000;
-    border: 5px solid #444;
-    right: 20px;
-    top: 40px;
-    width: 50%;
-    border-radius: 4px 0 4px 4px;
-
-  }
-
-  nav li {
-    text-align: center;
-    width: 100%;
-    padding: 10px 0;
-    margin: 0;
-
-  }
-
-  nav:hover ul {
-    display: block;
-  }
-}
