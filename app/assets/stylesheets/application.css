@@ -43,10 +43,6 @@ a:hover#menu-icon {
   border-radius: 4px 4px 0 0;
 }
 
-.menu_bar {
-  display:none;
-}
-
 nav ul li{
     font-weight: normal;
     display: inline-block;
