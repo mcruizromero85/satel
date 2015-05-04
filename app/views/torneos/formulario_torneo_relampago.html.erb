@@ -1,0 +1,23 @@
+ <section class="FrmRegistrarTorneo">
+  <h1>Arma tus llaves</h1>
+  <br/>
+  <%= form_tag({controller: "torneos", action: "agregar_gamers_temporales"}, method: "post") %>
+  <% if @torneo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@torneo.errors.count, "error") %> No permiten registrar el torneo:</h2>
+
+      <ul>
+      <% @torneo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+	<label id="torneo_gamers_label">Gamers
+		<br/>
+		<textarea rows="4" cols="50" name="gamers" id="gamers"></textarea>
+	</label>
+	<center><input name="commit" type="submit" value="Iniciar Torneo!!!" /></center>
+  <input name="id_torneo" type="hidden" value="<%=@torneo.id%>" />
+</section>
