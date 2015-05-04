@@ -285,6 +285,16 @@ margin-top: 10px;
      margin-left: -6%;
  }  
 
+.FrmRegistrarTorneo textarea {
+    font-size: 15px;
+    box-sizing: border-box;
+    margin: 15px 0 15px 0;
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #7ac9b7;
+}  
+
 .FrmRegistrarTorneo input[type="text"]{
     font-size: 15px;
     box-sizing: border-box;

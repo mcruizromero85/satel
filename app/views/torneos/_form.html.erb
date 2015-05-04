@@ -26,7 +26,11 @@
   <% end %>
 
 <label id="torneo_titulo_label">Titulo del torneo <input type="text" name="torneo[titulo]" id="torneo_titulo" placeholder="<%=@torneo.titulo%>"size="12" /></label>
-<label id="torneo_paginaweb_label">Post de facebook con informaci&oacute;n del torneo(opcional) <input type="text" name="torneo[post_detalle_torneo]" id="torneo_post_detalle_torneo" placeholder="Link del post facebook con el detalle de tu torneo" value="<%=@torneo.post_detalle_torneo%>" size="12"/></label>
+<label id="torneo_paginaweb_label">Post de facebook con informaci&oacute;n del torneo<input type="text" name="torneo[post_detalle_torneo]" id="torneo_post_detalle_torneo" placeholder="Link del post facebook con el detalle de tu torneo" value="<%=@torneo.post_detalle_torneo%>" size="12"/></label>
+
+<label id="torneo_urlstreeming_label">Url de canal twitch para transmitir el torneo<input type="text" name="torneo[urlstreeming]" id="torneo_urlstreeming" placeholder="Link del canal twitch para transmitir el torneo" value="<%=@torneo.urlstreeming%>" size="12"/></label>
+
+
 <label >Seleccione el juego: </label> 
   <p id="cuadro_de_juegos">
               <% Juego.all.each do | juego | %>   

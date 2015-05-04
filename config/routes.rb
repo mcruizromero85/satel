@@ -32,11 +32,12 @@ Satel::Application.routes.draw do
   get '/torneos/iniciar/:id_torneo' => 'torneos#iniciar_torneo'
   get '/inscripciones/revisar_datos_inscripcion/:id' => 'inscripciones#revisar_datos_inscripcion'
   get '/inscripciones/:id/eliminar' => 'inscripciones#destroy'
+  get '/torneo_relampago/:id_torneo' => 'torneos#formulario_torneo_relampago'
 
   resources :rondas
 
   resources :torneos
-
+  post '/agregar_gamers_temporales' => 'torneos#agregar_gamers_temporales'
   post '/comenzar' => 'torneos#comenzar'
   root 'torneos#index'
   get '/auth/:provider/callback' => 'authentications#create'

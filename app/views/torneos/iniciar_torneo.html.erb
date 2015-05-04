@@ -87,7 +87,7 @@
     <article id="llaves"></article> 
   </article> 
   <article id="tabs-2">
-    <iframe src="http://www.twitch.tv/starcraft_lima2/embed" frameborder="0" scrolling="no" height="378" width="620"></iframe><a href="http://www.twitch.tv/starcraft_lima2?tt_medium=live_embed&tt_content=text_link" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline;">Watch live video from Starcraft_lima2 on www.twitch.tv</a>
+    <iframe src="<%=@torneo.urlstreeming%>/embed" frameborder="0" scrolling="no" height="378" width="620"></iframe><a href="http://www.twitch.tv/starcraft_lima2?tt_medium=live_embed&tt_content=text_link" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px;text-decoration:underline;">Watch live video from Starcraft_lima2 on www.twitch.tv</a>
   </article>
   <article id="tabs-3">
     <%= render partial: "reutilizable/ficha_presentacion_torneo_detallado", object: @torneo, as: :torneo %>
@@ -96,16 +96,7 @@
           <aside>
             <br/>
             <article id="tabs_comentario">
-                <ul>
-                  <li><a href="#tabs_comentario-1">Comentarios</a></li>
-                  <li><a href="#tabs_comentario-2">Chat</a></li>                  
-                </ul>
-              <article id="tabs_comentario-1">
-                <div class="fb-comments" data-href="http://satel-staging.herokuapp.com/" data-width="380" data-numposts="5" data-colorscheme="light"></div>
-              </article>
-              <article id="tabs_comentario-2">
-                <iframe src="http://www.twitch.tv/starcraft_lima2/chat?popout=" frameborder="0" scrolling="no" height="500" width="350"></iframe>
-              </article>
+                <iframe src="<%=@torneo.urlstreeming%>/chat?popout=" frameborder="0" scrolling="no" height="500" width="350"></iframe>
             </article>
           </aside>
 </section>

@@ -45,6 +45,7 @@ class TorneosController < ApplicationController
   def new
     @torneo = Torneo.new
     @torneo.estado = 'Pendiente'
+    @torneo.urlstreeming = 'http://www.twitch.tv/kripty85'
     @torneo.vacantes = 8
     @torneo.cierre_inscripcion = (Time.new + (60 * 60 * 0.5))
   end
@@ -93,6 +94,36 @@ class TorneosController < ApplicationController
     end
   end
 
+  def formulario_torneo_relampago
+    @torneo = Torneo.find(params[:id_torneo])
+  end
+
+  def agregar_gamers_temporales
+    torneo = Torneo.find_by(id: params[:id_torneo], gamer_id: current_gamer.id)
+    gamers_array = params['gamers']
+
+    gamers_array.each_line do | gamer_temporal_nick |
+      gamer_temporal_nick = gamer_temporal_nick.strip
+      gamer = Gamer.new(correo: gamer_temporal_nick + '@temporal.com' , apellidos: gamer_temporal_nick)
+      gamer.nombres = gamer_temporal_nick + '_temporal'
+      gamer.nick = gamer_temporal_nick
+      gamer.save
+
+      authentication = Authentication.new(provider: 'temporal', uid: gamer.correo, gamer: gamer)
+      authentication.save
+
+      inscripcion = Inscripcion.new
+      inscripcion.gamer = gamer
+      inscripcion.torneo = torneo
+      inscripcion.estado = 'Confirmado'
+      inscripcion.tipo_inscripcion = 2
+      inscripcion.save      
+    end
+    respond_to do |format|
+      format.html { redirect_to action: 'iniciar_torneo', id_torneo: torneo.id }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -100,8 +131,10 @@ class TorneosController < ApplicationController
     @torneo = Torneo.find(params[:id])
   end
 
+
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def torneo_params
-    params.require(:torneo).permit(:titulo, :paginaweb, :vacantes, :cierre_inscripcion, :post_detalle_torneo,:periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego)
+    params.require(:torneo).permit(:titulo, :urlstreeming, :vacantes, :cierre_inscripcion, :post_detalle_torneo,:periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego)
   end
 end
