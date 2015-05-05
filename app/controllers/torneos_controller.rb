@@ -116,7 +116,6 @@ class TorneosController < ApplicationController
       inscripcion.gamer = gamer
       inscripcion.torneo = torneo
       inscripcion.estado = 'Confirmado'
-      inscripcion.tipo_inscripcion = 2
       inscripcion.save      
     end
     respond_to do |format|
