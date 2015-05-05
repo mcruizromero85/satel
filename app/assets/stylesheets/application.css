@@ -50,7 +50,7 @@ nav ul li{
 }
 
 nav ul li:hover{
-  background-color:#505050 ;
+  background-color: #505050;
 }
 
 nav ul{
@@ -221,7 +221,6 @@ font-size:90%;
   margin-top: 10px;
   margin-left: 0%;
   margin-right: 0%;
-
 }
 
 .Torneos article{
@@ -232,7 +231,6 @@ font-size:90%;
   margin-right: 0.5%;
   width: 68%;
   border-radius: 4px;
-
  } 
 
 .Torneos article h1{
@@ -255,7 +253,6 @@ font-size:90%;
 }
 
 .Torneos aside{
-   
     float: left;
     background-color: #FFFFFF;
     width: 28%;
@@ -266,7 +263,6 @@ font-size:90%;
 
 .fb-comments {
     width: 100%;
-   
 }
 
 .FrmRegistrarTorneo{
@@ -276,8 +272,7 @@ font-size:90%;
     margin-right: 0px;
     margin-bottom: 0px;
     margin-left: 15%;
-   
-}
+  }
 
 .FrmRegistrarTorneo h1{
     text-align: center;
@@ -511,10 +506,7 @@ footer p{
 
 
 
- .Torneos{
-    margin-left: 4%;
-    margin-right: 0%;
-  }
+ 
 
  .Torneos article {
     width: 95%;
@@ -542,11 +534,16 @@ footer p{
   margin-left: 5%;
  }
 
+.Torneos{
+    margin-left: 4%;
+    margin-right: 0%;
+  }
 
   .Torneos article {
     width: 94%;
   }
 
+  
   #ContenidoTorneo img {
     height: 40%;
     width: 98%;
