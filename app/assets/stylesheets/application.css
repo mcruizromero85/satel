@@ -221,7 +221,6 @@ font-size:90%;
   margin-top: 10px;
   margin-left: 0%;
   margin-right: 0%;
-
 }
 
 .Torneos article{
@@ -232,7 +231,6 @@ font-size:90%;
   margin-right: 0.5%;
   width: 60%;
   border-radius: 4px;
-
  } 
 
 .Torneos article h1{
@@ -255,7 +253,6 @@ font-size:90%;
 }
 
 .Torneos aside{
-   
     float: left;
     background-color: #FFFFFF;
     width: 38%;
@@ -266,7 +263,6 @@ font-size:90%;
 
 .fb-comments {
     width: 100%;
-   
 }
 
 .FrmRegistrarTorneo{
@@ -276,7 +272,6 @@ font-size:90%;
     margin-right: 0px;
     margin-bottom: 0px;
     margin-left: 18%;
-   
 }
 
 .FrmRegistrarTorneo h1{
