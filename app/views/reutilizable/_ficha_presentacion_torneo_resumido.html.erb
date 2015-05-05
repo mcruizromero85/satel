@@ -1,12 +1,16 @@
-<article id="ContenidoTorneo">
-   <img  src="<%= image_path(torneo.juego.nombre_imagen) %>" >
-  <article>
-  <h2><a href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
-   <p>   	
-    M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
-    <b>Cierre de inscripci&oacute;n:</b> <%= torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %><br/>
-    <b>Periodo para confirmar: </b>  <%= torneo.periodo_confirmacion_en_minutos %> minutos <br/>
-    <a href="/torneos/<%=torneo.id%>">Ver m&aacute;s</a>
-    </p>	
+<section class="Torneos">
+  <article id="Inscripcion_Detalle">
+    <article id="ContenidoTorneo">
+       <img  src="<%= image_path(torneo.juego.nombre_imagen) %>" >
+        <article>
+         <h2><a href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
+         <p>   	
+          M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
+          <b>Cierre de inscripci&oacute;n:</b> <%= torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %><br/>
+          <b>Periodo para confirmar: </b>  <%= torneo.periodo_confirmacion_en_minutos %> minutos <br/>
+          <a href="/torneos/<%=torneo.id%>">Ver m&aacute;s</a>
+          </p>	
+         </article>
+    </article>
   </article>
-</article>
+</section>

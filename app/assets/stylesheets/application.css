@@ -230,7 +230,7 @@ font-size:90%;
   background-color: #47474D;
   margin-left: 1%;
   margin-right: 0.5%;
-  width: 60%;
+  width: 68%;
   border-radius: 4px;
 
  } 
@@ -258,7 +258,7 @@ font-size:90%;
    
     float: left;
     background-color: #FFFFFF;
-    width: 38%;
+    width: 28%;
     height: 566px;
     border-radius: 4px;
     overflow: auto;
@@ -275,7 +275,7 @@ font-size:90%;
     margin-top: 2%;
     margin-right: 0px;
     margin-bottom: 0px;
-    margin-left: 18%;
+    margin-left: 15%;
    
 }
 
@@ -325,7 +325,6 @@ font-size:90%;
     font-size: 20px;
     text-decoration: none;
     font-weight: bold;
-    margin-left: -20%;
 }
 
 .Enlace_detalle_registrarTorneo:hover{
@@ -398,8 +397,7 @@ footer{
     color: white;
 }
 footer p{
-    margin-right: 40%;
-    margin-left: 40%;
+    text-align: center;
 }
 
 .Enlaces {
@@ -455,9 +453,23 @@ footer p{
  
 }
 
-
+ #Inscripcion_Detalle{
+    width: 98%;
+ }
 
 /*MEDIA QUERY*/
+@media only screen and (max-width : 1204px){
+
+
+.Torneos article {
+  width: 55%;
+}
+
+.Torneos aside {
+  width: 43%;
+ } 
+
+}
 
 @media only screen and (max-width : 800px) {
  
@@ -500,7 +512,7 @@ footer p{
 
 
  .Torneos{
-    margin-left: 0%;
+    margin-left: 4%;
     margin-right: 0%;
   }
 
@@ -518,13 +530,19 @@ footer p{
 }
 
 /*2. Para moviles, hereda del item 1*/
-@media only screen and (max-width : 450px){
+@media only screen and (max-width : 670px){
   
   aside{
    display: none;
   }
 
- 
+ /*Ajustando el formulario de inscripciòn al movil*/
+ .FrmRegistrarTorneo {
+  width: 93%;
+  margin-left: 5%;
+ }
+
+
   .Torneos article {
     width: 94%;
   }
