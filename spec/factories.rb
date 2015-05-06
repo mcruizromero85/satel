@@ -10,9 +10,10 @@ FactoryGirl.define do
 
   factory :torneo do
     titulo 'TORNEO DE CS 1.6 ONLINE - THE LAST CHANCE'
-    paginaweb 'http://www.bloodzone.net/forums/f25/torneo-de-cs-1-6-online-last-chance-108544/'
+    post_detalle_torneo 'https://www.facebook.com/3gpwrLOCOPIEDRA/posts/599468586862802'
+    urlstreeming 'http://www.twitch.tv/kripty85'
     vacantes '8'
-    estado 'Pendiente'
+    estado 'Creado'
     cierre_inscripcion Time.new + (60 * 60 * 24 * 2)
     periodo_confirmacion_en_minutos '20'
   end

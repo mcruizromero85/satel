@@ -20,11 +20,10 @@ feature 'Registrar datos de torneo' do
     click_link('link_cabecera_registrar_torneo')
     torneo = FactoryGirl.build(:torneo)
     fill_in('torneo_titulo', with: torneo.titulo)
-    fill_in('torneo_paginaweb', with: torneo.paginaweb)
     choose 'juego_1'
     fill_in('cierre_inscripcion_fecha', with: 'adasdadas')
     fill_in('cierre_inscripcion_hora', with: 'ggggg')
-    click_button('Siguiente')
+    click_button('Registrar')
     expect(page).to have_content('la fecha de cierre de inscripciones tiene que ser mayor a la actual')
   end
 end

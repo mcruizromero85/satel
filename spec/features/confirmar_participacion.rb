@@ -8,7 +8,7 @@ feature 'Confirmar Participación' do
     autenticarse_como_gamer
     inscribirme_al_torneo
     confirmar_participacion
-    expect(page).to have_content('Tu confirmación se realizó con exito')
+    expect(page).to have_content('Tu confirmación se realizó con éxito')
   end
 
   def confirmar_participacion

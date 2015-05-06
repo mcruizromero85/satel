@@ -8,6 +8,6 @@ feature 'Inscribirse a un torneo' do
     registrar_torneo
     autenticarse_como_gamer
     inscribirme_al_torneo
-    expect(page).to have_content('Tu Inscripción se realizó con exito')
+    expect(page).to have_content('Tu Inscripción se realizó con éxito')
   end
 end

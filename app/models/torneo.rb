@@ -81,7 +81,7 @@ class Torneo < ActiveRecord::Base
   end
 
   def fecha_cierre_mayor_que_actual
-    return unless estado == 'Pendiente'
+    return unless estado == 'Creado'
     return unless (cierre_inscripcion.to_i - Time.new.to_i) < 0
     errors.add(:cierre_inscripcion, ', la fecha de cierre de inscripciones tiene que ser mayor a la actual')
   end

@@ -14,18 +14,6 @@ describe Torneo do
     expect(torneo.errors[:titulo].size).to eq 1
   end
 
-  it 'Sin error con página web con formato url' do
-    torneo = FactoryGirl.build(:torneo, paginaweb: 'http://www.paginaweb.com')
-    torneo.save
-    expect(torneo.errors[:paginaweb].size).to eq 0
-  end
-
-  it 'Error con páginaweb sin formato url' do
-    torneo = FactoryGirl.build(:torneo, paginaweb: 'url sin formato')
-    torneo.save
-    expect(torneo.errors[:paginaweb].size).to eq 1
-  end
-
   it 'Error con fecha cierre inscripción, fecha inscripción menor a la actual' do
     torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new - 60)
     torneo.save

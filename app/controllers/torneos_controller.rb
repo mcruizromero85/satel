@@ -64,7 +64,8 @@ class TorneosController < ApplicationController
     @torneo.estado = 'Creado'
     respond_to do |format|
       if @torneo.save
-        format.html { render action: 'show', notice: 'Torneo creado correctamente' }
+        @mensaje_de_guardado = 'Torneo creado correctamente'
+        format.html { render action: 'show'}
       else
         format.html { render action: 'new' }
       end

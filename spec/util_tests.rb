@@ -12,43 +12,32 @@
     click_link('link_cabecera_registrar_torneo')
     torneo = FactoryGirl.build(:torneo, cierre_inscripcion: cierre_inscripcion)
 
-    fill_in('torneo_titulo', with: torneo.titulo)
-    fill_in('torneo_paginaweb', with: torneo.paginaweb)
+    fill_in('torneo_titulo', with: torneo.titulo)    
     choose 'juego_1'
     fill_in('cierre_inscripcion_fecha', with: cierre_inscripcion.strftime('%d/%m/%Y'))
     fill_in('cierre_inscripcion_hora', with: cierre_inscripcion.strftime('%I:%M %p'))
     if minutos_confirmacion > 0
       select(minutos_confirmacion, from: 'torneo_periodo_confirmacion_en_minutos')
     end
-    click_button('Siguiente')
-    fill_in('ronda1_inicio_fecha', with: primera_ronda.strftime('%d/%m/%Y'))
-    fill_in('ronda1_inicio_tiempo', with: primera_ronda.strftime('%I:%M %p'))
-    fill_in('ronda2_inicio_fecha', with: segunda_ronda.strftime('%d/%m/%Y'))
-    fill_in('ronda2_inicio_tiempo', with: segunda_ronda.strftime('%I:%M %p'))
-    fill_in('ronda3_inicio_fecha', with: tercera_ronda.strftime('%d/%m/%Y'))
-    fill_in('ronda3_inicio_tiempo', with: tercera_ronda.strftime('%I:%M %p'))
-    click_button('Registrar Torneo')
+    click_button('Registrar')
   end
 
   def autenticarse_como_organizador
-    visit '/'
-    click_link('autenticarse')
+    visit '/auth/developer'
     fill_in('name', with: 'Gissella')
     fill_in('email', with: 'gcarhuamacaquispe@gmail.com')
     find('button').click
   end
 
   def autenticarse_como_gamer
-    visit '/'
-    click_link('autenticarse')
+    visit '/auth/developer'
     fill_in('name', with: 'Mauro')
     fill_in('email', with: 'mcruizromero85@gmail.com')
     find('button').click
   end
 
   def inscribirse_como(nombre, correo)
-    visit '/'
-    click_link('autenticarse')
+    visit '/auth/developer'
     fill_in('name', with: nombre)
     fill_in('email', with: correo)
     find('button').click
@@ -105,13 +94,9 @@
   def torneo_iniciado_con_vacantes_confirmadas(vacantes_confirmadas = 8)
     vacantes_confirmadas_calculado = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(vacantes_confirmadas)
     torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new + 10, vacantes: vacantes_confirmadas_calculado)
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 1))
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 2))
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 3)) if vacantes_confirmadas > 4
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 4)) if vacantes_confirmadas > 8
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 5)) if vacantes_confirmadas > 16
     torneo.save
     generar_inscripciones_confirmadas(vacantes_confirmadas, torneo)
+
     torneo.generar_encuentros
     torneo.estado = 'Iniciado'
     torneo.save
