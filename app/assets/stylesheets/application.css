@@ -229,7 +229,7 @@ font-size:90%;
   background-color: #47474D;
   margin-left: 1%;
   margin-right: 0.5%;
-  width: 68%;
+  width: 65%;
   border-radius: 4px;
  } 
 
@@ -239,6 +239,7 @@ font-size:90%;
 }
 #Lista_vacia{
   margin-top: 25%;
+  margin-bottom: 28%;
   color: white;
 }
 
@@ -255,8 +256,8 @@ font-size:90%;
 .Torneos aside{
     float: left;
     background-color: #FFFFFF;
-    width: 28%;
-    height: 566px;
+    width: 31%;
+    height: 515px;
     border-radius: 4px;
     overflow: auto;
 }
@@ -410,8 +411,8 @@ footer p{
 }
 
 #tabs_comentario{
-  background-color: white;
-  width: 98%;
+  background-color:#f2f2f2;
+  width: 95%;
   margin-top: -18px;
   margin-left: 0;
   
@@ -457,7 +458,7 @@ footer p{
 
 
 .Torneos article {
-  width: 55%;
+  width: 54%;
 }
 
 .Torneos aside {
@@ -466,7 +467,7 @@ footer p{
 
 }
 
-@media only screen and (max-width : 800px) {
+@media only screen and (max-width : 860px) {
  
  aside {
   display: none;
