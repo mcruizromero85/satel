@@ -371,7 +371,8 @@ table {
    border-radius: 3px;
    border-collapse: separate; 
    text-align: left; 
-   width: 100%; 
+   width: 88%; 
+   margin-left: 5%;
 }
 
 table thead {
@@ -431,6 +432,23 @@ footer p{
 
 #tabs-3{
   color: white;
+  width: 90%;
+  padding: 0;
+  margin-left: 0%;
+  margin-top: -5%;
+}
+
+#tabs-3 img{
+width: 66%;
+}
+
+#tabs-3 table {
+  width: 66%;
+  margin-left: 14%;
+}
+
+#tabs-3 iframe{
+  width: 400px;
 }
 
 /*Estilos para mostrar el torneo registrado*/
@@ -452,6 +470,8 @@ footer p{
  #Inscripcion_Detalle{
     width: 98%;
  }
+
+
 
 /*MEDIA QUERY*/
 @media only screen and (max-width : 1204px){
