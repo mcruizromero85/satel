@@ -328,7 +328,10 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
     padding: 0.2em;
     position: absolute;
     top: 0;
+    background: url("ui-bg_flat_75_ffffff_40x100.png") repeat-x scroll 50% 50% #FFFFFF;
+ 
 }
+
 .ui-dialog .ui-dialog-titlebar {
     padding: 0.4em 1em;
     position: relative;
