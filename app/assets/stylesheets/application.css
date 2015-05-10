@@ -440,7 +440,8 @@ footer p{
 
 #tabs-3 img{
 
-max-width: 551px;
+width: 73%;
+
 }
 
 
@@ -474,7 +475,9 @@ max-width: 551px;
 
 #tabs-2{
   width: 100%;
-  height: 681px;
+  height: 569px;
+  margin: 0;
+  padding: 0;
 }
 
 /*MEDIA QUERY*/
@@ -489,15 +492,16 @@ max-width: 551px;
   width: 43%;
  } 
 
+#tabs-3 div {
+  display: none;
+}
  
 
 }
 
 @media only screen and (max-width : 1000px){
 
- #tabs-3 div {
-  display: none;
- }
+
 
  #tabs-3{
     margin-left: 5%;
@@ -642,6 +646,12 @@ max-width: 551px;
 
   #ContenidoTorneo article {
     width: 95%;
+  }
+
+  #tabs-2{
+
+  height: 350px;
+
   }
   
   footer p {
