@@ -439,14 +439,15 @@ footer p{
 }
 
 #tabs-3 img{
-width: 73%;
 
+max-width: 551px;
 }
 
 
 #tabs-3 table {
   width: 73%;
   margin-left: 14%;
+  margin-bottom: 5%;
 }
 
 
