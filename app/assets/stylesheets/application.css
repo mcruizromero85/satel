@@ -435,21 +435,21 @@ footer p{
   width: 90%;
   padding: 0;
   margin-left: 0%;
-  margin-top: -5%;
+  margin-top: 0%;
 }
 
 #tabs-3 img{
-width: 66%;
+width: 73%;
+
 }
 
+
 #tabs-3 table {
-  width: 66%;
+  width: 73%;
   margin-left: 14%;
 }
 
-#tabs-3 iframe{
-  width: 400px;
-}
+
 
 /*Estilos para mostrar el torneo registrado*/
 .Img_registroTorneo{
@@ -526,7 +526,6 @@ width: 66%;
   }
 
 
-
  
 
  .Torneos article {
@@ -540,6 +539,9 @@ width: 66%;
   margin-left: 20%;
   text-align: center;
  }
+
+ 
+
 }
 
 /*2. Para moviles, hereda del item 1*/
@@ -578,6 +580,38 @@ width: 66%;
     margin-right: 9%;
     margin-left: 9%;
     text-align: center;
+  }
+
+
+  #tabs-3{
+    margin-left: 5%;
+  }
+
+  #tabs-3 .MostrarTorneo_datos{
+    margin-left: 0;
+    margin-left: 0.5%;
+  }
+
+  #tabs-3 img {
+    margin-left: 0.5%;
+    width: 100%;
+  }
+
+  #tabs-3 div{
+    display: none;
+  }
+
+  #tabs-3 table{
+    margin-left: 0;
+    width: 100%;
+  }
+
+  #tabs-3 h1{
+    margin-top: -8%;
+  }
+
+   #tabs-2{
+    display: none;
   }
 }
 
