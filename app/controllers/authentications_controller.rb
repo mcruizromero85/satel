@@ -1,11 +1,13 @@
 class AuthenticationsController < ApplicationController
-  # GET /authentications/1/edit
   def edit
   end
 
   def create
     auth = request.env['omniauth.auth']
+    
     @auth = Authentication.where('uid = ? AND provider = ?', auth['uid'], auth['provider']).first
+    facebook_gamer = auth['info']
+    print auth['info']
     unless @auth
       facebook_gamer = auth['info']
       gamer = Gamer.new(correo: facebook_gamer.email, apellidos: facebook_gamer.last_name)
@@ -16,7 +18,7 @@ class AuthenticationsController < ApplicationController
       end
       gamer.save
 
-      authentication = Authentication.new(provider: auth['provider'], uid: auth['uid'], gamer: gamer)
+      authentication = Authentication.new(provider: auth['provider'], uid: auth['uid'], gamer: gamer, link_cuenta: auth['info'].urls.Facebook)
       authentication.save
       @auth = authentication
     end

@@ -13,12 +13,20 @@
           <h1 id="Lista_vacia">A&uacute;n no existe torneos registrados, puedes registrar el tuyo haciendo clic <a href="/torneos/new">aqu&iacute;</a></h1>
         <% end %>
       </article>
-        
       <aside>
-        <br/>
-        
-        <div class="fb-comments" data-href="http://satel-staging.herokuapp.com/" data-width="380" data-numposts="5" data-colorscheme="light"></div>
-         
+        <script>
+          (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.3&appId=686458234757061";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+
+          $(document).ready(main);
+        </script>          
+          <br/>
+          <div class="fb-comments" data-href="http://www.ggesports.la/" data-width="380" data-numposts="7" data-colorscheme="light" data-order-by="reverse_time"></div>
         </aside>
     </section>
 

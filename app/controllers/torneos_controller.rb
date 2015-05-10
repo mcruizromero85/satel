@@ -100,7 +100,7 @@ class TorneosController < ApplicationController
   end
 
   def agregar_gamers_temporales
-    torneo = Torneo.find_by(id: params[:id_torneo], gamer_id: current_gamer.id)
+    torneo = Torneo.find_by(id: params[:id_torneo], gamer_id: current_gamer.id, estado: "Creado")
     gamers_array = params['gamers']
 
     gamers_array.each_line do | gamer_temporal_nick |

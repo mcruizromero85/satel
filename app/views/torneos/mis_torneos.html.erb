@@ -24,7 +24,7 @@
               <% if torneo.estado == "Iniciado"%>
                 <a class="Enlace_torneosDisponibles" id="link_seguimiento_torneo_<%=torneo.id%>" href="/torneos/iniciar/<%=torneo.id%>"><font color="green">Seguimiento</font></a>
               <% else %>
-                <a class="Enlace_torneosDisponibles" id="link_iniciar_torneo_<%=torneo.id%>" href="/torneos/iniciar/<%=torneo.id%>">Iniciar ya!!!</a> 
+                <a class="Enlace_torneosDisponibles" id="link_iniciar_torneo_<%=torneo.id%>" href="/torneos/iniciar/<%=torneo.id%>">Iniciar ya!!!</a>, <a class="Enlace_torneosDisponibles" href="/torneo_relampago/<%=torneo.id%>" >Agregar gamers fantasmas</a>
               <% end %>
             </td>
           </tr>

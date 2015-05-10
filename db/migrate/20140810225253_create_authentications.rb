@@ -4,6 +4,7 @@ class CreateAuthentications < ActiveRecord::Migration
       t.integer :gamer_id
       t.string :provider
       t.string :uid
+      t.string :link_cuenta
       t.timestamps
     end
   end

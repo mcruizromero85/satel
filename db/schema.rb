@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.integer  "gamer_id"
     t.string   "provider"
     t.string   "uid"
+    t.string   "link_cuenta"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
