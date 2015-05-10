@@ -278,7 +278,7 @@ font-size:90%;
 .FrmRegistrarTorneo h1{
     text-align: center;
     width: 100%;
-     margin-left: -6%;
+    margin-left: 0%;
  }  
 
 .FrmRegistrarTorneo textarea {
@@ -447,25 +447,29 @@ width: 73%;
 
 #tabs-3 table {
   width: 73%;
-  margin-left: 14%;
+  margin-left: 28%;
   margin-bottom: 5%;
+}
+
+#tabs-3 h1{
+  margin-left: 28%;
 }
 
 
 
 /*Estilos para mostrar el torneo registrado*/
 .Img_registroTorneo{
-  width: 550px;
-  margin-left: 14%;
+  width: 552px;
+  margin-left: 28%;
 }
 
 .MostrarTorneo_datos{
   line-height: 29px;
-  margin-left: 14%;
+  margin-left: 28%;
 }
 
 .fb-post{
-  margin-left: 14%;
+  margin-left: 28%;
  
 }
 
@@ -541,9 +545,6 @@ width: 73%;
     width: 10%;
   }
 
-  .fb-post{
-    margin-left: 0;
-  }
 
 }
 
