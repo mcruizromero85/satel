@@ -87,7 +87,7 @@
     <article id="llaves"></article> 
   </article> 
   <article id="tabs-2" style="width: 1085px; height: 681px" >
-    <iframe src="http://www.twitch.tv/Antaurustv/embed" frameborder="0" scrolling="no" height="100%" width="100%"></iframe><a href="http://www.twitch.tv/starcraft_lima2?tt_medium=live_embed&tt_content=text_link" style="padding:2px 0px 4px; display:block; width:100%; font-weight:normal; font-size:10px;text-decoration:underline;"></a>
+    <iframe src="http://www.twitch.tv/<%=@torneo.urlstreeming%>/embed" frameborder="0" scrolling="no" height="100%" width="100%"></iframe><a href="http://www.twitch.tv/starcraft_lima2?tt_medium=live_embed&tt_content=text_link" style="padding:2px 0px 4px; display:block; width:100%; font-weight:normal; font-size:10px;text-decoration:underline;"></a>
   </article>
   <article id="tabs-3">
     <%= render partial: "reutilizable/ficha_presentacion_torneo_detallado", object: @torneo, as: :torneo %>
@@ -96,7 +96,7 @@
           <aside>
             <br/>
             <article id="tabs_comentario">
-                <iframe src="http://www.twitch.tv/Antaurustv/chat?popout=" frameborder="0" scrolling="no" height="500" width="100%"></iframe>                
+                <iframe src="http://www.twitch.tv/<%=@torneo.urlstreeming%>/chat?popout=" frameborder="0" scrolling="no" height="500" width="100%"></iframe>                
             </article>
           </aside>
 </section>
