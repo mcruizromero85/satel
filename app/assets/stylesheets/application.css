@@ -540,7 +540,9 @@ width: 73%;
   text-align: center;
  }
 
- 
+  #tabs-3 div{
+    display: none;
+  }
 
 }
 
@@ -597,21 +599,29 @@ width: 73%;
     width: 100%;
   }
 
-  #tabs-3 div{
-    display: none;
-  }
+ 
 
   #tabs-3 table{
     margin-left: 0;
     width: 100%;
   }
 
+  #tabs-3 table thead{
+    font-size: 10px;
+  }
+
+  #tabs-3 table tbody{
+    font-size: 12px;
+  }
+
   #tabs-3 h1{
     margin-top: -8%;
   }
 
-   #tabs-2{
-    display: none;
+  #tabs-3 .fb-post{
+    margin-left: -4%;
   }
+
+ 
 }
 
