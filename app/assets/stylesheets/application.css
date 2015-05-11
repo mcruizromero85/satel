@@ -485,6 +485,22 @@ width: 73%;
 }
 
 /*MEDIA QUERY*/
+@media only screen and (max-width : 1366px){
+
+ .MostrarTorneo_datos{
+    margin-left: 14%;
+  }
+}
+  .Img_registroTorneo{
+    margin-left: 14%;
+  }
+
+  .fb-post{
+    margin-left: 14%;
+  }
+  
+ 
+}
 @media only screen and (max-width : 1204px){
 
 
@@ -605,10 +621,12 @@ width: 73%;
 
  .Img_registroTorneo{
   margin-left: 0%;
-  width: 80%;
+  width: 95%;
  }
 
-
+ .fb-post{
+  margin-left: 0%;
+ }
  
 }
 
