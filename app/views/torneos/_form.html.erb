@@ -33,7 +33,7 @@
 
 <label >Seleccione el juego: </label> 
   <p id="cuadro_de_juegos">
-              <% Juego.all.each do | juego | %>   
+              <% Juego.juegos_disponibles.each do | juego | %>   
                 <input type="radio" class="Radio_juego" id='juego_<%=juego.id%>' name='juego[id]' value="<%=juego.id%>" checked='checked'>
                 <label for="juego_<%=juego.id%>"><%= juego.nombre %></label>
           

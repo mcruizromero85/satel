@@ -37,19 +37,19 @@ class Torneo < ActiveRecord::Base
   end
 
   def self.obtener_torneos_iniciados(gamer_logeado)
-    Torneo.joins(:inscripciones).where('torneos.estado = :estado and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado_inscripcion ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Iniciado').order(cierre_inscripcion: :asc)
+    Torneo.joins(:inscripciones).where('torneos.estado = :estado and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado_inscripcion ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Iniciado').order(clasificacion: :asc, cierre_inscripcion: :asc)
   end
 
   def self.obtener_torneos_ya_confirmados(gamer_logeado)
-    Torneo.joins(:inscripciones).where('torneos.estado = :estado and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado_inscripcion ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Creado').order(cierre_inscripcion: :asc)
+    Torneo.joins(:inscripciones).where('torneos.estado = :estado and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado_inscripcion ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Creado').order(clasificacion: :asc, cierre_inscripcion: :asc)
   end
 
   def self.obtener_torneos_ya_inscrito(gamer)
-    Torneo.joins(:inscripciones).where('torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado in(:estado, :estado)', fecha_actual: Time.new, gamer_id: gamer.id, estado: 'Inscrito').order(cierre_inscripcion: :asc)
+    Torneo.joins(:inscripciones).where('torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado in(:estado, :estado)', fecha_actual: Time.new, gamer_id: gamer.id, estado: 'Inscrito').order(clasificacion: :asc, cierre_inscripcion: :asc)
   end
 
   def self.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados = [-1])
-    Torneo.all.order(cierre_inscripcion: :asc).limit(20).where('cierre_inscripcion > :fecha_actual and id not in (:ids_torneos_inscritos_y_confirmados)', fecha_actual: Time.new, ids_torneos_inscritos_y_confirmados: ids_torneos_inscritos_y_confirmados)
+    Torneo.all.order(clasificacion: :asc, cierre_inscripcion: :asc).limit(20).where('cierre_inscripcion > :fecha_actual and id not in (:ids_torneos_inscritos_y_confirmados)', fecha_actual: Time.new, ids_torneos_inscritos_y_confirmados: ids_torneos_inscritos_y_confirmados)
   end
 
   def agregar_ronda(ronda)

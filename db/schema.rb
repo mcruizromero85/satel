@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.string   "nombre"
     t.string   "descripcion"
     t.string   "nombre_imagen"
+    t.integer  "tipo_juego" # 0 -> normal, 1 -> Corresponde a torneo destacado
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.integer  "periodo_confirmacion_en_minutos", null: false
     t.string   "tipo_torneo"# Individual / Moba
     t.string   "tipo_generacion" #Simple / Doble / Grupos Round Robin / Grupos Round Robin doble llave
+    t.integer  "clasificacion" #0 -> Normal ó 1 -> Destacado
     t.integer  "gamer_id"
     t.integer  "juego_id"
     t.string   "estado"
