@@ -490,15 +490,23 @@ width: 73%;
  .MostrarTorneo_datos{
     margin-left: 14%;
   }
-}
+
   .Img_registroTorneo{
     margin-left: 14%;
   }
 
-  .fb-post{
+ 
+  #tabs-3 table {
     margin-left: 14%;
   }
+
+  #tabs-3 h1{
+    margin-left: 0%;
+  }
   
+ .fb-post{
+  margin-left: 14%;
+ }
  
 }
 @media only screen and (max-width : 1204px){
@@ -515,7 +523,8 @@ width: 73%;
 #tabs-3 div {
   display: none;
 }
- 
+
+
 
 }
 
@@ -544,6 +553,10 @@ width: 73%;
     width: 100%;
   }
 
+  aside {
+    display: none;
+  }
+
   #tabs-3 table thead{
     font-size: 10px;
   }
@@ -553,13 +566,10 @@ width: 73%;
   }
 
   #tabs-3 h1{
-    margin-top: -4%;
+    margin-top: 0%;
   }
 
-  #tabs-3 .fb-post{
-    margin-left: -4%;
-    width: 10%;
-  }
+ 
 
 
 }
@@ -569,6 +579,11 @@ width: 73%;
  aside {
   display: none;
  }
+
+  .FrmRegistrarTorneo div {
+  display: none;
+  }
+
 
  .logo {
     
@@ -624,9 +639,7 @@ width: 73%;
   width: 95%;
  }
 
- .fb-post{
-  margin-left: 0%;
- }
+ 
  
 }
 
@@ -643,9 +656,6 @@ width: 73%;
   margin-left: 5%;
  }
 
- .FrmRegistrarTorneo div {
-  display: none;
-}
 
 
 .Torneos{
@@ -679,8 +689,5 @@ width: 73%;
     text-align: center;
   }
 
-
-  
- 
 }
 
