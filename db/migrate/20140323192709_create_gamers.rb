@@ -6,7 +6,6 @@ class CreateGamers < ActiveRecord::Migration
       t.string :nombres
       t.string :apellidos
       t.date :fecha_ultimo_login
-
       t.timestamps
     end
   end

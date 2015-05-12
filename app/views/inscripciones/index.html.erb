@@ -39,7 +39,7 @@
       <% @inscripciones.each do |inscripcion| %>
         <tr>
           <td><%= posicion %></td>
-          <td><%= inscripcion.gamer.nick %></td>
+          <td><%= inscripcion.nick %></td>
           <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
           <td><%= inscripcion.estado %></td>
           <td>

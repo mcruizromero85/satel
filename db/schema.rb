@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.integer  "torneo_id"
     t.belongs_to :gamer, null: false
     t.string   "estado"
+    t.string   "nick"
     t.integer "tipo_inscripcion" #0 = Normal, 1 = Free Win, 3 = #Gamer Temporal
     t.datetime "created_at"
     t.datetime "updated_at"

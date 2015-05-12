@@ -32,6 +32,7 @@ class InscripcionesController < ApplicationController
     current_gamer.save
     @inscripcion = Inscripcion.new
     @inscripcion.gamer = current_gamer
+    @inscripcion.nick = gamer_params[:nick]
     @inscripcion.torneo = Torneo.find(params[:id_torneo])
 
     respond_to do |format|

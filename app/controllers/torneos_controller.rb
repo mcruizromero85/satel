@@ -115,6 +115,7 @@ class TorneosController < ApplicationController
 
       inscripcion = Inscripcion.new
       inscripcion.gamer = gamer
+      inscripcion.nick = gamer_temporal_nick
       inscripcion.torneo = torneo
       inscripcion.estado = 'Confirmado'
       inscripcion.save      

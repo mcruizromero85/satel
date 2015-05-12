@@ -22,6 +22,7 @@ class Inscripcion < ActiveRecord::Base
       inscripcion = Inscripcion.new
       inscripcion.torneo = torneo
       inscripcion.gamer = gamer
+      inscripcion.nick = gamer.nick
       inscripcion.tipo_inscripcion = 1
       inscripcion.estado = 'Confirmado'
       inscripcion.save

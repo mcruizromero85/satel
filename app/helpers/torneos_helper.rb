@@ -46,13 +46,13 @@ module TorneosHelper
     contador = 1
     torneo.rondas.where(numero: 1).first.encuentros.each do | encuentro |
       if !encuentro.gamerinscritoa.nil?
-        array_para_llaves.concat("[\"" + encuentro.gamerinscritoa.gamer.etiqueta_para_bracket + "\",")
+        array_para_llaves.concat("[\"" + encuentro.gamerinscritoa.nick + "\",")
       else
         array_para_llaves.concat("[\"\",")
       end
 
       if !encuentro.gamerinscritob.nil?
-        array_para_llaves.concat("\"" + encuentro.gamerinscritob.gamer.etiqueta_para_bracket + "\"]")
+        array_para_llaves.concat("\"" + encuentro.gamerinscritob.nick + "\"]")
       else
         array_para_llaves.concat("\"\"]")
       end
