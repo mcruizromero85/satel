@@ -14,7 +14,14 @@
       </ul>
     </div>
   <% end %>
-<label id="torneo_titulo"><b>Nick o N&oacute;mbre del clan<b/> <input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" size="15" maxlength="20" /></label>
-<input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
-<%= f.submit "Inscribirme" %>
+
+  <% if @torneo.flag_inscripciones == FLAG_INSCRIPCIONES_NO_DISPONIBLES %>
+    <center><b>Proceso de inscripci&oacute;n en actualizaci&oacute;n, no te preocupes pronto volver&aacute; a estar&aacute; disponible.</b></center>
+    <br/>
+    <center><a class="Enlace_detalle_registrarTorneo" href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a><center>
+  <% else %>
+    <label id="torneo_titulo"><b>Nick o N&oacute;mbre del clan<b/> <input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" size="15" maxlength="20" /></label>
+    <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
+    <%= f.submit "Inscribirme" %>
+  <% end %>
 <% end %>

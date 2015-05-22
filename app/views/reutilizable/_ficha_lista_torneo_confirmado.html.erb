@@ -3,6 +3,9 @@
   <article>
   <h2><a href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
     <p>M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
-    <font color='green'>Esperando generaci&oacute;n de llaves</font>
+    <font color='green'>Esperando Inicio de torneo en: <b class="contador" id='countdown_<%=torneo.id%>'></b></font>
   </article>
 </article>
+<script type="text/javascript">
+  generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion.to_i * 1000 %>));
+</script>
