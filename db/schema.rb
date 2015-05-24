@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.datetime "updated_at"
   end
 
+  create_table "detalle_pago_inscripciones", force: true do |t|
+    t.decimal "monto_inscripcion", default: 2.0, null: false
+    t.integer "torneo_id",                       null: false
+  end
+
   create_table "encuentros", force: true do |t|
     t.integer  "gamerinscritoa_id"
     t.integer  "gamerinscritob_id"
@@ -47,10 +52,11 @@ ActiveRecord::Schema.define(version: 20141214025352) do
 
   create_table "inscripciones", force: true do |t|
     t.integer  "torneo_id"
-    t.belongs_to :gamer, null: false
+    t.integer  "gamer_id",         null: false
     t.string   "estado"
     t.string   "nick"
-    t.integer "tipo_inscripcion" #0 = Normal, 1 = Free Win, 3 = #Gamer Temporal
+    t.integer  "tipo_inscripcion"
+    t.string   "id_transaccion_pago"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -59,7 +65,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.string   "nombre"
     t.string   "descripcion"
     t.string   "nombre_imagen"
-    t.integer  "tipo_juego" # 0 -> normal, 1 -> Corresponde a torneo destacado
+    t.integer  "tipo_juego"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -76,54 +82,36 @@ ActiveRecord::Schema.define(version: 20141214025352) do
   end
 
   create_table "torneos", force: true do |t|
-    t.string   "titulo", null: false
+    t.string   "titulo",                                      null: false
     t.string   "post_detalle_torneo"
     t.string   "urlstreeming"
-    t.integer  "vacantes", null: false
-    t.datetime "cierre_inscripcion", null: false
-    t.integer  "periodo_confirmacion_en_minutos", null: false
-    t.string   "tipo_torneo"# Individual / Moba
-    t.string   "tipo_generacion" #Simple / Doble / Grupos Round Robin / Grupos Round Robin doble llave
-    t.integer  "clasificacion" #0 -> Normal ó 1 -> Destacado
-    t.integer  "flag_inscripciones", null: false, default: 1 #0 -> No disponible, 1 -> Disponible
-    t.integer  "flag_pago_inscripciones", null: false, default: 0 # 0 -> Gratuito, 1 -> De Pago
+    t.integer  "vacantes",                                    null: false
+    t.datetime "cierre_inscripcion",                          null: false
+    t.integer  "periodo_confirmacion_en_minutos",             null: false
+    t.string   "tipo_torneo"
+    t.string   "tipo_generacion"
+    t.integer  "clasificacion"
+    t.integer  "flag_inscripciones",              default: 1, null: false
+    t.integer  "flag_pago_inscripciones",         default: 0, null: false
     t.integer  "gamer_id"
     t.integer  "juego_id"
     t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "torneos", force: true do |t|
-    t.string   "titulo", null: false
-    t.string   "post_detalle_torneo"
-    t.string   "urlstreeming"
-    t.integer  "vacantes", null: false
-    t.datetime "cierre_inscripcion", null: false
-    t.integer  "periodo_confirmacion_en_minutos", null: false
-    t.string   "tipo_torneo"# Individual / Moba
-    t.string   "tipo_generacion" #Simple / Doble / Grupos Round Robin / Grupos Round Robin doble llave
-    t.integer  "clasificacion" #0 -> Normal ó 1 -> Destacado
-    t.integer  "flag_inscripciones", null: false, default: 1 #0 -> No disponible, 1 -> Disponible
-    t.integer  "flag_pago_inscripciones", null: false, default: 0 # 0 -> Gratuito, 1 -> De Pago
-    t.integer  "gamer_id"
-    t.integer  "juego_id"
-    t.string   "estado"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "detalle_pago_inscripciones", force: true do | t |
-    t.decimal   "monto_inscripcion", null: false, default: 2.0
-    t.integer  "torneo_id", null: false
   end
 
   add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"
+
+  add_foreign_key "detalle_pago_inscripciones", "torneos", name: "detalle_pago_inscripcion_torneos_id_fk"
+
   add_foreign_key "encuentros", "rondas", name: "encuentros_ronda_id_fk"
+
   add_foreign_key "inscripciones", "gamers", name: "inscripciones_gamer_id_fk"
   add_foreign_key "inscripciones", "torneos", name: "inscripciones_torneo_id_fk"
+
   add_foreign_key "rondas", "torneos", name: "rondas_torneo_id_fk"
+
   add_foreign_key "torneos", "gamers", name: "torneos_gamer_id_fk"
   add_foreign_key "torneos", "juegos", name: "torneos_juego_id_fk"
-  add_foreign_key "detalle_pago_inscripciones", "torneos", name: "detalle_pago_inscripcion_torneos_id_fk"
+
 end

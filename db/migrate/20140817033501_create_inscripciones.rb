@@ -4,7 +4,8 @@ class CreateInscripciones < ActiveRecord::Migration
       t.integer :torneo_id
       t.integer :gamer_id
       t.string :estado
-      t.string :nick	
+      t.string :nick
+      t.string :id_transaccion_pago
       t.timestamps
     end
   end

@@ -17,9 +17,9 @@ class Torneo < ActiveRecord::Base
   belongs_to :gamer
   belongs_to :juego, autosave: false
   has_many :rondas, -> { order('numero ASC') }, autosave: true
-  has_many :inscripciones, autosave: true
-  has_many :datos_inscripciones, autosave: true
+  has_many :inscripciones, autosave: true  
   before_save :asignar_valores_por_defectos, if: "estado == 'Creado'"
+  has_one :detalle_pago_inscripcion
 
   def asignar_valores_por_defectos
     numero_de_rondas_totales = TorneosHelper.obtener_rondas_por_vacantes(vacantes)

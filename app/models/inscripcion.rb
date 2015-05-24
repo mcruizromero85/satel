@@ -50,14 +50,16 @@ class Inscripcion < ActiveRecord::Base
     save
   end
 
-  def confirmar
+  def confirmar(id_transaccion = nil)
     self.estado = 'Confirmado'
+    self.id_transaccion_pago = id_transaccion if !id_transaccion.nil?
     save
   end
 
   def mensaje_inscripcion
     if self.new_record? == false && estado == 'Confirmado'
-      mensaje = 'Tu confirmación se realizó con éxito'
+      mensaje = 'Tu confirmación se realizó con éxito '
+      mensaje = mensaje + "\n Tu id de pago es : " + self.id_transaccion_pago if !self.id_transaccion_pago.nil? 
       if torneo.inscripciones.count > torneo.vacantes
         mensaje = mensaje + "\n Tu posición es " + torneo.inscripciones.count.to_s + ' de ' + torneo.vacantes.to_s + ' vacantes, estás en cola'
       end

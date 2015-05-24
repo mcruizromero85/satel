@@ -27,7 +27,6 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones
   # POST /inscripciones.json
   def create
-
     @torneo = Torneo.find(params[:id_torneo])
     gamer_params = params.require(:gamer).permit(:nick)
     current_gamer.nick = gamer_params[:nick]
@@ -39,10 +38,12 @@ class InscripcionesController < ApplicationController
 
     if @torneo.flag_pago_inscripciones == 1 
       detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])
-        if detalle_pago_inscripcion.crear_pago && @inscripcion.inscribir
-          format.html { redirect_to payment.links[1].href }
+      respond_to do |format|
+        if detalle_pago_inscripcion.crear_pago(@torneo.id) && @inscripcion.inscribir
+          format.html { redirect_to detalle_pago_inscripcion.url_de_pago }
         else
-          format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: detalle_pago_inscripcion.mensaje_error_paypal }        
+          @mensaje_inscripcion=detalle_pago_inscripcion.mensaje_error_paypal
+          format.html { render action: 'new', id_torneo: params[:id_torneo] }        
         end
       end
     else
@@ -54,8 +55,6 @@ class InscripcionesController < ApplicationController
         end
       end
     end
-   
-    
   end
 
   def confirmar
@@ -65,9 +64,10 @@ class InscripcionesController < ApplicationController
     if @torneo.flag_pago_inscripciones == 1 
       detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])      
       respond_to do |format|
-        if detalle_pago_inscripcion.cerrar_pago(params[:paymentId], params[:PayerID]) && @inscripcion.confirmar 
+        if detalle_pago_inscripcion.cerrar_pago(params[:paymentId], params[:PayerID]) && @inscripcion.confirmar(detalle_pago_inscripcion.id_transaccion)
           format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
         else
+          @inscripcion.destroy
           format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: detalle_pago_inscripcion.mensaje_error_paypal }  
         end
       end
