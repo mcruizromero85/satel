@@ -27,36 +27,63 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones
   # POST /inscripciones.json
   def create
+
+    @torneo = Torneo.find(params[:id_torneo])
     gamer_params = params.require(:gamer).permit(:nick)
     current_gamer.nick = gamer_params[:nick]
     current_gamer.save
     @inscripcion = Inscripcion.new
     @inscripcion.gamer = current_gamer
     @inscripcion.nick = gamer_params[:nick]
-    @inscripcion.torneo = Torneo.find(params[:id_torneo])
+    @inscripcion.torneo = @torneo
 
-    respond_to do |format|
-      if @inscripcion.inscribir
-        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
-      else
-        @torneo = Torneo.find(params[:id_torneo])
-        format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }        
+    if @torneo.flag_pago_inscripciones == 1 
+      detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])
+        if detalle_pago_inscripcion.crear_pago && @inscripcion.inscribir
+          format.html { redirect_to payment.links[1].href }
+        else
+          format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: detalle_pago_inscripcion.mensaje_error_paypal }        
+        end
+      end
+    else
+      respond_to do |format|
+        if @inscripcion.inscribir
+           format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
+        else          
+           format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion } 
+        end
       end
     end
+   
+    
   end
 
   def confirmar
+    @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
     @inscripcion.estado = 'Confirmado'
-
-    respond_to do |format|
-      if @inscripcion.confirmar
-        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
-      else
-        @torneo = Torneo.find(params[:id_torneo])
-        format.html { render action: 'new' }
+    if @torneo.flag_pago_inscripciones == 1 
+      detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])      
+      respond_to do |format|
+        if detalle_pago_inscripcion.cerrar_pago(params[:paymentId], params[:PayerID]) && @inscripcion.confirmar 
+          format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
+        else
+          format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: detalle_pago_inscripcion.mensaje_error_paypal }  
+        end
+      end
+    else
+      respond_to do |format|
+        if @inscripcion.confirmar
+           format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
+        else          
+           format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion } 
+        end
       end
     end
+    
+    
+
+
   end
   # DELETE /gamers/1
   # DELETE /gamers/1.json

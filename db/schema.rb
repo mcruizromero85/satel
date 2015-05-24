@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.string   "tipo_generacion" #Simple / Doble / Grupos Round Robin / Grupos Round Robin doble llave
     t.integer  "clasificacion" #0 -> Normal ó 1 -> Destacado
     t.integer  "flag_inscripciones", null: false, default: 1 #0 -> No disponible, 1 -> Disponible
+    t.integer  "flag_pago_inscripciones", null: false, default: 0 # 0 -> Gratuito, 1 -> De Pago
     t.integer  "gamer_id"
     t.integer  "juego_id"
     t.string   "estado"
@@ -93,16 +94,36 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.datetime "updated_at"
   end
 
+  create_table "torneos", force: true do |t|
+    t.string   "titulo", null: false
+    t.string   "post_detalle_torneo"
+    t.string   "urlstreeming"
+    t.integer  "vacantes", null: false
+    t.datetime "cierre_inscripcion", null: false
+    t.integer  "periodo_confirmacion_en_minutos", null: false
+    t.string   "tipo_torneo"# Individual / Moba
+    t.string   "tipo_generacion" #Simple / Doble / Grupos Round Robin / Grupos Round Robin doble llave
+    t.integer  "clasificacion" #0 -> Normal ó 1 -> Destacado
+    t.integer  "flag_inscripciones", null: false, default: 1 #0 -> No disponible, 1 -> Disponible
+    t.integer  "flag_pago_inscripciones", null: false, default: 0 # 0 -> Gratuito, 1 -> De Pago
+    t.integer  "gamer_id"
+    t.integer  "juego_id"
+    t.string   "estado"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "detalle_pago_inscripciones", force: true do | t |
+    t.decimal   "monto_inscripcion", null: false, default: 2.0
+    t.integer  "torneo_id", null: false
+  end
+
   add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"
-
   add_foreign_key "encuentros", "rondas", name: "encuentros_ronda_id_fk"
-
   add_foreign_key "inscripciones", "gamers", name: "inscripciones_gamer_id_fk"
   add_foreign_key "inscripciones", "torneos", name: "inscripciones_torneo_id_fk"
-
   add_foreign_key "rondas", "torneos", name: "rondas_torneo_id_fk"
-
   add_foreign_key "torneos", "gamers", name: "torneos_gamer_id_fk"
   add_foreign_key "torneos", "juegos", name: "torneos_juego_id_fk"
-
+  add_foreign_key "detalle_pago_inscripciones", "torneos", name: "detalle_pago_inscripcion_torneos_id_fk"
 end

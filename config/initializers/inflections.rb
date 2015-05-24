@@ -17,5 +17,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'inscripcion', 'inscripciones'
-  inflect.irregular 'datos_inscripcion', 'datos_inscripciones'
+  inflect.irregular 'detalle_pago_inscripcion', 'detalle_pago_inscripciones'
 end
