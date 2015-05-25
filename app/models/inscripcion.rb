@@ -2,7 +2,7 @@ class Inscripcion < ActiveRecord::Base
   validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
   belongs_to :gamer
   belongs_to :torneo, autosave: false
-  has_many :datos_inscripcion_registrado
+  has_one :hots_formulario
 
   def self.inscritos_confirmados_en_el_torneo_con_free_wins(torneo)
     array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
@@ -50,14 +50,16 @@ class Inscripcion < ActiveRecord::Base
     save
   end
 
-  def confirmar
+  def confirmar(id_transaccion = nil)
     self.estado = 'Confirmado'
+    self.id_transaccion_pago = id_transaccion if !id_transaccion.nil?
     save
   end
 
   def mensaje_inscripcion
     if self.new_record? == false && estado == 'Confirmado'
-      mensaje = 'Tu confirmación se realizó con éxito'
+      mensaje = 'Tu confirmación se realizó con éxito '
+      mensaje = mensaje + "\n Tu id de pago es : " + self.id_transaccion_pago if !self.id_transaccion_pago.nil? 
       if torneo.inscripciones.count > torneo.vacantes
         mensaje = mensaje + "\n Tu posición es " + torneo.inscripciones.count.to_s + ' de ' + torneo.vacantes.to_s + ' vacantes, estás en cola'
       end

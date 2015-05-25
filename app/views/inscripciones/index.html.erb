@@ -43,7 +43,7 @@
           <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
           <td><%= inscripcion.estado %></td>
           <td>
-            <% if inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer  %>
+            <% if (inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer) && inscripcion.torneo.flag_pago_inscripciones == 0  %>
               <a class="Enlace_torneosDisponibles" href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a>
             <% end %>
           </td>
