@@ -1,5 +1,9 @@
 Satel::Application.routes.draw do
 
+  resources :hots_formularios
+
+  resources :formulario_hots
+
   post '/comenzar' => 'torneos#comenzar'
 
   resources :datos_inscripcion_registrados

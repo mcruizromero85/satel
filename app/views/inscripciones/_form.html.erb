@@ -45,7 +45,9 @@
       <center><img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" /></center>
     <% end %>
 
-    <label id="torneo_titulo"><b>Nick o N&oacute;mbre del clan<b/> <input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" size="15" maxlength="20" /></label>
+    <label id="torneo_titulo"><b>Nick o N&oacute;mbre del clan<b/><input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" size="15" maxlength="20" /></label>
+    <br/>
+    <label id="torneo_titulo"><b>Correo Electr&oacute;nico<b/><input type="text" name="gamer[correo]" id="gamer_correo" value="<%=current_gamer.correo%>" size="200" maxlength="20" /></label>
     <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
     <%= f.submit "Inscribirme" %>
   <% end %>

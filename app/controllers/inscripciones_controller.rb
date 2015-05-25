@@ -28,8 +28,9 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones.json
   def create
     @torneo = Torneo.find(params[:id_torneo])
-    gamer_params = params.require(:gamer).permit(:nick)
+    gamer_params = params.require(:gamer).permit(:nick,:correo)
     current_gamer.nick = gamer_params[:nick]
+    current_gamer.correo = gamer_params[:correo]
     current_gamer.save
     @inscripcion = Inscripcion.new
     @inscripcion.gamer = current_gamer
@@ -62,7 +63,16 @@ class InscripcionesController < ApplicationController
     @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
     @inscripcion.estado = 'Confirmado'
     if @torneo.flag_pago_inscripciones == 1 
-      detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])      
+      detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])
+      
+      if !es_retornado_de_pasarela_de_pago
+        detalle_pago_inscripcion.crear_pago(@torneo.id)
+        respond_to do |format|
+          format.html { redirect_to detalle_pago_inscripcion.url_de_pago }
+        end
+        return
+      end
+
       respond_to do |format|
         if detalle_pago_inscripcion.cerrar_pago(params[:paymentId], params[:PayerID]) && @inscripcion.confirmar(detalle_pago_inscripcion.id_transaccion)
           format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
@@ -80,10 +90,7 @@ class InscripcionesController < ApplicationController
         end
       end
     end
-    
-    
-
-
+   
   end
   # DELETE /gamers/1
   # DELETE /gamers/1.json
@@ -95,4 +102,11 @@ class InscripcionesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def es_retornado_de_pasarela_de_pago
+    !params[:paymentId].nil? || !params[:PayerID].nil?
+  end
+
 end

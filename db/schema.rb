@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141214025352) do
+ActiveRecord::Schema.define(version: 20150524225843) do
 
   create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
@@ -50,9 +50,16 @@ ActiveRecord::Schema.define(version: 20141214025352) do
     t.datetime "updated_at"
   end
 
+  create_table "hots_formularios", force: true do |t|
+    t.integer  "inscripcion_id"
+    t.string   "nombre_equipo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "inscripciones", force: true do |t|
     t.integer  "torneo_id"
-    t.integer  "gamer_id",         null: false
+    t.integer  "gamer_id",            null: false
     t.string   "estado"
     t.string   "nick"
     t.integer  "tipo_inscripcion"

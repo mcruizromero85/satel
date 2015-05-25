@@ -2,7 +2,7 @@ class Inscripcion < ActiveRecord::Base
   validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
   belongs_to :gamer
   belongs_to :torneo, autosave: false
-  has_many :datos_inscripcion_registrado
+  has_one :hots_formulario
 
   def self.inscritos_confirmados_en_el_torneo_con_free_wins(torneo)
     array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
