@@ -3,7 +3,7 @@ include PayPal::SDK::REST
 
 class DetallePagoInscripcion < ActiveRecord::Base
   belongs_to :torneos
-  def crear_pago(torneo_id)
+  def crear_pago(torneo_id, torneo_titulo)
   	@payment = PayPal::SDK::REST::Payment.new({
       :intent => "sale",
       :payer => {
@@ -14,8 +14,18 @@ class DetallePagoInscripcion < ActiveRecord::Base
       :transactions => [ {
         :amount => {
           :total => ('%.2f' % monto_inscripcion),
-          :currency => "USD" },
-        :description => "Completa tu inscripción" } ] } )
+          :currency => "USD",
+          :details => {
+            :subtotal => ('%.2f' % monto_inscripcion)
+            }
+          },
+      :item_list => {
+        :items => [{
+          :name => ("Inscripción para: " + torneo_titulo)[0..126],
+          :price => ('%.2f' % monto_inscripcion),
+          :currency => "USD",
+        :quantity => 1 }]},
+      :description => "Completa tu inscripción" } ] } )
     @payment.create
   end
 

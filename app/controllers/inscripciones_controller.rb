@@ -40,7 +40,7 @@ class InscripcionesController < ApplicationController
     if @torneo.flag_pago_inscripciones == 1 
       detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])
       respond_to do |format|
-        if detalle_pago_inscripcion.crear_pago(@torneo.id) && @inscripcion.inscribir
+        if detalle_pago_inscripcion.crear_pago(@torneo.id, @torneo.titulo) && @inscripcion.inscribir
           format.html { redirect_to detalle_pago_inscripcion.url_de_pago }
         else
           @mensaje_inscripcion=detalle_pago_inscripcion.mensaje_error_paypal
@@ -66,7 +66,7 @@ class InscripcionesController < ApplicationController
       detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])
       
       if !es_retornado_de_pasarela_de_pago
-        detalle_pago_inscripcion.crear_pago(@torneo.id)
+        detalle_pago_inscripcion.crear_pago(@torneo.id, @torneo.titulo)
         respond_to do |format|
           format.html { redirect_to detalle_pago_inscripcion.url_de_pago }
         end
