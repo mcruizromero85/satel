@@ -39,8 +39,7 @@ class DetallePagoInscripcion < ActiveRecord::Base
   end
 
   def mensaje_error_paypal
-    print @payment.error
-  	@payment.error.details[0].issue.to_s
+    @payment.error.details[0].issue.to_s if !@payment.error.nil?
   end
 
   def id_transaccion

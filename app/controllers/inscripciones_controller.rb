@@ -43,7 +43,11 @@ class InscripcionesController < ApplicationController
         if detalle_pago_inscripcion.crear_pago(@torneo.id, @torneo.titulo) && @inscripcion.inscribir
           format.html { redirect_to detalle_pago_inscripcion.url_de_pago }
         else
-          @mensaje_inscripcion=detalle_pago_inscripcion.mensaje_error_paypal
+          if !detalle_pago_inscripcion.mensaje_error_paypal.nil?
+            @mensaje_inscripcion=detalle_pago_inscripcion.mensaje_error_paypal
+          else
+            @mensaje_inscripcion=@inscripcion.mensaje_inscripcion
+          end  
           format.html { render action: 'new', id_torneo: params[:id_torneo] }        
         end
       end
