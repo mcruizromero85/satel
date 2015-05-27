@@ -10,7 +10,7 @@ class DetallePagoInscripcion < ActiveRecord::Base
         :payment_method => "paypal" },
       :redirect_urls => {
         :return_url => URL_RETORNO_PAYPAL + torneo_id.to_s,
-        :cancel_url => URL_CANCELAR_PAYPAL + torneo_id.to_s },
+        :cancel_url => URL_CANCELAR_PAYPAL },
       :transactions => [ {
         :amount => {
           :total => ('%.2f' % monto_inscripcion),
