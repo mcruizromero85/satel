@@ -2,6 +2,7 @@
   <h1>Detalle del Torneo</h1>
   <%= render partial: "reutilizable/ficha_presentacion_torneo", object: @torneo, as: :torneo %>
   <br/>
+  <article class="Detalle_Torneo_Ver">
     <% if @mensaje_de_guardado.nil? %>
       <center>
         <% if !current_gamer.nil? %>
@@ -25,4 +26,5 @@
       </center>
     <% end %>
     <br/>
+  </article>
 </section>

@@ -463,15 +463,12 @@ width: 73%;
   margin-left: 28%;
 }
 
-.MostrarTorneo_datos{
+.Detalle_torneo label{
   line-height: 29px;
-  margin-left: 28%;
-}
-
-.fb-post{
-  margin-left: 28%;
+  font-size: 14px;
  
 }
+
 
  #Inscripcion_Detalle{
     width: 98%;
@@ -484,12 +481,19 @@ width: 73%;
   padding: 0;
 }
 
+.Detalle_Torneo_Ver{
+ height: 96px;
+}
+
+.Detalle_torneo{
+  margin-left: 18%;
+  
+}
+
 /*MEDIA QUERY*/
 @media only screen and (max-width : 1366px){
 
- .MostrarTorneo_datos{
-    margin-left: 14%;
-  }
+ 
 
   .Img_registroTorneo{
     margin-left: 14%;
@@ -504,9 +508,6 @@ width: 73%;
     margin-left: 0%;
   }
   
- .fb-post{
-  margin-left: 14%;
- }
  
 }
 @media only screen and (max-width : 1204px){
@@ -524,7 +525,9 @@ width: 73%;
   display: none;
 }
 
-
+.Detalle_torneo {
+  margin-left: 9%;
+}
 
 }
 
@@ -568,9 +571,7 @@ width: 73%;
   #tabs-3 h1{
     margin-top: 0%;
   }
-
  
-
 
 }
 
@@ -579,10 +580,6 @@ width: 73%;
  aside {
   display: none;
  }
-
-  .FrmRegistrarTorneo div {
-  display: none;
-  }
 
 
  .logo {
@@ -629,22 +626,37 @@ width: 73%;
   text-align: center;
  }
  
- .MostrarTorneo_datos{
-  margin-left: 0%;
-
- }
 
  .Img_registroTorneo{
   margin-left: 0%;
   width: 95%;
  }
 
+
  
- 
+  .Enlaces{
+    margin-left: 34%;
+    margin-right: 0%;
+    
+  }
+
 }
 
+@media only screen and (max-width : 670px) {
+
+  .Enlaces{
+    margin-left: 30%;
+  }
+
+  .Detalle_torneo{
+    margin-left: -6%;
+  }
+}
+
+
+
 /*2. Para moviles, hereda del item 1*/
-@media only screen and (max-width : 670px){
+@media only screen and (max-width : 570px){
   
   aside{
    display: none;
@@ -653,15 +665,10 @@ width: 73%;
  /*Ajustando el formulario de inscripciòn al movil*/
  .FrmRegistrarTorneo {
   width: 93%;
-  margin-left: 5%;
+  margin-left: 4%;
  }
 
 
-
-.Torneos{
-    margin-left: 4%;
-    margin-right: 0%;
-  }
 
   .Torneos article {
     width: 94%;
@@ -683,11 +690,41 @@ width: 73%;
 
   }
   
+  table thead{
+    font-size: 10px;
+  }
+  table tbody{
+    font-size: 10px;
+  }
+
   footer p {
     margin-right: 9%;
     margin-left: 9%;
     text-align: center;
   }
 
-}
+ 
+  .Detalle_torneo{
+    margin-left: 2%;
+    margin-right: 2%;
+    
+  }
+
+  .Detalle_Torneo_Ver{
+    height: 107px;
+  }
+
+  .Enlaces {
+    margin-left: 23%;
+  }
+
+ }
+
+ @media only screen and (max-width : 370px){
+ 
+ .Enlaces {
+    margin-left: 13%;
+  }
+
+ }
 
