@@ -526,8 +526,13 @@ width: 73%;
 }
 
 .Detalle_torneo {
-  margin-left: 9%;
+  margin-left: 15%;
 }
+
+.Enlaces{
+  margin-right: 0%;
+}
+
 
 }
 
@@ -572,7 +577,10 @@ width: 73%;
     margin-top: 0%;
   }
  
-
+ .Detalle_torneo {
+  margin-left: 9%;
+  }
+  
 }
 
 @media only screen and (max-width : 860px) {
@@ -636,8 +644,11 @@ width: 73%;
  
   .Enlaces{
     margin-left: 34%;
-    margin-right: 0%;
-    
+
+    }
+
+   .Detalle_torneo {
+    margin-left: 0%;
   }
 
 }
@@ -649,7 +660,7 @@ width: 73%;
   }
 
   .Detalle_torneo{
-    margin-left: -6%;
+    margin-left: -12%;
   }
 }
 
