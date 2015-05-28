@@ -508,7 +508,23 @@ width: 73%;
     margin-left: 0%;
   }
   
+ .Detalle_torneo {
+  margin-left: 30%;
+}
+
+footer{
+  margin-left: 15%;
+}
+  
+  .Enlaces{
+    margin-right: 0%;
+  }
+
+.Detalle_Torneo_Ver {
  
+  margin-left: 19%;
+}
+
 }
 @media only screen and (max-width : 1204px){
 
@@ -682,7 +698,8 @@ width: 73%;
 
 
   .Torneos article {
-    width: 94%;
+    width: 95%;
+    margin-left: 2.5%;
   }
 
   
@@ -716,6 +733,12 @@ width: 73%;
 
  
   .Detalle_torneo{
+    margin-left: 2%;
+    margin-right: 2%;
+    
+  }
+
+   .Detalle_torneo{
     margin-left: 2%;
     margin-right: 2%;
     
