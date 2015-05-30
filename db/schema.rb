@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 20150524225843) do
     t.datetime "updated_at"
   end
 
-  create_table "detalle_pago_inscripciones", force: true do |t|
+  create_table "detalle_pago_inscripciones", id: false, force: true do |t|
     t.decimal "monto_inscripcion", default: 2.0, null: false
+    t.integer "id",                              null: false
     t.integer "torneo_id",                       null: false
   end
 
@@ -61,11 +62,11 @@ ActiveRecord::Schema.define(version: 20150524225843) do
     t.integer  "torneo_id"
     t.integer  "gamer_id",            null: false
     t.string   "estado"
-    t.string   "nick"
     t.integer  "tipo_inscripcion"
-    t.string   "id_transaccion_pago"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nick"
+    t.string   "id_transaccion_pago"
   end
 
   create_table "juegos", force: true do |t|
@@ -98,18 +99,18 @@ ActiveRecord::Schema.define(version: 20150524225843) do
     t.string   "tipo_torneo"
     t.string   "tipo_generacion"
     t.integer  "clasificacion"
-    t.integer  "flag_inscripciones",              default: 1, null: false
-    t.integer  "flag_pago_inscripciones",         default: 0, null: false
     t.integer  "gamer_id"
     t.integer  "juego_id"
     t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "flag_inscripciones",              default: 1, null: false
+    t.integer  "flag_pago_inscripciones",         default: 0, null: false
   end
 
   add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"
 
-  add_foreign_key "detalle_pago_inscripciones", "torneos", name: "detalle_pago_inscripcion_torneos_id_fk"
+  add_foreign_key "detalle_pago_inscripciones", "torneos", name: "detalle_pago_inscripciones"
 
   add_foreign_key "encuentros", "rondas", name: "encuentros_ronda_id_fk"
 
