@@ -491,6 +491,21 @@ width: 73%;
 }
 
 /*MEDIA QUERY*/
+@media only screen and (max-width : 1920px){
+  
+  .Detalle_torneo{
+    margin-left: 29%;
+  }
+
+  .Enlaces{
+    margin-right: 0%;
+    margin-left: 45%;
+  }
+
+  
+
+}
+
 @media only screen and (max-width : 1366px){
 
  
@@ -509,22 +524,14 @@ width: 73%;
   }
   
  .Detalle_torneo {
-  margin-left: 30%;
+  margin-left: 20%;
 }
-
-footer{
-  margin-left: 15%;
-}
-  
-  .Enlaces{
-    margin-right: 0%;
-  }
-
-.Detalle_Torneo_Ver {
  
-  margin-left: 19%;
-}
+  .Enlaces{
+    margin-left: 41%;
+  }  
 
+ 
 }
 @media only screen and (max-width : 1204px){
 
