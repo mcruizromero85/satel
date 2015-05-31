@@ -711,6 +711,8 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor {
     cursor: pointer;
 }
+
+ 
 .ui-tabs .ui-tabs-panel {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-width: 0;
@@ -1408,6 +1410,18 @@ body .ui-tooltip {
     padding: 0 0 0 0;
     }
 }
+
+ #tabs-1 {
+  background: white;
+  width: 100%;
+  margin: 0%;
+  padding:0;
+ }
+
+ #llaves {
+    background: white;
+    margin-bottom: 1%;
+ }
 
 @media screen and (max-width: 1024px){
 
