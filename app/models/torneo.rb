@@ -64,7 +64,7 @@ class Torneo < ActiveRecord::Base
   def fecha_y_hora_inscripcion(fecha, hora)
     fecha = Date.strptime(fecha, '%d/%m/%Y')
     hora = Time.strptime(hora, '%I:%M %p')
-    self.cierre_inscripcion = Time.local(fecha.year, fecha.month, fecha.day, hora.hour, hora.min, hora.sec)
+    self.cierre_inscripcion = Time.new(fecha.year, fecha.month, fecha.day, hora.hour, hora.min, hora.sec,"-05:00")
     rescue StandardError
       errors.add(:cierre_inscripcion, ', la fecha debe estar en formato dd/mm/yyyy')
       errors.add(:cierre_inscripcion, ', , la hora debe estar en formato hh:mm AM/PM')
