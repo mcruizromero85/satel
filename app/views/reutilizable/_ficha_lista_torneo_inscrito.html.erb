@@ -25,7 +25,7 @@
       <% end %>    
       </p>
       <script type="text/javascript">
-        generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.inicio_fecha_hora_confirmacion.to_i * 1000 %>));
+        generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion.to_i * 1000 %>));
       </script>
     <% end %>
     
