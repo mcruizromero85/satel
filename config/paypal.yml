@@ -13,8 +13,6 @@ test:
   <<: *default
 production:
   mode: live
-#  client_id: AUHGA0drtShJXTIOp4sSe9QUCs3k-EXZ1r4OaA6VXPwv-EjrEyUGIetQokcl_06v-OUTfxFAPpIeDrbV
-#  client_secret: EG0hZcwq-7mHChlAcmi8G_nbOQtGY6DO0Brf_fK9O29SvcokULz_UV1XEFBi_H5WW_22KKnvcqlzY4xK
-  client_id: ARVfZhmNa9Dukh1JInEWDrTSri5ZYJXMFiOBOAGYemvJyaBbVFBM57SbFM0mFnWs6oOYdz-DmetYejyh
-  client_secret: EJ3nYSYXlEqxNmDrqOHqgqWftVVgbXncxnGuz1oaJSJug6einC25rXBMCA_NHPprN-XO6ycoTbwt91OX
+  client_id: AUHGA0drtShJXTIOp4sSe9QUCs3k-EXZ1r4OaA6VXPwv-EjrEyUGIetQokcl_06v-OUTfxFAPpIeDrbV
+  client_secret: EG0hZcwq-7mHChlAcmi8G_nbOQtGY6DO0Brf_fK9O29SvcokULz_UV1XEFBi_H5WW_22KKnvcqlzY4xK
 
