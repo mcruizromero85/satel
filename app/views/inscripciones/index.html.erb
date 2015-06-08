@@ -24,36 +24,53 @@
   <br/>
   <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
   <br/>
-  <table class="Detalle_rondas" >
-      <thead>
-        <tr>
-          <th class="header">Orden</th>
-          <th class="header">Nick / Nombre Equipo</th>
-          <th class="header">Fecha Inscripci&oacute;n</th>
-          <th class="header">Estado</th>
-          <th class="header">Accion</th>
-        </tr>
-      </thead>
-      <tbody id="rondas">
+
+
+ 
+  <Section class="Lista_Inscritos" >
+      
+  <article class="lista_Inscritos_contenido">
+    
       <% posicion=1 %>
-      <% @inscripciones.each do |inscripcion| %>
-        <tr>
-          <td><%= posicion %></td>
-          <td><%= inscripcion.nick %></td>
-          <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
-          <td><%= inscripcion.estado %></td>
-          <td>
-            <% if (inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer) && inscripcion.torneo.flag_pago_inscripciones == 0  %>
-              <a class="Enlace_torneosDisponibles" href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a>
-            <% end %>
-          </td>
-        </tr>
-        <% posicion+=1 %>
-        <% end %>
-      </tbody>
-    </table> 
-    <% end %>
+          <% @inscripciones.each do |inscripcion| %>
+       
+         <article class = "Lista_Inscritos_Item">
+
+           <article>
+           <img class="Lista_Inscritos_item_UsFb"src="Usfb.png" alt="Logofacebook">
+           </article>
+
+            <article>
+            <b class="Lista_Inscritos_item_nick"> <%= inscripcion.nick %>, inscrito el dia 10/06/2015  </b>
+            </article>
+
+            <article>
+             <% if inscripcion.estado == "Inscrito" %>
+                <button class="Lista_Inscritos_item_estado_button"><b>ins<%= inscripcion.estado %></b></button>
+            <% else%>
+            <button class="Lista_Inscritos_item_estado_button"><b>conf<%= inscripcion.estado %></b></button>
+           <% end%>
+
+            </article>
+
+            <!--
+            <article>
+            <b class="Lista_Inscritos_item_accion"><% if (inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer) && inscripcion.torneo.flag_pago_inscripciones == 0  %>
+                 <a class="Enlace_torneosDisponibles" href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a>
+                <% end %></b>
+              </article>
+           -->
+
+         </article> 
+           <% posicion+=1 %>
+           <% end %>
+      <% end %>
     <br/>
+
+  </article>
+  </section>
+
+
       <center>
         <% if @mensaje_inscripcion.nil? %>
           <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>
