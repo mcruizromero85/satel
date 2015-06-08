@@ -310,10 +310,10 @@ font-size:90%;
 }  
 
 .FrmRegistrarTorneo input[type="text"]{
-  font-size: 15px;
+   font-size: 15px;
   box-sizing: border-box;
-  margin: 15px 11px 14px 11px;
-  width: 95%;
+  margin: 15px 11px 14px 0px;
+  width: 98%;
   padding: 15px;
   border-radius: 5px;
   border: 1px solid #7ac9b7;
@@ -331,8 +331,8 @@ font-size:90%;
     font-size: 15px;
     margin: 15px 0;
     padding: 15px;
-    width: 98%;
-    margin-left: 1%;
+    width: 100%;
+    
 }
 
 .Enlace_detalle_registrarTorneo {
@@ -367,21 +367,21 @@ font-size:90%;
 }
 
 #cierre_inscripcion_fecha{
-    width: 63%;
+    width: 62%;
 }
 
 #cierre_inscripcion_hora
 {
-    width: 36%;
+    width: 35%;
 }
 #torneo_periodo_confirmacion_en_minutos {
-    font-size: 15px;
-    box-sizing: border-box;
-    margin: 15px 0 15px 0;
-    width: 100%;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #7ac9b7;
+   font-size: 15px;
+  box-sizing: border-box;
+  margin: 15px 0px 15px 0px;
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #7ac9b7;
 }
 
 table {
@@ -560,8 +560,19 @@ width: 73%;
 }
 
 .Lista_Inscritos_item_estado_button{
-   color: #fff;
-  background-color: #3880C8;
+  color: #fff;
+  background-color: lightslategray;
+  font-family: serif;
+  font-size: 16px;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 3px 63px;
+  border-radius: 4px;
+}
+.Lista_Inscritos_item_estado_button_confirmado{
+  color: #fff;
+  background-color: royalblue;
   font-family: serif;
   font-size: 16px;
   vertical-align: middle;
@@ -588,7 +599,7 @@ width: 73%;
   height: 191px;
 }
 
-#torneo_titulo{
+#torneo_titulo2{
  margin-left: 3%;
 
 }
@@ -605,6 +616,17 @@ width: 73%;
 #valorpago{
   text-decoration: underline;
 }
+
+.Inscripcion_datos input[type="text"]{
+  font-size: 15px;
+  box-sizing: border-box;
+  margin: 15px 11px 14px 11px;
+  width: 95%;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #7ac9b7;
+}
+
 
 /*MEDIA QUERY*/
 @media only screen and (max-width : 1920px){

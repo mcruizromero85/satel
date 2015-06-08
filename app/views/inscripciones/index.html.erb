@@ -46,9 +46,10 @@
 
             <article>
              <% if inscripcion.estado == "Inscrito" %>
-                <button class="Lista_Inscritos_item_estado_button"><b>ins<%= inscripcion.estado %></b></button>
+                 <button class="Lista_Inscritos_item_estado_button"><b><%= inscripcion.estado %></b></button>
             <% else%>
-            <button class="Lista_Inscritos_item_estado_button"><b>conf<%= inscripcion.estado %></b></button>
+                   <button class="Lista_Inscritos_item_estado_button_confirmado"><b><%= inscripcion.estado %></b></button>
+               
            <% end%>
 
             </article>
