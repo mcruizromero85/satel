@@ -21,35 +21,46 @@
     <center><a  href="/inscripciones/new/<%=@torneo.id%>"><button class="link_button" type="button">Inscribirme al torneo</button></a></center>
   <% end %>
   <br/>
-  <table class="Detalle_rondas" >
-      <thead>
-        <tr>
-          <th class="header">Orden</th>
-          <th class="header">Nick / Nombre Equipo</th>
-          <th class="header">Fecha Inscripci&oacute;n</th>
-          <th class="header">Estado</th>
-          <th class="header">Accion</th>
-        </tr>
-      </thead>
-      <tbody id="rondas">
-      <% posicion=1 %>
-      <% @inscripciones.each do |inscripcion| %>
-        <tr>
-          <td><%= posicion %></td>
-          <td><img src=<%=@current_gamer.authentications[0].icono %> /><%= inscripcion.nick %></td>
-          <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
-          <td><%= inscripcion.estado %></td>
-          <td>
-            <% if (inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer) && inscripcion.torneo.flag_pago_inscripciones == 0  %>
-              <a class="Enlace_torneosDisponibles" href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a>
-            <% end %>
-          </td>
-        </tr>
-        <% posicion+=1 %>
-        <% end %>
-      </tbody>
-    </table>
+
+
+ 
+  <Section class="Lista_Inscritos" >
+      
+  <article class="lista_Inscritos_contenido">
+     <% @inscripciones.each do |inscripcion| %>       
+         <article class = "Lista_Inscritos_Item">
+           <article>
+             <img class="Lista_Inscritos_item_UsFb" src="<%= inscripcion.gamer.authentications[0].icono %>" height='35px' width='35px'>
+           </article>
+           <article>
+            <p class="Lista_Inscritos_item_nick"><b><%= inscripcion.nick %></b></p>
+           </article>
+            <article>
+              <p class="Lista_Inscritos_item_nick">
+                <b><%= inscripcion.estado %></b>
+                </p>
+              <% if inscripcion.estado == "Confirmado" %>
+              <% end%>
+            </article>
+            <article>
+              <img class="confirmacion_check" src="<%= image_path('check_confirmado.png')%>" height='35px' width='35px' > 
+            </article>
+
+            <!--
+            <article>
+            <b class="Lista_Inscritos_item_accion"><% if (inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer) && inscripcion.torneo.flag_pago_inscripciones == 0  %>
+                 <a class="Enlace_torneosDisponibles" href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a>
+                <% end %></b>
+              </article>
+           -->
+         </article> 
+      <% end %>
     <br/>
+
+  </article>
+  </section>
+
+
       <center>
         <% if @mensaje_inscripcion.nil? %>
           <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>

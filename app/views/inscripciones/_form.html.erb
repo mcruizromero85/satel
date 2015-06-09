@@ -17,7 +17,18 @@
   </div>
   <% end %>
 <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
+
 <br/>
+<section class="Frm_Inscripcion">
+
+ <article class="Inscripcion_pago">
+      
+      <b>El torneo consta de un costo de <b id="valorpago">$. 9.00 dolares americanos</b>, el pago 
+       y premiacion se realizara via PayPal</b><br><br>
+       <center><img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" /></center>
+      
+    </article>
+
 <span id="mensajeError"></span>
 <%= form_for @inscripcion,  html: {class: "frm-registro"} do |f| %>
   <% if @inscripcion.errors.any? %>
@@ -45,10 +56,19 @@
       <center><img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" /></center>
     <% end %>
 
-    <label id="torneo_titulo"><b>Nick o N&oacute;mbre del clan<b/><input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" size="15" maxlength="20" /></label>
-    <br/>
-    <label id="torneo_titulo"><b>Correo Electr&oacute;nico<b/><input type="text" name="gamer[correo]" id="gamer_correo" value="<%=current_gamer.correo%>" size="200" maxlength="20" /></label>
-    <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
-    <%= f.submit "Inscribirme" %>
+     <article class="Inscripcion_datos">
+      
+        <label id="torneo_titulo2"><b>Nick o N&oacute;mbre del clan<b/><input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" size="15" maxlength="20" /></label>
+        <br/>
+        <label id="torneo_titulo2"><b>Correo Electr&oacute;nico<b/><input type="text" name="gamer[correo]" id="gamer_correo" value="<%=current_gamer.correo%>" size="200" maxlength="20" /></label>
+             
+    </article>
+ <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
+        <%= f.submit "Inscribirme" %>
+  </section>
+ 
+ 
+
   <% end %>
 <% end %>
+
