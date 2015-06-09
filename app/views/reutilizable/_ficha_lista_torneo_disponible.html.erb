@@ -1,7 +1,7 @@
 <article id="ContenidoTorneo">
-   <img  src="<%= image_path(torneo.juego.nombre_imagen) %>" >
+   <a href="/inscripciones?id_torneo=<%= torneo.id %>"><img  src="<%= image_path(torneo.juego.nombre_imagen) %>" ></a>
     <article>
-      <h2 ><a  href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
+      <h2 ><a  href="/inscripciones?id_torneo=<%= torneo.id %>"><%= torneo.titulo %></a></h2>
       <br>
       <p>M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
       Las incripciones cierran en: <b>

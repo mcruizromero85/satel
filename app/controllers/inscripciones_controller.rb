@@ -81,7 +81,8 @@ class InscripcionesController < ApplicationController
         if detalle_pago_inscripcion.cerrar_pago(params[:paymentId], params[:PayerID]) && @inscripcion.confirmar(detalle_pago_inscripcion.id_transaccion)
           format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
         else
-          @inscripcion.inscribir
+          @inscripcion.destroy
+          detalle_pago_inscripcion.mensaje_error_paypal = "Error interno contacta, con el administrador: mcruizromero85@gmail.com" if detalle_pago_inscripcion.mensaje_error_paypal.nil?
           format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: detalle_pago_inscripcion.mensaje_error_paypal }  
         end
       end
