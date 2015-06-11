@@ -892,6 +892,75 @@ width: 73%;
     width: 95%;
   }
 
+
+ #ContenidoTorneo article h2 a {
+  font-size: 17px;
+
+ }
+
+ .Lista_Inscritos {
+  margin-top: -21px;
+ }
+
+.Inscripcion_datos {
+  width: 42%;
+}
+
+ #torneo_titulo2 {
+ 
+  font-size: 12px;
+ }
+
+ .Inscripcion_datos input[type="text"] {
+  font-size: 12px;
+  
+  margin: 15px 9px 11px 3px;
+  width: 97%;
+ 
+}
+
+.Inscripcion_pago {
+  
+  font-size: 12px;
+  text-align: justify;
+  }
+
+  .Inscripcion_pago center img{
+   width: 102%;
+  }
+
+ .Lista_Inscritos_Item article:nth-child(1) {
+  width: 15%;
+ }
+
+ .Lista_Inscritos_Item article {
+ 
+  width: 80.5%;
+}
+
+.Lista_Inscritos_item_nick {
+  top: 0;
+  font-size: 28px;
+}
+
+
+ .Lista_Inscritos_Item article:nth-child(3) {
+ 
+  width: 43%;
+}
+
+
+.Lista_Inscritos_Item article:nth-child(4) {
+ 
+  width: 18%;
+}
+
+ #ContenidoTorneo .PricePool {
+  float: inherit;
+  width: 34%;
+  padding-top: 11px;
+ }
+
   #tabs-2{
 
   height: 350px;
