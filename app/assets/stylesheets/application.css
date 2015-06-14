@@ -563,11 +563,11 @@ width: 73%;
   padding-bottom: 5px;
   padding-left: 7px;
   padding-top: 5px;
-  width: 72.5%;
+  width: 69.5%;
 }
 
 .Lista_Inscritos_Item article:nth-child(1){
-  width: 7%;
+  width: 5%;
 }
 
 .Lista_Inscritos_Item article:nth-child(3){
@@ -583,7 +583,7 @@ width: 73%;
   padding-right: 1%;
   text-align: right;
   vertical-align: middle;
-  width: 3%;
+  width: 4%;
 }
 
 .Lista_Inscritos_item_nick{
@@ -750,7 +750,9 @@ width: 73%;
     width: 100%;
   }
 
- 
+ .Lista_Inscritos_Item article:nth-child(4) {
+  width: 6%;
+ }
 
   #tabs-3 table{
     margin-left: 0;
@@ -784,6 +786,7 @@ width: 73%;
  aside {
   display: none;
  }
+
 
 
  .logo {
@@ -847,6 +850,45 @@ width: 73%;
     margin-left: 0%;
   }
 
+.Lista_Inscritos_Item article {
+   width: 46.5%;
+  }
+ .Lista_Inscritos_Item article:nth-child(4) {
+    width: 11%;
+  }
+
+  #ContenidoTorneo article h2, p{
+      font-size: 67%;
+  }
+
+   #ContenidoTorneo article h2 a{
+      font-size: 16px;
+   }
+
+  #ContenidoTorneo img{
+      height: 86px;
+        width: 20%;
+  }
+
+
+  #ContenidoTorneo .PricePool{
+   width: 19%;
+  }
+
+  #ContenidoTorneo .PricePool p{
+    font-size: 11px;
+  }
+
+  .Lista_Inscritos_Item article:nth-child(3) {
+    width: 27%;
+  }
+  .Lista_Inscritos_Item article:nth-child(1) {
+  width: 7%;
+  }
+  .Lista_Inscritos_item_nick {
+  
+    font-size: 16px;
+  }
 }
 
 @media only screen and (max-width : 670px) {
@@ -858,12 +900,17 @@ width: 73%;
   .Detalle_torneo{
     margin-left: -12%;
   }
+
+ .Lista_Inscritos_Item article:nth-child(3) {
+  width: 26%;
+}
+
 }
 
 
 
 /*2. Para moviles, hereda del item 1*/
-@media only screen and (max-width : 570px){
+@media only screen and (max-width : 580px){
   
   aside{
    display: none;
@@ -885,17 +932,25 @@ width: 73%;
   
   #ContenidoTorneo img {
     height: 40%;
-    width: 98%;
+    width:98%;
   }
 
   #ContenidoTorneo article {
-    width: 95%;
+    width: 98%;
   }
 
 
  #ContenidoTorneo article h2 a {
-  font-size: 17px;
+  font-size: 25px;
 
+ }
+
+ #ContenidoTorneo article h2, p{
+    font-size: 128%;
+ }
+
+ #ContenidoTorneo .PricePool p{
+  font-size: 17px;
  }
 
  .Lista_Inscritos {
@@ -935,12 +990,12 @@ width: 73%;
 
  .Lista_Inscritos_Item article {
  
-  width: 80.5%;
+  width: 10.5%;
 }
 
 .Lista_Inscritos_item_nick {
-  top: 0;
-  font-size: 28px;
+
+  font-size: 14px;
 }
 
 
@@ -956,9 +1011,10 @@ width: 73%;
 }
 
  #ContenidoTorneo .PricePool {
-  float: inherit;
-  width: 34%;
+  float: left;
+  width: 30%;
   padding-top: 11px;
+    font-size: 2px;
  }
 
   #tabs-2{
@@ -1001,6 +1057,15 @@ width: 73%;
     margin-left: 23%;
   }
 
+  .Lista_Inscritos_Item article:nth-child(1) {
+  width: 9%;
+  }
+  .Lista_Inscritos_Item article:nth-child(3) {
+  width: 60%;
+  }
+  .Lista_Inscritos_Item article:nth-child(4) {
+  width: 10%;
+  }
  }
 
  @media only screen and (max-width : 370px){
@@ -1008,6 +1073,35 @@ width: 73%;
  .Enlaces {
     margin-left: 13%;
   }
+ #ContenidoTorneo .PricePool {
+  width: 47%;
+ }
+  #ContenidoTorneo article h2, p {
+   font-size: 75%;
+  }
+ #ContenidoTorneo article h2 a {
+  font-size: 20px;
+ }
+ .Enlace{
+  width: 73%;
+ }
 
+ .Enlaces article {
+  width: 29%
+ }
+ #ContenidoTorneo .PricePool {
+  font-size: 4px;
+ }
+ .Lista_Inscritos_Item article:nth-child(1) {
+  width: 14%;
+}
+
+ .Lista_Inscritos_Item article:nth-child(3) {
+  width: 40%;
+  }
+
+  .Lista_Inscritos_Item article:nth-child(4) {
+  width: 18%;
+  }
  }
 
