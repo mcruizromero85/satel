@@ -16,13 +16,5 @@
                       generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.cierre_inscripcion.to_i * 1000 %>));
                     </script>
     </article>
-
-     <article class="PricePool">
-          <p>PricePool:$24</p>
-          <br>
-          <br>
-          <p>Inscribete para aumentarlo<p>
-        </article>
-
-
+  <%= render partial: "reutilizable/presentacion_price_pool", object: torneo, as: :torneo %>
 </article>

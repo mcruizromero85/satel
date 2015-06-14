@@ -20,12 +20,9 @@
   <% if !@current_gamer.esta_inscrito(@torneo) %>
     <center><a  href="/inscripciones/new/<%=@torneo.id%>"><button class="link_button" type="button">Inscribirme al torneo</button></a></center>
   <% end %>
-  <br/>
-
-
- 
+  
   <Section class="Lista_Inscritos" >
-      
+  <h1>Lista de inscritos</h1>
   <article class="lista_Inscritos_contenido">
      <% @inscripciones.each do |inscripcion| %>       
          <article class = "Lista_Inscritos_Item">
@@ -59,8 +56,6 @@
 
   </article>
   </section>
-
-
       <center>
         <% if @mensaje_inscripcion.nil? %>
           <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>

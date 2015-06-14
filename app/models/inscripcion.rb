@@ -3,6 +3,8 @@ class Inscripcion < ActiveRecord::Base
   belongs_to :gamer
   belongs_to :torneo, autosave: false
   has_one :hots_formulario
+  accepts_nested_attributes_for :hots_formulario
+  validates_associated :hots_formulario
 
   def self.inscritos_confirmados_en_el_torneo_con_free_wins(torneo)
     array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
@@ -46,7 +48,7 @@ class Inscripcion < ActiveRecord::Base
       errors.add(:gamer, ', Debes colocar tu nick')
       return
     end
-    self.estado = 'Inscrito'
+    self.estado = 'Inscrito'  
     save
   end
 

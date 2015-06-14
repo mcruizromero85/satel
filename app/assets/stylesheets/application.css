@@ -634,7 +634,6 @@ width: 73%;
 
 #torneo_titulo2{
  margin-left: 3%;
-
 }
 
 .Inscripcion_pago{
@@ -654,10 +653,10 @@ width: 73%;
   font-size: 15px;
   box-sizing: border-box;
   margin: 15px 11px 14px 11px;
-  width: 95%;
   padding: 15px;
   border-radius: 5px;
   border: 1px solid #7ac9b7;
+  width: 98%;
 }
 
 /*MEDIA QUERY*/
