@@ -211,7 +211,6 @@ nav ul li a:hover{
   font-family: serif;
 }
 
-
 #ContenidoTorneo article h2 a{
     text-decoration: none;
     color: #D0D0D0;
@@ -322,17 +321,15 @@ font-size:90%;
 
 
 .FrmRegistrarTorneo input[type="submit"] {
-    background-color: #4180c5;
-    border: 1px solid #7ac9b7;
+    background-color: #4180C5;
+    border: 1px solid #7AC9B7;
     border-radius: 5px;
-    box-sizing: border-box;
-    color: white;
+    color: #FFFFFF;
     cursor: pointer;
     font-size: 15px;
-    margin: 15px 0;
+    margin: 1%;
     padding: 15px;
-    width: 100%;
-    
+    width: 98%;
 }
 
 .Enlace_detalle_registrarTorneo {
@@ -627,12 +624,12 @@ width: 73%;
 }
 
 .Inscripcion_datos{
- width: 52%;
-  background-color: black;
-  margin: 1%;
-  border-radius: 2%;
-  padding: 10px;
-  height: 191px;
+    background-color: #000000;
+    border-radius: 4px;
+    color: #FFFFFF;
+    margin: 1%;
+    width: 98%;
+    float: left;
 }
 
 #torneo_titulo2{
@@ -642,8 +639,8 @@ width: 73%;
 
 .Inscripcion_pago{
  background-color: black;
-  width: 40%;
-  float: right;
+  width: 46.25%;
+  float: left;
   border-radius: 2%;
   margin: 1%;
   height: 191px;
