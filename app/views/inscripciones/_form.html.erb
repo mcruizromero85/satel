@@ -21,14 +21,29 @@
 <br/>
 <section class="Frm_Inscripcion">
 
+  <article class="Inscripcion_distribucion_pago">
+    <b>Costo de inscripcion: $. 9.00 dolares americanos,si te inscribes
+       la bolsa aumenta a $ 39.00 dolares</b><br>
+
+       <article class="Tablas_Item"> 
+           <article ><p>Distribucion de pagos</p></article>
+           <article class="Tablas_Item_P"><p>Primer Lugar</p></article><article class="Tablas_Item_V" ><p>45%</p></article>
+           <article class="Tablas_Item_P"><p>Segundo Lugar</p></article><article class="Tablas_Item_V" ><p>42%</p></article>
+           <article class="Tablas_Item_P"><p>Tercer y cuarto Lugar</p></article><article class="Tablas_Item_V" ><p>12%</p></article>
+          
+          
+        </article>
+  </article>
+
  <article class="Inscripcion_pago">
       
-      <b>El torneo consta de un costo de <b id="valorpago">$. 9.00 dolares americanos</b>, el pago 
-       y premiacion se realizara via PayPal</b><br><br>
+      <b>Medio de pago</b>
        <center><img class="paypal" src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" /></center>
       
     </article>
-
+ </section>
+ 
+ <section class="Frm_Inscripcion2">
 <span id="mensajeError"></span>
 <%= form_for @inscripcion,  html: {class: "frm-registro"} do |f| %>
   <% if @inscripcion.errors.any? %>
@@ -65,10 +80,9 @@
     </article>
  <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
         <%= f.submit "Inscribirme" %>
-  </section>
  
  
 
   <% end %>
 <% end %>
-
+</section>

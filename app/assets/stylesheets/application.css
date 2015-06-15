@@ -636,13 +636,21 @@ width: 73%;
   overflow: hidden;
 }
 
+.Frm_Inscripcion2{
+ background-color: #47474D;
+ overflow: hidden;
+   width: 98%;
+  margin-left: 1%;
+}
 .Inscripcion_datos{
- width: 49%;
+  width: 96%;
   background-color: black;
-  margin: 1%;
+  
   border-radius: 2%;
   padding: 10px;
-  height: 191px;
+ 
+  margin-left: 1%;
+  
 }
 
 #torneo_titulo2{
@@ -652,12 +660,13 @@ width: 73%;
 
 .Inscripcion_pago{
  background-color: black;
-  width: 40%;
+  width: 44%;
   float: right;
   border-radius: 2%;
   margin: 1%;
   height: 191px;
   padding: 10px;
+  text-align: center;
 }
 #valorpago{
   text-decoration: underline;
@@ -672,6 +681,66 @@ width: 73%;
   border-radius: 5px;
   border: 1px solid #7ac9b7;
 }
+
+.Inscripcion_distribucion_pago{
+  background-color: black;
+  width: 46%;
+  float: left;
+  border-radius: 2%;
+  margin: 1%;
+  height: 191px;
+  padding: 10px;
+  text-align: center;
+}
+
+.paypal{
+  margin-top: 8%;
+}
+
+.Tablas_Item{
+  margin-top: 2%;
+  overflow: hidden;
+  background-color: black;
+  width: 82%;
+  margin-left: 9%;
+}
+
+.Tablas_Item article:nth-child(1){
+  background: linear-gradient(#8C8C8C, #2B2B2B);
+  width: 100%;
+  border: 2px solid black;
+  margin-bottom: -3px;
+}
+
+.Tablas_Item article:nth-child(1) p{
+  text-align: center;
+}
+
+.Tablas_Item p{
+  text-align: center;
+}
+
+.Tablas_Item_P{
+   float: left;
+   width: 80%;
+  background-color: #47474D;
+  margin-top: 6px;
+  margin-left: 1px;
+  
+ }
+
+ .Tablas_Item_V{
+  float: right;
+  width: 18%;
+  background-color: #47474D;
+  margin-top: 6px;
+  margin-left: 1px;
+ }
+
+ .Tablas_Item_V p{
+  text-align: right;
+ }
+
 
 /*MEDIA QUERY*/
 @media only screen and (max-width : 1920px){
@@ -747,6 +816,9 @@ width: 73%;
 @media only screen and (max-width : 1000px){
 
 
+.Inscripcion_pago{
+  width: 42%
+}
 
  #tabs-3{
     margin-left: 5%;
@@ -798,7 +870,12 @@ width: 73%;
   line-height: 22px;
   }
 
- 
+.Inscripcion_distribucion_pago b{
+ font-size: 12px;
+ }
+
+ } 
+
 
 @media only screen and (max-width : 890px) {
  
@@ -806,10 +883,16 @@ width: 73%;
   display: none;
  }
 
+
+
+
 #ContenidoTorneo article {
- width:  55%;
+ width:  98%;
 }
 
+#ContenidoTorneo img {
+  height: 209px;
+}
  .logo {
     
    float:center;
@@ -857,7 +940,7 @@ width: 73%;
 
  .Img_registroTorneo{
   margin-left: 0%;
-  width: 95%;
+  width: 94.5%;
  }
 
 
@@ -880,7 +963,7 @@ width: 73%;
 
 
   #ContenidoTorneo article h2, p{
-      font-size: 73% !important;
+      font-size: 103% !important;
   }
 
    #ContenidoTorneo article h2 a{
@@ -888,10 +971,12 @@ width: 73%;
    }
 
   #ContenidoTorneo img{
-      
-        width: 20%;
+      width: 99%;
   }
-
+#ContenidoTorneo .PricePool {
+  /* float: right; */
+  width: 96%;
+}
 
   .Lista_Inscritos_Item article:nth-child(3) {
     width: 27%;
@@ -904,12 +989,52 @@ width: 73%;
     font-size: 16px;
   }
 
+  .Inscripcion_datos {
+  width: 94.5%;
+  }
+ .Inscripcion_distribucion_pago{
+  height: 155px;
+ 
+  }
+
+  .Inscripcion_pago{
+    height: 155px;
+  width: 40.5%;
+  margin-right: 1%;
+}
   
+  .paypal {
+  margin-top: 5%;
+  width: 57%;
+ }
+ .Inscripcion_datos {
+  width: 93.5%;
 }
 
 
 
-@media only screen and (max-width : 670px) {
+
+.Inscripcion_datos {
+  width: 94.5%;
+}
+
+.Tablas_Item {
+  font-size: 12px;
+ }
+ .Inscripcion_distribucion_pago b {
+  font-size: 10px;
+}
+}
+
+
+
+@media only screen and (max-width: 701px) {
+
+.Inscripcion_distribucion_pago {
+  
+  width: 93%;
+  
+}
 
   .Enlaces{
     margin-left: 30%;
@@ -921,14 +1046,39 @@ width: 73%;
 
  .Lista_Inscritos_Item article:nth-child(3) {
   width: 26%;
-}
+  }
   #ContenidoTorneo article h2, p {
     font-size: 61% !important;
   }
 
+  .Inscripcion_pago {
+  width: 93%;
+  }
+
+  .Tablas_Item {
+  margin-top: 0%;
+  width: 92%;
+  margin-left: 5%;
+  font-size: 12px;
+  }
+
+ #ContenidoTorneo img {
+  width: 99%;
+ }
+ #ContenidoTorneo article {
+  width: 98%;
+ }
+
+ #ContenidoTorneo article h2, p {
+  font-size: 92% !important;
+ }
+
+ #ContenidoTorneo .PricePool {
+  /* float: right; */
+  width: 99%;
+ }
+
 }
-
-
 
 /*2. Para moviles, hereda del item 1*/
 @media only screen and (max-width : 580px){
@@ -936,6 +1086,8 @@ width: 73%;
   aside{
    display: none;
   }
+
+
 
  /*Ajustando el formulario de inscripciòn al movil*/
  .FrmRegistrarTorneo {
@@ -945,39 +1097,9 @@ width: 73%;
 
 
 
-  .Torneos article {
-    width: 95%;
-    margin-left: 2.5%;
-  }
 
   
-  #ContenidoTorneo img {
-    height: 40%;
-    width:99%;
-  }
 
-  #ContenidoTorneo article {
-    width: 98%;
-  }
-
-
- #ContenidoTorneo article h2 a {
-  font-size: 25px;
-
- }
-
- #ContenidoTorneo article h2, p{
-    font-size: 100% !important;
-    line-height: 2;
- }
-
- #ContenidoTorneo .PricePool {
-
-  width: 98%;
-  padding-top: 11px;
-  font-size: 18px;
- 
- }
  .Lista_Inscritos {
   margin-top: -21px;
  }
@@ -999,15 +1121,13 @@ width: 73%;
  
 }
 
-.Inscripcion_pago {
-  
-  font-size: 12px;
-  text-align: justify;
-  }
 
-  .Inscripcion_pago center img{
-   width: 102%;
-  }
+
+.Inscripcion_datos {
+  
+  width: 94%;
+}
+
 
  .Lista_Inscritos_Item article:nth-child(1) {
   width: 15%;
@@ -1085,17 +1205,28 @@ width: 73%;
   .Lista_Inscritos_Item article:nth-child(4) {
   width: 10%;
   }
+  .Tablas_Item {
+  margin-top: 1%;
+  margin-left: 2%;
+  width: 95%;
+  font-size: 12px;
  }
 
+ }
+
+ 
+ 
  @media only screen and (max-width : 370px){
  
  .Enlaces {
     margin-left: 13%;
   }
+
  #ContenidoTorneo .PricePool {
   width: 98%;
   font-size: 18px
  }
+
   #ContenidoTorneo article h2, p {
      font-size: 72% !important;
   }
@@ -1123,5 +1254,29 @@ width: 73%;
   .Lista_Inscritos_Item article:nth-child(4) {
   width: 18%;
   }
+  .Inscripcion_pago {
+   width: 90.6%;
+  margin-right: 2%;
+  height: 94px;
+  }
+  .Inscripcion_distribucion_pago {
+  width: 90%;
+  }
+  .Inscripcion_distribucion_pago b {
+  font-size: 10px;
+  }
+  
+ .Inscripcion_datos {
+  width: 90%;
  }
 
+
+ }
+
+ @media only screen and (max-width : 280px){
+  .Inscripcion_pago {
+  width: 89.6%;
+  margin-right: 1%;
+}
+ }
+ 
