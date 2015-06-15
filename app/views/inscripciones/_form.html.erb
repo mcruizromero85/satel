@@ -1,25 +1,7 @@
 <h1>Inscribete</h1>
-  <% if !@mensaje_inscripcion.nil? %>
-  <script>
-  $(function() {
-    $( "#dialog-confirm" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  });
-  </script>
-  <div id="dialog-confirm" title="Alerta">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><%=@mensaje_inscripcion%></p>
-  </div>
-  <% end %>
 <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
-
-<br/>
 <section class="Frm_Inscripcion">
+<<<<<<< HEAD
 
   <article class="Inscripcion_distribucion_pago">
     <b>Costo de inscripcion: $. 9.00 dolares americanos,si te inscribes
@@ -46,6 +28,41 @@
  <section class="Frm_Inscripcion2">
 <span id="mensajeError"></span>
 <%= form_for @inscripcion,  html: {class: "frm-registro"} do |f| %>
+=======
+  <article class="Inscripcion_pago">
+    <center><b>Costo de inscripci&oacute;n: $ 9.00 dolares,<br/> si te inscribes la bolsa aumenta a <u>$ <%= @torneo.detalle_pago_inscripcion.total_price_pool + 9.00 %></u></b></center>
+    <br/>
+    <table class="Detalle_rondas">
+    <thead>
+      <tr >
+        <th colspan="2" class="header" >Distribuci&oacute;n de la bolsa de premio</th>
+      </tr>
+    </thead>
+      <tbody id="torneosPortada">        
+          <tr>
+            <td>Primer Lugar</td>
+            <td>45 %</td>
+          </tr>
+          <tr>
+            <td>Segundo Lugar</td>
+            <td>25 %</td>
+          </tr>
+          <tr>
+            <td>Tercer y Cuarto Lugar</td>
+            <td>12 %</td>
+          </tr>        
+      </tbody>
+    </table>
+  </article>
+  <article class="Inscripcion_pago">
+      <center><b>Medio de pago</b></center><br/>
+       <center><img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" /></center>      
+  </article>
+  <article class="Inscripcion_datos">
+  <span id="mensajeError"></span>
+  <%= @mensaje_inscripcion_error if !@mensaje_inscripcion_error.nil? %>
+  <%= form_for @inscripcion,  html: {class: "frm-registro"} do |f| %>
+>>>>>>> d7ebf212b070cc56b07b30a15a17354d1678a972
   <% if @inscripcion.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@inscripcion.errors.count, "error") %> No permiten registrar la inscripcion:</h2>
@@ -56,21 +73,18 @@
       </ul>
     </div>
   <% end %>
+  <br/>
 
-  <% if @torneo.flag_inscripciones == FLAG_INSCRIPCIONES_NO_DISPONIBLES %>
-    <center><b>Proceso de inscripci&oacute;n en actualizaci&oacute;n, pero no te preocupes pronto volver&aacute; a estar disponible.</b></center>
-    <br/>
-    <center><a class="Enlace_detalle_registrarTorneo" href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a><center>
-  <% else %>
-
-    <% if @torneo.flag_pago_inscripciones == 1 %>
-    <label id="torneo_titulo">
-    <center><b>El presente torneo cuenta con un costo de inscripci&oacute;n de $ <%=@torneo.detalle_pago_inscripcion.monto_inscripcion%> dolares americanos, el pago se realizará con paypal</b></center>
-      <br/>
-    </label>
-      <center><img class ="paypal" src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" /></center>
+  <% if @torneo.juego.id == ID_JUEGO_HOTS %>
+    <%= render partial: "reutilizable/ficha_inscripcion_hots", object: @torneo, as: :torneo %>
+  <% end %>
+  <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
+    <%= f.submit "Inscribirme" %>
     <% end %>
+  </article>
+</section>
 
+<<<<<<< HEAD
      <article class="Inscripcion_datos">
       
         <label id="torneo_titulo2"><b>Nick o N&oacute;mbre del clan<b/><input type="text" name="gamer[nick]" id="gamer_nick" value="<%=current_gamer.nick%>" size="15" maxlength="20" /></label>
@@ -86,3 +100,6 @@
   <% end %>
 <% end %>
 </section>
+=======
+
+>>>>>>> d7ebf212b070cc56b07b30a15a17354d1678a972

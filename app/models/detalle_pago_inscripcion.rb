@@ -2,7 +2,7 @@ require 'paypal-sdk-rest'
 include PayPal::SDK::REST
 
 class DetallePagoInscripcion < ActiveRecord::Base
-  belongs_to :torneos
+  belongs_to :torneo
   def crear_pago(torneo_id, torneo_titulo)
   	@payment = PayPal::SDK::REST::Payment.new({
       :intent => "sale",
@@ -39,11 +39,16 @@ class DetallePagoInscripcion < ActiveRecord::Base
   end
 
   def mensaje_error_paypal
-    print @payment.error
-    @payment.error.message.to_s if !@payment.error.nil?
+    if !@payment.nil?
+      @payment.error.message.to_s if !@payment.error.nil?
+    end    
   end
 
   def id_transaccion
   	@payment.id
+  end
+
+  def total_price_pool    
+    (Inscripcion.total_confirmados_por_torneo(self.torneo) * monto_inscripcion) + self.monto_auspiciado
   end
 end

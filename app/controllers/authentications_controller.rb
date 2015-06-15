@@ -7,8 +7,8 @@ class AuthenticationsController < ApplicationController
     
     @auth = Authentication.where('uid = ? AND provider = ?', auth['uid'], auth['provider']).first        
     print auth
-    unless @auth
-      facebook_gamer = auth['info']
+    facebook_gamer = auth['info']
+    unless @auth      
       gamer = Gamer.new(correo: facebook_gamer.email, apellidos: facebook_gamer.last_name)
       if params[:provider] == 'developer'
         gamer.nombres = facebook_gamer.name
@@ -22,6 +22,11 @@ class AuthenticationsController < ApplicationController
       authentication = Authentication.new(provider: auth['provider'], uid: auth['uid'], gamer: gamer, link_cuenta: link_cuenta, icono: facebook_gamer.image )
       authentication.save
       @auth = authentication
+    end
+
+    if @auth.icono.nil?
+      @auth.icono = facebook_gamer.image
+      @auth.save
     end
     self.current_gamer = @auth.gamer
     redirect_to action: 'index', controller: 'torneos'

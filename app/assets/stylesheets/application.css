@@ -7,7 +7,7 @@ body{
 }
 
 header{
-  background: black;
+  background: rgb(4, 6, 21);
   width: 100%;
   height: 51.4px;
   top: 0;
@@ -107,17 +107,13 @@ nav ul li a:hover{
 }
 
 .WelcomeUSer {
-
-
     float: right;
     color: #fff;
     font-weight: normal;
     font-size: 14px;
-    padding: 0px;
+    padding-left: 10px;
     vertical-align: middle;
-  
-    
-    }
+}
 
 .Anuncios{
      margin-top: 2px;
@@ -212,7 +208,6 @@ nav ul li a:hover{
   font-weight: bold;
   font-family: serif;
 }
-
 
 #ContenidoTorneo article h2 a{
   text-decoration: none;
@@ -332,17 +327,15 @@ font-size: 90% !important;
 
 
 .FrmRegistrarTorneo input[type="submit"] {
-    background-color: #4180c5;
-    border: 1px solid #7ac9b7;
+    background-color: #4180C5;
+    border: 1px solid #7AC9B7;
     border-radius: 5px;
-    box-sizing: border-box;
-    color: white;
+    color: #FFFFFF;
     cursor: pointer;
     font-size: 15px;
-    margin: 15px 0;
+    margin: 1%;
     padding: 15px;
-    width: 100%;
-    
+    width: 98%;
 }
 
 .Enlace_detalle_registrarTorneo {
@@ -643,6 +636,7 @@ width: 73%;
   margin-left: 1%;
 }
 .Inscripcion_datos{
+<<<<<<< HEAD
   width: 96%;
   background-color: black;
   
@@ -651,17 +645,29 @@ width: 73%;
  
   margin-left: 1%;
   
+=======
+    background-color: #000000;
+    border-radius: 4px;
+    color: #FFFFFF;
+    margin: 1%;
+    width: 98%;
+    float: left;
+>>>>>>> d7ebf212b070cc56b07b30a15a17354d1678a972
 }
 
 #torneo_titulo2{
  margin-left: 3%;
-
 }
 
 .Inscripcion_pago{
  background-color: black;
+<<<<<<< HEAD
   width: 44%;
   float: right;
+=======
+  width: 46.25%;
+  float: left;
+>>>>>>> d7ebf212b070cc56b07b30a15a17354d1678a972
   border-radius: 2%;
   margin: 1%;
   height: 191px;
@@ -676,10 +682,10 @@ width: 73%;
   font-size: 15px;
   box-sizing: border-box;
   margin: 15px 11px 14px 11px;
-  width: 95%;
   padding: 15px;
   border-radius: 5px;
   border: 1px solid #7ac9b7;
+  width: 98%;
 }
 
 .Inscripcion_distribucion_pago{
