@@ -18,6 +18,7 @@ class InscripcionesController < ApplicationController
   def new
     @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.new
+    @mensaje_inscripcion_error = params[:mensaje_inscripcion_error] if !params[:mensaje_inscripcion_error].nil?
   end
 
   # GET /inscripciones/1/edit
@@ -59,34 +60,27 @@ class InscripcionesController < ApplicationController
     @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
     @inscripcion.estado = 'Confirmado'
-
-    if @torneo.flag_pago_inscripciones == 1 
-      detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])
+    detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])
       
-      if !es_retornado_de_pasarela_de_pago
-        detalle_pago_inscripcion.crear_pago(@torneo.id, @torneo.titulo)
-        respond_to do |format|
-          format.html { redirect_to detalle_pago_inscripcion.url_de_pago }
-        end
-        return
+    if !es_retornado_de_pasarela_de_pago
+      detalle_pago_inscripcion.crear_pago(@torneo.id, @torneo.titulo)
+      respond_to do |format|
+        format.html { redirect_to detalle_pago_inscripcion.url_de_pago }
       end
+      return
+    end
 
-      respond_to do |format|
-        if detalle_pago_inscripcion.cerrar_pago(params[:paymentId], params[:PayerID]) && @inscripcion.confirmar(detalle_pago_inscripcion.id_transaccion)
-          format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
+    respond_to do |format|
+      if detalle_pago_inscripcion.cerrar_pago(params[:paymentId], params[:PayerID]) && @inscripcion.confirmar(detalle_pago_inscripcion.id_transaccion)
+        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
+      else
+        @inscripcion.destroy
+        if !detalle_pago_inscripcion.mensaje_error_paypal.nil?
+          mensaje_inscripcion_error = detalle_pago_inscripcion.mensaje_error_paypal
         else
-          @inscripcion.destroy
-          detalle_pago_inscripcion.mensaje_error_paypal = "Error interno contacta, con el administrador: mcruizromero85@gmail.com" if detalle_pago_inscripcion.mensaje_error_paypal.nil?
-          format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: detalle_pago_inscripcion.mensaje_error_paypal }  
+          mensaje_inscripcion_error = "Error interno contacta, con el administrador: mcruizromero85@gmail.com"
         end
-      end
-    else
-      respond_to do |format|
-        if @inscripcion.confirmar
-           format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
-        else          
-           format.html { render action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion } 
-        end
+        format.html { redirect_to action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion_error: mensaje_inscripcion_error }  
       end
     end
    

@@ -2,7 +2,7 @@ class Inscripcion < ActiveRecord::Base
   validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
   belongs_to :gamer
   belongs_to :torneo, autosave: false
-  has_one :hots_formulario
+  has_one :hots_formulario, :dependent => :delete
   accepts_nested_attributes_for :hots_formulario
   validates_associated :hots_formulario
 
@@ -69,5 +69,5 @@ class Inscripcion < ActiveRecord::Base
       mensaje = 'Tu Inscripción se realizó con éxito'
     end
     mensaje
-  end
+  end  
 end

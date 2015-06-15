@@ -32,6 +32,7 @@
   </article>
   <article class="Inscripcion_datos">
   <span id="mensajeError"></span>
+  <%= @mensaje_inscripcion_error if !@mensaje_inscripcion_error.nil? %>
   <%= form_for @inscripcion,  html: {class: "frm-registro"} do |f| %>
   <% if @inscripcion.errors.any? %>
     <div id="error_explanation">

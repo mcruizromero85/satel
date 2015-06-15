@@ -5,13 +5,6 @@
   <article class="Detalle_Torneo_Ver">
     <% if @mensaje_de_guardado.nil? %>
       <center>
-        <% if !current_gamer.nil? %>
-          Inscribete dando click <b><a class="Enlace_torneosDisponibles" id="link_inscripcion_torneo_<%=@torneo.id%>" href="/inscripciones/new/<%=@torneo.id%>">aqu&iacute;</a></b>
-        <% else %>
-          Primero logueate para poder inscribirte, haz click <a id="autenticarse" href="/auth/facebook" > 
-               <button class="btnFacebook" type="button">Aqu&iacute;</button>
-            </a> para conectarte: 
-        <% end %>
         <br/>
         <br/>
         <a class="Enlace_detalle_registrarTorneo" href="/inscripciones?id_torneo=<%=@torneo.id%>">Ver inscritos</a>
