@@ -48,8 +48,6 @@
   <% if @torneo.juego.id == ID_JUEGO_HOTS %>
     <%= render partial: "reutilizable/ficha_inscripcion_hots", object: @torneo, as: :torneo %>
   <% end %>
-
-
   <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
     <%= f.submit "Inscribirme" %>
     <% end %>
