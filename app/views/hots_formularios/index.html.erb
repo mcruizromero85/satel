@@ -1,0 +1,29 @@
+<h1>Listing hots_formularios</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Inscripcion</th>
+      <th>Nombre equipo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hots_formularios.each do |hots_formulario| %>
+      <tr>
+        <td><%= hots_formulario.inscripcion_id %></td>
+        <td><%= hots_formulario.nombre_equipo %></td>
+        <td><%= link_to 'Show', hots_formulario %></td>
+        <td><%= link_to 'Edit', edit_hots_formulario_path(hots_formulario) %></td>
+        <td><%= link_to 'Destroy', hots_formulario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Hots formulario', new_hots_formulario_path %>
