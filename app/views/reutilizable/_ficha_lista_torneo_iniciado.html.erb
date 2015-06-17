@@ -6,5 +6,7 @@
     Torneo iniciado!!!, haz click  <b>	
 	<font color='green'><a class='estilo_listo' href='/torneos/iniciar/<%=torneo.id%>'>aqu&iacute;</a></font></b> para ver las llaves
   </article>
-  <%= render partial: "reutilizable/presentacion_price_pool", object: @torneo, as: :torneo %>
+  <% if !torneo.detalle_pago_inscripcion.nil? %>
+  <%= render partial: "reutilizable/presentacion_price_pool", object: torneo, as: :torneo %>
+  <% end %>
 </article>

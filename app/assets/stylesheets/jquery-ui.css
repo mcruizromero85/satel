@@ -61,16 +61,18 @@
     width: 100%;
 }
 .ui-accordion .ui-accordion-header {
-    cursor: pointer;
-    display: block;
-    font-size: 100%;
-    margin: 2px 0 0;
-    min-height: 0;
-    padding: 0.5em 0.5em 0.5em 0.7em;
-    position: relative;
-}
-.ui-accordion .ui-accordion-icons {
-    padding-left: 2.2em;
+      cursor: pointer;
+  display: block;
+  font-size: 80%;
+  /* margin: 2px 0 0; */
+  min-height: 0;
+  padding: 0.5em 0.5em 0.5em 0.7em;
+  position: relative;
+  margin-left: 1.5%;
+  margin-top: %;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+  width: 99%;
 }
 .ui-accordion .ui-accordion-icons .ui-accordion-icons {
     padding-left: 2.2em;
@@ -742,7 +744,7 @@ body .ui-tooltip {
 }
 .ui-widget-content {
     /*background: url("ui-bg_flat_75_ffffff_40x100.png") repeat-x scroll 50% 50% #FFFFFF;*/
-    border: 1px solid #AAAAAA;
+   
  /*   color: #222222;-->depura para hacer mas legible el nombre de los participantes de los brackets*/
     
 
@@ -760,9 +762,9 @@ body .ui-tooltip {
     color: #222222;
 }
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-    background: url("ui-bg_glass_75_e6e6e6_1x400.png") repeat-x scroll 50% 50% #E6E6E6;
-    border: 1px solid #D3D3D3;
-    color: #555555;
+    
+    
+    
     font-weight: normal;
 }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
@@ -770,9 +772,9 @@ body .ui-tooltip {
     text-decoration: none;
 }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-    background: url("ui-bg_glass_75_dadada_1x400.png") repeat-x scroll 50% 50% #DADADA;
+    
     border: 1px solid #999999;
-    color: #212121;
+    
     font-weight: normal;
 }
 .ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited, .ui-state-focus a, .ui-state-focus a:hover, .ui-state-focus a:link, .ui-state-focus a:visited {
@@ -780,9 +782,9 @@ body .ui-tooltip {
     text-decoration: none;
 }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-    background: url("ui-bg_glass_65_ffffff_1x400.png") repeat-x scroll 50% 50% #FFFFFF;
-    border: 1px solid #AAAAAA;
-    color: #212121;
+    background-color: black;
+    
+    
     font-weight: normal;
 }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
@@ -1394,6 +1396,11 @@ body .ui-tooltip {
     opacity: 0.3;
     padding: 8px;
 }
+
+@media only screen and (max-width : 890px) {
+  .ui-accordion .ui-accordion-header {
+    width: 97%;
+  }  
 
 @media screen and (max-width: 350px){
 

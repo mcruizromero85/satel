@@ -324,8 +324,6 @@ font-size: 90% !important;
   border: 1px solid #7ac9b7;
 }  
 
-
-
 .FrmRegistrarTorneo input[type="submit"] {
     background-color: #4180C5;
     border: 1px solid #7AC9B7;
@@ -537,11 +535,11 @@ width: 73%;
 
 
 .lista_Inscritos_contenido{
-  width: 98%;
+  width: 96%;
   background-color: #47474D;
   border-radius: 4px;
   float: left;
-  margin-left: 1%;
+  margin-left: 1.5%;
   margin-right: 0.5%;
   padding: 0.5% 0 1%;
 }
@@ -566,7 +564,7 @@ width: 73%;
   padding-bottom: 5px;
   padding-left: 7px;
   padding-top: 5px;
-  width: 69.5%;
+  width: 4%;
 }
 
 .Lista_Inscritos_Item article:nth-child(1){
@@ -576,18 +574,25 @@ width: 73%;
 .Lista_Inscritos_Item article:nth-child(3){
   float: left;
   padding-right: 0;
-  text-align: right;
   vertical-align: middle;
-  width: 12%;
+  width: 60%;
 }
 
 .Lista_Inscritos_Item article:nth-child(4){
-  float: right;
+  
   padding-right: 1%;
-  text-align: right;
+  text-align: left;
   vertical-align: middle;
-  width: 4%;
+  width: 20%;
 }
+
+.Lista_Inscritos_Item article:nth-child(5){
+  float: right;
+  width: 11%;
+  margin-right: -6%;
+}
+
+
 
 .Lista_Inscritos_item_nick{
   top: 30%;
@@ -636,38 +641,21 @@ width: 73%;
   margin-left: 1%;
 }
 .Inscripcion_datos{
-<<<<<<< HEAD
   width: 96%;
   background-color: black;
-  
   border-radius: 2%;
   padding: 10px;
- 
   margin-left: 1%;
-  
-=======
-    background-color: #000000;
-    border-radius: 4px;
-    color: #FFFFFF;
-    margin: 1%;
-    width: 98%;
-    float: left;
->>>>>>> d7ebf212b070cc56b07b30a15a17354d1678a972
 }
 
 #torneo_titulo2{
- margin-left: 3%;
+ margin-left: 2%;
 }
 
 .Inscripcion_pago{
  background-color: black;
-<<<<<<< HEAD
   width: 44%;
   float: right;
-=======
-  width: 46.25%;
-  float: left;
->>>>>>> d7ebf212b070cc56b07b30a15a17354d1678a972
   border-radius: 2%;
   margin: 1%;
   height: 191px;
@@ -747,7 +735,27 @@ width: 73%;
   text-align: right;
  }
 
+ .Ficha_inscripcion2_detalle{
+  background-color: black;
+  width: 98%;
+  margin-left: 1%;
+  border-radius: 1%;
+  padding-top: 2%;
+ }
 
+  .Ficha_inscripcion2_detalle input[type="text"]{
+   margin-left: 2%;
+    width: 96%;
+  }
+
+  .Team_Inscritos{
+  background-color: #484848;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 1%;
+  }
+
+  
 /*MEDIA QUERY*/
 @media only screen and (max-width : 1920px){
   
@@ -889,20 +897,15 @@ width: 73%;
   display: none;
  }
 
+ #ContenidoTorneo article {
+  width:  98%;
+ }
 
-
-
-#ContenidoTorneo article {
- width:  98%;
-}
-
-#ContenidoTorneo img {
-  height: 209px;
-}
+ #ContenidoTorneo img {
+   height: 209px;
+ }
  .logo {
-    
    float:center;
-   
   }
 
   #menu-icon {
@@ -961,11 +964,15 @@ width: 73%;
   }
 
 .Lista_Inscritos_Item article {
-   width: 46.5%;
+   width: 6.5%;
   }
  .Lista_Inscritos_Item article:nth-child(4) {
-    width: 11%;
+    width: 16%;
   }
+
+ .Lista_Inscritos_Item article:nth-child(5){
+  width: 23%;
+ }
 
 
   #ContenidoTorneo article h2, p{
