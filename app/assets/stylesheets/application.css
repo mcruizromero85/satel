@@ -290,7 +290,7 @@ font-size: 90% !important;
 }
 
 .FrmRegistrarTorneo{
-    color: white;
+    
     width: 69%;
     margin-top: 2%;
     margin-right: 0px;
@@ -632,6 +632,7 @@ width: 73%;
   border-radius: 4px;
   background-color: #47474D;
   overflow: hidden;
+  color: #686868;
 }
 
 .Frm_Inscripcion2{
@@ -688,7 +689,7 @@ width: 73%;
 }
 
 .paypal{
-  margin-top: 8%;
+  margin-top: 5%;
 }
 
 .Tablas_Item{
