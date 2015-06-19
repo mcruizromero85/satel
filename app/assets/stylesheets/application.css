@@ -321,8 +321,8 @@ font-size: 90% !important;
   width: 98%;
   padding: 15px;
   border-radius: 5px;
-  border: 1px solid #7ac9b7;
-}  
+    border: 1px solid #787877;
+  }  
 
 .FrmRegistrarTorneo input[type="submit"] {
     background-color: #4180C5;
@@ -653,7 +653,7 @@ width: 73%;
 }
 
 .Inscripcion_pago{
- background-color: black;
+ background-color: #fff;
   width: 44%;
   float: right;
   border-radius: 2%;
@@ -677,7 +677,7 @@ width: 73%;
 }
 
 .Inscripcion_distribucion_pago{
-  background-color: black;
+  background-color: #fff;
   width: 46%;
   float: left;
   border-radius: 2%;
@@ -694,16 +694,17 @@ width: 73%;
 .Tablas_Item{
   margin-top: 2%;
   overflow: hidden;
-  background-color: black;
   width: 82%;
   margin-left: 9%;
+  color: whitesmoke;
 }
 
 .Tablas_Item article:nth-child(1){
-  background: linear-gradient(#8C8C8C, #2B2B2B);
-  width: 100%;
-  border: 2px solid black;
+  background: linear-gradient(#A0A0A0, #484848 );
+  width: 99%;
+  border: 1px solid #8C8C8C;
   margin-bottom: -3px;
+  border-radius: 4px;
 }
 
 .Tablas_Item article:nth-child(1) p{
@@ -715,20 +716,22 @@ width: 73%;
 }
 
 .Tablas_Item_P{
-   float: left;
-   width: 80%;
-  background-color: #47474D;
-  margin-top: 6px;
+  float: left;
+  width: 80%;
+  background-color: #787878;
+  margin-top: 5px;
   margin-left: 1px;
+  border-radius: 4px;
   
  }
 
  .Tablas_Item_V{
   float: right;
-  width: 18%;
-  background-color: #47474D;
-  margin-top: 6px;
-  margin-left: 1px;
+  width: 19%;
+  background-color: #787878;
+  margin-top: 5px;
+  border-radius: 4px;
+
  }
 
  .Tablas_Item_V p{
@@ -736,7 +739,7 @@ width: 73%;
  }
 
  .Ficha_inscripcion2_detalle{
-  background-color: black;
+  background-color: #fff;
   width: 98%;
   margin-left: 1%;
   border-radius: 1%;
@@ -790,12 +793,15 @@ width: 73%;
     border: 1px solid;
      border-color: #dca7a7;
     border-radius: 4px;
+    margin-left: 1%;
+    margin-right: 1%;
 
     }
 
   #error_explanation h2{
     color: #a94442;
     font-weight: bold;
+    margin-left: 3%;
   }
    #error_explanation li{
     color: #a94442;
