@@ -57,6 +57,7 @@
     <li><a href="#tabs-1">Brackets</a></li>
     <li><a href="#tabs-2">En vivo!!!</a></li>
     <li><a href="#tabs-3">Detalle Torneo</a></li>
+    <li><a href="#tabs-4">Chat</a></li>
   </ul>
   <article id="tabs-1">
         <% if @torneo.estado == "Iniciado"  %>  
@@ -92,11 +93,14 @@
   <article id="tabs-3">
     <%= render partial: "reutilizable/ficha_presentacion_torneo_detallado", object: @torneo, as: :torneo %>
   </article>
+  <article id="tabs-4">
+    aa
+  </article>
 </article>
           <aside>
             <br/>
             <article id="tabs_comentario">
-                <iframe src="<%=@torneo.urlstreeming%>/chat?popout=" frameborder="0" scrolling="no" height="600" width="100%"></iframe>                
+                <!-- <iframe src="<%=@torneo.urlstreeming%>/chat?popout=" frameborder="0" scrolling="no" height="600" width="100%"></iframe> -->
             </article>
           </aside>
 </section>

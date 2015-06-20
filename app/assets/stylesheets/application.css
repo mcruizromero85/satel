@@ -566,36 +566,15 @@ width: 73%;
   padding-bottom: 5px;
   padding-left: 7px;
   padding-top: 5px;
-  /*width: 4%;*/
+
     color: white;
 }
-
-.Lista_Inscritos_Item article:nth-child(1){
-  width: 5%;
-}
-
-.Lista_Inscritos_Item article:nth-child(3){
-  float: left;
-  padding-right: 0;
-  vertical-align: middle;
+.Team_nick{
   width: 60%;
 }
-
-.Lista_Inscritos_Item article:nth-child(4){
-  
-  padding-right: 1%;
-  text-align: left;
-  vertical-align: middle;
-  width: 20%;
+.Team_estado{
+  width: 30%;
 }
-
-.Lista_Inscritos_Item article:nth-child(5){
-  float: right;
-  width: 11%;
-  margin-right: -6%;
-}
-
-
 
 .Lista_Inscritos_item_nick{
   top: 30%;
@@ -886,6 +865,9 @@ width: 73%;
 
 @media only screen and (max-width : 1000px){
 
+.Team_nick {
+  width: 55%;
+}
 
 .Inscripcion_pago{
   width: 42%
@@ -905,9 +887,7 @@ width: 73%;
     width: 100%;
   }
 
- .Lista_Inscritos_Item article:nth-child(4) {
-  width: 6%;
- }
+ 
 
   #tabs-3 table{
     margin-left: 0;
@@ -1020,16 +1000,7 @@ width: 73%;
     margin-left: 0%;
   }
 
-.Lista_Inscritos_Item article {
-   width: 6.5%;
-  }
- .Lista_Inscritos_Item article:nth-child(4) {
-    width: 16%;
-  }
 
- .Lista_Inscritos_Item article:nth-child(5){
-  width: 23%;
- }
 
 
 
@@ -1046,12 +1017,7 @@ width: 73%;
   width: 96%;
 }
 
-  .Lista_Inscritos_Item article:nth-child(3) {
-    width: 27%;
-  }
-  .Lista_Inscritos_Item article:nth-child(1) {
-  width: 7%;
-  }
+ 
   .Lista_Inscritos_item_nick {
   
     font-size: 16px;
@@ -1104,6 +1070,10 @@ width: 73%;
   
 }
 
+.Team_nick {
+  width: 51%;
+}
+
   .Enlaces{
     margin-left: 30%;
   }
@@ -1112,9 +1082,7 @@ width: 73%;
     margin-left: -12%;
   }
 
- .Lista_Inscritos_Item article:nth-child(3) {
-  width: 26%;
-  }
+ 
   #ContenidoTorneo article h2, p {
     font-size: 61% !important;
   }
@@ -1165,7 +1133,9 @@ width: 73%;
 
 
 
-
+.Team_nick {
+  width: 44%;
+}
   
 
  .Lista_Inscritos {
@@ -1197,14 +1167,6 @@ width: 73%;
 }
 
 
- .Lista_Inscritos_Item article:nth-child(1) {
-  width: 15%;
- }
-
- .Lista_Inscritos_Item article {
- 
-  width: 10.5%;
-}
 
 .Lista_Inscritos_item_nick {
 
@@ -1212,16 +1174,7 @@ width: 73%;
 }
 
 
- .Lista_Inscritos_Item article:nth-child(3) {
  
-  width: 43%;
-}
-
-
-.Lista_Inscritos_Item article:nth-child(4) {
- 
-  width: 18%;
-}
 
  
   #tabs-2{
@@ -1264,15 +1217,7 @@ width: 73%;
     margin-left: 23%;
   }
 
-  .Lista_Inscritos_Item article:nth-child(1) {
-  width: 9%;
-  }
-  .Lista_Inscritos_Item article:nth-child(3) {
-  width: 60%;
-  }
-  .Lista_Inscritos_Item article:nth-child(4) {
-  width: 10%;
-  }
+  
   .Tablas_Item {
   margin-top: 1%;
   margin-left: 2%;
@@ -1310,18 +1255,7 @@ width: 73%;
   width: 29%
  }
  
- .Lista_Inscritos_Item article:nth-child(1) {
-  width: 14%;
-}
 
- .Lista_Inscritos_Item article:nth-child(3) {
-  width: 40%;
-  visibility: hidden;
-  }
-
-  .Lista_Inscritos_Item article:nth-child(4) {
-  width: 18%;
-  }
   .Inscripcion_pago {
    width: 90.6%;
   margin-right: 2%;
@@ -1337,7 +1271,13 @@ width: 73%;
  .Inscripcion_datos {
   width: 90%;
  }
-
+ .Team_nick {
+  width: 34%;
+  font-size: 13px;
+}
+.Team_estado {
+  font-size: 13px;
+}
 
  }
 
