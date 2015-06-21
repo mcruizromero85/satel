@@ -1,0 +1,31 @@
+ <article id="ContenidoTorneo">
+   <a href="/inscripciones?id_torneo=<%= torneo.id %>"><img  src="<%= image_path(torneo.juego.nombre_imagen) %>" ></a>
+  <article>
+  <h2><a href="/inscripciones?id_torneo=<%= torneo.id %>"><%= torneo.titulo %></a></h2>
+    <p>M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
+    <% if  Time.new > torneo.cierre_inscripcion %>
+      Haz clic <b><a id="link_confirmar_torneo_<%=torneo.id%>" href="/inscripciones/confirmar/<%=torneo.id%>">aqu&iacute;</a></b>
+      para confirmar tu participaci&oacute;n, te queda:
+      <b class="contador" id='countdown_<%=torneo.id%>'></b>
+      <script type="text/javascript">
+        generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.inicio_fecha_hora_confirmacion.to_i * 1000 %>));
+      </script>
+    <% else %>
+      <% if torneo.flag_pago_inscripciones == 1 %>
+        Tu pago de inscripci&oacute;n no se completo, vuelve a intentarlo dando clic <b><a id="link_confirmar_torneo_<%=torneo.id%>" href="/inscripciones/confirmar/<%=torneo.id%>">aqu&iacute;</a></b>, te queda: 
+      <% else %>
+        <b>Ya est&aacute;s inscrito</b>, Podr&aacute;s confirmar tu participaci&oacute;n en:
+      <% end %>
+      <% if TorneosHelper.debe_mostrar_contador_estatico(torneo.inicio_fecha_hora_confirmacion) %>
+        <%= TorneosHelper.formato_cuenta_regresiva(torneo.inicio_fecha_hora_confirmacion) %>
+      <% else %>
+        <b class="contador" id='countdown_<%=torneo.id%>'></b>
+      <% end %>    
+      </p>
+      <script type="text/javascript">
+        generarContadorPorTorneo('<%=torneo.id%>', new Date(<%= torneo.inicio_fecha_hora_confirmacion.to_i * 1000 %>));
+      </script>
+    <% end %>
+    
+  </article>
+</article>
