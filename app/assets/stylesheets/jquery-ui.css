@@ -86,7 +86,8 @@
 .ui-accordion .ui-accordion-content {
     border-top: 0 none;
     overflow: auto;
-    padding: 1em 2.2em;
+    padding-left: 1%;
+    margin-bottom: -4%;
 }
 .ui-autocomplete {
     cursor: default;
@@ -773,13 +774,11 @@ body .ui-tooltip {
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-    background-color: black;
-    
-    
+  
     font-weight: normal;
 }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
-    color: #212121;
+    
     text-decoration: none;
 }
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
@@ -825,6 +824,7 @@ body .ui-tooltip {
    margin-top: -1%;
      
 }
+
 .ui-widget-header .ui-icon {
     background-image: url("ui-icons_222222_256x240.png");
 }

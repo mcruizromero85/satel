@@ -250,7 +250,6 @@ font-size: 90% !important;
   float: left;
   /*height: 500px; -->Se retira para hacer dinamica la pagina*/
   background-color: #22394c;
-  margin-left: 1%;
   margin-right: 0.5%;
   width: 65%;
   border-radius: 4px;
@@ -487,13 +486,13 @@ width: 73%;
 .Detalle_torneo label{
   line-height: 29px;
   font-size: 14px;
-    color: white;
+  color: white ;
  
 }
 
 
  #Inscripcion_Detalle{
-    width: 98%;
+    width: 100%;
  }
 
 #tabs-2{
@@ -509,12 +508,14 @@ width: 73%;
 
 .Detalle_torneo{
   margin-left: 18%;
+    margin-top: -2%;
   
 }
 
 #tabs-3 .Detalle_torneo{
   float: none;
   margin-left: 14%;
+  background-color: white;
 }
 .link_button {
   background-color: #4180C5;
@@ -790,6 +791,17 @@ width: 73%;
    #error_explanation li{
     color: #a94442;
    
+  }
+
+   .miembros_equipo2{
+     margin-bottom: -4%;
+   }
+
+   #tabs{
+    background-color: white;
+   }
+   #llaves{
+    background-color: white;
    }
   
 /*MEDIA QUERY*/
@@ -1276,7 +1288,7 @@ width: 73%;
   font-size: 13px;
 }
 .Team_estado {
-  font-size: 13px;
+  width: 30%;
 }
 
  }
