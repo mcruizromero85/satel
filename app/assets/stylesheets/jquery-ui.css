@@ -819,9 +819,8 @@ body .ui-tooltip {
     width: 16px;
 }
 .ui-icon, .ui-widget-content .ui-icon {
-    /*background-image: url("Advertencia.png");*/
-    width: 8%;
-  height: 46px;
+   width: 8%;
+   height: 46px;
    margin-top: -1%;
      
 }
