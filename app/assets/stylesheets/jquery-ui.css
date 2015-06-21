@@ -821,7 +821,7 @@ body .ui-tooltip {
 .ui-icon, .ui-widget-content .ui-icon {
    width: 8%;
    height: 46px;
-   margin-top: -1%;
+   margin-top: 0%;
      
 }
 .ui-widget-header .ui-icon {
