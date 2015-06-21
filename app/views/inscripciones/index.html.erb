@@ -34,12 +34,12 @@
            <article class="Team_estado">
               <p class="Lista_Inscritos_item_nick">
                 <b><%= inscripcion.estado %></b>
-                </p>
-              <% if inscripcion.estado == "Confirmado" %>
-              <% end%>
+                </p>              
             </article>
            <article class="Team_check">
+            <% if inscripcion.estado == "Confirmado" %>
               <img class="confirmacion_check" src="<%= image_path('check_confirmado.png')%>" height='35px' width='35px' > 
+            <% end %>  
             </article>
          </article>
          <article class="miembros_equipo">

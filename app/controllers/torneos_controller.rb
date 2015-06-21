@@ -17,11 +17,14 @@ class TorneosController < ApplicationController
       end
 
       @torneos_inscritos = Torneo.obtener_torneos_ya_inscrito(current_gamer)
+      @torneos_inscrito_con_pago = Torneo.obtener_torneos_ya_inscrito(current_gamer,1)
       @torneos_inscritos_y_confirmados.concat(@torneos_inscritos)
+      @torneos_inscritos_y_confirmados.concat(@torneos_inscrito_con_pago)
     else
       @torneos_iniciados = []
       @torneos_confirmados = []
       @torneos_inscritos = []
+      @torneos_inscrito_con_pago = []
     end
     if @torneos_inscritos_y_confirmados.size == 0
       @torneos = Torneo.obtener_torneos_disponibles_para_inscribir
@@ -64,6 +67,7 @@ class TorneosController < ApplicationController
     @torneo.estado = 'Creado'
     respond_to do |format|
       if @torneo.save
+        DetallePagoInscripcion.create(monto_inscripcion: 0.0, monto_auspiciado: 0.0, torneo_id: @torneo.id)
         @mensaje_de_guardado = 'Torneo creado correctamente'
         format.html { render action: 'show'}
       else

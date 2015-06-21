@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20150607065343) do
 
   create_table "detalle_pago_inscripciones", id: false, force: true do |t|
     t.decimal "monto_inscripcion", default: 2.0, null: false
-    t.integer "id",                              null: false
     t.integer "torneo_id",                       null: false
     t.decimal "monto_auspiciado"
   end
