@@ -1408,7 +1408,7 @@ body .ui-tooltip {
 .ui-tabs .ui-tabs-panel {
     padding: 0 0 0 0;
     }
-}
+
 
  #tabs-1 {
   background: white;
@@ -1421,10 +1421,12 @@ body .ui-tooltip {
     background: white;
     margin-bottom: 1%;
  }
-
+}
 @media screen and (max-width: 1024px){
 
 .ui-tabs .ui-tabs-panel{
     margin-left: -2px;
     padding: 0 0 0 0;
+}
+
 }
