@@ -68,11 +68,10 @@
   min-height: 0;
   padding: 0.5em 0.5em 0.5em 0.7em;
   position: relative;
-  margin-left: 1.5%;
-  margin-top: %;
+  margin-left: 0.5%;
   margin-bottom: 0.5%;
   margin-top: 0.5%;
-  width: 99%;
+  width: 101%;
 }
 .ui-accordion .ui-accordion-icons .ui-accordion-icons {
     padding-left: 2.2em;
@@ -87,7 +86,7 @@
     border-top: 0 none;
     overflow: auto;
     padding-left: 1%;
-    margin-bottom: -4%;
+   
 }
 .ui-autocomplete {
     cursor: default;
@@ -1392,10 +1391,7 @@ body .ui-tooltip {
     padding: 8px;
 }
 
-@media only screen and (max-width : 890px) {
-  .ui-accordion .ui-accordion-header {
-    width: 97%;
-  }  
+
 
 @media screen and (max-width: 350px){
 
