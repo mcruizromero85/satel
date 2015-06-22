@@ -1,6 +1,6 @@
 FLAG_INSCRIPCIONES_NO_DISPONIBLES = 0
 FLAG_INSCRIPCIONES_DISPONIBLES = 0
-ID_JUEGO_HOTS = 2
+ID_JUEGO_HOTS = 6
 if ENV["RAILS_ENV"] == 'production'
 	URL_CANCELAR_PAYPAL = "http://www.ggesports.la/" 
 	URL_RETORNO_PAYPAL = "http://www.ggesports.la/inscripciones/confirmar/"

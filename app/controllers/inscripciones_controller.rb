@@ -1,5 +1,5 @@
 class InscripcionesController < ApplicationController
-  before_action :revisa_si_existe_gamer_en_sesion, only: [:new]
+  before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :index]
 
   # GET /inscripciones
   # GET /inscripciones.json
