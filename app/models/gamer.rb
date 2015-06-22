@@ -10,4 +10,8 @@ class Gamer < ActiveRecord::Base
       return nick
     end
   end
+
+  def esta_inscrito(torneo)
+    true if Inscripcion.find_by(torneo_id: torneo.id, gamer_id: self.id)
+  end
 end

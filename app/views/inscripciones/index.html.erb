@@ -1,59 +1,58 @@
 <section class="FrmRegistrarTorneo">
+  <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
+  <% if !@current_gamer.esta_inscrito(@torneo) %>
+    <center><a  href="/inscripciones/new/<%=@torneo.id%>"><button class="link_button" type="button">Inscribirme al torneo</button></a></center>
+  <% end %>
+  
+  <Section class="Lista_Inscritos" >
   <h1>Lista de inscritos</h1>
-  <% if @inscripciones.size == 0 %>
-    <h1>A&uacute;n no se cuenta con inscripciones</h1>
-  <% else %>
-
+        <script>
+      $(function() {
+        $( "#accordion" ).accordion({
+          collapsible: true     
+        });        
+      });
+      $( ".selector" ).accordion( "option", "header", "article .Lista_Inscritos_Item" );
+      $( ".selector" ).accordion( "option", "active", false );
+      </script>
   <% if !@mensaje_inscripcion.nil? %>
   <script>
-  $(function() {
-    $( "#dialog-confirm" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  });
+
   </script>
   <div id="dialog-confirm" title="Inscripción confirmada">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><%=@mensaje_inscripcion%></p>
+    <span class="ui-icon ui-icon-alert" style="float:left;"></span>
+    <p><%=@mensaje_inscripcion%></p>
   </div>
   <% end %>
-  <br/>
-  <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
-  <br/>
-  <table class="Detalle_rondas" >
-      <thead>
-        <tr>
-          <th class="header">Orden</th>
-          <th class="header">Nick / Nombre Equipo</th>
-          <th class="header">Fecha Inscripci&oacute;n</th>
-          <th class="header">Estado</th>
-          <th class="header">Accion</th>
-        </tr>
-      </thead>
-      <tbody id="rondas">
-      <% posicion=1 %>
-      <% @inscripciones.each do |inscripcion| %>
-        <tr>
-          <td><%= posicion %></td>
-          <td><%= inscripcion.nick %></td>
-          <td><%= inscripcion.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
-          <td><%= inscripcion.estado %></td>
-          <td>
-            <% if (inscripcion.torneo.gamer == current_gamer || current_gamer == inscripcion.gamer) && inscripcion.torneo.flag_pago_inscripciones == 0  %>
-              <a class="Enlace_torneosDisponibles" href="/inscripciones/<%=inscripcion.id%>/eliminar">Retirar</a>
-            <% end %>
-          </td>
-        </tr>
-        <% posicion+=1 %>
-        <% end %>
-      </tbody>
-    </table> 
-    <% end %>
+  <article class="Team_Inscritos">
+  <article id="accordion" class="lista_Inscritos_contenido">
+     <% @inscripciones.each do |inscripcion| %>       
+         <article class = "Lista_Inscritos_Item">
+           <article class="Team_nick">
+            <p class="Lista_Inscritos_item_nick"><b><%= inscripcion.nick %></b></p>
+           </article>
+           <article class="Team_estado">
+              <p class="Lista_Inscritos_item_nick">
+                <b><%= inscripcion.estado %></b>
+                </p>              
+            </article>
+           <article class="Team_check">
+            <% if inscripcion.estado == "Confirmado" %>
+              <img class="confirmacion_check" src="<%= image_path('check_confirmado.png')%>" height='35px' width='35px' > 
+            <% end %>  
+            </article>
+         </article>
+         <article class="miembros_equipo2">
+         <article class="miembros_equipo">
+           <%= render partial: "hots_formularios/show", object: inscripcion, as: :inscripcion %>
+         </article>
+       </article>
+      <% end %>
     <br/>
+
+  </article>
+  </article>
+  </section>
       <center>
         <% if @mensaje_inscripcion.nil? %>
           <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>

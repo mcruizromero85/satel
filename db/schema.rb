@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150524225843) do
+ActiveRecord::Schema.define(version: 20150607065343) do
 
   create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
@@ -20,12 +20,14 @@ ActiveRecord::Schema.define(version: 20150524225843) do
     t.string   "link_cuenta"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "icono"
   end
 
   create_table "detalle_pago_inscripciones", id: false, force: true do |t|
     t.decimal "monto_inscripcion", default: 2.0, null: false
     t.integer "id",                              null: false
     t.integer "torneo_id",                       null: false
+    t.decimal "monto_auspiciado"
   end
 
   create_table "encuentros", force: true do |t|
@@ -54,6 +56,13 @@ ActiveRecord::Schema.define(version: 20150524225843) do
   create_table "hots_formularios", force: true do |t|
     t.integer  "inscripcion_id"
     t.string   "nombre_equipo"
+    t.string   "capitan_nick"
+    t.string   "titular_numero1"
+    t.string   "titular_numero2"
+    t.string   "titular_numero3"
+    t.string   "titular_numero4"
+    t.string   "suplente_numero1"
+    t.string   "suplente_numero2"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,6 +122,8 @@ ActiveRecord::Schema.define(version: 20150524225843) do
   add_foreign_key "detalle_pago_inscripciones", "torneos", name: "detalle_pago_inscripciones"
 
   add_foreign_key "encuentros", "rondas", name: "encuentros_ronda_id_fk"
+
+  add_foreign_key "hots_formularios", "inscripciones", name: "hots_formularios_inscripcion_id_fk"
 
   add_foreign_key "inscripciones", "gamers", name: "inscripciones_gamer_id_fk"
   add_foreign_key "inscripciones", "torneos", name: "inscripciones_torneo_id_fk"

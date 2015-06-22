@@ -1,9 +1,12 @@
 <article id="ContenidoTorneo">
-   <img  src="<%= image_path(torneo.juego.nombre_imagen) %>" >
+  <a class='estilo_listo' href='/torneos/iniciar/<%=torneo.id%>'><img  src="<%= image_path(torneo.juego.nombre_imagen) %>" ></a>
   <article>
   <h2><a href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
     <p>M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
     Torneo iniciado!!!, haz click  <b>	
 	<font color='green'><a class='estilo_listo' href='/torneos/iniciar/<%=torneo.id%>'>aqu&iacute;</a></font></b> para ver las llaves
   </article>
+  <% if !torneo.detalle_pago_inscripcion.nil? %>
+  <%= render partial: "reutilizable/presentacion_price_pool", object: torneo, as: :torneo %>
+  <% end %>
 </article>

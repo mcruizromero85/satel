@@ -11,6 +11,7 @@
           <a href="/torneos/<%=torneo.id%>">Ver m&aacute;s</a>
           </p>	
          </article>
+         <%= render partial: "reutilizable/presentacion_price_pool", object: @torneo, as: :torneo %>
     </article>
   </article>
 </section>

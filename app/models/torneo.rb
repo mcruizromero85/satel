@@ -19,7 +19,7 @@ class Torneo < ActiveRecord::Base
   has_many :rondas, -> { order('numero ASC') }, autosave: true
   has_many :inscripciones, autosave: true  
   before_save :asignar_valores_por_defectos, if: "estado == 'Creado'"
-  has_one :detalle_pago_inscripcion
+  has_one :detalle_pago_inscripcion, autosave: true
 
   def asignar_valores_por_defectos
     numero_de_rondas_totales = TorneosHelper.obtener_rondas_por_vacantes(vacantes)
@@ -28,7 +28,7 @@ class Torneo < ActiveRecord::Base
       ronda = Ronda.new
       ronda.inicializar_valores_por_defecto(numero + 1, cierre_inscripcion)
       agregar_ronda(ronda)
-    end
+    end    
   end
 
   def rondas_existentes_por_vacantes
@@ -44,8 +44,8 @@ class Torneo < ActiveRecord::Base
     Torneo.joins(:inscripciones).where('torneos.estado = :estado and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado_inscripcion ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Creado').order(clasificacion: :asc, cierre_inscripcion: :asc)
   end
 
-  def self.obtener_torneos_ya_inscrito(gamer)
-    Torneo.joins(:inscripciones).where('torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado in(:estado, :estado)', fecha_actual: Time.new, gamer_id: gamer.id, estado: 'Inscrito').order(clasificacion: :asc, cierre_inscripcion: :asc)
+  def self.obtener_torneos_ya_inscrito(gamer, flag_pago_inscripciones=0)
+    Torneo.joins(:inscripciones).where('torneos.flag_pago_inscripciones = :flag_pago_inscripciones and torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado in(:estado, :estado)', fecha_actual: Time.new, gamer_id: gamer.id, estado: 'Inscrito', flag_pago_inscripciones: flag_pago_inscripciones).order(clasificacion: :asc, cierre_inscripcion: :asc)
   end
 
   def self.obtener_torneos_disponibles_para_inscribir(ids_torneos_inscritos_y_confirmados = [-1])
