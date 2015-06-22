@@ -571,10 +571,10 @@ width: 73%;
 }
 
 .Team_nick{
-  width: 60%;
+  width: 40%;
 }
 .Team_estado{
-  width: 30%;
+  width: 48%;
 }
 
 .Lista_Inscritos_item_nick{
@@ -902,7 +902,7 @@ width: 73%;
 @media only screen and (max-width : 1000px){
 
 .Team_nick {
-  width: 55%;
+  width: 40%;
 }
 
 .Inscripcion_pago{
@@ -1107,7 +1107,7 @@ width: 73%;
 }
 
 .Team_nick {
-  width: 51%;
+  width: 35%;
 }
 
   .Enlaces{
@@ -1168,7 +1168,7 @@ width: 73%;
 
 
 .Team_nick {
-  width: 44%;
+  width: 33%;
 }
   
 
@@ -1305,13 +1305,15 @@ width: 73%;
  .Inscripcion_datos {
   width: 90%;
  }
- .Team_nick {
-  width: 34%;
-  font-size: 13px;
-}
+  .Team_nick {
+  width: 41%;
+  font-size: 15px;
+ }
+
 .Team_estado {
   width: 30%;
-}
+  font-size: 15px;
+ }
 
  }
 
