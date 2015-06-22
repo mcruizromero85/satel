@@ -15,6 +15,15 @@ class HotsFormulariosController < ApplicationController
   # GET /hots_formularios/new
   def new
     @hots_formulario = HotsFormulario.new
+    require 'net/http'
+    require "uri"
+    uri = URI.parse("http://heroesdraft.com/create.php")
+    # Full control
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri.request_uri)
+    request.set_form_data({"mapSelectType" => "0", "posted" => "newMatch", "startType" => "0", "teamOne" => "test1", "teamTwo" => "test2", "tournament" => "test"})
+    response = http.request(request)
+    print response
   end
 
   # GET /hots_formularios/1/edit

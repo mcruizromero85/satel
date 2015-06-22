@@ -1,21 +1,23 @@
 <h1>Inscribete</h1>
 <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
-<section class="Frm_Inscripcion">
-  <article class="Inscripcion_distribucion_pago">
-      <center><b>Costo de inscripci&oacute;n: $ 9.00 dolares,<br/> si te inscribes la bolsa aumenta a <u>$ <%= @torneo.detalle_pago_inscripcion.total_price_pool + 9.00 %></u></b></center>
-       <article class="Tablas_Item"> 
-           <article ><p>Distribucion de pagos</p></article>
-           <article class="Tablas_Item_P"><p>Primer Lugar</p></article><article class="Tablas_Item_V" ><p>45%</p></article>
-           <article class="Tablas_Item_P"><p>Segundo Lugar</p></article><article class="Tablas_Item_V" ><p>42%</p></article>
-           <article class="Tablas_Item_P"><p>Tercer y cuarto Lugar</p></article><article class="Tablas_Item_V" ><p>12%</p></article>
-        </article>
-  </article>
- <article class="Inscripcion_pago">
-      <b>Medio de pago</b>
-       <center><img class="paypal" src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" /></center>
+<% if @torneo.flag_pago_inscripciones == 1 %>
+  <section class="Frm_Inscripcion">
+    <article class="Inscripcion_distribucion_pago">
+        <center><b>Costo de inscripci&oacute;n: $ 9.00 dolares,<br/> si te inscribes la bolsa aumenta a <u>$ <%= @torneo.detalle_pago_inscripcion.total_price_pool + @torneo.detalle_pago_inscripcion.monto_inscripcion %></u></b></center>
+         <article class="Tablas_Item"> 
+             <article ><p>Distribucion de pagos</p></article>
+             <article class="Tablas_Item_P"><p>Primer Lugar</p></article><article class="Tablas_Item_V" ><p>45%</p></article>
+             <article class="Tablas_Item_P"><p>Segundo Lugar</p></article><article class="Tablas_Item_V" ><p>42%</p></article>
+             <article class="Tablas_Item_P"><p>Tercer y cuarto Lugar</p></article><article class="Tablas_Item_V" ><p>12%</p></article>
+          </article>
     </article>
- </section>
- 
+   <article class="Inscripcion_pago">
+        <b>Medio de pago</b>
+         <center><img class="paypal" src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" /></center>
+      </article>
+   </section>
+ <% end %>
+
  <section class="Frm_Inscripcion2">
 <span id="mensajeError"></span>
 <%= @mensaje_inscripcion_error if !@mensaje_inscripcion_error.nil? %>

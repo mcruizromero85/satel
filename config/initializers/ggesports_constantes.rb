@@ -8,4 +8,3 @@ else
 	URL_CANCELAR_PAYPAL = "http://localhost:3000/"
 	URL_RETORNO_PAYPAL = "http://localhost:3000/inscripciones/confirmar/"
 end
-

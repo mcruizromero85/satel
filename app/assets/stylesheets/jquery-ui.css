@@ -47,9 +47,7 @@
 .ui-state-disabled {
     cursor: default !important;
 }
-.ui-icon {
-   
-    
+.ui-icon {      
     overflow: hidden;
     text-indent: -99999px;
 }
@@ -61,14 +59,15 @@
     width: 100%;
 }
 .ui-accordion .ui-accordion-header {
-      cursor: pointer;
+  cursor: pointer;
   display: block;
   font-size: 80%;
-  /* margin: 2px 0 0; */
   min-height: 0;
   padding: 0.5em 0.5em 0.5em 0.7em;
   position: relative;
+
   margin-left: 0.5%;
+
   margin-bottom: 0.5%;
   margin-top: 0.5%;
   width: 101%;
@@ -79,7 +78,6 @@
 .ui-accordion .ui-accordion-header .ui-accordion-header-icon {
     left: 0.5em;
     margin-top: -8px;
-   /* position: absolute;*/
     top: 50%;
 }
 .ui-accordion .ui-accordion-content {
@@ -330,8 +328,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
     padding: 0.2em;
     position: absolute;
     top: 0;
-    background: url("ui-bg_flat_75_ffffff_40x100.png") repeat-x scroll 50% 50% #FFFFFF;
- 
+    background: url("ui-bg_flat_75_ffffff_40x100.png") repeat-x scroll 50% 50% #FFFFFF; 
 }
 
 .ui-dialog .ui-dialog-titlebar {
@@ -732,7 +729,6 @@ body .ui-tooltip {
     border-width: 2px;
 }
 .ui-widget {
-   /* font-family: Verdana,Arial,sans-serif;*/
     font-size: 1.1em;
 }
 .ui-widget .ui-widget {
@@ -741,13 +737,6 @@ body .ui-tooltip {
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
     font-family: Verdana,Arial,sans-serif;
     font-size: 1em;
-}
-.ui-widget-content {
-    /*background: url("ui-bg_flat_75_ffffff_40x100.png") repeat-x scroll 50% 50% #FFFFFF;*/
-   
- /*   color: #222222;-->depura para hacer mas legible el nombre de los participantes de los brackets*/
-    
-
 }
 .ui-widget-content a {
     color: #222222;
@@ -817,9 +806,8 @@ body .ui-tooltip {
     width: 16px;
 }
 .ui-icon, .ui-widget-content .ui-icon {
-    /*background-image: url("Advertencia.png");*/
-    width: 8%;
-  height: 46px;
+   width: 8%;
+   height: 46px;
    margin-top: -1%;
      
 }

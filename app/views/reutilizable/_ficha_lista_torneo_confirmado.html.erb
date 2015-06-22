@@ -3,7 +3,11 @@
   <article>
   <h2><a href="/inscripciones?id_torneo=<%= torneo.id %>"><%= torneo.titulo %></a></h2>
     <p>M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
-    <font color='green'>Esperando Inicio de torneo en: <b class="contador" id='countdown_<%=torneo.id%>'></b></font>
+    <% if  Time.new > torneo.cierre_inscripcion %>
+    	<font color='green'>Haz click <a href="/torneos/iniciar/<%=torneo.id%>">aqu&iacute;</a> para ir al chat de coordinaci&oacute;n</b></font>
+    <% else %>
+    	<font color='green'>Esperando Inicio de torneo en: <b class="contador" id='countdown_<%=torneo.id%>'></b></font>
+    <% end %>
   </article>
 <%= render partial: "reutilizable/presentacion_price_pool", object: torneo, as: :torneo %>
 </article>
