@@ -571,10 +571,10 @@ width: 73%;
 }
 
 .Team_nick{
-  width: 40%;
+  width: 70%;
 }
 .Team_estado{
-  width: 48%;
+  width: 20%;
 }
 
 .Lista_Inscritos_item_nick{
@@ -902,7 +902,7 @@ width: 73%;
 @media only screen and (max-width : 1000px){
 
 .Team_nick {
-  width: 40%;
+  width: 68%;
 }
 
 .Inscripcion_pago{
@@ -1107,7 +1107,7 @@ width: 73%;
 }
 
 .Team_nick {
-  width: 35%;
+  width: 62%;
 }
 
   .Enlaces{
@@ -1157,6 +1157,9 @@ width: 73%;
    display: none;
   }
 
+.Team_encabezado label{
+  font-size: 9px;
+}
 
 
  /*Ajustando el formulario de inscripciòn al movil*/
@@ -1168,7 +1171,11 @@ width: 73%;
 
 
 .Team_nick {
-  width: 33%;
+  width: 57%;
+}
+
+.Team_estado {
+  width: 24%;
 }
   
 
@@ -1306,12 +1313,12 @@ width: 73%;
   width: 90%;
  }
   .Team_nick {
-  width: 41%;
+  width: 48%;
   font-size: 15px;
  }
 
 .Team_estado {
-  width: 30%;
+  width: 28%;
   font-size: 15px;
  }
 
