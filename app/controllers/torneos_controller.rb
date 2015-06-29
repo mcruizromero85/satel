@@ -129,13 +129,16 @@ class TorneosController < ApplicationController
     end
   end
 
+  def chat
+    
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_torneo
     @torneo = Torneo.find(params[:id])
   end
-
 
 
   # Never trust parameters from the scary internet, only allow the white list through.

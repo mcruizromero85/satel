@@ -5,14 +5,20 @@
   <meta property="og:description" content="Simplificando la inscripción y organización de torneos e-sports en línea" />
   <meta name="viewport" content="width = device-width, initial-scale=1, maximum-scale=1"/>
   <title>GG E-sports</title>
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "jquery-ui", media: "all", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag "jquery.bracket.min", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
   <%= csrf_meta_tags %>
-  <script type="text/javascript" src="/assets/jquery.bracket.min.js"></script>  
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= stylesheet_link_tag "jquery-ui", media: "all" %>
+  <%= stylesheet_link_tag "jquery.bracket.min", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <script src="/assets/websocket_rails/websocket_rails.js?body=1"></script>
+  <script src="/assets/websocket_rails/event.js?body=1"></script>
+  <script src="/assets/websocket_rails/abstract_connection.js?body=1"></script>
+  <script src="/assets/websocket_rails/http_connection.js?body=1"></script>
+  <script src="/assets/websocket_rails/websocket_connection.js?body=1"></script>
+  <script src="/assets/websocket_rails/channel.js?body=1"></script>
+  <script src="/assets/websocket_rails/main.js?body=1"></script>
 </head>
-<body data-no-turbolink >
+<body >
 <div id="fb-root"></div>
 <script>
   function goBack() {

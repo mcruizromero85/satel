@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
+gem 'thin'
+gem 'websocket-rails'
+
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 
@@ -16,7 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -26,6 +29,8 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -44,6 +49,8 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem "less-rails"
+
 group :production, :staging do
       gem 'pg'
       gem 'rails_12factor'
@@ -53,15 +60,15 @@ gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
-  gem "capybara"
-  gem "capybara-webkit"
-  gem 'selenium-webdriver'
   gem "factory_girl_rails", "~> 4.0"
   gem 'database_cleaner', '~> 1.3.0'
   gem 'simplecov', :require => false
   gem 'rubocop', require: false
+  gem 'tilt'
+  gem 'coffee-rails-source-maps'
 end
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'foreigner'
 gem 'paypal-sdk-rest'
+gem 'jquery-rails'

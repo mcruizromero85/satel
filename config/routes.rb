@@ -6,6 +6,8 @@ Satel::Application.routes.draw do
 
   post '/comenzar' => 'torneos#comenzar'
 
+  get '/chat' => 'torneos#chat'
+
   resources :datos_inscripcion_registrados
 
   resources :datos_inscripciones

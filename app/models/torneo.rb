@@ -104,11 +104,11 @@ class Torneo < ActiveRecord::Base
   end
 
   def generar_encuentros
+    inscripciones.where('tipo_inscripcion = :tipo_freewin', tipo_freewin: 1).destroy_all
     return unless estado != 'Iniciado'
     rondas.each do | ronda |
       ronda.encuentros.destroy_all
     end
-    inscripciones.where('tipo_inscripcion = :tipo_freewin', tipo_freewin: 1).destroy_all
     array_inscritos_confirmados = Inscripcion.inscritos_confirmados_en_el_torneo_con_free_wins(self)
     rondas.where(numero: 1).first.armar_encuentros_con_confirmados(array_inscritos_confirmados)
     reload
