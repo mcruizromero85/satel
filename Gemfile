@@ -59,7 +59,7 @@ end
 gem 'newrelic_rpm'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'rspec-rails'
   gem "factory_girl_rails", "~> 4.0"
   gem 'database_cleaner', '~> 1.3.0'
   gem 'simplecov', :require => false
@@ -71,4 +71,3 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'foreigner'
 gem 'paypal-sdk-rest'
-gem 'jquery-rails'

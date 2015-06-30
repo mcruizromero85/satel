@@ -1,7 +1,9 @@
-jQuery ->
-  window.chatController = new Chat.Controller($('#chat').data('uri'), true);
-
+jQuery ->  
+  torneo_id = $('#torneo_id').val();  
+  window.chatController = new Chat.Controller($('#chat').data('uri' + torneo_id), true);
+  
 window.Chat = {}
+
 
 class Chat.User
   constructor: (@user_name) ->
@@ -22,15 +24,15 @@ class Chat.Controller
 
   userListTemplate: (userList) ->
     userHtml = ""
-    for user in userList
-      userHtml = userHtml + "<li>#{user.user_name}</li>"
+    for user in userList    
+      userHtml = userHtml + "<li>#{user.user_name}</li>" if user != null
     $(userHtml)
 
   constructor: (url,useWebSockets) ->
     @messageQueue = []
-    @dispatcher = new WebSocketRails(url,useWebSockets)
-    @dispatcher.on_open = @createGuestUser
-    @bindEvents()
+    @dispatcher = new WebSocketRails(url,useWebSockets)    
+    @dispatcher.on_open = @createGuestUser 
+    @bindEvents() 
 
   bindEvents: =>
     @dispatcher.bind 'new_message', @newMessage
@@ -69,8 +71,11 @@ class Chat.Controller
       $(this).remove()
 
   createGuestUser: =>
+    flag_gamer_confirmado = $('#flag_gamer_confirmado').val()
+    return if flag_gamer_confirmado == 'false'
     rand_num = Math.floor(Math.random()*1000)
-    @user = new Chat.User("Guest_" + rand_num)
+    rand_num = document.getElementById('nombre_chat').value;
+    @user = new Chat.User(rand_num)
     $('#username').html @user.user_name
     $('input#user_name').val @user.user_name
     @dispatcher.trigger 'new_user', @user.serialize()

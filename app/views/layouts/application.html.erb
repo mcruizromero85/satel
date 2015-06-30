@@ -9,16 +9,26 @@
   <%= stylesheet_link_tag "application", media: "all" %>
   <%= stylesheet_link_tag "jquery-ui", media: "all" %>
   <%= stylesheet_link_tag "jquery.bracket.min", media: "all" %>
-  <%= javascript_include_tag "application" %>
-  <script src="/assets/websocket_rails/websocket_rails.js?body=1"></script>
-  <script src="/assets/websocket_rails/event.js?body=1"></script>
-  <script src="/assets/websocket_rails/abstract_connection.js?body=1"></script>
-  <script src="/assets/websocket_rails/http_connection.js?body=1"></script>
-  <script src="/assets/websocket_rails/websocket_connection.js?body=1"></script>
-  <script src="/assets/websocket_rails/channel.js?body=1"></script>
-  <script src="/assets/websocket_rails/main.js?body=1"></script>
+   <!--aaaa -->
+    <%= javascript_include_tag "jquery.js" %>
+    <%= javascript_include_tag "jquery_ujs.js" %>    
+    <%= javascript_include_tag "jquery-ui.js" %>
+    <%= javascript_include_tag "jquery.bracket.min.js" %>
+    <%= javascript_include_tag "jquery.countdown.js" %>
+    <%= javascript_include_tag "jquery.ui.timepicker.js" %> 
+   <!--aaaa -->
+  <% if request.env['PATH_INFO'].index('/torneos/iniciar/') %>
+    <%= javascript_include_tag "chat.js" %>
+    <script src="/assets/websocket_rails/websocket_rails.js?body=1"></script>
+    <script src="/assets/websocket_rails/event.js?body=1"></script>
+    <script src="/assets/websocket_rails/abstract_connection.js?body=1"></script>
+    <script src="/assets/websocket_rails/http_connection.js?body=1"></script>
+    <script src="/assets/websocket_rails/websocket_connection.js?body=1"></script>
+    <script src="/assets/websocket_rails/channel.js?body=1"></script>
+    <script src="/assets/websocket_rails/main.js?body=1"></script>
+  <% end %>
 </head>
-<body >
+<body data-no-turbolink >
 <div id="fb-root"></div>
 <script>
   function goBack() {

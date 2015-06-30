@@ -246,7 +246,7 @@ DEPENDENCIES
   pg
   rails (= 4.0.0)
   rails_12factor
-  rspec-rails (~> 3.0.0.beta)
+  rspec-rails
   rubocop
   sass-rails (~> 4.0.0)
   sdoc
