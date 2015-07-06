@@ -71,7 +71,7 @@ class Torneo < ActiveRecord::Base
   end
 
   def cantidad_minima_confirmados
-    cantidad_confirmados = Inscripcion.total_confirmados_por_torneo(self)
+    cantidad_confirmados = Inscripcion.inscripciones_permitidas_y_confirmadas_en_el_torneo(self).size
     return unless estado == 'Iniciado' && cantidad_confirmados < 4
     errors.add(:vacantes, ', El Torneo debe tener como mínimo 4 gamers confirmados')
   end
@@ -103,14 +103,38 @@ class Torneo < ActiveRecord::Base
     end
   end
 
-  def generar_encuentros
-    inscripciones.where('tipo_inscripcion = :tipo_freewin', tipo_freewin: 1).destroy_all
+  def generar_encuentros(flag_aleatorio = true)
     return unless estado != 'Iniciado'
     rondas.each do | ronda |
       ronda.encuentros.destroy_all
     end
-    array_inscritos_confirmados = Inscripcion.inscritos_confirmados_en_el_torneo_con_free_wins(self)
+    array_inscritos_confirmados = Inscripcion.inscripciones_confirmadas_permitidas_con_free_wins(self,flag_aleatorio)
     rondas.where(numero: 1).first.armar_encuentros_con_confirmados(array_inscritos_confirmados)
     reload
+  end
+
+  def arreglo_de_nombres_para_llaves(flag_aleatorio = true)
+    array_para_llaves = '['
+    contador = 1
+    rondas.where(numero: 1).first.encuentros.each do | encuentro |
+      if !encuentro.gamerinscritoa.nil?
+        array_para_llaves.concat("[\"" + encuentro.gamerinscritoa.etiqueta_llave + "\",")
+      else
+        array_para_llaves.concat("[\"\",")
+      end
+
+      if !encuentro.gamerinscritob.nil?
+        array_para_llaves.concat("\"" + encuentro.gamerinscritob.etiqueta_llave + "\"]")
+      else
+        array_para_llaves.concat("\"\"]")
+      end
+
+      if rondas.where(numero: 1).first.encuentros.count != contador
+        array_para_llaves.concat(',')
+      end
+      contador += 1
+    end
+    array_para_llaves.concat(']')
+    array_para_llaves
   end
 end

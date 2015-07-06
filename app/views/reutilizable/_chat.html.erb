@@ -1,35 +1,41 @@
 <input type="hidden" name="nombre_chat" id="nombre_chat" value="<%=current_gamer.nombres %>" />
 <input type="hidden" name="torneo_id" id="torneo_id" value="<%=@torneo.id %>" />
 <input type="hidden" name="flag_gamer_confirmado" id="flag_gamer_confirmado" value="<%=current_gamer.esta_confirmado(@torneo) %>" />
-<span id="username">Guest</span>
-    <div class="container">
-      <div class="content">
-        <div class="row">
-          <div class="span9">
-          <% if notice %>
-            <div class="notice"><%= notice %></div>
-          <% elsif alert %>
-            <div class="alert"><%= alert %></div>
-          <% end %>
-         <div id="chat" class="well" data-uri="<%= request.host %>:<%= request.port %>/websocket">
-          </div>
-          ------------------> <%= current_gamer.esta_confirmado(@torneo) %>
-          <div class="form-inline well">
-            <fieldset>
-              <input type="hidden" class="input-medium" id="user_name" >
-              <input type="text" class="input-xlarge" id="message">
-              <button id="send" class="btn btn-primary">Send</button>
-            </fieldset>
-          </div>
-        </div>
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <h3>Users</h3>
-            <ul class="nav nav-list" id="user-list">
-              <li class="nav-header">Active</li>
-            </ul>
-          </div>
-        </div>
+<script>
+  $(function() {
+    $( "#tabs_chat" ).tabs();
+  });
+</script>
+<article id="tabs_chat">
+  <ul>
+    <li><a href="#tabs_chat-1">Chat</a></li>
+    <li><a href="#tabs_chat-2">Confirmados</a></li>
+  </ul>
+  <article id="tabs_chat-1">
+    <div class="span9">
+      <% if notice %>
+        <div class="notice"><%= notice %></div>
+      <% elsif alert %>
+        <div class="alert"><%= alert %></div>
+      <% end %>
+      
+      <div id="chat" class="well" data-uri="<%= request.host %>:<%= request.port %>/websocket">
       </div>
-    </div><!--/row-->
-  </div><!--/content-->
+      <% if @current_gamer.esta_confirmado(@torneo) %>
+        <div class="form-inline well">
+          <fieldset>
+            <input type="hidden" class="input-medium" id="user_name" >
+            <input type="text" class="input-xlarge" id="message">
+            <button id="send" class="btn btn-primary">Send</button>
+          </fieldset>
+        </div>
+      <% end %>
+    </div>
+  </article> 
+  <article id="tabs_chat-2" >
+    <h3>Users</h3>
+      <ul class="nav nav-list" id="user-list">
+        <li class="nav-header">Active</li>
+      </ul>
+  </article> 
+</article>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607065343) do
+ActiveRecord::Schema.define(version: 20150704155959) do
 
   create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20150607065343) do
     t.datetime "updated_at"
     t.string   "nick"
     t.string   "id_transaccion_pago"
+    t.string   "etiqueta_llave"
+    t.string   "etiqueta_chat"
   end
 
   create_table "juegos", force: true do |t|

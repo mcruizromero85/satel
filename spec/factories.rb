@@ -30,6 +30,8 @@ FactoryGirl.define do
     tipo_inscripcion 0
     nick 'Matt'
     association :gamer, strategy: :build
+    etiqueta_llave 'Matt'
+    etiqueta_chat 'Matt'
     torneo
   end
 end

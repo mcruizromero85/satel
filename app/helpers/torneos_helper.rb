@@ -41,32 +41,6 @@ module TorneosHelper
     array_id_encuentros
   end
 
-  def self.array_para_llaves(torneo)
-    array_para_llaves = '['
-    contador = 1
-    torneo.rondas.where(numero: 1).first.encuentros.each do | encuentro |
-      if !encuentro.gamerinscritoa.nil?
-        array_para_llaves.concat("[\"" + encuentro.gamerinscritoa.nick + "\",")
-      else
-        array_para_llaves.concat("[\"\",")
-      end
-
-      if !encuentro.gamerinscritob.nil?
-        array_para_llaves.concat("\"" + encuentro.gamerinscritob.nick + "\"]")
-      else
-        array_para_llaves.concat("\"\"]")
-      end
-
-      if torneo.rondas.where(numero: 1).first.encuentros.count != contador
-        array_para_llaves.concat(',')
-      end
-      contador += 1
-    end
-    array_para_llaves.concat(']')
-
-    array_para_llaves
-  end
-
   def self.obtener_rondas_por_vacantes(vacantes)
     Math.log(vacantes, 2).ceil
   end

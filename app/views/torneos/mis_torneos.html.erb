@@ -17,7 +17,7 @@
             <td><a class="Enlace_torneosDisponibles" href="/torneos/<%=torneo.id%>"><%= torneo.titulo %><a/></td>
             <td><%= torneo.juego.nombre %></td>
             <td><%= torneo.vacantes %></td>                      
-            <td ><a class="Enlace_torneosDisponibles" href="/inscripciones?id_torneo=<%=torneo.id%>" ><%= torneo.inscripciones.count %><a/></td>
+            <td ><a class="Enlace_torneosDisponibles" href="/inscripciones?id_torneo=<%=torneo.id%>" >Ver<a/></td>
             <td><%= torneo.cierre_inscripcion.strftime("%d/%m/%Y") %> <%= torneo.cierre_inscripcion.strftime("%I:%M %p") %>
             </td>
             <td>
