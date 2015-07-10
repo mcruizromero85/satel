@@ -49,5 +49,12 @@
     users = connection_store.collect_all(:user)
     broadcast_message :user_list, users
   end
+
+  def enviar_evento_encuentro
+    print "LLEGO !!!: " + message[:id_encuentro].to_s
+    print "LLEGO !!!: " + message[:id_inscripcion].to_s
+    print "LLEGO !!!: " + message[:id_inscripcion_contrincante].to_s
+    broadcast_message :actualizar_evento_encuentro, { id_inscrito_listo: '1', id_encuentro: '2'  } 
+  end
   
 end

@@ -23,9 +23,8 @@ ActiveRecord::Schema.define(version: 20150704155959) do
     t.string   "icono"
   end
 
-  create_table "detalle_pago_inscripciones", id: false, force: true do |t|
+  create_table "detalle_pago_inscripciones", force: true do |t|
     t.decimal "monto_inscripcion", default: 2.0, null: false
-    t.integer "id",                              null: false
     t.integer "torneo_id",                       null: false
     t.decimal "monto_auspiciado"
   end
@@ -41,6 +40,8 @@ ActiveRecord::Schema.define(version: 20150704155959) do
     t.string   "encuentro_anterior_b_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "flag_listo_gamera",        default: false
+    t.boolean  "flag_listo_gamerb",        default: false
   end
 
   create_table "gamers", force: true do |t|

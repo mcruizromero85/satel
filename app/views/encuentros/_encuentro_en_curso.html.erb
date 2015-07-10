@@ -1,0 +1,17 @@
+<table>
+	<tr>
+		<td><h1><%=@current_gamer.etiqueta_llave(@torneo)%></h1></td>
+		<td>vs</td>
+		<td><h1><%=@current_gamer.contrincante_inscrito_actual(@torneo).etiqueta_llave%></h1></td>
+	</tr>
+	<tr>
+		<td><button id="boton_listo">Estoy Listo!!!</button><span id="label_listo" style="display:none"></span></td>
+		<td></td>
+		<td><span id="label_listo_contrincante">Sin confirmar</span></td>
+	</tr>
+	<tr></tr>
+</table>
+<input type="text" id="flag_test" value="" />
+<input type="hidden" id="id_encuentro_actual" value="<%=@current_gamer.encuentro_actual(@torneo).id%>" />
+<input type="hidden" id="id_inscripcion" value="<%=@current_gamer.inscripcion_en_torneo(@torneo).id%>" />
+<input type="hidden" id="id_inscripcion_contrincante" value="<%=current_gamer.contrincante_inscrito_actual(@torneo).id%>" />

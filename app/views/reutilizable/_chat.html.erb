@@ -1,4 +1,4 @@
-<input type="hidden" name="nombre_chat" id="nombre_chat" value="<%=current_gamer.nombres %>" />
+<input type="hidden" name="nombre_chat" id="nombre_chat" value="<%=current_gamer.etiqueta_para_chat(@torneo) %>" />
 <input type="hidden" name="torneo_id" id="torneo_id" value="<%=@torneo.id %>" />
 <input type="hidden" name="flag_gamer_confirmado" id="flag_gamer_confirmado" value="<%=current_gamer.esta_confirmado(@torneo) %>" />
 <script>

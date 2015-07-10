@@ -37,16 +37,40 @@ class Chat.Controller
   bindEvents: =>
     @dispatcher.bind 'new_message', @newMessage
     @dispatcher.bind 'user_list', @updateUserList
+    @dispatcher.bind 'actualizar_evento_encuentro', @actualizar_evento_encuentro
     $('input#user_name').on 'keyup', @updateUserInfo
     $('#send').on 'click', @sendMessage
     $('#message').keypress (e) -> $('#send').click() if e.keyCode == 13
+    $('#boton_listo').on 'click', @enviar_evento_encuentro
+
+  enviar_evento_encuentro: (event) =>  
+    event.preventDefault()    
+    id_encuentro = $('#id_encuentro_actual').val()
+    id_inscripcion = $('#id_inscripcion').val()
+    id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()
+    console.log('id_encuentro ' + id_encuentro );
+    console.log('id_inscripcion ' + id_inscripcion );
+    console.log('id_inscripcion_contrincante ' + id_inscripcion_contrincante );
+    @dispatcher.trigger 'enviar_evento_encuentro', { id_encuentro: id_encuentro, id_inscripcion: id_inscripcion, id_inscripcion_contrincante: id_inscripcion_contrincante }
+
+  actualizar_evento_encuentro: (response) =>  
+    console.log('id_inscrito_listo ' + response.id_inscrito_listo );
+    console.log('id_encuentro ' + response.id_encuentro );
+    if $('#id_encuentro_actual').val == response.id_encuentro
+      if $('#id_inscripcion').val == response.id_inscrito_listo
+        $('#boton_listo').hide()
+        $('#label_listo').show()
+      else
+         $('#label_listo_contrincante').html 'Listo'
 
   newMessage: (message) =>
+    console.log('newMessage');
     @messageQueue.push message
     @shiftMessageQueue() if @messageQueue.length > 15
     @appendMessage message
 
   sendMessage: (event) =>
+    console.log('sendMessage');
     event.preventDefault()
     message = $('#message').val()
     @dispatcher.trigger 'new_message', {user_name: @user.user_name, msg_body: message}
@@ -61,11 +85,13 @@ class Chat.Controller
     @dispatcher.trigger 'change_username', @user.serialize()
 
   appendMessage: (message) ->
+    console.log('appendMessage');
     messageTemplate = @template(message)
     $('#chat').append messageTemplate
     messageTemplate.slideDown 140
 
   shiftMessageQueue: =>
+    console.log('shiftMessageQueue');
     @messageQueue.shift()
     $('#chat div.messages:first').slideDown 100, ->
       $(this).remove()

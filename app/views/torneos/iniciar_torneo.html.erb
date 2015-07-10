@@ -47,10 +47,11 @@
                 });
                 </script>
         <article id="tabs">
-          <ul>
+          <ul>            
             <li><a href="#tabs-1">Brackets</a></li>
             <li><a href="#tabs-2">En vivo!!!</a></li>
             <li><a href="#tabs-3">Detalle Torneo</a></li>
+            <li><a href="#tabs-4">Encuentro en curso</a></li>
           </ul>
         <article id="tabs-1">
           <% if @current_gamer == @torneo.gamer %>
@@ -88,6 +89,11 @@
   </article>
   <article id="tabs-3">
     <%= render partial: "reutilizable/ficha_presentacion_torneo_detallado", object: @torneo, as: :torneo %>
+  </article>
+  <article id="tabs-4">
+    <% if @current_gamer != @torneo.gamer %>
+      <%= render partial: "encuentros/encuentro_en_curso", object: @torneo, as: :torneo %>
+    <% end %>
   </article>
 </article>
           <aside>
