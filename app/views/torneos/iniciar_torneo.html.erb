@@ -58,10 +58,12 @@
     <% if @current_gamer != @torneo.gamer %>
       <%= render partial: "encuentros/encuentro_en_curso", object: @torneo, as: :torneo %>
     <% end %>
-    <br/>
+     <br/>
   </article> 
   <article id="tabs-2" >
-    
+    <article id="tabs_comentario">
+      <%= render partial: "reutilizable/chat" %>
+    </article>   
   </article>
   <article id="tabs-3">
     <%= render partial: "reutilizable/ficha_presentacion_torneo_detallado", object: @torneo, as: :torneo %>
@@ -99,8 +101,11 @@
 </article>
           <aside>
             <br/>
-            <article id="tabs_comentario">
-               <%= render partial: "reutilizable/chat" %>
-            </article>
+            <article id="tabs_chat-2" >
+              <h3>Users</h3>
+                <ul class="nav nav-list" id="user-list">
+                  <li class="nav-header">Active</li>
+                </ul>
+            </article> 
           </aside>
 </section>

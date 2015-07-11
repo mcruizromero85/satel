@@ -1,6 +1,6 @@
 jQuery ->  
   torneo_id = $('#torneo_id').val();  
-  window.chatController = new Chat.Controller($('#chat').data('uri' + torneo_id), true);
+  window.chatController = new Chat.Controller($('#chat').data('uri'), true);
   
 window.Chat = {}
 

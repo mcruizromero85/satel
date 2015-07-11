@@ -9,9 +9,9 @@ class Encuentro < ActiveRecord::Base
 
   def puntaje_de_inscrito(inscrito)
     if self.gamerinscritoa == inscrito
-      Partida.where(encuentro: self, flag_gano_gamerinscritoa: true ).size
+      Partida.where('partidas.encuentro_id=:encuentro_id and partidas.estado = :estado and flag_gano_gamerinscritoa = :flag_gano_gamerinscritoa', encuentro_id: self.id, estado: 'Finalizado', flag_gano_gamerinscritoa: true ).size
     else
-      Partida.where(encuentro: self, flag_gano_gamerinscritoa: false).size
+      Partida.where('partidas.encuentro_id=:encuentro_id and partidas.estado = :estado and flag_gano_gamerinscritob = :flag_gano_gamerinscritob', encuentro_id: self.id, estado: 'Finalizado', flag_gano_gamerinscritob: true ).size
     end    
   end
 

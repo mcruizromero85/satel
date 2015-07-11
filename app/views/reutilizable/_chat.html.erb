@@ -1,24 +1,11 @@
 <input type="hidden" name="nombre_chat" id="nombre_chat" value="<%=current_gamer.etiqueta_para_chat(@torneo) %>" />
 <input type="hidden" name="torneo_id" id="torneo_id" value="<%=@torneo.id %>" />
 <input type="hidden" name="flag_gamer_confirmado" id="flag_gamer_confirmado" value="<%=current_gamer.esta_confirmado(@torneo) %>" />
-<script>
-  $(function() {
-    $( "#tabs_chat" ).tabs();
-  });
-</script>
+<br/>
+<br/>
 <article id="tabs_chat">
-  <ul>
-    <li><a href="#tabs_chat-1">Chat</a></li>
-    <li><a href="#tabs_chat-2">Confirmados</a></li>
-  </ul>
   <article id="tabs_chat-1">
     <div class="span9">
-      <% if notice %>
-        <div class="notice"><%= notice %></div>
-      <% elsif alert %>
-        <div class="alert"><%= alert %></div>
-      <% end %>
-      
       <div id="chat" class="well" data-uri="<%= request.host %>:<%= request.port %>/websocket">
       </div>
       <% if @current_gamer.esta_confirmado(@torneo) %>
@@ -32,10 +19,5 @@
       <% end %>
     </div>
   </article> 
-  <article id="tabs_chat-2" >
-    <h3>Users</h3>
-      <ul class="nav nav-list" id="user-list">
-        <li class="nav-header">Active</li>
-      </ul>
-  </article> 
+
 </article>
