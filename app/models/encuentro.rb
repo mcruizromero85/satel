@@ -5,6 +5,29 @@ class Encuentro < ActiveRecord::Base
   belongs_to :ronda, autosave: false
   belongs_to :encuentro_anterior_a, class_name: 'Encuentro'
   belongs_to :encuentro_anterior_b, class_name: 'Encuentro'
+  has_many :partidas, -> { order('id ASC') }, autosave: false
+
+  def puntaje_de_inscrito(inscrito)
+    if self.gamerinscritoa == inscrito
+      Partida.where(encuentro: self, flag_gano_gamerinscritoa: true ).size
+    else
+      Partida.where(encuentro: self, flag_gano_gamerinscritoa: false).size
+    end    
+  end
+
+  def siguiente_partida
+    partidas << Partida.create(encuentro: self)
+  end
+
+  def partida_actual
+    partidas.where(estado: 'Pendiente').last
+  end
+
+  def iniciar_partidas
+    self.estado = 'Iniciado'
+    partidas.destroy_all
+    partidas << Partida.create(encuentro: self)
+  end
 
   def registrar_ganador
     armar_siguiente_encuentro
@@ -25,6 +48,10 @@ class Encuentro < ActiveRecord::Base
     encuentro.posicion_en_ronda = obtener_posicion_en_siguiente_ronda
     encuentro.ronda = ronda.ronda_siguiente
     encuentro.save
+  end
+
+  def ambos_estan_confirmados
+    self.flag_listo_gamera && self.flag_listo_gamerb
   end
 
   private

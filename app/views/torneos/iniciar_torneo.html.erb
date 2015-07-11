@@ -40,21 +40,34 @@
           <% end %>
 
           </script> 
-        <section class="Torneos">
-               <script>
-                $(function() {
-                  $( "#tabs" ).tabs();
-                });
-                </script>
-        <article id="tabs">
-          <ul>            
-            <li><a href="#tabs-1">Brackets</a></li>
-            <li><a href="#tabs-2">En vivo!!!</a></li>
-            <li><a href="#tabs-3">Detalle Torneo</a></li>
-            <li><a href="#tabs-4">Encuentro en curso</a></li>
-          </ul>
-        <article id="tabs-1">
-          <% if @current_gamer == @torneo.gamer %>
+<section class="Torneos">
+  <script>
+    $(function() {
+      $( "#tabs" ).tabs();
+    });
+  </script>
+<article id="tabs">
+  <ul>            
+    <li><a href="#tabs-1">Encuentro en curso</a></li>
+    <li><a href="#tabs-2">En vivo!!!</a></li>
+    <li><a href="#tabs-3">Detalle Torneo</a></li>
+    <li><a href="#tabs-4">Brackets</a></li>
+  </ul>
+  <article id="tabs-1">
+    <br/>
+    <% if @current_gamer != @torneo.gamer %>
+      <%= render partial: "encuentros/encuentro_en_curso", object: @torneo, as: :torneo %>
+    <% end %>
+    <br/>
+  </article> 
+  <article id="tabs-2" >
+    
+  </article>
+  <article id="tabs-3">
+    <%= render partial: "reutilizable/ficha_presentacion_torneo_detallado", object: @torneo, as: :torneo %>
+  </article>
+  <article id="tabs-4">
+    <% if @current_gamer == @torneo.gamer %>
             <h1 ><u>Torneo en Curso</u></h1>
             <% if @torneo.errors.any? %>
                 <div id="error_explanation">
@@ -82,18 +95,6 @@
         <% else %>
           <h1 ><u>En un momento el organizador genera las llaves..., por favor espera</u></h1>
         <% end %> 
-        
-  </article> 
-  <article id="tabs-2" >
-    
-  </article>
-  <article id="tabs-3">
-    <%= render partial: "reutilizable/ficha_presentacion_torneo_detallado", object: @torneo, as: :torneo %>
-  </article>
-  <article id="tabs-4">
-    <% if @current_gamer != @torneo.gamer %>
-      <%= render partial: "encuentros/encuentro_en_curso", object: @torneo, as: :torneo %>
-    <% end %>
   </article>
 </article>
           <aside>

@@ -38,30 +38,90 @@ class Chat.Controller
     @dispatcher.bind 'new_message', @newMessage
     @dispatcher.bind 'user_list', @updateUserList
     @dispatcher.bind 'actualizar_evento_encuentro', @actualizar_evento_encuentro
+    @dispatcher.bind 'actualizar_evento_partida_ganada', @actualizar_evento_partida_ganada
     $('input#user_name').on 'keyup', @updateUserInfo
     $('#send').on 'click', @sendMessage
     $('#message').keypress (e) -> $('#send').click() if e.keyCode == 13
     $('#boton_listo').on 'click', @enviar_evento_encuentro
+    $('#boton_gane').on 'click', @enviar_evento_gane_partida
+    $('#boton_perdi').on 'click', @enviar_evento_perdi_partida
+
+  enviar_evento_si_el_gano: (event) =>  
+    event.preventDefault()    
+    id_encuentro = $('#id_encuentro_actual').val()
+    id_inscripcion = $('#id_inscripcion').val()
+    id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()    
+    id_partida_actual = $('#id_partida_actual').val()
+    @dispatcher.trigger 'enviar_evento_si_el_gano', { id_encuentro: id_encuentro, id_inscripcion_ganador: id_inscripcion_contrincante, id_partida_actual: id_partida_actual }
+
+  enviar_evento_gane_partida: (event) =>  
+    event.preventDefault()    
+    id_encuentro = $('#id_encuentro_actual').val()
+    id_inscripcion = $('#id_inscripcion').val()
+    id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()    
+    id_partida_actual = $('#id_partida_actual').val()
+    @dispatcher.trigger 'enviar_evento_gane_partida', { id_encuentro: id_encuentro, id_inscripcion: id_inscripcion, id_partida_actual: id_partida_actual }
+
+  enviar_evento_perdi_partida: (event) =>  
+    event.preventDefault()    
+    id_encuentro = $('#id_encuentro_actual').val()
+    id_inscripcion = $('#id_inscripcion').val()
+    id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()    
+    id_partida_actual = $('#id_partida_actual').val()
+    @dispatcher.trigger 'enviar_evento_gane_partida', { id_encuentro: id_encuentro, id_inscripcion: id_inscripcion_contrincante, id_partida_actual: id_partida_actual }
+
+  actualizar_evento_partida_ganada: (response) =>  
+    id_encuentro = $('#id_encuentro_actual').val()
+    id_inscripcion = $('#id_inscripcion').val()
+    id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()
+    id_partida_actual = $('#id_partida_actual').val()
+    console.log('id_inscrito_ganador ' + response.id_inscrito_ganador );
+    console.log('id_encuentro ' + response.id_encuentro );
+    console.log('id_partida ' + response.id_partida );
+    console.log('timeout_confirmar_que_gano ' + response.timeout_confirmar_que_gano );
+    if $('#id_partida_actual').val() == (response.id_partida + '')
+      if response.flag_ambos_deacuerdo == false
+        if $('#id_inscripcion').val() == (response.id_inscrito_ganador + '')
+          $('#boton_gane').hide()          
+          $('#boton_perdi').hide()
+          $('#label_gane').show()
+          $('#mensaje_gane').html 'A la espera que tu contrincante confirme que ganaste, le queda: '
+        else
+          $('#boton_gane').html 'Crear debate, yo gane'
+          $('#boton_perdi').html 'Es correcto el ganó'
+          $('#boton_perdi').on 'click', @enviar_evento_si_el_gano
+          $('#mensaje_gane').html 'Tu contrincante Indica que gano esta partida, por favor confirmalo, te queda: '
+        generarContadorPorEvento('partida_ganada', new Date(response.timeout_confirmar_que_gano * 1000))
+      else
+        location.reload() 
 
   enviar_evento_encuentro: (event) =>  
     event.preventDefault()    
     id_encuentro = $('#id_encuentro_actual').val()
     id_inscripcion = $('#id_inscripcion').val()
     id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()
-    console.log('id_encuentro ' + id_encuentro );
-    console.log('id_inscripcion ' + id_inscripcion );
-    console.log('id_inscripcion_contrincante ' + id_inscripcion_contrincante );
     @dispatcher.trigger 'enviar_evento_encuentro', { id_encuentro: id_encuentro, id_inscripcion: id_inscripcion, id_inscripcion_contrincante: id_inscripcion_contrincante }
 
   actualizar_evento_encuentro: (response) =>  
     console.log('id_inscrito_listo ' + response.id_inscrito_listo );
     console.log('id_encuentro ' + response.id_encuentro );
-    if $('#id_encuentro_actual').val == response.id_encuentro
-      if $('#id_inscripcion').val == response.id_inscrito_listo
-        $('#boton_listo').hide()
-        $('#label_listo').show()
+    if $('#id_encuentro_actual').val() == (response.id_encuentro + '')
+      if response.flag_ambos_listos == false
+        if $('#id_inscripcion').val() == (response.id_inscrito_listo + '')
+          $('#boton_listo').hide()
+          $('#label_listo').show()
+          $('#mensaje_listo').html 'A la espera que tu contrincante este listo, sino es W.O a tu favor, le queda: '
+        else
+          $('#label_listo_contrincante').html 'Listo'
+          $('#mensaje_listo').html 'Tu contrincante ya está listo, pon listo tu también sino pierdes por W.O, te queda: '
+        generarContadorPorEvento('encuentro_listo', new Date(response.timeout_listo * 1000))
       else
-         $('#label_listo_contrincante').html 'Listo'
+        $('#mensaje_encuentro_iniciado').val 'Encuentro iniciado'
+        $('#label_listo').show()
+        $('#boton_listo').hide()
+        $('#mensaje_listo').html 'Encuentro iniciado!!'
+        $('#countdown_encuentro_listo').hide()
+        location.reload() 
 
   newMessage: (message) =>
     console.log('newMessage');

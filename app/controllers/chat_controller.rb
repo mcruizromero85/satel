@@ -51,10 +51,48 @@
   end
 
   def enviar_evento_encuentro
-    print "LLEGO !!!: " + message[:id_encuentro].to_s
-    print "LLEGO !!!: " + message[:id_inscripcion].to_s
-    print "LLEGO !!!: " + message[:id_inscripcion_contrincante].to_s
-    broadcast_message :actualizar_evento_encuentro, { id_inscrito_listo: '1', id_encuentro: '2'  } 
+    encuentro = Encuentro.find(message[:id_encuentro])
+    puts encuentro.gamerinscritoa.id
+    if encuentro.gamerinscritoa.id.to_s == message[:id_inscripcion].to_s
+      encuentro.flag_listo_gamera = true
+    else
+      encuentro.flag_listo_gamerb = true
+    end    
+    
+    if encuentro.ambos_estan_confirmados
+      encuentro.iniciar_partidas
+      flag_ambos_listos = true
+    else
+      flag_ambos_listos = false
+    end
+    encuentro.save
+
+    timeout = encuentro.updated_at + 600
+    broadcast_message :actualizar_evento_encuentro, { id_inscrito_listo: message[:id_inscripcion], id_encuentro: encuentro.id, timeout_listo: timeout.to_i, flag_ambos_listos: flag_ambos_listos }
+  end
+
+  def enviar_evento_gane_partida
+    partida = Partida.find(message[:id_partida_actual])
+    encuentro = Encuentro.find(message[:id_encuentro])
+    if encuentro.gamerinscritoa.id.to_s == message[:id_inscripcion].to_s
+      partida.flag_gano_gamerinscritoa = true
+    else
+      partida.flag_gano_gamerinscritob = true
+    end
+    partida.save
+    timeout = partida.updated_at + 1500
+    broadcast_message :actualizar_evento_partida_ganada, { id_inscrito_ganador: message[:id_inscripcion], id_encuentro: encuentro.id, id_partida: message[:id_partida_actual], timeout_confirmar_que_gano: timeout.to_i, flag_ambos_deacuerdo: flag_ambos_deacuerdo }
+  end
+
+  def enviar_evento_si_el_gano
+    flag_ambos_deacuerdo = true
+    partida = Partida.find(message[:id_partida_actual])
+    encuentro = Encuentro.find(message[:id_encuentro])
+    id_inscripcion_ganador = message[:id_inscripcion_ganador]
+    partida.estado = 'Finalizado'
+    partida.save
+    partida_nueva = encuentro.siguiente_partida
+    broadcast_message :actualizar_evento_partida_ganada, { id_inscrito_ganador: message[:id_inscripcion], id_encuentro: encuentro.id, id_partida: partida_nueva.id, timeout_confirmar_que_gano: timeout.to_i, flag_ambos_deacuerdo: flag_ambos_deacuerdo }
   end
   
 end

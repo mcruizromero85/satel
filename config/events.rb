@@ -36,4 +36,6 @@ WebsocketRails::EventMap.describe do
   subscribe :change_username, to: ChatController, with_method: :change_username
   subscribe :client_disconnected, to: ChatController, with_method: :delete_user
   subscribe :enviar_evento_encuentro, to: ChatController, with_method: :enviar_evento_encuentro
+  subscribe :enviar_evento_gane_partida, to: ChatController, with_method: :enviar_evento_gane_partida
+  subscribe :enviar_evento_si_el_gano, to: ChatController, with_method: :enviar_evento_si_el_gano  
 end

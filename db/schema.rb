@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150704155959) do
     t.datetime "updated_at"
     t.boolean  "flag_listo_gamera",        default: false
     t.boolean  "flag_listo_gamerb",        default: false
+    t.string   "estado",                   default: "Pendiente"
   end
 
   create_table "gamers", force: true do |t|
@@ -90,6 +91,15 @@ ActiveRecord::Schema.define(version: 20150704155959) do
     t.datetime "updated_at"
   end
 
+  create_table "partidas", force: true do |t|
+    t.integer  "encuentro_id"
+    t.boolean  "flag_gano_gamerinscritoa"
+    t.boolean  "flag_gano_gamerinscritob"
+    t.string   "estado",                   default: "Pendiente"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rondas", force: true do |t|
     t.integer  "numero"
     t.date     "inicio_fecha"
@@ -130,6 +140,8 @@ ActiveRecord::Schema.define(version: 20150704155959) do
 
   add_foreign_key "inscripciones", "gamers", name: "inscripciones_gamer_id_fk"
   add_foreign_key "inscripciones", "torneos", name: "inscripciones_torneo_id_fk"
+
+  add_foreign_key "partidas", "encuentros", name: "partidas_encuentro_id_fk"
 
   add_foreign_key "rondas", "torneos", name: "rondas_torneo_id_fk"
 
