@@ -249,7 +249,7 @@ font-size: 90% !important;
 .Torneos article{
   float: left;
   /*height: 500px; -->Se retira para hacer dinamica la pagina*/
-  background-color: #22394c;
+  
   margin-right: 0.5%;
   width: 65%;
   border-radius: 4px;
@@ -432,9 +432,9 @@ footer p{
 }
 
 #tabs_comentario{
-  background-color:#f2f2f2;
-  width: 95%;
-  margin-top: -18px;
+  background-color:#FFFFFF;
+  width: 100%;
+  margin-top: 1px;
   margin-left: 0;
   
 }
@@ -500,6 +500,7 @@ width: 73%;
   height: 569px;
   margin: 0;
   padding: 0;
+  overflow: scroll;
 }
 
 .Detalle_Torneo_Ver{
@@ -827,7 +828,72 @@ width: 73%;
     color: #686868;
   }
 
+
+  #tabs_chat{
+   margin-top: -5%;
+   width: 100%;
+  }
+
+  #tabs_chat-2{
   
+  margin-left: 1%;
+  width: 97%;
+    border-radius: 4px;
+  }
+
+  #tabs_chat-2 h3{
+   background-color: #2a6496;
+   color: whitesmoke;  
+   margin-top: 0%;
+   margin-bottom: 0.5%;
+   padding: 5%;
+   border-radius: 4px;
+   
+  }
+
+
+  
+  #user-list{
+      background-color: #f5f5f5;
+      padding-bottom: 6%;
+      margin-bottom: 0%;
+      padding-top: 6%;
+      margin-top: 0;
+     border: 1px solid #ddd;
+     border-radius: 4px;
+  } 
+
+  .form-inline{
+    width: 152%;
+  }
+  
+  #chat{
+  width: 150.5%;
+  margin-left: 0.5%;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  height: 491px;
+  overflow: scroll;
+}
+
+
+  #send{
+  color: #fff;
+  background-color: #2a6496;
+  border-color: #357ebd;
+  padding: 2px 11px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  }
+  #message{
+    width: 89%;
+    border-radius: 4px;
+  }
+  .PostMessage{
+    border-color: white;
+  border-radius: 4px;
+  }
+
 /*MEDIA QUERY*/
 @media only screen and (max-width : 1920px){
   
