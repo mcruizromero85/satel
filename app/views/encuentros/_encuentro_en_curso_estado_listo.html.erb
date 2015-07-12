@@ -1,0 +1,39 @@
+ <input type="hidden" id="id_inscripcion_contrincante" value="<%=@current_gamer.contrincante_inscrito_actual(torneo).id%>" />
+<table>
+	<tr>
+		<td><h1><%=@current_gamer.etiqueta_llave(torneo)%></h1></td>
+		<td>vs</td>
+		<td><h1><%=@current_gamer.contrincante_inscrito_actual(torneo).etiqueta_llave%></h1></td>
+	</tr>
+	<tr>		
+		<% if @current_gamer.esta_listo_en_encuentro_actual(torneo) %>
+			<td>
+				<button id="boton_listo" style="display: none;">Estoy Listo!!!</button>
+				<span id="label_listo" style="">Listo</span>
+			</td>
+			<td><span id="mensaje_listo">A la espera que tu contrincante este listo, sino es W.O a tu favor, le queda: </span><b class="contador" id='countdown_encuentro_listo'></b></td>
+			<td><span id="label_listo_contrincante">Sin confirmar</span></td>
+			<script type="text/javascript">
+				generarContadorPorEvento('encuentro_listo', new Date(<%=@current_gamer.encuentro_actual(@torneo).updated_at.to_i + 16 %> * 1000))
+			</script>
+		<% elsif @current_gamer.esta_listo_contrincante_en_encuentro_actual(torneo) %>
+			<td>
+				<button id="boton_listo">Estoy Listo!!!</button>
+				<span id="label_listo" style="display:none">Listo</span>
+			</td>
+			<td><span id="mensaje_listo">Tu contrincante ya está listo, pon listo tu también sino pierdes por W.O, te queda: </span><b class="contador" id='countdown_encuentro_listo'></b></td>
+			<td><span id="label_listo_contrincante">Listo</span></td>
+			<script type="text/javascript">
+				generarContadorPorEvento('encuentro_listo', new Date(<%=@current_gamer.encuentro_actual(@torneo).updated_at.to_i + 16 %> * 1000))
+			</script>
+		<% else %>
+			<td>
+				<button id="boton_listo">Estoy Listo!!!</button>
+				<span id="label_listo" style="display:none">Listo</span>
+			</td>
+			<td><span id="mensaje_listo"></span> <b class="contador" id='countdown_encuentro_listo'></b></td>
+			<td><span id="label_listo_contrincante">Sin confirmar</span></td>
+		<% end %>
+	</tr>
+	<tr></tr>
+</table>

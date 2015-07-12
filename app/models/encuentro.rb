@@ -7,6 +7,29 @@ class Encuentro < ActiveRecord::Base
   belongs_to :encuentro_anterior_b, class_name: 'Encuentro'
   has_many :partidas, -> { order('id ASC') }, autosave: false
 
+  def es_la_final
+    if ronda.ronda_siguiente.nil?
+      true
+    else
+      false
+    end
+  end
+
+  def self.encuentro_actual_por_inscrito(inscripcion)
+    Encuentro.where('encuentros.ronda_id in (:rondas_ids) and encuentros.gamerinscrito_ganador_id is null and (encuentros.gamerinscritoa_id = :inscripcion_id or encuentros.gamerinscritob_id = :inscripcion_id)',rondas_ids: inscripcion.torneo.rondas.ids, inscripcion_id: inscripcion.id).take
+  end
+
+  def tiene_partidas_pendientes
+    partidas_maximas = ronda.modo_ganar
+    puntaje_gamera = puntaje_de_inscrito(gamerinscritoa)
+    puntaje_gamerb = puntaje_de_inscrito(gamerinscritob)
+    if (puntaje_gamera.to_i + puntaje_gamerb.to_i) < partidas_maximas.to_i
+      true
+    else
+      false
+    end
+  end
+
   def puntaje_de_inscrito(inscrito)
     if self.gamerinscritoa == inscrito
       Partida.where('partidas.encuentro_id=:encuentro_id and partidas.estado = :estado and flag_gano_gamerinscritoa = :flag_gano_gamerinscritoa', encuentro_id: self.id, estado: 'Finalizado', flag_gano_gamerinscritoa: true ).size
