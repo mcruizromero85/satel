@@ -3,6 +3,21 @@ class Gamer < ActiveRecord::Base
   has_many :inscripciones
   has_many :authentications, autosave: true
 
+  def esta_listo_contrincante_en_encuentro_actual(torneo)
+    encuentro = encuentro_actual(torneo)
+    encuentro.gamerinscritoa.gamer == self && encuentro.flag_listo_gamerb || encuentro.gamerinscritob.gamer == self && encuentro.flag_listo_gamera
+  end
+
+  def esta_listo_en_encuentro_actual(torneo)
+    encuentro = encuentro_actual(torneo)
+    encuentro.gamerinscritoa.gamer == self && encuentro.flag_listo_gamera || encuentro.gamerinscritob.gamer == self && encuentro.flag_listo_gamerb
+  end
+
+  def gane_el_torneo(torneo)
+    inscripcion = inscripcion_en_torneo(torneo)
+    Encuentro.find_by(gamerinscrito_ganador: inscripcion, ronda: torneo.rondas.last)
+  end
+
   def etiqueta_para_bracket
     if nick.nil? || nick == ''
       return nombres
@@ -50,10 +65,16 @@ class Gamer < ActiveRecord::Base
 
   def encuentro_actual(torneo)
     inscripcion = inscripcion_en_torneo(torneo)
-    encuentro = Encuentro.where('encuentros.ronda_id in (:rondas_ids) and encuentros.gamerinscrito_ganador_id is null and (encuentros.gamerinscritoa_id = :inscripcion_id or encuentros.gamerinscritob_id = :inscripcion_id)',rondas_ids: torneo.rondas.ids, inscripcion_id: inscripcion.id).take
+    encuentro = Encuentro.encuentro_actual_por_inscrito(inscripcion)
   end
 
   def inscripcion_en_torneo(torneo)
     Inscripcion.find_by(torneo_id: torneo.id, estado: 'Confirmado', gamer_id: self.id)
+  end
+
+  def contrincante_posiblea(torneo)
+  end
+
+  def contrincante_posibleb(torneo)
   end
 end

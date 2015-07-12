@@ -1,49 +1,20 @@
-<input type="hidden" id="id_encuentro_actual" value="<%=@current_gamer.encuentro_actual(@torneo).id%>" />
-<input type="hidden" id="id_inscripcion" value="<%=@current_gamer.inscripcion_en_torneo(@torneo).id%>" />
-<input type="hidden" id="id_inscripcion_contrincante" value="<%=@current_gamer.contrincante_inscrito_actual(@torneo).id%>" />
-<% if @current_gamer.encuentro_actual(@torneo).estado == 'Pendiente' %>
-<table>
-	<tr>
-		<td><h1><%=@current_gamer.etiqueta_llave(@torneo)%></h1></td>
-		<td>vs</td>
-		<td><h1><%=@current_gamer.contrincante_inscrito_actual(@torneo).etiqueta_llave%></h1></td>
-	</tr>
-	<tr>
-		<td><button id="boton_listo">Estoy Listo!!!</button><span id="label_listo" style="display:none">Listo</span></td>
-		<td><span id="mensaje_listo"></span> <b class="contador" id='countdown_encuentro_listo'></b></td>
-		<td><span id="label_listo_contrincante">Sin confirmar</span></td>
-	</tr>
-	<tr></tr>
-</table>
-<% else %>
-	<table>
-	<tr>
-		<td><h1><%=@current_gamer.etiqueta_llave(@torneo)%></h1></td>
-		<td>vs</td>
-		<td><h1><%=@current_gamer.contrincante_inscrito_actual(@torneo).etiqueta_llave%></h1></td>
-	</tr>
-	<tr>
-		<td><%=@current_gamer.encuentro_actual(@torneo).puntaje_de_inscrito(@current_gamer.inscripcion_en_torneo(@torneo))%></td>
-		<td></td>
-		<td><%=@current_gamer.encuentro_actual(@torneo).puntaje_de_inscrito(@current_gamer.contrincante_inscrito_actual(@torneo))%></td>
-	</tr>	
-</table>
-<br/>
-<input type="hidden" id="id_partida_actual" value="<%=@current_gamer.encuentro_actual(torneo).partida_actual.id%>">
-<table >
-	<tr >
-		<td colspan="3">Partida N&uacute;mero: <%=@current_gamer.encuentro_actual(torneo).partidas.size %> </td>
-	</tr>	
-	<tr>
-		<td><button id="boton_gane">Yo gan&eacute; :)</button><span id="label_gane" style="display:none">Gane!!!</span></td>
-		<td><span id="mensaje_gane"></span> <b class="contador" id='countdown_partida_ganada'></b></td>
-		<td><button id="boton_perdi">El gan&oacute; :(</button></td>
-	</tr>	
-</table>
-<br/>
-<% end%>
-  <script type="text/javascript">
-    function generarContadorPorEvento(evento,fecha_limite){
-      $('#countdown_'+evento).countdown({until: fecha_limite, format: 'dhmS',expiryText: "<font color='red'>Recarga la p&aacute;gina</font>" }); 
-      }
-  </script>
+<script type="text/javascript">
+	function generarContadorPorEvento(evento,fecha_limite){
+	  $('#countdown_'+evento).countdown({until: fecha_limite, format: 'dhmS', expiryUrl: '/torneos/iniciar/<%=@torneo.id%>?reload=1' }); 
+	}
+</script>
+<% if @current_gamer.gane_el_torneo(@torneo) %>
+	<h1>Felicidades ganaste el torneo :)</h1>
+<% elsif @current_gamer.encuentro_actual(@torneo).nil? %>
+	<h1>Quedaste eliminado de torneo :(, vuelve a intentalo la pr&oacute;xima vez :)</h1>	
+<% elsif !@current_gamer.encuentro_actual(@torneo).nil? %>
+	<input type="hidden" id="id_encuentro_actual" value="<%=@current_gamer.encuentro_actual(@torneo).id%>" />
+	<input type="hidden" id="id_inscripcion" value="<%=@current_gamer.inscripcion_en_torneo(@torneo).id%>" />
+	<% if @current_gamer.encuentro_actual(@torneo).estado == 'Pendiente' && @current_gamer.contrincante_inscrito_actual(@torneo).nil? %>
+		<%= render partial: "encuentros/encuentro_en_curso_estado_esperando_contrincante", object: @torneo, as: :torneo %>
+	<% elsif @current_gamer.encuentro_actual(@torneo).estado == 'Pendiente' %>
+		<%= render partial: "encuentros/encuentro_en_curso_estado_listo", object: @torneo, as: :torneo %>
+	<% else %>
+		<%= render partial: "encuentros/encuentro_en_curso_estado_iniciado", object: @torneo, as: :torneo %>	
+	<% end%>
+<% end %>

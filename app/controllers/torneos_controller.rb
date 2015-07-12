@@ -83,6 +83,15 @@ class TorneosController < ApplicationController
   def iniciar_torneo
     @torneo = Torneo.find(params[:id_torneo])
     @torneo.generar_encuentros if current_gamer == @torneo.gamer
+    return if @torneo.gamer == current_gamer
+
+    encuentro_actual = current_gamer.encuentro_actual(@torneo)
+    return if encuentro_actual.nil?
+    if encuentro_actual.updated_at.to_i + 16 < Time.new.to_i && current_gamer.esta_listo_en_encuentro_actual(@torneo)
+      encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
+      encuentro_actual.registrar_ganador
+    end
+
   end
 
   def comenzar

@@ -63,6 +63,7 @@ class Chat.Controller
     @dispatcher.trigger 'enviar_evento_gane_partida', { id_encuentro: id_encuentro, id_inscripcion: id_inscripcion, id_partida_actual: id_partida_actual }
 
   enviar_evento_perdi_partida: (event) =>  
+    console.log('Entre a Partida Perdida')
     event.preventDefault()    
     id_encuentro = $('#id_encuentro_actual').val()
     id_inscripcion = $('#id_inscripcion').val()
@@ -75,6 +76,12 @@ class Chat.Controller
     id_inscripcion = $('#id_inscripcion').val()
     id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()
     id_partida_actual = $('#id_partida_actual').val()
+    console.log(response.flag_cerrar_torneo)
+    if parseInt(response.id_encuentro) == parseInt(id_encuentro) && $('#flag_espera_contrincante').val() == 'true' || response.flag_cerrar_torneo 
+      console.log('Actualizar pantalla contrincante ')
+      location.reload();
+      return;
+
     console.log('id_inscrito_ganador ' + response.id_inscrito_ganador );
     console.log('id_encuentro ' + response.id_encuentro );
     console.log('id_partida ' + response.id_partida );
