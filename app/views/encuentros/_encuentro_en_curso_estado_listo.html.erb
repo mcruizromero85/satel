@@ -14,7 +14,7 @@
 			<td><span id="mensaje_listo">A la espera que tu contrincante este listo, sino es W.O a tu favor, le queda: </span><b class="contador" id='countdown_encuentro_listo'></b></td>
 			<td><span id="label_listo_contrincante">Sin confirmar</span></td>
 			<script type="text/javascript">
-				generarContadorPorEvento('encuentro_listo', new Date(<%=@current_gamer.encuentro_actual(@torneo).updated_at.to_i + 16 %> * 1000))
+				generarContadorPorEvento('encuentro_listo', new Date(<%=@current_gamer.encuentro_actual(@torneo).updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS %> * 1000))
 			</script>
 		<% elsif @current_gamer.esta_listo_contrincante_en_encuentro_actual(torneo) %>
 			<td>
@@ -24,7 +24,7 @@
 			<td><span id="mensaje_listo">Tu contrincante ya está listo, pon listo tu también sino pierdes por W.O, te queda: </span><b class="contador" id='countdown_encuentro_listo'></b></td>
 			<td><span id="label_listo_contrincante">Listo</span></td>
 			<script type="text/javascript">
-				generarContadorPorEvento('encuentro_listo', new Date(<%=@current_gamer.encuentro_actual(@torneo).updated_at.to_i + 16 %> * 1000))
+				generarContadorPorEvento('encuentro_listo', new Date(<%=@current_gamer.encuentro_actual(@torneo).updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS %> * 1000))
 			</script>
 		<% else %>
 			<td>

@@ -87,9 +87,23 @@ class TorneosController < ApplicationController
 
     encuentro_actual = current_gamer.encuentro_actual(@torneo)
     return if encuentro_actual.nil?
-    if encuentro_actual.updated_at.to_i + 16 < Time.new.to_i && current_gamer.esta_listo_en_encuentro_actual(@torneo)
-      encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
-      encuentro_actual.registrar_ganador
+
+    if encuentro_actual.estado == 'Pendiente'
+      if encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && current_gamer.esta_listo_en_encuentro_actual(@torneo) && !current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
+        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
+        encuentro_actual.registrar_ganador
+      elsif encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && !current_gamer.esta_listo_en_encuentro_actual(@torneo) && current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
+        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.contrincante_inscrito_actual(@torneo).id)
+        encuentro_actual.registrar_ganador
+      end
+    elsif encuentro_actual.estado == 'Iniciado'
+      if encuentro_actual.partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS <= Time.new.to_i && current_gamer.reporto_ganar_partida_actual(@torneo) && !current_gamer.reporto_ganar_partida_actual_el_contrincante(@torneo)
+        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
+        encuentro_actual.registrar_ganador
+      elsif encuentro_actual.partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS <= Time.new.to_i && !current_gamer.reporto_ganar_partida_actual(@torneo) && current_gamer.reporto_ganar_partida_actual_el_contrincante(@torneo)
+        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.contrincante_inscrito_actual(@torneo).id)
+        encuentro_actual.registrar_ganador
+      end
     end
 
   end

@@ -3,14 +3,30 @@ class Gamer < ActiveRecord::Base
   has_many :inscripciones
   has_many :authentications, autosave: true
 
+  def reporto_ganar_partida_actual_el_contrincante(torneo)
+    inscripcion = inscripcion_en_torneo(torneo)
+    encuentro =  encuentro_actual(torneo)
+    partida = encuentro.partida_actual
+    encuentro.gamerinscritoa == inscripcion && partida.flag_gano_gamerinscritob || encuentro.gamerinscritob == inscripcion && partida.flag_gano_gamerinscritoa
+  end
+
+  def reporto_ganar_partida_actual(torneo)
+    inscripcion = inscripcion_en_torneo(torneo)
+    encuentro =  encuentro_actual(torneo)
+    partida = encuentro.partida_actual
+    encuentro.gamerinscritoa == inscripcion && partida.flag_gano_gamerinscritoa || encuentro.gamerinscritob == inscripcion && partida.flag_gano_gamerinscritob 
+  end
+
   def esta_listo_contrincante_en_encuentro_actual(torneo)
     encuentro = encuentro_actual(torneo)
-    encuentro.gamerinscritoa.gamer == self && encuentro.flag_listo_gamerb || encuentro.gamerinscritob.gamer == self && encuentro.flag_listo_gamera
+    inscripcion = inscripcion_en_torneo(torneo)
+    encuentro.gamerinscritoa == inscripcion && encuentro.flag_listo_gamerb || encuentro.gamerinscritob == inscripcion && encuentro.flag_listo_gamera
   end
 
   def esta_listo_en_encuentro_actual(torneo)
     encuentro = encuentro_actual(torneo)
-    encuentro.gamerinscritoa.gamer == self && encuentro.flag_listo_gamera || encuentro.gamerinscritob.gamer == self && encuentro.flag_listo_gamerb
+    inscripcion = inscripcion_en_torneo(torneo)
+    encuentro.gamerinscritoa == inscripcion && encuentro.flag_listo_gamera || encuentro.gamerinscritob == inscripcion && encuentro.flag_listo_gamerb
   end
 
   def gane_el_torneo(torneo)

@@ -45,6 +45,7 @@ class Chat.Controller
     $('#boton_listo').on 'click', @enviar_evento_encuentro
     $('#boton_gane').on 'click', @enviar_evento_gane_partida
     $('#boton_perdi').on 'click', @enviar_evento_perdi_partida
+    $('#boton_el_gano').on 'click', @enviar_evento_si_el_gano    
 
   enviar_evento_si_el_gano: (event) =>  
     event.preventDefault()    
@@ -77,6 +78,11 @@ class Chat.Controller
     id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()
     id_partida_actual = $('#id_partida_actual').val()
     console.log(response.flag_cerrar_torneo)
+    console.log('Partida estado: ' + response.partida_estado)
+
+    if response.partida_estado == 'Debate'
+      location.reload();
+
     if parseInt(response.id_encuentro) == parseInt(id_encuentro) && $('#flag_espera_contrincante').val() == 'true' || response.flag_cerrar_torneo 
       console.log('Actualizar pantalla contrincante ')
       location.reload();
@@ -97,7 +103,7 @@ class Chat.Controller
           $('#boton_gane').html 'Crear debate, yo gane'
           $('#boton_perdi').html 'Es correcto el ganó'
           $('#boton_perdi').on 'click', @enviar_evento_si_el_gano
-          $('#mensaje_gane').html 'Tu contrincante Indica que gano esta partida, por favor confirmalo, te queda: '
+          $('#mensaje_gane').html '¿Tu contrincante gano esta partida?, por favor confirmalo, te queda: '
         generarContadorPorEvento('partida_ganada', new Date(response.timeout_confirmar_que_gano * 1000))
       else
         location.reload() 

@@ -43,7 +43,7 @@ class Encuentro < ActiveRecord::Base
   end
 
   def partida_actual
-    partidas.where(estado: 'Pendiente').last
+    partidas.where('partidas.estado in (\'Pendiente\',\'Debate\')').last
   end
 
   def iniciar_partidas

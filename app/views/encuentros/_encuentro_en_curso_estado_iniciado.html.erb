@@ -18,9 +18,27 @@
 		<td colspan="3">Partida N&uacute;mero: <%=@current_gamer.encuentro_actual(torneo).partidas.size %> </td>
 	</tr>	
 	<tr>
-		<td><button id="boton_gane">Yo gan&eacute; :)</button><span id="label_gane" style="display:none">Gane!!!</span></td>
-		<td><span id="mensaje_gane"></span> <b class="contador" id='countdown_partida_ganada'></b></td>
-		<td><button id="boton_perdi">El gan&oacute; :(</button></td>
+		<% if @current_gamer.encuentro_actual(torneo).partida_actual.estado == 'Debate' %>	
+			<td colspan='3'><span id="mensaje_gane">La partida esta en debate y debe ser revisado por el organizador, favor de coordinarlo en el chat general</span></td>	
+		<% elsif @current_gamer.reporto_ganar_partida_actual(torneo) %>
+			<td><button id="boton_gane" style="display: none;">Yo gané :)</button><span id="label_gane" style="">Gan&eacute;!!!</span></td>
+			<td><span id="mensaje_gane">A la espera que tu contrincante confirme que ganaste, le queda: </span> <b class="contador" id='countdown_partida_ganada'></b></td>
+			<td><button id="boton_perdi" style="display: none;">El ganó :(</button></td>
+			<script type="text/javascript">
+				generarContadorPorEvento('partida_ganada', new Date(<%=@current_gamer.encuentro_actual(torneo).partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS %> * 1000))
+			</script>
+		<% elsif @current_gamer.reporto_ganar_partida_actual_el_contrincante(torneo) %>			
+			<td><button id="boton_gane">Crear debate, yo gane</button><span id="label_gane" style="display:none">Gan&eacute;!!!</span></td>
+			<td><span id="mensaje_gane">¿Tu contrincante gano esta partida?, por favor confirmalo, te queda: </span> <b class="contador" id='countdown_partida_ganada'></b></td>
+			<td><button id="boton_el_gano" >Es correcto el ganó</button></td>
+			<script type="text/javascript">				
+				generarContadorPorEvento('partida_ganada', new Date(<%=@current_gamer.encuentro_actual(torneo).partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS %> * 1000))
+			</script>		
+		<% else %>
+			<td><button id="boton_gane">Yo gan&eacute; :)</button><span id="label_gane" style="display:none">Gan&eacute;!!!</span></td>
+			<td><span id="mensaje_gane"></span> <b class="contador" id='countdown_partida_ganada'></b></td>
+			<td><button id="boton_perdi">El gan&oacute; :(</button></td>
+		<% end %>
 	</tr>	
 </table>
 <br/>

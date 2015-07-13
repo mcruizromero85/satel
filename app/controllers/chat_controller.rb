@@ -66,21 +66,22 @@
     end
     encuentro.save
 
-    timeout = encuentro.updated_at + 600
+    timeout = encuentro.updated_at + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS
     broadcast_message :actualizar_evento_encuentro, { id_inscrito_listo: message[:id_inscripcion], id_encuentro: encuentro.id, timeout_listo: timeout.to_i, flag_ambos_listos: flag_ambos_listos }
   end
 
   def enviar_evento_gane_partida
     partida = Partida.find(message[:id_partida_actual])
-    encuentro = Encuentro.find(message[:id_encuentro])    
+    encuentro = Encuentro.find(message[:id_encuentro])
     if encuentro.gamerinscritoa.id.to_s == message[:id_inscripcion].to_s
       partida.flag_gano_gamerinscritoa = true
     else
       partida.flag_gano_gamerinscritob = true
     end
+    partida.estado = 'Debate' if partida.existe_debate
     partida.save
-    timeout = partida.updated_at + 1500
-    broadcast_message :actualizar_evento_partida_ganada, { id_inscrito_ganador: message[:id_inscripcion], id_encuentro: encuentro.id, id_partida: message[:id_partida_actual], timeout_confirmar_que_gano: timeout.to_i, flag_ambos_deacuerdo: false }
+    timeout = partida.updated_at + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS
+    broadcast_message :actualizar_evento_partida_ganada, { id_inscrito_ganador: message[:id_inscripcion], id_encuentro: encuentro.id, id_partida: message[:id_partida_actual], timeout_confirmar_que_gano: timeout.to_i, flag_ambos_deacuerdo: false, partida_estado: partida.estado }
   end
 
   def enviar_evento_si_el_gano    
@@ -91,7 +92,7 @@
     partida.estado = 'Finalizado'
     partida.save
     if encuentro.tiene_partidas_pendientes
-      partida_nueva = encuentro.siguiente_partida      
+      partida_nueva = encuentro.siguiente_partida    
     else
       encuentro.gamerinscrito_ganador = Inscripcion.new(id: id_inscripcion_ganador)
       encuentro.registrar_ganador
