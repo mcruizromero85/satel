@@ -13,6 +13,8 @@
 </table>
 <br/>
 <input type="hidden" id="id_partida_actual" value="<%=@current_gamer.encuentro_actual(torneo).partida_actual.id%>">
+<center><a href="<%=@current_gamer.link_heroes_draft_partida_actual(torneo)%>" target="_blank">Link de la partida</a></center>
+<br/>
 <table >
 	<tr >
 		<td colspan="3">Partida N&uacute;mero: <%=@current_gamer.encuentro_actual(torneo).partidas.size %> </td>
