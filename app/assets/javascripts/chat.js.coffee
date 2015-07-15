@@ -1,4 +1,6 @@
 jQuery ->  
+  objDiv = document.getElementById("chat");
+  objDiv.scrollTop = objDiv.scrollHeight + 100;
   torneo_id = $('#torneo_id').val();  
   window.chatController = new Chat.Controller($('#chat').data('uri'), true);
   
@@ -77,21 +79,14 @@ class Chat.Controller
     id_inscripcion = $('#id_inscripcion').val()
     id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()
     id_partida_actual = $('#id_partida_actual').val()
-    console.log(response.flag_cerrar_torneo)
-    console.log('Partida estado: ' + response.partida_estado)
 
     if response.partida_estado == 'Debate'
       location.reload();
 
     if parseInt(response.id_encuentro) == parseInt(id_encuentro) && $('#flag_espera_contrincante').val() == 'true' || response.flag_cerrar_torneo 
-      console.log('Actualizar pantalla contrincante ')
       location.reload();
       return;
 
-    console.log('id_inscrito_ganador ' + response.id_inscrito_ganador );
-    console.log('id_encuentro ' + response.id_encuentro );
-    console.log('id_partida ' + response.id_partida );
-    console.log('timeout_confirmar_que_gano ' + response.timeout_confirmar_que_gano );
     if $('#id_partida_actual').val() == (response.id_partida + '')
       if response.flag_ambos_deacuerdo == false
         if $('#id_inscripcion').val() == (response.id_inscrito_ganador + '')
@@ -109,15 +104,14 @@ class Chat.Controller
         location.reload() 
 
   enviar_evento_encuentro: (event) =>  
-    event.preventDefault()    
+    event.preventDefault()
+    $('#boton_listo').html 'Procesando...'
     id_encuentro = $('#id_encuentro_actual').val()
     id_inscripcion = $('#id_inscripcion').val()
     id_inscripcion_contrincante = $('#id_inscripcion_contrincante').val()
     @dispatcher.trigger 'enviar_evento_encuentro', { id_encuentro: id_encuentro, id_inscripcion: id_inscripcion, id_inscripcion_contrincante: id_inscripcion_contrincante }
 
   actualizar_evento_encuentro: (response) =>  
-    console.log('id_inscrito_listo ' + response.id_inscrito_listo );
-    console.log('id_encuentro ' + response.id_encuentro );
     if $('#id_encuentro_actual').val() == (response.id_encuentro + '')
       if response.flag_ambos_listos == false
         if $('#id_inscripcion').val() == (response.id_inscrito_listo + '')
@@ -158,10 +152,15 @@ class Chat.Controller
     @dispatcher.trigger 'change_username', @user.serialize()
 
   appendMessage: (message) ->
-    console.log('appendMessage');
+    if message.msg_body.toString() == '/reiniciar' && message.user_name.indexOf('(Admin)') > 0
+      location.reload()
+    return if message.msg_body.indexOf('connected') > 0
+
     messageTemplate = @template(message)
     $('#chat').append messageTemplate
     messageTemplate.slideDown 140
+    objDiv = document.getElementById("chat");
+    objDiv.scrollTop = objDiv.scrollHeight + 30;
 
   shiftMessageQueue: =>
     console.log('shiftMessageQueue');

@@ -49,6 +49,7 @@ Satel::Application.routes.draw do
   get '/auth/:provider/callback' => 'authentications#create'
   post '/auth/:provider/callback' => 'authentications#create'
   get '/cerrar_sesion' => 'authentications#cerrar_sesion'
+  get '/simular_sesion/:gamer_id' => 'authentications#simular_sesion'
   
   
   # The priority is based upon order of creation: first created -> highest priority.

@@ -10,8 +10,17 @@ class ChatYReporteEncuentros < ActiveRecord::Migration
       t.boolean :flag_gano_gamerinscritoa
       t.boolean :flag_gano_gamerinscritob
       t.string :estado, :default => 'Pendiente'
+      t.string :field1
+      t.string :field2
+      t.string :field3
       t.timestamps
     end
     add_foreign_key :partidas, :encuentros
+    create_table :chats do |t|
+      t.string :user_name
+      t.string :received
+      t.string :msg_body
+      t.timestamps
+    end
   end
 end

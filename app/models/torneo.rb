@@ -17,7 +17,7 @@ class Torneo < ActiveRecord::Base
   belongs_to :gamer
   belongs_to :juego, autosave: false
   has_many :rondas, -> { order('numero ASC') }, autosave: true
-  has_many :inscripciones, autosave: true  
+  has_many :inscripciones, -> { where "(tipo_inscripcion != 0 or tipo_inscripcion is null)" }, autosave: true  
   before_save :asignar_valores_por_defectos, if: "estado == 'Creado'"
   has_one :detalle_pago_inscripcion, autosave: true
 

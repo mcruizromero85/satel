@@ -17,6 +17,17 @@ class Gamer < ActiveRecord::Base
     encuentro.gamerinscritoa == inscripcion && partida.flag_gano_gamerinscritoa || encuentro.gamerinscritob == inscripcion && partida.flag_gano_gamerinscritob 
   end
 
+  def link_heroes_draft_partida_actual(torneo)
+    inscripcion = inscripcion_en_torneo(torneo)
+    encuentro =  encuentro_actual(torneo)
+    partida = encuentro.partida_actual
+    if encuentro.gamerinscritoa == inscripcion
+      partida.field1
+    else
+      partida.field2
+    end
+  end
+
   def esta_listo_contrincante_en_encuentro_actual(torneo)
     encuentro = encuentro_actual(torneo)
     inscripcion = inscripcion_en_torneo(torneo)
@@ -55,10 +66,13 @@ class Gamer < ActiveRecord::Base
   end
 
   def etiqueta_para_chat(torneo)
+    inscripcion = inscripcion_en_torneo(torneo)
     if torneo.gamer == self
       nombres + '(Admin)'
-    else
+    elsif !inscripcion.nil?
       inscripcion_en_torneo(torneo).etiqueta_chat
+    else
+      nombres + '(Invitado)'
     end
   end
 

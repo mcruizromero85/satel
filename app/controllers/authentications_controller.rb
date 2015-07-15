@@ -39,4 +39,9 @@ class AuthenticationsController < ApplicationController
     session[:gamer_id] = nil
     redirect_to action: 'index', controller: 'torneos'
   end
+
+  def simular_sesion
+     self.current_gamer = Gamer.find(params[:gamer_id])
+     redirect_to action: 'index', controller: 'torneos'
+  end
 end

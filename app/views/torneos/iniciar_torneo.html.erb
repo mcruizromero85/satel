@@ -1,44 +1,14 @@
           <script type="text/javascript">
-
-            var minimalData = {
-              <%   cantidad_inscripciones=@torneo.vacantes %>
+            var minimalData = {              
               teams : <%=raw @torneo.arreglo_de_nombres_para_llaves %>,
               results: <%=raw TorneosHelper.obtener_array_para_resultado_llaves(@torneo) %>
             }
           $(function() {
             $('#llaves').bracket({
-            init: minimalData,
-            skipConsolationRound: true
-            <% if @torneo.estado == "Iniciado" && @current_gamer==@torneo.gamer %>
-            ,onMatchClick: registrarGanador,
-            decorator: {edit: edit_fn,render: render_fn}})
-            <% end %>
+              init: minimalData,
+              skipConsolationRound: true
+            })
           })
-          <% if @torneo.estado == "Iniciado" && @current_gamer==@torneo.gamer %>
-            function registrarGanador(data) {
-              if (data == "0"){
-                alert("No existe ambos contrincantes");                
-              }else{
-                location.href="/encuentros/"+data+"/edit";  
-              }
-            }
-
-            function edit_fn(container, data, doneCb) {
-              var input = $('<input type="text">')
-              input.val(data.name)
-              container.html(input)
-              input.focus()
-              input.blur(function() { doneCb({name: input.val()}) })
-            }
-
-            function render_fn(container, data, score) {
-              $('#llaves div .tools').addClass('ocultar_contenido');
-              container.append(data);
-            }
-          <% else %>
-          })
-          <% end %>
-
           </script> 
 <section class="Torneos">
   <script>
@@ -46,29 +16,33 @@
       $( "#tabs" ).tabs();
     });
   </script>
+<% if @current_gamer == @torneo.gamer %>
+  <input type="hidden" id="flag_administrador" value="true" />
+<% end %>
 <article id="tabs">
-  <ul>            
-    <li><a href="#tabs-1">Encuentro en curso</a></li>
-    <li><a href="#tabs-2">En vivo!!!</a></li>
-    <li><a href="#tabs-3">Detalle Torneo</a></li>
-    <li><a href="#tabs-4">Brackets</a></li>
+  <ul>
+    <% if @current_gamer.esta_confirmado(@torneo) && @torneo.estado == 'Iniciado' && @current_gamer != @torneo.gamer  %>
+      <li><a href="#tabs-1">Encuentro en curso</a></li>
+    <% end %> 
+    <li><a href="#tabs-2">Chat de coordinaci&oacute;n</a></li>
+    <li><a href="#tabs-3">Brackets</a></li>
+    <li><a href="#tabs-4">En vivo</a></li>
   </ul>
-  <article id="tabs-1">
-    <br/>
-    <% if @current_gamer != @torneo.gamer %>
+  <% if @current_gamer.esta_confirmado(@torneo) && @torneo.estado == 'Iniciado' && @current_gamer != @torneo.gamer  %>
+    <article id="tabs-1">
+      <br/>   
       <%= render partial: "encuentros/encuentro_en_curso", object: @torneo, as: :torneo %>
-    <% end %>
-     <br/>
-  </article> 
+      <br/>
+    </article> 
+  <% end %>
   <article id="tabs-2" >
     <article id="tabs_comentario">
+      <b>Chat solo para los participantes</b>
+      <br/>
       <%= render partial: "reutilizable/chat" %>
     </article>   
   </article>
   <article id="tabs-3">
-    <%= render partial: "reutilizable/ficha_presentacion_torneo_detallado", object: @torneo, as: :torneo %>
-  </article>
-  <article id="tabs-4">
     <% if @current_gamer == @torneo.gamer %>
             <h1 ><u>Torneo en Curso</u></h1>
             <% if @torneo.errors.any? %>
@@ -93,19 +67,22 @@
               <% end %>
           <% end %>    
         <% if @torneo.estado == 'Iniciado' || @current_gamer == @torneo.gamer %>
+        <b>Para ver el detalle sobre este torneo, click <a href="/inscripciones?id_torneo=<%=@torneo.id%>" target='_blank' >aqu&iacute;</a></b>
           <article id="llaves"></article>
         <% else %>
-          <h1 ><u>En un momento el organizador genera las llaves..., por favor espera</u></h1>
+          <h1 ><u>En un momento el organizador generar&aacute; las llaves..., por favor espera</u></h1>
         <% end %> 
   </article>
+  <article id="tabs-4">
+    <center><object id="stream_1" width="730" height="550" bgcolor="#000000" data="https://www-cdn.jtvnw.net/swflibs/TwitchPlayer.swf?channel=entr0p1k" type="application/x-shockwave-flash" class=""><param value="true" name="allowFullScreen"><param value="always" name="allowScriptAccess"><param value="all" name="allowNetworking"><param value="https://www-cdn.jtvnw.net/swflibs/TwitchPlayer.swf" name="movie"><param id="stream_2" value="hostname=www.twitch.tv&amp;channel=entr0p1k&amp;auto_play=true&amp;start_volume=25" name="flashvars"></object></center>
+  </article>
 </article>
-          <aside>
-            <br/>
-            <article id="tabs_chat-2" >
-              <h3>Users</h3>
-                <ul class="nav nav-list" id="user-list">
-                  <li class="nav-header">Active</li>
-                </ul>
-            </article> 
-          </aside>
+  <aside>
+    <article id="tabs_chat-2" >
+      <h3>Participantes confirmados</h3>
+      <ul class="nav nav-list" id="user-list">
+        <li class="nav-header">Active</li>
+      </ul>
+    </article> 
+  </aside>
 </section>

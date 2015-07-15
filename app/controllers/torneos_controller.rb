@@ -31,6 +31,7 @@ class TorneosController < ApplicationController
     else
       @torneos = Torneo.obtener_torneos_disponibles_para_inscribir(@torneos_inscritos_y_confirmados.map(&:id))
     end
+    print "SIZE: " + @torneos_confirmados.size.to_s
   end
 
   # GET /torneos/1
@@ -81,9 +82,13 @@ class TorneosController < ApplicationController
   end
 
   def iniciar_torneo
+    #chats = Chat.last(Chat.count - 50) if Chat.count > 50
+    chat = Chat.limit(1).offset(49)
+    Chat.destroy_all("id < " + chat[0].id.to_s) if !chat[0].nil?
+    @chats = Chat.all.order(:id)
     @torneo = Torneo.find(params[:id_torneo])
     @torneo.generar_encuentros if current_gamer == @torneo.gamer
-    return if @torneo.gamer == current_gamer
+    return if @torneo.gamer == current_gamer || !current_gamer.esta_confirmado(@torneo)
 
     encuentro_actual = current_gamer.encuentro_actual(@torneo)
     return if encuentro_actual.nil?
@@ -105,7 +110,6 @@ class TorneosController < ApplicationController
         encuentro_actual.registrar_ganador
       end
     end
-
   end
 
   def comenzar
@@ -114,7 +118,7 @@ class TorneosController < ApplicationController
     respond_to do |format|
       if @torneo.save
         @torneo.generar_encuentros
-        format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }
+        format.html { redirect_to action: 'iniciar_torneo', id_torneo: @torneo.id }
       else
         @torneo.estado = 'Creado'
         format.html { render action: 'iniciar_torneo', notice: 'Error' }

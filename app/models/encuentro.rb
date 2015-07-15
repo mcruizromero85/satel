@@ -21,9 +21,10 @@ class Encuentro < ActiveRecord::Base
 
   def tiene_partidas_pendientes
     partidas_maximas = ronda.modo_ganar
+    partidas_maximas_ganadas = partidas_maximas.to_i - (partidas_maximas.to_i / 2 )
     puntaje_gamera = puntaje_de_inscrito(gamerinscritoa)
     puntaje_gamerb = puntaje_de_inscrito(gamerinscritob)
-    if (puntaje_gamera.to_i + puntaje_gamerb.to_i) < partidas_maximas.to_i
+    if (puntaje_gamera.to_i + puntaje_gamerb.to_i) < partidas_maximas.to_i && puntaje_gamera.to_i < partidas_maximas_ganadas && puntaje_gamerb.to_i < partidas_maximas_ganadas
       true
     else
       false
@@ -49,6 +50,7 @@ class Encuentro < ActiveRecord::Base
   def iniciar_partidas
     self.estado = 'Iniciado'
     partidas.destroy_all
+    print 'GG antes de crear partida'
     partidas << Partida.create(encuentro: self)
   end
 
