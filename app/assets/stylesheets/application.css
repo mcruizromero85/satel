@@ -862,7 +862,7 @@ width: 73%;
     width: 152%;
   }
   
-  #chat{
+#chat{
   width: 150.5%;
   margin-left: 0.5%;
   margin-top: 20px;
@@ -889,7 +889,76 @@ width: 73%;
     border-color: white;
   border-radius: 4px;
   }
+  
+  .Table_Encuentros_enCurso{
+    border: none;
+  }
+  
+  .Encuentro_encurso{
+    background-color: transparent;
+  }
 
+  .Gamer{
+    background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+    border-radius: 4px;
+  }
+
+  .Versus{
+    color: white;
+  }
+
+  .Detalle_gamer{
+      background-color: #f5f5f5;
+      border-radius: 4px;
+  }
+
+  #boton_listo{
+   color: #fff;
+  background-color: #2a6496;
+  
+  border-radius: 4px;
+  }
+
+  #boton_gane{
+    color: #fff;
+   background-color: #04B431;
+   border-radius: 4px;
+  }
+
+
+  #boton_perdi{
+     color: #fff;
+   background-color: #DF7401;
+   border-radius: 4px;
+  }
+
+  #label_listo_contrincante{
+  color: #FAAC58;
+  /* background-color: #FAAC58; */
+  padding: 2px 11px;
+  border: 1px solid transparent;
+  
+  font-weight: bold;
+  }
+
+  .Mensaje_Espera{
+    width: 38%;
+  }
+
+  #label_listo{
+      color: #40FF00;
+  font-weight: bold;
+  font-size: 26px;
+  }
+  .winner{
+    width: 47%;
+  }
+
+  #label_gane{
+    font-weight: bold;
+  font-size: 30px;
+  color: green;
+  }
 /*MEDIA QUERY*/
 @media only screen and (max-width : 1920px){
   
