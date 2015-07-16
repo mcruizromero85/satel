@@ -26,15 +26,14 @@ class Ronda < ActiveRecord::Base
       if contador_gamer.even?
         encuentro = Encuentro.new(gamerinscritoa: gamera, gamerinscritob: gamer, posicion_en_ronda: contador_posicion_en_ronda)
         encuentros << encuentro
-
-        unless encuentro.gamerinscritoa.gamer.nick['Free win'].nil?
+        if encuentro.gamerinscritoa.etiqueta_llave == 'Free Win'
           encuentro.gamerinscrito_ganador = encuentro.gamerinscritob
-          encuentro.registrar_ganador
+          encuentro.registrar_ganador(flag_victoria_directa = true)
         end
 
-        unless encuentro.gamerinscritob.gamer.nick['Free win'].nil?
+        if encuentro.gamerinscritob.etiqueta_llave == 'Free Win'
           encuentro.gamerinscrito_ganador = encuentro.gamerinscritoa
-          encuentro.registrar_ganador
+          encuentro.registrar_ganador(flag_victoria_directa = true)
         end
         contador_posicion_en_ronda += 1
       else

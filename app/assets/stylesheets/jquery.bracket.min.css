@@ -36,7 +36,7 @@ div.jQBracket .loserBracket{
 
 div.jQBracket .round{
 	position:relative;
-	width:100px;
+	width:150px;
 	margin-right:40px;
 	float:left}
 
@@ -49,10 +49,9 @@ div.jQBracket .editable{
 div.jQBracket .team{
 	position:relative;
 	z-index:1;
-	float:left;
-	
+	float:left;	
 	background-color:#eee;
-	width:110px;
+	width:150px;
 	cursor:default}
 
 div.jQBracket .team:first-child{
@@ -62,7 +61,7 @@ div.jQBracket .team input{
 font-size:12px;padding:0;width:inherit;border:0;margin:0}
 
 div.jQBracket .team div.label{
-	padding:3px;position:absolute;width:80px;height:22px;white-space:nowrap;overflow:hidden}
+	padding:3px;position:absolute;width:150px;height:22px;white-space:nowrap;overflow:hidden}
 
 div.jQBracket .team div.label[disabled]{cursor:default}
 

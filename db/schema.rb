@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20150704155959) do
     t.string   "icono"
   end
 
+  create_table "chats", force: true do |t|
+    t.string   "user_name"
+    t.string   "received"
+    t.string   "msg_body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "detalle_pago_inscripciones", force: true do |t|
     t.decimal "monto_inscripcion", default: 2.0, null: false
     t.integer "torneo_id",                       null: false
@@ -96,6 +104,9 @@ ActiveRecord::Schema.define(version: 20150704155959) do
     t.boolean  "flag_gano_gamerinscritoa"
     t.boolean  "flag_gano_gamerinscritob"
     t.string   "estado",                   default: "Pendiente"
+    t.string   "field1"
+    t.string   "field2"
+    t.string   "field3"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

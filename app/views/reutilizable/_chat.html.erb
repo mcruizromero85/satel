@@ -9,23 +9,25 @@
   <article id="tabs_chat-1">
     <div class="span9">
       <div id="chat" class="well" data-uri="<%= request.host %>:<%= request.port %>/websocket">
-        <% @chats.each do | chat | %>
-          <div class="message" >
-            <label class="label label-info">
-              [<%=chat.received%>] <%=chat.user_name%>
-            </label>&nbsp;
-            <%=chat.msg_body%>
+        <% if !@chats.nil? %>
+          <% @chats.each do | chat | %>
+            <div class="message" >
+              <label class="label label-info">
+                [<%=chat.received%>] <%=chat.user_name%>
+              </label>&nbsp;
+              <%=chat.msg_body%>
+            </div>
+          <% end %>
+        </div>
+        <% if @current_gamer.esta_confirmado(@torneo) %>
+          <div class="form-inline well">
+            <fieldset class="PostMessage">
+              <input type="hidden" class="input-medium" id="user_name" >
+              <input type="text" class="input-xlarge" id="message">
+              <button id="send" class="btn btn-primary">Send</button>
+            </fieldset>
           </div>
         <% end %>
-      </div>
-      <% if @current_gamer.esta_confirmado(@torneo) %>
-        <div class="form-inline well">
-          <fieldset class="PostMessage">
-            <input type="hidden" class="input-medium" id="user_name" >
-            <input type="text" class="input-xlarge" id="message">
-            <button id="send" class="btn btn-primary">Send</button>
-          </fieldset>
-        </div>
       <% end %>
     </div>
   </article> 

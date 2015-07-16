@@ -9,6 +9,7 @@
               skipConsolationRound: true
             })
           })
+
           </script> 
 <section class="Torneos">
   <script>
@@ -42,7 +43,7 @@
       <%= render partial: "reutilizable/chat" %>
     </article>   
   </article>
-  <article id="tabs-3">
+  <article id="tabs-3" >
     <% if @current_gamer == @torneo.gamer %>
             <h1 ><u>Torneo en Curso</u></h1>
             <% if @torneo.errors.any? %>

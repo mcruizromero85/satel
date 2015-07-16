@@ -5,7 +5,7 @@ class Encuentro < ActiveRecord::Base
   belongs_to :ronda, autosave: false
   belongs_to :encuentro_anterior_a, class_name: 'Encuentro'
   belongs_to :encuentro_anterior_b, class_name: 'Encuentro'
-  has_many :partidas, -> { order('id ASC') }, autosave: false
+  has_many :partidas, -> { order('id ASC') }, autosave: false, :dependent => :delete_all
 
   def es_la_final
     if ronda.ronda_siguiente.nil?
@@ -50,12 +50,25 @@ class Encuentro < ActiveRecord::Base
   def iniciar_partidas
     self.estado = 'Iniciado'
     partidas.destroy_all
-    print 'GG antes de crear partida'
     partidas << Partida.create(encuentro: self)
   end
 
-  def registrar_ganador
+  def registrar_ganador(flag_victoria_directa=false)
     armar_siguiente_encuentro
+    if flag_victoria_directa
+      partidas_maximas = ronda.modo_ganar
+      partidas_maximas_ganadas = partidas_maximas.to_i - (partidas_maximas.to_i / 2 )
+      partidas_maximas_ganadas.times do | numero |
+        if self.gamerinscritoa == self.gamerinscrito_ganador
+          partidas << Partida.create(encuentro: self, flag_gano_gamerinscritoa: true, estado: 'Finalizado') 
+        else
+          partidas << Partida.create(encuentro: self, flag_gano_gamerinscritob: true, estado: 'Finalizado')
+        end
+      end
+    end
+    self.flag_listo_gamera = true
+    self.flag_listo_gamera = true
+    self.estado='Pendiente'
     save
   end
 

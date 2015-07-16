@@ -1,5 +1,5 @@
 ﻿select * from inscripciones
-select * from gamers
+select * from gamers order by 1 
 select * from hots_formularios
 select * from schema_migrations
 delete from inscripciones where torneo_id=1
@@ -37,7 +37,7 @@ update torneos set estado='Creado'
 
  select * from gamers where id in (60,61,66,63)
  select * from torneos
-
+select * from partidas
 
  SELECT "inscripciones".* FROM "inscripciones" WHERE "inscripciones"."torneo_id" = 12 AND (tipo_inscripcion != 0 or tipo_inscripcion is null)  
  SELECT COUNT(*) FROM "torneos" INNER JOIN "inscripciones" ON "inscripciones"."torneo_id" = "torneos"."id" AND ((tipo_inscripcion != 0 or tipo_inscripcion is null)) WHERE (torneos.estado = 'Creado' and inscripciones.gamer_id = 60 and inscripciones.estado = 'Confirmado' )
@@ -45,3 +45,12 @@ update torneos set estado='Creado'
 drop table partidas
 select * from schema_migrations
 delete from schema_migrations where version='20150704155959'
+select * from inscripciones
+update inscripciones set estado='Confirmado' 
+=================================================
+Scripts ayuda en producción.
+select * from encuentros
+select e.id, ia.etiqueta_llave, ib.etiqueta_llave, ig.etiqueta_llave, e.encuentro_anterior_a_id, e.encuentro_anterior_b_id from 
+encuentros e, inscripciones ia, inscripciones ib, inscripciones ig 
+where e.gamerinscritoa_id=ia.id and e.gamerinscritob_id=ib.id
+and  e.gamerinscrito_ganador_id=ig.id

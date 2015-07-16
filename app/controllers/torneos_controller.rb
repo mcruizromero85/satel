@@ -2,7 +2,7 @@ class TorneosController < ApplicationController
   require_relative '../../app/helpers/torneos_helper'
 
   before_action :set_torneo, only: [:preparar, :show, :edit, :update, :destroy]
-  before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :mis_torneos]
+  before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :mis_torneos, :iniciar_torneo]
 
   # GET /torneos GET /torneos.json
   def index
@@ -82,7 +82,6 @@ class TorneosController < ApplicationController
   end
 
   def iniciar_torneo
-    #chats = Chat.last(Chat.count - 50) if Chat.count > 50
     chat = Chat.limit(1).offset(49)
     Chat.destroy_all("id < " + chat[0].id.to_s) if !chat[0].nil?
     @chats = Chat.all.order(:id)
