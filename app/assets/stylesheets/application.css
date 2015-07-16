@@ -868,7 +868,7 @@ width: 73%;
   margin-top: 20px;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
-  height: 491px;  
+  height: 472px;  
   overflow-y: scroll;
 }
 
@@ -959,6 +959,12 @@ width: 73%;
   font-size: 30px;
   color: green;
   }
+
+  #stream_1{
+  width: 153.4%;
+  margin-left: -4.6%;
+  margin-top: -3%;
+  }
 /*MEDIA QUERY*/
 @media only screen and (max-width : 1920px){
   
@@ -1004,13 +1010,19 @@ width: 73%;
 }
 @media only screen and (max-width : 1204px){
 
+#stream_1{
+  width: 184.4%;
+  margin-left: -7.6%;
+}
 
 .Torneos article {
   width: 54%;
 }
 
 .Torneos aside {
-  width: 43%;
+  width: 96%;
+  margin-left: 1%;
+  margin-top: 1%;
  } 
 
 #tabs-3 div {
@@ -1028,9 +1040,28 @@ width: 73%;
     width: 73%;
   }
 
+  #chat{
+    width: 179.5%;
+    margin-top: -9px;
+  }
+  .form-inline {
+   width: 181%;
+ }
+ #message {
+  width: 82%;
+ }
+
 }
 
-@media only screen and (max-width : 1000px){
+@media only screen and (max-width : 1030px){
+
+
+
+#stream_1{
+    width: 184.4%;
+  margin-left: 0.4%;
+  margin-top: 1%;
+}
 
 .Team_nick {
   width: 68%;
@@ -1059,9 +1090,7 @@ width: 73%;
     width: 100%;
   }
 
-  aside {
-    display: none;
-  }
+  
 
   #tabs-3 table thead{
     font-size: 10px;
@@ -1095,8 +1124,21 @@ width: 73%;
 
 @media only screen and (max-width : 890px) {
  
- aside {
-  display: none;
+
+
+ #stream_1{
+    width: 104.4%;
+  }
+
+  #chat{
+  width: 104.5%;
+  margin-top: -5px;
+  margin-left: -2%;
+  }
+
+ .form-inline {
+  width: 105.4%;
+  margin-left: -16px;
  }
 
  #ContenidoTorneo article {
@@ -1282,9 +1324,7 @@ width: 73%;
 /*2. Para moviles, hereda del item 1*/
 @media only screen and (max-width : 580px){
   
-  aside{
-   display: none;
-  }
+ 
 
 .Team_encabezado label{
   font-size: 9px;
@@ -1395,6 +1435,27 @@ width: 73%;
   font-size: 12px;
  }
 
+ #chat{
+  
+  width: 103.5%;
+  margin-left: -1.5%;
+  margin-top: -19px;
+  height: 269px;
+ } 
+
+ #message {
+  width: 73%;
+ }
+
+ .form-inline {
+  width: 105%;
+  margin-left: -2%;
+ }
+ .message{
+  font-size: 10px;
+ }
+
+
  }
 
  
@@ -1450,6 +1511,17 @@ width: 73%;
   width: 28%;
   font-size: 15px;
  }
+
+ 
+  #stream_1{
+  width: 105%;
+  margin-left: 1%;
+  border-radius: 6px;
+  }
+
+   #message {
+  width: 64%;
+  }
 
  }
 
