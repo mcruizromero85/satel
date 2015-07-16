@@ -11,11 +11,12 @@
       <div id="chat" class="well" data-uri="<%= request.host %>:<%= request.port %>/websocket">
         <% if !@chats.nil? %>
           <% @chats.each do | chat | %>
+            <% next if chat.msg_body == '/reiniciar' %>
             <div class="message" >
               <label class="label label-info">
                 [<%=chat.received%>] <%=chat.user_name%>
               </label>&nbsp;
-              <%=chat.msg_body%>
+              <%=raw chat.msg_body%>
             </div>
           <% end %>
         </div>

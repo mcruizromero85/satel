@@ -7,6 +7,10 @@ class Encuentro < ActiveRecord::Base
   belongs_to :encuentro_anterior_b, class_name: 'Encuentro'
   has_many :partidas, -> { order('id ASC') }, autosave: false, :dependent => :delete_all
 
+  def tiene_contrincante_freewin
+    encuentro.gamerinscritoa.etiqueta_llave == 'Free Win' || encuentro.gamerinscritob.etiqueta_llave == 'Free Win'
+  end
+
   def es_la_final
     if ronda.ronda_siguiente.nil?
       true

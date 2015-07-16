@@ -6,7 +6,7 @@
   end
   
   def system_msg(ev, msg)
-    Chat.create(user_name: 'system', received: Time.now.to_s(:short), msg_body: msg) if msg.index('connected') == 0
+    Chat.create(user_name: 'system', received: Time.now.to_s(:short), msg_body: msg.dup) if msg.index('connected') == 0 
     broadcast_message ev, { 
       user_name: 'system', 
       received: Time.now.to_s(:short), 
@@ -68,7 +68,6 @@
       flag_ambos_listos = false
     end
     encuentro.save
-
     timeout = encuentro.updated_at + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS
     broadcast_message :actualizar_evento_encuentro, { id_inscrito_listo: message[:id_inscripcion], id_encuentro: encuentro.id, timeout_listo: timeout.to_i, flag_ambos_listos: flag_ambos_listos }
   end

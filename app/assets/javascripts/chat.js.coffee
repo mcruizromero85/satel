@@ -112,8 +112,11 @@ class Chat.Controller
     @dispatcher.trigger 'enviar_evento_encuentro', { id_encuentro: id_encuentro, id_inscripcion: id_inscripcion, id_inscripcion_contrincante: id_inscripcion_contrincante }
 
   actualizar_evento_encuentro: (response) =>  
+    console.log('Entro1')
     if $('#id_encuentro_actual').val() == (response.id_encuentro + '')
+      console.log('Entro2')
       if response.flag_ambos_listos == false
+        console.log('Entro3')
         if $('#id_inscripcion').val() == (response.id_inscrito_listo + '')
           $('#boton_listo').hide()
           $('#label_listo').show()
@@ -123,6 +126,7 @@ class Chat.Controller
           $('#mensaje_listo').html 'Tu contrincante ya está listo, pon listo tu también sino pierdes por W.O, te queda: '
         generarContadorPorEvento('encuentro_listo', new Date(response.timeout_listo * 1000))
       else
+        console.log('Entro4')
         $('#mensaje_encuentro_iniciado').val 'Encuentro iniciado'
         $('#label_listo').show()
         $('#boton_listo').hide()

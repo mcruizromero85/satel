@@ -9,13 +9,11 @@ class TorneosController < ApplicationController
     @torneos_inscritos_y_confirmados = []
     if !current_gamer.nil?
       @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)
-      @torneos_inscritos_y_confirmados = @torneos_iniciados if @torneos_iniciados.size > 0
+      @torneos_inscritos_y_confirmados.concat(@torneos_iniciados) if @torneos_iniciados.size > 0
       @torneos_confirmados = Torneo.obtener_torneos_ya_confirmados(current_gamer)
-
       if @torneos_confirmados.size > 0
         @torneos_inscritos_y_confirmados.concat(@torneos_confirmados)
       end
-
       @torneos_inscritos = Torneo.obtener_torneos_ya_inscrito(current_gamer)
       @torneos_inscrito_con_pago = Torneo.obtener_torneos_ya_inscrito(current_gamer,1)
       @torneos_inscritos_y_confirmados.concat(@torneos_inscritos)
@@ -31,7 +29,6 @@ class TorneosController < ApplicationController
     else
       @torneos = Torneo.obtener_torneos_disponibles_para_inscribir(@torneos_inscritos_y_confirmados.map(&:id))
     end
-    print "SIZE: " + @torneos_confirmados.size.to_s
   end
 
   # GET /torneos/1
@@ -95,10 +92,10 @@ class TorneosController < ApplicationController
     if encuentro_actual.estado == 'Pendiente'
       if encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && current_gamer.esta_listo_en_encuentro_actual(@torneo) && !current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
         encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
-        encuentro_actual.registrar_ganador
+        encuentro_actual.registrar_ganador(flag_victoria_directa = true)
       elsif encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && !current_gamer.esta_listo_en_encuentro_actual(@torneo) && current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
         encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.contrincante_inscrito_actual(@torneo).id)
-        encuentro_actual.registrar_ganador
+        encuentro_actual.registrar_ganador(flag_victoria_directa = true)
       end
     elsif encuentro_actual.estado == 'Iniciado'
       if encuentro_actual.partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS <= Time.new.to_i && current_gamer.reporto_ganar_partida_actual(@torneo) && !current_gamer.reporto_ganar_partida_actual_el_contrincante(@torneo)
