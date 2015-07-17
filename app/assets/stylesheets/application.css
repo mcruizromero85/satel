@@ -792,6 +792,8 @@ width: 73%;
    }
    #llaves{
     background-color: white;
+    overflow-x: scroll;
+    width: 100%;
    }
 
    .Table_Detalle_Team thead tr th{
@@ -962,7 +964,7 @@ width: 73%;
 
   #stream_1{
   width: 153.4%;
-  margin-left: -4.6%;
+  margin-left: -2.6%;
   margin-top: -2%;
   }
 /*MEDIA QUERY*/

@@ -50,7 +50,6 @@ class InscripcionesController < ApplicationController
   def confirmar
     @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
-    @inscripcion.estado = 'Confirmado'
     
     if  @torneo.flag_pago_inscripciones == 1
       confirmar_y_cerrar_pago
@@ -75,9 +74,6 @@ class InscripcionesController < ApplicationController
   private
 
   def solo_confirmar
-    @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
-    @inscripcion.estado = 'Confirmado'
-
     respond_to do |format|
       if @inscripcion.confirmar
         format.html { redirect_to action: 'iniciar_torneo', controller: 'torneos' , id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }

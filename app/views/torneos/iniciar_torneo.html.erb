@@ -1,16 +1,19 @@
-          <script type="text/javascript">
-            var minimalData = {              
-              teams : <%=raw @torneo.arreglo_de_nombres_para_llaves %>,
-              results: <%=raw TorneosHelper.obtener_array_para_resultado_llaves(@torneo) %>
-            }
-          $(function() {
-            $('#llaves').bracket({
-              init: minimalData,
-              skipConsolationRound: true
+<% if @torneo.estado == 'Iniciado' || @current_gamer == @torneo.gamer %>
+  <script type="text/javascript">
+              var minimalData = {              
+                teams : <%=raw @torneo.arreglo_de_nombres_para_llaves %>,
+                results: <%=raw TorneosHelper.obtener_array_para_resultado_llaves(@torneo) %>
+              }
+            $(function() {
+              $('#llaves').bracket({
+                init: minimalData,
+                skipConsolationRound: true
+              })
             })
-          })
 
-          </script> 
+  </script> 
+<% end %>          
+
 <section class="Torneos">
   <script>
     $(function() {
@@ -68,7 +71,7 @@
               <% end %>
           <% end %>    
         <% if @torneo.estado == 'Iniciado' || @current_gamer == @torneo.gamer %>
-        <b>Para ver el detalle sobre este torneo, click <a href="/inscripciones?id_torneo=<%=@torneo.id%>" target='_blank' >aqu&iacute;</a></b>
+        <b>Para ver el detalle sobre este torneo, click <a href="/inscripciones?id_torneo=<%=@torneo.id%>" target='_blank' >aqu&iacute;</a></b>          
           <article id="llaves"></article>
         <% else %>
           <h1 ><u>En un momento el organizador generar&aacute; las llaves..., por favor espera</u></h1>
