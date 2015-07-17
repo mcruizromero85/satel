@@ -1,0 +1,43 @@
+ <input type="hidden" id="id_inscripcion_contrincante" value="<%=@current_gamer.contrincante_inscrito_actual(torneo).id%>" />
+<table class="Table_Encuentros_enCurso">
+	<tbody class="Encuentro_encurso">
+	<tr>
+		<td class="Gamer"><h1><%=@current_gamer.etiqueta_para_chat(torneo)%></h1></td>
+		<td class="Versus">Versus</td>
+		<td class="Gamer"><h1><%=@current_gamer.contrincante_inscrito_actual(torneo).etiqueta_chat%></h1></td>
+	</tr>
+	<tr>		
+		<% if @current_gamer.esta_listo_en_encuentro_actual(torneo) %>
+			<td class="Detalle_gamer">
+				<button id="boton_listo" style="display: none;">Estoy Listo!!!</button>
+				<span id="label_listo" style="">Listo</span>
+			</td>
+
+			<td class="Mensaje_Espera" ><span id="mensaje_listo">A la espera que tu contrincante este listo, sino es W.O a tu favor, le queda: </span><b class="contador" id='countdown_encuentro_listo'></b></td>
+
+			<td class="Detalle_gamer" ><span id="label_listo_contrincante">Sin confirmar</span></td>
+			<script type="text/javascript">
+				generarContadorPorEvento('encuentro_listo', new Date(<%=@current_gamer.encuentro_actual(@torneo).updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS %> * 1000))
+			</script>
+		<% elsif @current_gamer.esta_listo_contrincante_en_encuentro_actual(torneo) %>
+			<td>
+				<button id="boton_listo">Estoy Listo!!!</button>
+				<span id="label_listo" style="display:none">Listo</span>
+			</td>
+			<td class="Mensaje_Espera"><span id="mensaje_listo">Tu contrincante ya está listo, pon listo tu también sino pierdes por W.O, te queda: </span><b class="contador" id='countdown_encuentro_listo'></b></td>
+			<td><span id="label_listo_contrincante">Listo</span></td>
+			<script type="text/javascript">
+				generarContadorPorEvento('encuentro_listo', new Date(<%=@current_gamer.encuentro_actual(@torneo).updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS %> * 1000))
+			</script>
+		<% else %>
+			<td class="Detalle_gamer">
+				<button id="boton_listo">Estoy Listo!!!</button>
+				<span id="label_listo" style="display:none">Listo</span>
+			</td>
+			<td class="Mensaje_Espera" ><span id="mensaje_listo"></span> <b class="contador" id='countdown_encuentro_listo'></b></td>
+			<td class="Detalle_gamer"><span id="label_listo_contrincante">Sin confirmar</span></td>
+		<% end %>
+	</tr>
+	<tr></tr>
+</tbody>
+</table>

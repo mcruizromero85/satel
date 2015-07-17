@@ -2,20 +2,18 @@ class TorneosController < ApplicationController
   require_relative '../../app/helpers/torneos_helper'
 
   before_action :set_torneo, only: [:preparar, :show, :edit, :update, :destroy]
-  before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :mis_torneos]
+  before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :mis_torneos, :iniciar_torneo]
 
   # GET /torneos GET /torneos.json
   def index
     @torneos_inscritos_y_confirmados = []
     if !current_gamer.nil?
       @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)
-      @torneos_inscritos_y_confirmados = @torneos_iniciados if @torneos_iniciados.size > 0
+      @torneos_inscritos_y_confirmados.concat(@torneos_iniciados) if @torneos_iniciados.size > 0
       @torneos_confirmados = Torneo.obtener_torneos_ya_confirmados(current_gamer)
-
       if @torneos_confirmados.size > 0
         @torneos_inscritos_y_confirmados.concat(@torneos_confirmados)
       end
-
       @torneos_inscritos = Torneo.obtener_torneos_ya_inscrito(current_gamer)
       @torneos_inscrito_con_pago = Torneo.obtener_torneos_ya_inscrito(current_gamer,1)
       @torneos_inscritos_y_confirmados.concat(@torneos_inscritos)
@@ -81,8 +79,33 @@ class TorneosController < ApplicationController
   end
 
   def iniciar_torneo
+    chat = Chat.limit(1).offset(49)
+    Chat.destroy_all("id < " + chat[0].id.to_s) if !chat[0].nil?
+    @chats = Chat.all.order(:id)
     @torneo = Torneo.find(params[:id_torneo])
     @torneo.generar_encuentros if current_gamer == @torneo.gamer
+    return if @torneo.gamer == current_gamer || !current_gamer.esta_confirmado(@torneo)
+
+    encuentro_actual = current_gamer.encuentro_actual(@torneo)
+    return if encuentro_actual.nil?
+
+    if encuentro_actual.estado == 'Pendiente'
+      if encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && current_gamer.esta_listo_en_encuentro_actual(@torneo) && !current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
+        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
+        encuentro_actual.registrar_ganador(flag_victoria_directa = true)
+      elsif encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && !current_gamer.esta_listo_en_encuentro_actual(@torneo) && current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
+        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.contrincante_inscrito_actual(@torneo).id)
+        encuentro_actual.registrar_ganador(flag_victoria_directa = true)
+      end
+    elsif encuentro_actual.estado == 'Iniciado'
+      if encuentro_actual.partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS <= Time.new.to_i && current_gamer.reporto_ganar_partida_actual(@torneo) && !current_gamer.reporto_ganar_partida_actual_el_contrincante(@torneo)
+        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
+        encuentro_actual.registrar_ganador
+      elsif encuentro_actual.partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS <= Time.new.to_i && !current_gamer.reporto_ganar_partida_actual(@torneo) && current_gamer.reporto_ganar_partida_actual_el_contrincante(@torneo)
+        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.contrincante_inscrito_actual(@torneo).id)
+        encuentro_actual.registrar_ganador
+      end
+    end
   end
 
   def comenzar
@@ -91,7 +114,7 @@ class TorneosController < ApplicationController
     respond_to do |format|
       if @torneo.save
         @torneo.generar_encuentros
-        format.html { render action: 'iniciar_torneo', notice: 'Torneo was successfully updated.' }
+        format.html { redirect_to action: 'iniciar_torneo', id_torneo: @torneo.id }
       else
         @torneo.estado = 'Creado'
         format.html { render action: 'iniciar_torneo', notice: 'Error' }
@@ -129,13 +152,16 @@ class TorneosController < ApplicationController
     end
   end
 
+  def chat
+    
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_torneo
     @torneo = Torneo.find(params[:id])
   end
-
 
 
   # Never trust parameters from the scary internet, only allow the white list through.

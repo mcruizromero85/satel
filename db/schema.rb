@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607065343) do
+ActiveRecord::Schema.define(version: 20150704155959) do
 
   create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
@@ -23,9 +23,16 @@ ActiveRecord::Schema.define(version: 20150607065343) do
     t.string   "icono"
   end
 
-  create_table "detalle_pago_inscripciones", id: false, force: true do |t|
+  create_table "chats", force: true do |t|
+    t.string   "user_name"
+    t.string   "received"
+    t.string   "msg_body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "detalle_pago_inscripciones", force: true do |t|
     t.decimal "monto_inscripcion", default: 2.0, null: false
-    t.integer "id",                              null: false
     t.integer "torneo_id",                       null: false
     t.decimal "monto_auspiciado"
   end
@@ -41,6 +48,9 @@ ActiveRecord::Schema.define(version: 20150607065343) do
     t.string   "encuentro_anterior_b_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "flag_listo_gamera",        default: false
+    t.boolean  "flag_listo_gamerb",        default: false
+    t.string   "estado",                   default: "Pendiente"
   end
 
   create_table "gamers", force: true do |t|
@@ -76,6 +86,8 @@ ActiveRecord::Schema.define(version: 20150607065343) do
     t.datetime "updated_at"
     t.string   "nick"
     t.string   "id_transaccion_pago"
+    t.string   "etiqueta_llave"
+    t.string   "etiqueta_chat"
   end
 
   create_table "juegos", force: true do |t|
@@ -83,6 +95,18 @@ ActiveRecord::Schema.define(version: 20150607065343) do
     t.string   "descripcion"
     t.string   "nombre_imagen"
     t.integer  "tipo_juego"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "partidas", force: true do |t|
+    t.integer  "encuentro_id"
+    t.boolean  "flag_gano_gamerinscritoa"
+    t.boolean  "flag_gano_gamerinscritob"
+    t.string   "estado",                   default: "Pendiente"
+    t.string   "field1"
+    t.string   "field2"
+    t.string   "field3"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -127,6 +151,8 @@ ActiveRecord::Schema.define(version: 20150607065343) do
 
   add_foreign_key "inscripciones", "gamers", name: "inscripciones_gamer_id_fk"
   add_foreign_key "inscripciones", "torneos", name: "inscripciones_torneo_id_fk"
+
+  add_foreign_key "partidas", "encuentros", name: "partidas_encuentro_id_fk"
 
   add_foreign_key "rondas", "torneos", name: "rondas_torneo_id_fk"
 

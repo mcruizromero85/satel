@@ -249,7 +249,7 @@ font-size: 90% !important;
 .Torneos article{
   float: left;
   /*height: 500px; -->Se retira para hacer dinamica la pagina*/
-  background-color: #22394c;
+  
   margin-right: 0.5%;
   width: 65%;
   border-radius: 4px;
@@ -432,9 +432,9 @@ footer p{
 }
 
 #tabs_comentario{
-  background-color:#f2f2f2;
-  width: 95%;
-  margin-top: -18px;
+  background-color:#FFFFFF;
+  width: 100%;
+  margin-top: 1px;
   margin-left: 0;
   
 }
@@ -450,18 +450,8 @@ footer p{
   background-color: #f2f2f2;
 }
 
-#tabs-3{
-  color: white;
-  width: 90%;
-  padding: 0;
-  margin-left: 0%;
-  margin-top: 0%;
-}
-
 #tabs-3 img{
-
 width: 73%;
-
 }
 
 
@@ -802,6 +792,8 @@ width: 73%;
    }
    #llaves{
     background-color: white;
+    overflow-x: scroll;
+    width: 100%;
    }
 
    .Table_Detalle_Team thead tr th{
@@ -827,7 +819,154 @@ width: 73%;
     color: #686868;
   }
 
+
+  #tabs_chat{
+   margin-top: -5%;
+   width: 100%;
+  }
+
+  #tabs_chat-2{
   
+  margin-left: 1%;
+  width: 97%;
+    border-radius: 4px;
+  }
+
+  #tabs_chat-2 h3{
+   background-color: #2a6496;
+   color: whitesmoke;  
+   margin-top: 5px;
+   margin-bottom: 0.5%;
+   padding: 2%;
+   border-radius: 4px;
+   text-align: center;
+  }
+
+
+  
+  #user-list{
+    list-style: outside none none;
+    padding-left: 0;
+  } 
+
+  #user-list li {
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 0;
+      margin-top: 0;
+      padding-bottom: 2%;
+      padding-left: 3%;
+      padding-top: 2%;
+  }
+
+  .form-inline{
+    width: 152%;
+  }
+  
+#chat{
+  width: 150.5%;
+  margin-left: 0.5%;
+  margin-top: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  height: 472px;  
+  overflow-y: scroll;
+}
+
+
+  #send{
+  color: #fff;
+  background-color: #2a6496;
+  border-color: #357ebd;
+  padding: 2px 11px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  }
+  #message{
+    width: 89%;
+    border-radius: 4px;
+  }
+  .PostMessage{
+    border-color: white;
+  border-radius: 4px;
+  }
+  
+  .Table_Encuentros_enCurso{
+    border: none;
+  }
+  
+  .Encuentro_encurso{
+    background-color: transparent;
+  }
+
+  .Gamer{
+    background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+    border-radius: 4px;
+  }
+
+  .Versus{
+    color: white;
+  }
+
+  .Detalle_gamer{
+      background-color: #f5f5f5;
+      border-radius: 4px;
+  }
+
+  #boton_listo{
+   color: #fff;
+  background-color: #2a6496;
+  
+  border-radius: 4px;
+  }
+
+  #boton_gane{
+    color: #fff;
+   background-color: #04B431;
+   border-radius: 4px;
+  }
+
+
+  #boton_perdi{
+     color: #fff;
+   background-color: #DF7401;
+   border-radius: 4px;
+  }
+
+  #label_listo_contrincante{
+  color: #FAAC58;
+  /* background-color: #FAAC58; */
+  padding: 2px 11px;
+  border: 1px solid transparent;
+  
+  font-weight: bold;
+  }
+
+  .Mensaje_Espera{
+    width: 38%;
+  }
+
+  #label_listo{
+      color: #40FF00;
+  font-weight: bold;
+  font-size: 26px;
+  }
+  .winner{
+    width: 47%;
+  }
+
+  #label_gane{
+    font-weight: bold;
+  font-size: 30px;
+  color: green;
+  }
+
+  #stream_1{
+  width: 153.4%;
+  margin-left: -2.6%;
+  margin-top: -2%;
+  }
 /*MEDIA QUERY*/
 @media only screen and (max-width : 1920px){
   
@@ -873,18 +1012,23 @@ width: 73%;
 }
 @media only screen and (max-width : 1204px){
 
+#stream_1{
+  width: 158.4%;
+  margin-left: -5.6%;
+  margin-top: -3%;
+}
+
 
 .Torneos article {
-  width: 54%;
+  width: 63%;
 }
 
 .Torneos aside {
-  width: 43%;
+  width: 34%;
+  margin-left: 1%;
+  margin-top: 0%;
  } 
 
-#tabs-3 div {
-  display: none;
-}
 
 .Detalle_torneo {
   margin-left: 15%;
@@ -897,9 +1041,27 @@ width: 73%;
     width: 73%;
   }
 
+  #chat{
+    width: 179.5%;
+    margin-top: -9px;
+  }
+  .form-inline {
+   width: 181%;
+ }
+ #message {
+  width: 82%;
+ }
+
 }
 
-@media only screen and (max-width : 1000px){
+@media only screen and (max-width : 1030px){
+
+#stream_1{
+  width: 157.4%;
+  margin-left: 1.4%;
+  margin-top: 1%;
+}
+
 
 .Team_nick {
   width: 68%;
@@ -923,16 +1085,12 @@ width: 73%;
     width: 100%;
   }
 
- 
-
   #tabs-3 table{
     margin-left: 0;
     width: 100%;
   }
 
-  aside {
-    display: none;
-  }
+  
 
   #tabs-3 table thead{
     font-size: 10px;
@@ -966,8 +1124,27 @@ width: 73%;
 
 @media only screen and (max-width : 890px) {
  
- aside {
-  display: none;
+
+
+ #stream_1{
+    width: 104.4%;
+  }
+
+  .Torneos aside {
+  width: 96%;
+  margin-left: 1%;
+  margin-top: 1%;
+}
+
+  #chat{
+  width: 104.5%;
+  margin-top: -5px;
+  margin-left: -2%;
+  }
+
+ .form-inline {
+  width: 105.4%;
+  margin-left: -16px;
  }
 
  #ContenidoTorneo article {
@@ -1153,9 +1330,7 @@ width: 73%;
 /*2. Para moviles, hereda del item 1*/
 @media only screen and (max-width : 580px){
   
-  aside{
-   display: none;
-  }
+ 
 
 .Team_encabezado label{
   font-size: 9px;
@@ -1266,11 +1441,42 @@ width: 73%;
   font-size: 12px;
  }
 
+ #chat{
+  
+  width: 103.5%;
+  margin-left: -1.5%;
+  margin-top: -19px;
+  height: 269px;
+ } 
+
+ #message {
+  width: 73%;
+ }
+
+ .form-inline {
+  width: 105%;
+  margin-left: -2%;
+ }
+ .message{
+  font-size: 10px;
+ }
+
+ #tabs-3{
+    margin-left: 1%;
+  }
+ 
+ #llaves {
+ 
+  width: 98%;
+  margin-left: 0%;
+}
+ 
+
  }
 
  
  
- @media only screen and (max-width : 370px){
+ @media only screen and (max-width : 400px){
  
  .Enlaces {
     margin-left: 13%;
@@ -1321,6 +1527,26 @@ width: 73%;
   width: 28%;
   font-size: 15px;
  }
+
+ 
+  #stream_1{
+  width: 105%;
+  margin-left: 1%;
+  border-radius: 6px;
+  }
+
+   #message {
+  width: 58%;
+  }
+
+  #llaves {
+ margin-top: 1%;
+  width: 97%;
+  margin-left: -14%;
+  background-color: transparent;
+  margin-top: 9%;
+  margin-bottom: 9%;
+}
 
  }
 

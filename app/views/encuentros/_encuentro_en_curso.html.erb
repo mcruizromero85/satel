@@ -1,0 +1,20 @@
+<script type="text/javascript">
+	function generarContadorPorEvento(evento,fecha_limite){
+	  $('#countdown_'+evento).countdown({until: fecha_limite, format: 'dhmS', expiryUrl: '/torneos/iniciar/<%=@torneo.id%>?reload=1' }); 
+	}
+</script>
+<% if @current_gamer.gane_el_torneo(@torneo) %>
+	<h1>Felicidades ganaste el torneo :)</h1>
+<% elsif @current_gamer.encuentro_actual(@torneo).nil? %>
+	<h1>Quedaste eliminado de torneo :(, vuelve a intentalo la pr&oacute;xima vez :)</h1>	
+<% elsif !@current_gamer.encuentro_actual(@torneo).nil? %>
+	<input type="hidden" id="id_encuentro_actual" value="<%=@current_gamer.encuentro_actual(@torneo).id%>" />
+	<input type="hidden" id="id_inscripcion" value="<%=@current_gamer.inscripcion_en_torneo(@torneo).id%>" />
+	<% if @current_gamer.encuentro_actual(@torneo).estado == 'Pendiente' && @current_gamer.contrincante_inscrito_actual(@torneo).nil? %>
+		<%= render partial: "encuentros/encuentro_en_curso_estado_esperando_contrincante", object: @torneo, as: :torneo %>
+	<% elsif @current_gamer.encuentro_actual(@torneo).estado == 'Pendiente' %>
+		<%= render partial: "encuentros/encuentro_en_curso_estado_listo", object: @torneo, as: :torneo %>
+	<% else %>
+		<%= render partial: "encuentros/encuentro_en_curso_estado_iniciado", object: @torneo, as: :torneo %>	
+	<% end%>
+<% end %>

@@ -5,8 +5,7 @@ class AuthenticationsController < ApplicationController
   def create
     auth = request.env['omniauth.auth']
     
-    @auth = Authentication.where('uid = ? AND provider = ?', auth['uid'], auth['provider']).first        
-    print auth
+    @auth = Authentication.where('uid = ? AND provider = ?', auth['uid'], auth['provider']).first
     facebook_gamer = auth['info']
     unless @auth      
       gamer = Gamer.new(correo: facebook_gamer.email, apellidos: facebook_gamer.last_name)
@@ -39,5 +38,10 @@ class AuthenticationsController < ApplicationController
     @current_gamer = nil
     session[:gamer_id] = nil
     redirect_to action: 'index', controller: 'torneos'
+  end
+
+  def simular_sesion
+     self.current_gamer = Gamer.find(params[:gamer_id])
+     redirect_to action: 'index', controller: 'torneos'
   end
 end

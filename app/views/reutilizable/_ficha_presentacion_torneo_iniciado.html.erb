@@ -1,0 +1,41 @@
+<%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
+      <Section class="Lista_Inscritos" >
+      <h1>Lista de inscritos</h1>
+      <script>
+        $(function() {
+          $( "#accordion" ).accordion({
+            collapsible: true     
+          });        
+        });
+        $( ".selector" ).accordion( "option", "header", "article .Lista_Inscritos_Item" );
+        $( ".selector" ).accordion( "option", "active", false );
+      </script>
+
+    <article class="Team_Inscritos">
+      <article id="accordion" class="lista_Inscritos_contenido">
+         <% @torneo.inscripciones.each do |inscripcion| %>       
+             <article class = "Lista_Inscritos_Item">
+               <article class="Team_nick">
+                <p class="Lista_Inscritos_item_nick"><b><%= inscripcion.nick %></b></p>
+               </article>
+               <article class="Team_estado">
+                  <p class="Lista_Inscritos_item_nick">
+                    <b><%= inscripcion.estado %></b>
+                    </p>              
+                </article>
+               <article class="Team_check">
+                <% if inscripcion.estado == "Confirmado" %>
+                  <img class="confirmacion_check" src="<%= image_path('check_confirmado.png')%>" height='35px' width='35px' > 
+                <% end %>  
+                </article>
+             </article>
+             <article class="miembros_equipo2">
+               <article class="miembros_equipo">
+                 <%= render partial: "hots_formularios/show", object: inscripcion, as: :inscripcion %>
+               </article>
+            </article>
+          <% end %>
+        <br/>
+      </article>
+    </article>
+  </section>

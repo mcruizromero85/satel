@@ -49,6 +49,6 @@ class DetallePagoInscripcion < ActiveRecord::Base
   end
 
   def total_price_pool    
-    (Inscripcion.total_confirmados_por_torneo(self.torneo) * monto_inscripcion) + self.monto_auspiciado
+    (Inscripcion.inscripciones_permitidas_y_confirmadas_en_el_torneo(self.torneo).size * monto_inscripcion) + self.monto_auspiciado
   end
 end

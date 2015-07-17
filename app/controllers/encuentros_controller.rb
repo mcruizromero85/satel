@@ -29,10 +29,11 @@ class EncuentrosController < ApplicationController
   # PATCH/PUT /encuentros/1
   # PATCH/PUT /encuentros/1.json
   def update
+    return if @encuentro.ronda.torneo.gamer != @current_gamer
     @encuentro.gamerinscrito_ganador = Inscripcion.new(id: params['encuentro_inscrito_ganador_id'])
 
     respond_to do |format|
-      if @encuentro.registrar_ganador
+      if @encuentro.registrar_ganador(flag_victoria_directa = true)
         format.html { redirect_to action: 'iniciar_torneo', controller: 'torneos', id_torneo: @encuentro.ronda.torneo.id }
         format.json { head :no_content }
       else

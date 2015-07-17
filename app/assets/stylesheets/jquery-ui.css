@@ -1379,23 +1379,51 @@ body .ui-tooltip {
     padding: 8px;
 }
 
+@media screen and (max-width: 1024px){
 
+.ui-helper-reset {
+      font-size: 92%;
+ }
+
+
+
+
+.ui-tabs .ui-tabs-panel{
+    margin-left: -2px;
+    padding: 0 0 0 0;
+}
+
+}
+
+@media only screen and (max-width : 580px){
+
+    .ui-helper-reset {
+    font-size: 71%;
+     }
+
+   
+
+}
 
 @media screen and (max-width: 350px){
 
 .ui-helper-reset {
-    font-size: 76%;
+    font-size: 60%;
 }
 
 .ui-widget-content a {
-  color: white;
+  color: blue;
+    
+}
+.ui-tabs .ui-tabs-nav {
+      padding: 1px 1px 1px 1px;
 }
 
 
 .ui-tabs .ui-tabs-panel {
     padding: 0 0 0 0;
     }
-}
+
 
  #tabs-1 {
   background: white;
@@ -1407,14 +1435,14 @@ body .ui-tooltip {
  #llaves {
     background: white;
     margin-bottom: 1%;
+      margin-left: 11%;
+  width: 89%;
  }
 
-@media screen and (max-width: 1024px){
-
-.ui-tabs .ui-tabs-panel{
-    margin-left: -2px;
-    padding: 0 0 0 0;
 }
 
+@media screen and (max-width: 300px){
+    #llaves {
+        margin-left: 5%;
+    }
 }
-

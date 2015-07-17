@@ -4,7 +4,7 @@
       }
   </script>
     <section class="Torneos">
-      <article>
+      <article>        
         <%= render partial: "reutilizable/ficha_lista_torneo_iniciado", collection: @torneos_iniciados, as: :torneo %>
         <%= render partial: "reutilizable/ficha_lista_torneo_confirmado", collection: @torneos_confirmados, as: :torneo %>
         <%= render partial: "reutilizable/ficha_lista_torneo_inscrito_con_pago", collection: @torneos_inscrito_con_pago, as: :torneo %>

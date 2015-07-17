@@ -5,42 +5,47 @@ class Inscripcion < ActiveRecord::Base
   has_one :hots_formulario, :dependent => :delete
   accepts_nested_attributes_for :hots_formulario
   validates_associated :hots_formulario
+  validates :etiqueta_llave, presence: { message: ', La etiqueta a mostrar en las llaves no se generó correctamente' }
+  validates :etiqueta_chat, presence: { message: ', La etiqueta a mostrar en el chat no se generó correctamente' }
 
-  def self.inscritos_confirmados_en_el_torneo_con_free_wins(torneo)
-    array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
-    cantidad_slots_que_deberia_tener = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)
+  def self.inscripciones_confirmadas_permitidas_con_free_wins(torneo,flag_aleatorio)
+    array_inscritos_confirmados = inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
+    cantidad_slots_correctos_para_las_llaves = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)
 
-    free_wins_faltantes = cantidad_slots_que_deberia_tener - array_inscritos_confirmados.count
+    free_wins_faltantes = cantidad_slots_correctos_para_las_llaves - array_inscritos_confirmados.count
     if free_wins_faltantes > 0
-      inscribir_free_wins(torneo, free_wins_faltantes)
-      array_inscritos_confirmados = inscritos_confirmados_en_el_torneo(torneo)
+      inscribir_y_confirmar_free_wins(torneo, free_wins_faltantes)
+      array_inscritos_confirmados << freewins_en_el_torneo(torneo)
     end
-    array_inscritos_confirmados.sample(cantidad_slots_que_deberia_tener)
+
+    if flag_aleatorio
+      array_inscritos_confirmados.sample(cantidad_slots_correctos_para_las_llaves)
+    else
+      array_inscritos_confirmados.take(cantidad_slots_correctos_para_las_llaves)
+    end
   end
 
-  def self.inscribir_free_wins(torneo, free_wins_faltantes)
+  def self.inscribir_y_confirmar_free_wins(torneo, free_wins_faltantes)
     free_wins_faltantes.times do | contador_free_win |
       gamer = Gamer.find_by(nick: 'Free win ' + (contador_free_win + 1).to_s)
       inscripcion = Inscripcion.new
       inscripcion.torneo = torneo
       inscripcion.gamer = gamer
       inscripcion.nick = gamer.nick
-      inscripcion.tipo_inscripcion = 1
+      inscripcion.tipo_inscripcion = 0
       inscripcion.estado = 'Confirmado'
+      inscripcion.etiqueta_llave = 'Free Win'
+      inscripcion.etiqueta_chat = 'Free Win'
       inscripcion.save
     end
   end
 
-  def agregar_dato_inscripcion_registrado(datos_inscripcion_registrado)
-    self.datos_inscripcion_registrado << datos_inscripcion_registrado
+  def self.freewins_en_el_torneo(torneo)
+    Inscripcion.where('torneo_id = :torneo_id and estado = :estado and tipo_inscripcion = 1 ', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
   end
 
-  def self.total_confirmados_por_torneo(torneo)
-    Gamer.joins(:inscripciones).where('inscripciones.torneo_id = :torneo_id and inscripciones.estado = :estado and gamers.nick not like \'%Free win%\'', torneo_id: torneo.id, estado: 'Confirmado').count
-  end
-
-  def self.inscritos_confirmados_en_el_torneo(torneo)
-    Inscripcion.where('torneo_id = :torneo_id and estado = :estado', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
+  def self.inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
+    Inscripcion.where('torneo_id = :torneo_id and estado = :estado and (tipo_inscripcion = 0 or tipo_inscripcion is null )', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
   end
 
   def inscribir
@@ -48,6 +53,8 @@ class Inscripcion < ActiveRecord::Base
       errors.add(:gamer, ', Debes colocar tu nick')
       return
     end
+    self.etiqueta_llave = self.hots_formulario.nombre_equipo
+    self.etiqueta_chat = self.hots_formulario.capitan_nick + '(' + self.hots_formulario.nombre_equipo + ')'
     self.estado = 'Inscrito'  
     save
   end
