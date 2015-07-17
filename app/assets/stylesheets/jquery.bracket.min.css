@@ -1,6 +1,6 @@
 div.jQBracket{
 	font-family:monospace;
-	font-size:9.2px;
+	font-size:12.2px;
 	position:relative}
 
 div.jQBracket .tools{
@@ -135,6 +135,26 @@ div.connector{
  div.jQBracket .highlightLoser .bubble{background-color:#ccc;color:#333}div.jQBracket .highlightLoser .bubble:after{border-right-color:#ccc}div.jQBracket.rl .finals{float:left;left:0;clear:left}div.jQBracket.rl .bracket{float:left;clear:right}div.jQBracket.rl .loserBracket{float:left;clear:right}div.jQBracket.rl .round{margin-right:0;margin-left:40px;float:right}div.jQBracket.rl .team{float:right}div.jQBracket.rl .team div.label{right:0}div.jQBracket.rl .team div.score{float:left}div.jQBracket.rl .teamContainer{float:right}div.jQBracket.rl .connector{border-left-style:solid;border-right-style:none;border-width:2px}div.jQBracket.rl .connector.highlightWinner,div.jQBracket.rl .connector div.connector.highlightWinner{border-color:#da0}div.jQBracket.rl .connector.highlightLoser,div.jQBracket.rl .connector div.connector.highlightLoser{border-color:#ccc}div.jQBracket.rl .connector.highlight,div.jQBracket.rl .connector div.connector.highlight{border-color:#0c0}div.jQBracket.rl .bubble{left:-35px}div.jQBracket.rl .bubble.third{background-color:#963;color:#310}div.jQBracket.rl .bubble.fourth{background-color:#678;color:#ccd}div.jQBracket.rl .bubble:after{left:auto;right:-5px;border-left:5px solid transparent;border-right:0}div.jQBracket.rl .bubble.third:after{border-right:0;border-left:6px solid #963}div.jQBracket.rl .bubble.fourth:after{border-right:0;border-left:6px solid #678}div.jQBracket.rl .highlightWinner .bubble:after{border-left-color:#da0}div.jQBracket.rl .highlightLoser .bubble:after{border-left-color:#ccc}
 
 
+
+@media screen and (max-width: 580px){
+
+div.jQBracket {
+ 
+  font-size: 10.2px;
+  
+}
+
+div.jQBracket .team {
+  width: 122px;
+	}
+
+div.jQBracket .round {
+width: 126px;
+}
+
+}
+
+
 @media screen and (max-width: 350px){
 
 div.jQBracket {
@@ -151,5 +171,27 @@ div.jQBracket .bracket {
   margin-left: -1%;
    margin-top: 10%;
 }
+
+div.jQBracket .round {
+  width: 101px;
+  margin-left: -1%;
+}
+
+div.jQBracket .team {
+  width: 110px;
+}
+
+
+}
+
+@media screen and (max-width: 300px){
+ 
+   div.jQBracket .round {
+   	width: 108px;
+    }
+div.jQBracket {
+  font-size: 9px;
+}
+
 
 }

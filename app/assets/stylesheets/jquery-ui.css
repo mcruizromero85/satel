@@ -1400,6 +1400,9 @@ body .ui-tooltip {
     .ui-helper-reset {
     font-size: 71%;
      }
+
+   
+
 }
 
 @media screen and (max-width: 350px){
@@ -1420,7 +1423,7 @@ body .ui-tooltip {
 .ui-tabs .ui-tabs-panel {
     padding: 0 0 0 0;
     }
-}
+
 
  #tabs-1 {
   background: white;
@@ -1432,6 +1435,14 @@ body .ui-tooltip {
  #llaves {
     background: white;
     margin-bottom: 1%;
+      margin-left: 11%;
+  width: 89%;
  }
 
+}
 
+@media screen and (max-width: 300px){
+    #llaves {
+        margin-left: 5%;
+    }
+}
