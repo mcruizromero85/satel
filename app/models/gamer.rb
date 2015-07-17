@@ -102,6 +102,10 @@ class Gamer < ActiveRecord::Base
     Inscripcion.find_by(torneo_id: torneo.id, estado: 'Confirmado', gamer_id: self.id)
   end
 
+  def esta_inscrito_o_confirmado(torneo)
+    Inscripcion.find_by(torneo_id: torneo.id, gamer_id: self.id)
+  end
+
   def contrincante_posiblea(torneo)
   end
 

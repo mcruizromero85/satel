@@ -11,18 +11,18 @@ class Inscripcion < ActiveRecord::Base
   def self.inscripciones_confirmadas_permitidas_con_free_wins(torneo,flag_aleatorio)
     array_inscritos_confirmados = inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
     cantidad_slots_correctos_para_las_llaves = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)
-
     free_wins_faltantes = cantidad_slots_correctos_para_las_llaves - array_inscritos_confirmados.count
     if free_wins_faltantes > 0
       inscribir_y_confirmar_free_wins(torneo, free_wins_faltantes)
-      array_inscritos_confirmados << freewins_en_el_torneo(torneo)
+      array_inscritos_confirmados.concat(freewins_en_el_torneo(torneo))
     end
 
     if flag_aleatorio
-      array_inscritos_confirmados.sample(cantidad_slots_correctos_para_las_llaves)
+      array_inscritos_confirmados.sample(cantidad_slots_correctos_para_las_llaves)      
     else
-      array_inscritos_confirmados.take(cantidad_slots_correctos_para_las_llaves)
+      array_inscritos_confirmados.take(cantidad_slots_correctos_para_las_llaves)      
     end
+    return array_inscritos_confirmados
   end
 
   def self.inscribir_y_confirmar_free_wins(torneo, free_wins_faltantes)

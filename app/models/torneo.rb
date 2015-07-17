@@ -8,7 +8,7 @@ class Torneo < ActiveRecord::Base
     too_long: ', el título debe estar entre 30 y 100 caracteres'
   }
   validates :urlstreeming, presence: { message: ', El canal de streeming no se ha definido' }
-  validates :urlstreeming, format: { with: URI.regexp(%w(http https)), message: ', Debe tener el formato de una url, incluido http / https' }
+  #validates :urlstreeming, format: { with: URI.regexp(%w(http https)), message: ', Debe tener el formato de una url, incluido http / https' }
   validate :fecha_cierre_mayor_que_actual
   validate :fecha_registro_entre_rondas
   #validate :ronda_numero_uno_mayor_fecha_inscripcion
@@ -108,6 +108,7 @@ class Torneo < ActiveRecord::Base
     rondas.each do | ronda |
       ronda.encuentros.destroy_all
     end
+    Inscripcion.destroy_all(tipo_inscripcion: 0, torneo: self)
     array_inscritos_confirmados = Inscripcion.inscripciones_confirmadas_permitidas_con_free_wins(self,flag_aleatorio)
     rondas.where(numero: 1).first.armar_encuentros_con_confirmados(array_inscritos_confirmados)
     reload
