@@ -1,7 +1,7 @@
   <script type="text/javascript">
     function generarContadorPorTorneo(idTorneo,fecha_limite){
-      $('#countdown_'+idTorneo).countdown({until: fecha_limite, format: 'dhmS',expiryText: "<font color='red'><a href='/'>Recarga la p&aacute;gina</a></font>" }); 
-      }
+      $('#countdown_'+idTorneo).countdown({until: $.countdown.UTCDate(-5,fecha_limite), format: 'dhmS',expiryText: "<font color='red'><a href='/'>Recarga la p&aacute;gina</a></font>" }); 
+      }      
   </script>
     <section class="Torneos">
       <article>        
