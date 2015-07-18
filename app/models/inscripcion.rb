@@ -17,11 +17,8 @@ class Inscripcion < ActiveRecord::Base
       array_inscritos_confirmados.concat(freewins_en_el_torneo(torneo))
     end
 
-    if flag_aleatorio
-      array_inscritos_confirmados.sample(cantidad_slots_correctos_para_las_llaves)      
-    else
-      array_inscritos_confirmados.take(cantidad_slots_correctos_para_las_llaves)      
-    end
+    array_inscritos_confirmados.sample(cantidad_slots_correctos_para_las_llaves)      
+    
     return array_inscritos_confirmados
   end
 
