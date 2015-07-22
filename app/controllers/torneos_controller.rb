@@ -7,8 +7,8 @@ class TorneosController < ApplicationController
   # GET /torneos GET /torneos.json
   def index
     @torneos_inscritos_y_confirmados = []
-    if !current_gamer.nil?
-      @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)
+    @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)
+    if !current_gamer.nil?      
       @torneos_inscritos_y_confirmados.concat(@torneos_iniciados) if @torneos_iniciados.size > 0
       @torneos_confirmados = Torneo.obtener_torneos_ya_confirmados(current_gamer)
       if @torneos_confirmados.size > 0
@@ -19,7 +19,6 @@ class TorneosController < ApplicationController
       @torneos_inscritos_y_confirmados.concat(@torneos_inscritos)
       @torneos_inscritos_y_confirmados.concat(@torneos_inscrito_con_pago)
     else
-      @torneos_iniciados = []
       @torneos_confirmados = []
       @torneos_inscritos = []
       @torneos_inscrito_con_pago = []

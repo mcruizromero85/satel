@@ -37,7 +37,7 @@ class Torneo < ActiveRecord::Base
   end
 
   def self.obtener_torneos_iniciados(gamer_logeado)
-    Torneo.where('torneos.estado = :estado ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Iniciado').order(clasificacion: :asc, cierre_inscripcion: :asc)
+    Torneo.where('torneos.estado = :estado ', estado_inscripcion: 'Confirmado', estado: 'Iniciado').order(clasificacion: :asc, cierre_inscripcion: :asc)
   end
 
   def self.obtener_torneos_ya_confirmados(gamer_logeado)
