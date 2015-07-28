@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704155959) do
+ActiveRecord::Schema.define(version: 20150727211335) do
 
   create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(version: 20150704155959) do
 
   create_table "inscripciones", force: true do |t|
     t.integer  "torneo_id"
-    t.integer  "gamer_id",            null: false
+    t.integer  "gamer_id",                        null: false
     t.string   "estado"
-    t.integer  "tipo_inscripcion"
+    t.integer  "tipo_inscripcion",    default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "nick"

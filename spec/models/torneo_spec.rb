@@ -4,7 +4,7 @@ require 'util_tests'
 describe Torneo do
 
   it 'Generar array brackets con 4 jugadores confirmados' do
-    torneo = FactoryGirl.create(:torneo)
+    torneo = FactoryGirl.create(:torneo, vacantes: 8)
     4.times do | contador |      
       gamer = FactoryGirl.create(:gamer, nick: 'Mateo ' + (contador + 1).to_s)
       inscripcion = FactoryGirl.create(:inscripcion,gamer: gamer,torneo: torneo, estado: 'Confirmado', etiqueta_llave: 'Mateo ' + (contador + 1).to_s)
@@ -23,7 +23,7 @@ describe Torneo do
     expect(torneo.arreglo_de_nombres_para_llaves).to eq '[["Mateo 1","Mateo 2"],["Mateo 3","Mateo 4"]]'
   end
 
-    it 'Generar array brackets con 6 jugadores confirmados y 8 vacantes en el torneo' do
+  it 'Generar array brackets con 6 jugadores confirmados y 8 vacantes en el torneo' do
     torneo = FactoryGirl.create(:torneo, vacantes: 8)
     7.times do | contador |
       gamer = FactoryGirl.create(:gamer, nick: 'Mateo ' + (contador + 1).to_s)
@@ -57,24 +57,6 @@ describe Torneo do
     torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new - 60)
     torneo.save
     expect(torneo.errors[:cierre_inscripcion].size).to eq 1
-  end
-
-  it 'Error cuando la fecha de primera ronda es mayor a la de cierre de inscripción' do
-    torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new + 10)
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 1, inicio_fecha: (Time.new - (60 * 60 * 24 * 2)).strftime('%d/%m/%Y')))
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 2))
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 3))
-    torneo.save
-    expect(torneo.errors[:cierre_inscripcion].size).to eq 1
-  end
-
-  it 'Error cuando se define una fecha y hora de inicio de ronda menor a la ronda anterior' do
-    torneo = FactoryGirl.build(:torneo, cierre_inscripcion: Time.new + 10)
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 1, inicio_fecha: (Time.new + (60 * 60 * 24 * 2)).strftime('%d/%m/%Y')))
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 2, inicio_fecha: (Time.new + (60 * 60 * 24 * 1)).strftime('%d/%m/%Y')))
-    torneo.agregar_ronda(FactoryGirl.build(:ronda, numero: 3))
-    torneo.save
-    expect(torneo.errors[:rondas].size).to eq 1
   end
 
   it 'Error cuando quiere iniciar un torneo con solo 3 inscritos confirmados' do

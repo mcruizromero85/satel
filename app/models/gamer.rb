@@ -3,6 +3,15 @@ class Gamer < ActiveRecord::Base
   has_many :inscripciones
   has_many :authentications, autosave: true
 
+  def self.buscar_o_crear_free_win(nick_free_win)
+    gamer = Gamer.find_by(nick: nick_free_win)
+    if gamer.nil?
+      Gamer.create(nick: nick_free_win, correo: nick_free_win + '@freewin.com', nombres: nick_free_win) 
+    else
+      gamer
+    end
+  end
+
   def reporto_ganar_partida_actual_el_contrincante(torneo)
     inscripcion = inscripcion_en_torneo(torneo)
     encuentro =  encuentro_actual(torneo)

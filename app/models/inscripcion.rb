@@ -23,8 +23,8 @@ class Inscripcion < ActiveRecord::Base
   end
 
   def self.inscribir_y_confirmar_free_wins(torneo, free_wins_faltantes)
-    free_wins_faltantes.times do | contador_free_win |
-      gamer = Gamer.find_by(nick: 'Free win ' + (contador_free_win + 1).to_s)
+    free_wins_faltantes.times do | contador_free_win |      
+      gamer = Gamer.buscar_o_crear_free_win('Free win ' + (contador_free_win + 1).to_s)
       inscripcion = Inscripcion.new
       inscripcion.torneo = torneo
       inscripcion.gamer = gamer
@@ -38,11 +38,11 @@ class Inscripcion < ActiveRecord::Base
   end
 
   def self.freewins_en_el_torneo(torneo)
-    Inscripcion.where('torneo_id = :torneo_id and estado = :estado and tipo_inscripcion = 1 ', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
+    Inscripcion.where('torneo_id = :torneo_id and estado = :estado and tipo_inscripcion = 0 ', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
   end
 
   def self.inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
-    Inscripcion.where('torneo_id = :torneo_id and estado = :estado and (tipo_inscripcion = 0 or tipo_inscripcion is null )', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
+    Inscripcion.where('torneo_id = :torneo_id and estado = :estado and (tipo_inscripcion = 1 )', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
   end
 
   def inscribir
