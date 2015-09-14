@@ -7,15 +7,16 @@ class TorneosController < ApplicationController
   # GET /torneos GET /torneos.json
   def index
     @torneos_inscritos_y_confirmados = []
+    @torneos_finalizados = Torneo.where(estado: TORNEO_ESTADO_FINALIZADO)
     @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)
-    if !current_gamer.nil?      
+    if !current_gamer.nil?
       @torneos_inscritos_y_confirmados.concat(@torneos_iniciados) if @torneos_iniciados.size > 0
       @torneos_confirmados = Torneo.obtener_torneos_ya_confirmados(current_gamer)
       if @torneos_confirmados.size > 0
         @torneos_inscritos_y_confirmados.concat(@torneos_confirmados)
       end
       @torneos_inscritos = Torneo.obtener_torneos_ya_inscrito(current_gamer)
-      @torneos_inscrito_con_pago = Torneo.obtener_torneos_ya_inscrito(current_gamer,1)
+      @torneos_inscrito_con_pago = Torneo.obtener_torneos_ya_inscrito(current_gamer, 1)
       @torneos_inscritos_y_confirmados.concat(@torneos_inscritos)
       @torneos_inscritos_y_confirmados.concat(@torneos_inscrito_con_pago)
     else
@@ -33,11 +34,10 @@ class TorneosController < ApplicationController
   # GET /torneos/1
   # GET /torneos/1.json
   def show
-    @mensaje_de_guardado = params[:notice]
     respond_to do |format|
-      format.html { render action: 'show', notice: 'Torneo creado correctamente' }      
+        format.html { render action: 'show' }
+        format.json { render json: Torneo.find(params[:id]), status: :ok }
     end
-    
   end
 
   attr_writer :attr_names
@@ -66,9 +66,11 @@ class TorneosController < ApplicationController
       if @torneo.save
         DetallePagoInscripcion.create(monto_inscripcion: 0.0, monto_auspiciado: 0.0, torneo_id: @torneo.id)
         @mensaje_de_guardado = 'Torneo creado correctamente'
-        format.html { render action: 'show'}
+        format.html { render action: 'show' }
+        format.json { render json: @torneo, status: :created }
       else
         format.html { render action: 'new' }
+        format.json { render json: @torneo.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -79,7 +81,7 @@ class TorneosController < ApplicationController
 
   def iniciar_torneo
     chat = Chat.limit(1).offset(49)
-    Chat.destroy_all("id < " + chat[0].id.to_s) if !chat[0].nil?
+    Chat.destroy_all('id < ' + chat[0].id.to_s) unless chat[0].nil?
     @chats = Chat.all.order(:id)
     @torneo = Torneo.find(params[:id_torneo])
     @torneo.generar_encuentros if current_gamer == @torneo.gamer
@@ -91,10 +93,10 @@ class TorneosController < ApplicationController
     if encuentro_actual.estado == 'Pendiente'
       if encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && current_gamer.esta_listo_en_encuentro_actual(@torneo) && !current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
         encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
-        encuentro_actual.registrar_ganador(flag_victoria_directa = true)
+        encuentro_actual.registrar_ganador(true)
       elsif encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && !current_gamer.esta_listo_en_encuentro_actual(@torneo) && current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
         encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.contrincante_inscrito_actual(@torneo).id)
-        encuentro_actual.registrar_ganador(flag_victoria_directa = true)
+        encuentro_actual.registrar_ganador(true)
       end
     elsif encuentro_actual.estado == 'Iniciado'
       if encuentro_actual.partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS <= Time.new.to_i && current_gamer.reporto_ganar_partida_actual(@torneo) && !current_gamer.reporto_ganar_partida_actual_el_contrincante(@torneo)
@@ -126,12 +128,12 @@ class TorneosController < ApplicationController
   end
 
   def agregar_gamers_temporales
-    torneo = Torneo.find_by(id: params[:id_torneo], gamer_id: current_gamer.id, estado: "Creado")
+    torneo = Torneo.find_by(id: params[:id_torneo], gamer_id: current_gamer.id, estado: 'Creado')
     gamers_array = params['gamers']
 
     gamers_array.each_line do | gamer_temporal_nick |
       gamer_temporal_nick = gamer_temporal_nick.strip
-      gamer = Gamer.new(correo: gamer_temporal_nick + '@temporal.com' , apellidos: gamer_temporal_nick)
+      gamer = Gamer.new(correo: gamer_temporal_nick + '@temporal.com', apellidos: gamer_temporal_nick)
       gamer.nombres = gamer_temporal_nick + '_temporal'
       gamer.nick = gamer_temporal_nick
       gamer.save
@@ -144,7 +146,7 @@ class TorneosController < ApplicationController
       inscripcion.nick = gamer_temporal_nick
       inscripcion.torneo = torneo
       inscripcion.estado = 'Confirmado'
-      inscripcion.save      
+      inscripcion.save
     end
     respond_to do |format|
       format.html { redirect_to action: 'iniciar_torneo', id_torneo: torneo.id }
@@ -152,7 +154,6 @@ class TorneosController < ApplicationController
   end
 
   def chat
-    
   end
 
   private
@@ -160,11 +161,15 @@ class TorneosController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_torneo
     @torneo = Torneo.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      respond_to do |format|
+        format.html { render action: 'show', status: :not_found }
+        format.json { render json: 'No existe el torneo', status: :not_found }
+      end
   end
-
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def torneo_params
-    params.require(:torneo).permit(:titulo, :urlstreeming, :vacantes, :cierre_inscripcion, :post_detalle_torneo,:periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego)
+    params.require(:torneo).permit(:titulo, :urlstreeming, :vacantes, :cierre_inscripcion, :post_detalle_torneo, :periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego)
   end
 end

@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :hots_formulario do
     inscripcion_id 1
-    nombre_equipo "MyString"
+    nombre_equipo 'MyString'
   end
 end

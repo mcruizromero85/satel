@@ -18,7 +18,7 @@ class InscripcionesController < ApplicationController
   def new
     @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.new
-    @mensaje_inscripcion_error = params[:mensaje_inscripcion_error] if !params[:mensaje_inscripcion_error].nil?
+    @mensaje_inscripcion_error = params[:mensaje_inscripcion_error] unless params[:mensaje_inscripcion_error].nil?
   end
 
   # GET /inscripciones/1/edit
@@ -50,15 +50,12 @@ class InscripcionesController < ApplicationController
   def confirmar
     @torneo = Torneo.find(params[:id_torneo])
     @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
-    
+
     if  @torneo.flag_pago_inscripciones == 1
       confirmar_y_cerrar_pago
-    else 
+    else
       solo_confirmar
     end
-      
-
-   
   end
   # DELETE /gamers/1
   # DELETE /gamers/1.json
@@ -76,7 +73,7 @@ class InscripcionesController < ApplicationController
   def solo_confirmar
     respond_to do |format|
       if @inscripcion.confirmar
-        format.html { redirect_to action: 'iniciar_torneo', controller: 'torneos' , id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
+        format.html { redirect_to action: 'iniciar_torneo', controller: 'torneos', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
       else
         @torneo = Torneo.find(params[:id_torneo])
         format.html { render action: 'new' }
@@ -86,7 +83,7 @@ class InscripcionesController < ApplicationController
 
   def confirmar_y_cerrar_pago
     detalle_pago_inscripcion = DetallePagoInscripcion.find_by(torneo_id: params[:id_torneo])
-    if !es_retornado_de_pasarela_de_pago
+    unless es_retornado_de_pasarela_de_pago
       detalle_pago_inscripcion.crear_pago(@torneo.id, @torneo.titulo)
       respond_to do |format|
         format.html { redirect_to detalle_pago_inscripcion.url_de_pago }
@@ -102,9 +99,9 @@ class InscripcionesController < ApplicationController
         if !detalle_pago_inscripcion.mensaje_error_paypal.nil?
           mensaje_inscripcion_error = detalle_pago_inscripcion.mensaje_error_paypal
         else
-          mensaje_inscripcion_error = "Error interno contacta, con el administrador: mcruizromero85@gmail.com"
+          mensaje_inscripcion_error = 'Error interno contacta, con el administrador: mcruizromero85@gmail.com'
         end
-        format.html { redirect_to action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion_error: mensaje_inscripcion_error }  
+        format.html { redirect_to action: 'new', id_torneo: params[:id_torneo], mensaje_inscripcion_error: mensaje_inscripcion_error }
       end
     end
   end
@@ -112,12 +109,12 @@ class InscripcionesController < ApplicationController
   def inscribir
     respond_to do |format|
       if @inscripcion.inscribir
-        mensaje_inscripcion="Inscripción realizada con éxito"
-        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: mensaje_inscripcion}
+        mensaje_inscripcion = 'Inscripción realizada con éxito'
+        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: mensaje_inscripcion }
       else
         @torneo = Torneo.find(params[:id_torneo])
-        @mensaje_inscripcion=@inscripcion.mensaje_inscripcion
-        format.html { render action: 'new', id_torneo: params[:id_torneo] }        
+        @mensaje_inscripcion = @inscripcion.mensaje_inscripcion
+        format.html { render action: 'new', id_torneo: params[:id_torneo] }
       end
     end
   end
@@ -129,11 +126,11 @@ class InscripcionesController < ApplicationController
         format.html { redirect_to detalle_pago_inscripcion.url_de_pago }
       else
         if !detalle_pago_inscripcion.mensaje_error_paypal.nil?
-          @mensaje_inscripcion=detalle_pago_inscripcion.mensaje_error_paypal
+          @mensaje_inscripcion = detalle_pago_inscripcion.mensaje_error_paypal
         else
-          @mensaje_inscripcion=@inscripcion.mensaje_inscripcion
+          @mensaje_inscripcion = @inscripcion.mensaje_inscripcion
         end
-        format.html { render action: 'new', id_torneo: params[:id_torneo] }        
+        format.html { render action: 'new', id_torneo: params[:id_torneo] }
       end
     end
   end
@@ -143,7 +140,6 @@ class InscripcionesController < ApplicationController
   end
 
   def hots_formulario_params
-      params.require(:hots_formulario).permit(:capitan_nick, :nombre_equipo, :titular_numero1,:titular_numero2,:titular_numero3,:titular_numero4,:suplente_numero1,:suplente_numero2)
+    params.require(:hots_formulario).permit(:capitan_nick, :nombre_equipo, :titular_numero1, :titular_numero2, :titular_numero3, :titular_numero4, :suplente_numero1, :suplente_numero2)
   end
-
 end

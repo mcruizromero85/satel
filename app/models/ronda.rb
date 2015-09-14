@@ -28,12 +28,12 @@ class Ronda < ActiveRecord::Base
         encuentros << encuentro
         if encuentro.gamerinscritoa.etiqueta_llave == 'Free Win'
           encuentro.gamerinscrito_ganador = encuentro.gamerinscritob
-          encuentro.registrar_ganador(flag_victoria_directa = true)
+          encuentro.registrar_ganador(true)
         end
 
         if encuentro.gamerinscritob.etiqueta_llave == 'Free Win'
           encuentro.gamerinscrito_ganador = encuentro.gamerinscritoa
-          encuentro.registrar_ganador(flag_victoria_directa = true)
+          encuentro.registrar_ganador(true)
         end
         contador_posicion_en_ronda += 1
       else

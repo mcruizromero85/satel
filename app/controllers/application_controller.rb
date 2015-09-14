@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  #protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
 
   before_action :signed_in?
 
@@ -23,11 +23,8 @@ class ApplicationController < ActionController::Base
 
   def revisa_si_existe_gamer_en_sesion
     return unless current_gamer.nil?
-    session[:last_url_pre_login] = '/'
-    if ENV['RAILS_ENV'] == 'test'
-      redirect_to '/auth/developer'
-    else
-      redirect_to '/auth/facebook'
-    end
+    puts params
+    session[:last_params] = params
+    redirect_to '/auth/facebook'
   end
 end

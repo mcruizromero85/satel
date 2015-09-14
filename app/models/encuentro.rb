@@ -5,27 +5,23 @@ class Encuentro < ActiveRecord::Base
   belongs_to :ronda, autosave: false
   belongs_to :encuentro_anterior_a, class_name: 'Encuentro'
   belongs_to :encuentro_anterior_b, class_name: 'Encuentro'
-  has_many :partidas, -> { order('id ASC') }, autosave: false, :dependent => :delete_all
+  has_many :partidas, -> { order('id ASC') }, autosave: false, dependent: :delete_all
 
   def tiene_contrincante_freewin
     encuentro.gamerinscritoa.etiqueta_llave == 'Free Win' || encuentro.gamerinscritob.etiqueta_llave == 'Free Win'
   end
 
   def es_la_final
-    if ronda.ronda_siguiente.nil?
-      true
-    else
-      false
-    end
+    ronda.ronda_siguiente.nil? ? true : false
   end
 
   def self.encuentro_actual_por_inscrito(inscripcion)
-    Encuentro.where('encuentros.ronda_id in (:rondas_ids) and encuentros.gamerinscrito_ganador_id is null and (encuentros.gamerinscritoa_id = :inscripcion_id or encuentros.gamerinscritob_id = :inscripcion_id)',rondas_ids: inscripcion.torneo.rondas.ids, inscripcion_id: inscripcion.id).take
+    Encuentro.where('encuentros.ronda_id in (:rondas_ids) and encuentros.gamerinscrito_ganador_id is null and (encuentros.gamerinscritoa_id = :inscripcion_id or encuentros.gamerinscritob_id = :inscripcion_id)', rondas_ids: inscripcion.torneo.rondas.ids, inscripcion_id: inscripcion.id).take
   end
 
   def tiene_partidas_pendientes
     partidas_maximas = ronda.modo_ganar
-    partidas_maximas_ganadas = partidas_maximas.to_i - (partidas_maximas.to_i / 2 )
+    partidas_maximas_ganadas = partidas_maximas.to_i - (partidas_maximas.to_i / 2)
     puntaje_gamera = puntaje_de_inscrito(gamerinscritoa)
     puntaje_gamerb = puntaje_de_inscrito(gamerinscritob)
     if (puntaje_gamera.to_i + puntaje_gamerb.to_i) < partidas_maximas.to_i && puntaje_gamera.to_i < partidas_maximas_ganadas && puntaje_gamerb.to_i < partidas_maximas_ganadas
@@ -36,11 +32,11 @@ class Encuentro < ActiveRecord::Base
   end
 
   def puntaje_de_inscrito(inscrito)
-    if self.gamerinscritoa == inscrito
-      Partida.where('partidas.encuentro_id=:encuentro_id and partidas.estado = :estado and flag_gano_gamerinscritoa = :flag_gano_gamerinscritoa', encuentro_id: self.id, estado: 'Finalizado', flag_gano_gamerinscritoa: true ).size
+    if gamerinscritoa == inscrito
+      Partida.where('partidas.encuentro_id=:encuentro_id and partidas.estado = :estado and flag_gano_gamerinscritoa = :flag_gano_gamerinscritoa', encuentro_id: id, estado: 'Finalizado', flag_gano_gamerinscritoa: true).size
     else
-      Partida.where('partidas.encuentro_id=:encuentro_id and partidas.estado = :estado and flag_gano_gamerinscritob = :flag_gano_gamerinscritob', encuentro_id: self.id, estado: 'Finalizado', flag_gano_gamerinscritob: true ).size
-    end    
+      Partida.where('partidas.encuentro_id=:encuentro_id and partidas.estado = :estado and flag_gano_gamerinscritob = :flag_gano_gamerinscritob', encuentro_id: id, estado: 'Finalizado', flag_gano_gamerinscritob: true).size
+    end
   end
 
   def siguiente_partida
@@ -57,14 +53,14 @@ class Encuentro < ActiveRecord::Base
     partidas << Partida.create(encuentro: self)
   end
 
-  def registrar_ganador(flag_victoria_directa=false)
+  def registrar_ganador(flag_victoria_directa = false)
     armar_siguiente_encuentro
     if flag_victoria_directa
       partidas_maximas = ronda.modo_ganar
-      partidas_maximas_ganadas = partidas_maximas.to_i - (partidas_maximas.to_i / 2 )
-      partidas_maximas_ganadas.times do | numero |
-        if self.gamerinscritoa == self.gamerinscrito_ganador
-          partidas << Partida.create(encuentro: self, flag_gano_gamerinscritoa: true, estado: 'Finalizado') 
+      partidas_maximas_ganadas = partidas_maximas.to_i - (partidas_maximas.to_i / 2)
+      partidas_maximas_ganadas.times do | _numero |
+        if gamerinscritoa == gamerinscrito_ganador
+          partidas << Partida.create(encuentro: self, flag_gano_gamerinscritoa: true, estado: 'Finalizado')
         else
           partidas << Partida.create(encuentro: self, flag_gano_gamerinscritob: true, estado: 'Finalizado')
         end
@@ -72,7 +68,7 @@ class Encuentro < ActiveRecord::Base
     end
     self.flag_listo_gamera = true
     self.flag_listo_gamera = true
-    self.estado='Pendiente'
+    self.estado = 'Pendiente'
     save
   end
 
@@ -93,7 +89,7 @@ class Encuentro < ActiveRecord::Base
   end
 
   def ambos_estan_confirmados
-    self.flag_listo_gamera && self.flag_listo_gamerb
+    flag_listo_gamera && flag_listo_gamerb
   end
 
   private

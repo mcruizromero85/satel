@@ -2,13 +2,13 @@ class Inscripcion < ActiveRecord::Base
   validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
   belongs_to :gamer
   belongs_to :torneo, autosave: false
-  has_one :hots_formulario, :dependent => :delete
+  has_one :hots_formulario, dependent: :delete
   accepts_nested_attributes_for :hots_formulario
   validates_associated :hots_formulario
   validates :etiqueta_llave, presence: { message: ', La etiqueta a mostrar en las llaves no se generó correctamente' }
   validates :etiqueta_chat, presence: { message: ', La etiqueta a mostrar en el chat no se generó correctamente' }
 
-  def self.inscripciones_confirmadas_permitidas_con_free_wins(torneo,flag_aleatorio)
+  def self.inscripciones_confirmadas_permitidas_con_free_wins(torneo, _flag_aleatorio)
     array_inscritos_confirmados = inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
     cantidad_slots_correctos_para_las_llaves = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)
     free_wins_faltantes = cantidad_slots_correctos_para_las_llaves - array_inscritos_confirmados.count
@@ -17,13 +17,13 @@ class Inscripcion < ActiveRecord::Base
       array_inscritos_confirmados.concat(freewins_en_el_torneo(torneo))
     end
 
-    array_inscritos_confirmados.sample(cantidad_slots_correctos_para_las_llaves)      
-    
-    return array_inscritos_confirmados
+    array_inscritos_confirmados.sample(cantidad_slots_correctos_para_las_llaves)
+
+    array_inscritos_confirmados
   end
 
   def self.inscribir_y_confirmar_free_wins(torneo, free_wins_faltantes)
-    free_wins_faltantes.times do | contador_free_win |      
+    free_wins_faltantes.times do | contador_free_win |
       gamer = Gamer.buscar_o_crear_free_win('Free win ' + (contador_free_win + 1).to_s)
       inscripcion = Inscripcion.new
       inscripcion.torneo = torneo
@@ -50,22 +50,22 @@ class Inscripcion < ActiveRecord::Base
       errors.add(:gamer, ', Debes colocar tu nick')
       return
     end
-    self.etiqueta_llave = self.hots_formulario.nombre_equipo
-    self.etiqueta_chat = self.hots_formulario.capitan_nick + '(' + self.hots_formulario.nombre_equipo + ')'
-    self.estado = 'Inscrito'  
+    self.etiqueta_llave = hots_formulario.nombre_equipo
+    self.etiqueta_chat = hots_formulario.capitan_nick + '(' + hots_formulario.nombre_equipo + ')'
+    self.estado = 'Inscrito'
     save
   end
 
   def confirmar(id_transaccion = nil)
     self.estado = 'Confirmado'
-    self.id_transaccion_pago = id_transaccion if !id_transaccion.nil?
+    self.id_transaccion_pago = id_transaccion unless id_transaccion.nil?
     save
   end
 
   def mensaje_inscripcion
     if self.new_record? == false && estado == 'Confirmado'
       mensaje = 'Tu confirmación se realizó con éxito '
-      mensaje = mensaje + "\n Tu id de pago es : " + self.id_transaccion_pago if !self.id_transaccion_pago.nil? 
+      mensaje = mensaje + "\n Tu id de pago es : " + id_transaccion_pago unless id_transaccion_pago.nil?
       if torneo.inscripciones.count > torneo.vacantes
         mensaje = mensaje + "\n Tu posición es " + torneo.inscripciones.count.to_s + ' de ' + torneo.vacantes.to_s + ' vacantes, estás en cola'
       end
@@ -73,5 +73,5 @@ class Inscripcion < ActiveRecord::Base
       mensaje = 'Tu Inscripción se realizó con éxito'
     end
     mensaje
-  end  
+  end
 end

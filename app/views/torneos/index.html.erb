@@ -3,31 +3,129 @@
       $('#countdown_'+idTorneo).countdown({until: fecha_limite, format: 'dhmS',expiryText: "<font color='red'><a href='/'>Recarga la p&aacute;gina</a></font>" }); 
       }
   </script>
-    <section class="Torneos">
-      <article>        
+    <section id="tournament-list">
+      <div class="content-tournament">
+        <ul>
+          <li>
+            <div class="tournament-item">
+              <div class="tournament-item-image">
+                <img alt="Imagen del torneo" src="http://placekitten.com/g/500/500">
+              </div>
+              <div class="tournament-item-info">
+                <h4>Nombre del item</h4>
+                <h5>SKU: <span>123456789123</span></h5>
+                <ul>
+                  <li class="avaible-shipping">
+                    <span class="domicilio-small-icon"></span>
+                    <span class="desc-state">
+                      <strong>Disponible</strong>
+                      Inscripci&oacute;n
+                    </span>
+                  </li>
+                  <li class="avaible-shipping">
+                    <span class="tienda-small-icon"></span>
+                    <div class="desc-state">
+                      <strong>Disponible</strong>
+                      Retiro en tienda
+                    </div>
+                  </li>
+                  <li class="unavaible-shipping">
+                    <span class="retiro-small-icon"></span>
+                    <span class="desc-state">
+                      <strong>No disponible</strong>
+                      Retiro cercano
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tournament-item-prize-pool">
+                <div class="tournament-item-prize-pool-inscripcion">
+                  <span>Costo de inscripci&oacute;n</span>
+                  <div class="costo-inscripcion">
+                    Gratuito
+                  </div>
+                </div>
+                <dl class="total-price">
+                  <dt>Prize Pool</dt>
+                  <dd>$9990</dd>
+                </dl>
+              </div>
+              <div class="tournament-list-delete">
+                <button class="delete-tournament-item hidden-mobile"><span class="fa fa-trash"></span></button>
+                <button class="btn btn-default center hidden-desktop">Eliminar</button>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="shopping-item-holder">
+              <div class="shopping-bag-item-image">
+                <img alt="Descripcion del producto." src="http://placekitten.com/g/500/500">
+              </div>
+              <div class="shopping-bag-item-info">
+                <h4>Nombre del item</h4>
+                <h5>SKU: <span>123456789123</span></h5>
+                <ul>
+                  <li class="avaible-shipping">
+                    <span class="domicilio-small-icon"></span>
+                    <span class="pull-right">
+                      <strong>Disponible</strong>
+                      Despacho a domicilio
+                    </span>
+                  </li>
+                  <li class="avaible-shipping">
+                    <span class="tienda-small-icon"></span>
+                    <div class="pull-right">
+                      <strong>Disponible</strong>
+                      Retiro en tienda
+                    </div>
+                  </li>
+                  <li class="unavaible-shipping">
+                    <span class="retiro-small-icon"></span>
+                    <span class="pull-right">
+                      <strong>No disponible</strong>
+                      Retiro cercano
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="shopping-bag-item-price">
+                <div class="shopping-bag-item-cuantity">
+                  <span>Cantidad</span>
+                  <div class="pull-right">
+                    <button class="btn">-</button>
+                    <input type="text" value="1">
+                    <button class="btn">+</button>
+                  </div>
+                </div>
+                <dl>
+                  <dt>Precio unidad</dt>
+                  <dd>$9990</dd>
+                </dl>
+                <dl class="total-price">
+                  <dt>Precio total</dt>
+                  <dd>$9990</dd>
+                </dl>
+              </div>
+              <div class="shopping-bag-delete">
+                <button class="delete-shopping-bag-item hidden-mobile"><span class="fa fa-trash"></span></button>
+                <button class="btn btn-default center hidden-desktop">Eliminar</button>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+      <article>                
         <%= render partial: "reutilizable/ficha_lista_torneo_iniciado", collection: @torneos_iniciados, as: :torneo %>
         <%= render partial: "reutilizable/ficha_lista_torneo_confirmado", collection: @torneos_confirmados, as: :torneo %>
         <%= render partial: "reutilizable/ficha_lista_torneo_inscrito_con_pago", collection: @torneos_inscrito_con_pago, as: :torneo %>
         <%= render partial: "reutilizable/ficha_lista_torneo_inscrito", collection: @torneos_inscritos, as: :torneo %>        
         <%= render partial: "reutilizable/ficha_lista_torneo_disponible", collection: @torneos, as: :torneo %>
-        <% if @torneos.size == 0 and @torneos_inscritos_y_confirmados.size == 0 %>
+        <%= render partial: "reutilizable/ficha_lista_torneo_finalizado", collection: @torneos_finalizados, as: :torneo %>        
+        <% if @torneos.size == 0 and @torneos_inscritos_y_confirmados.size == 0 && @torneos_iniciados.size == 0 && @torneos_finalizados.size == 0 %>
           <h1 id="Lista_vacia">A&uacute;n no existe torneos registrados, puedes registrar el tuyo haciendo clic <a href="/torneos/new">aqu&iacute;</a></h1>
         <% end %>
       </article>
-      <aside>
-        <script>
-          (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.3&appId=686458234757061";
-            fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
-
-          $(document).ready(main);
-        </script>          
-          <br/>
-          <div class="fb-comments" data-href="http://www.ggesports.la/" data-width="380" data-numposts="7" data-colorscheme="light" data-order-by="reverse_time"></div>
-        </aside>
     </section>
 

@@ -6,7 +6,7 @@ class Gamer < ActiveRecord::Base
   def self.buscar_o_crear_free_win(nick_free_win)
     gamer = Gamer.find_by(nick: nick_free_win)
     if gamer.nil?
-      Gamer.create(nick: nick_free_win, correo: nick_free_win + '@freewin.com', nombres: nick_free_win) 
+      Gamer.create(nick: nick_free_win, correo: nick_free_win + '@freewin.com', nombres: nick_free_win)
     else
       gamer
     end
@@ -23,7 +23,7 @@ class Gamer < ActiveRecord::Base
     inscripcion = inscripcion_en_torneo(torneo)
     encuentro =  encuentro_actual(torneo)
     partida = encuentro.partida_actual
-    encuentro.gamerinscritoa == inscripcion && partida.flag_gano_gamerinscritoa || encuentro.gamerinscritob == inscripcion && partida.flag_gano_gamerinscritob 
+    encuentro.gamerinscritoa == inscripcion && partida.flag_gano_gamerinscritoa || encuentro.gamerinscritob == inscripcion && partida.flag_gano_gamerinscritob
   end
 
   def link_heroes_draft_partida_actual(torneo)
@@ -94,7 +94,7 @@ class Gamer < ActiveRecord::Base
   end
 
   def contrincante_inscrito_actual(torneo)
-    encuentro = encuentro_actual(torneo)    
+    encuentro = encuentro_actual(torneo)
     if encuentro.gamerinscritoa == inscripcion_en_torneo(torneo)
       encuentro.gamerinscritob
     else
@@ -103,21 +103,14 @@ class Gamer < ActiveRecord::Base
   end
 
   def encuentro_actual(torneo)
-    inscripcion = inscripcion_en_torneo(torneo)
-    encuentro = Encuentro.encuentro_actual_por_inscrito(inscripcion)
+    Encuentro.encuentro_actual_por_inscrito(inscripcion_en_torneo(torneo))
   end
 
   def inscripcion_en_torneo(torneo)
-    Inscripcion.find_by(torneo_id: torneo.id, estado: 'Confirmado', gamer_id: self.id)
+    Inscripcion.find_by(torneo_id: torneo.id, estado: 'Confirmado', gamer_id: id)
   end
 
   def esta_inscrito_o_confirmado(torneo)
-    Inscripcion.find_by(torneo_id: torneo.id, gamer_id: self.id)
-  end
-
-  def contrincante_posiblea(torneo)
-  end
-
-  def contrincante_posibleb(torneo)
+    Inscripcion.find_by(torneo_id: torneo.id, gamer_id: id)
   end
 end

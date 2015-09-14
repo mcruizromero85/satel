@@ -71,3 +71,4 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'foreigner'
 gem 'paypal-sdk-rest'
+gem "font-awesome-rails"

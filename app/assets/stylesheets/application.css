@@ -1,9 +1,12 @@
+/*
+ *= require font-awesome
+ */
 
-body{
-    font-size: 16px;
-    margin: 0;
-    font-family: Calibri;
+body{    
     background-color: #2C2143;
+    color: #757575;
+    font-family: "montserratlight",sans-serif;
+    font-size: 14px;
 }
 
 header{
@@ -13,12 +16,7 @@ header{
   top: 0;
   left: 0;
   z-index: 100;
-}
-
-.logo{
-    width: 150px;
-    margin-left: 5%;
-    margin-top: 10px;
+  margin-bottom: 0.5%;
 }
 
 nav {
@@ -27,6 +25,20 @@ nav {
   line-height: 29px;
   margin-right: 2%;
   font-family: "Lucida Sans Unicode","Lucida Grande",Arial,sans-serif;
+}
+
+h4 {
+    color: #4B4B4B;
+    font-family: "montserratlight",sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.logo{
+    width: 150px;
+    margin-left: 5%;
+    margin-top: 10px;
 }
 
 #menu-icon {
@@ -70,9 +82,260 @@ nav ul li a:hover{
     text-decoration: underline;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content-tournament {
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+#tournament-list ul {
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+#tournament-list ul > li {
+    border: medium none;
+    margin: 0 0 15px;
+    padding: 0;
+    width: 100%;
+    background: none repeat scroll 0 0 #FFFFFF;
+    display: block;
+    overflow: hidden;
+}
+
+#tournament-list ul > li:hover {
+    border: 1px solid #3b5998;
+    box-shadow: 0 0 10px #3b5998;
+    cursor: pointer;
+    z-index: 99;
+}
+
+#tournament-list ul > li .tournament-item {
+    display: table;
+    width: 100%;
+    overflow: hidden;
+    padding: 15px;
+}
+
+
+#tournament-list ul > li .tournament-item-image {
+    display: table-cell;
+    vertical-align: middle;
+    width: 120px;
+}
+
+#tournament-list ul > li .tournament-item-image img {
+    display: block;
+    height: auto;
+     margin: 0 15px 0 0;
+    width: 150px;
+}
+
+#tournament-list ul .tournament-item-info {
+    display: table-cell;
+    vertical-align: middle;
+    width: 450px;
+}
+
+#tournament-list ul > li h4 {
+    display: block;
+    margin: 0 0 5px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#tournament-list ul > li h5 {
+    color: #7E7E7E;
+    display: block;
+    font-family: "montserratlight",sans-serif;
+    font-size: 12px;
+    margin: 0 0 15px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+
+#tournament-list ul > li ul li {
+    background: none repeat scroll 0 0 #FFFFFF;
+    overflow: hidden;
+    border: medium none;
+    color: #7E7E7E;
+    display: block;
+    float: left;
+    font-size: 12px;
+    margin: 0;
+    padding: 0 10px 0 0;
+    width: 30%;
+}
+
+
+#tournament-list ul > li ul li .desc-state {
+    width: 65%;
+}
+
+#tournament-list ul > li ul li strong {
+    display: block;
+    font-size: 11px;
+}
+
+#tournament-list ul .tournament-item-prize-pool {
+    display: table-cell;
+    margin: 0;
+    padding: 0 30px 0 0;
+    vertical-align: middle;
+    width: 250px;
+    overflow: hidden;
+}
+
+#tournament-list ul .tournament-item-prize-pool-inscripcion {
+    margin: 0 0 15px;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    display: table;
+}
+
+#tournament-list ul .tournament-item-prize-pool-inscripcion > span {
+    display: table;
+    float: left;
+    font-size: 14px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.costo-inscripcion {
+    display: table;
+    float: right !important;
+}
+
+#tournament-list ul .tournament-item-prize-pool-inscripcion input {
+    display: block;
+    float: left;
+    height: 30px;
+    margin-left: 0;
+    padding: 8px 0;
+    text-align: center;
+    width: 30px;
+}
+
+#tournament-list ul .tournament-item-prize-pool dl {
+    margin: 0 0 5px;
+    overflow: hidden;
+}
+
+#tournament-list ul .tournament-item-prize-pool dt {
+    display: table;
+    float: left;
+    font-weight: bold;
+}
+
+#tournament-list ul .tournament-item-prize-pool dd {
+    display: table;
+    float: right;
+}
+
+#tournament-list ul .tournament-item-prize-pool dl {
+    margin: 0 0 5px;
+    overflow: hidden;
+}
+
+#tournament-list ul .tournament-item-prize-pool dd {
+    display: table;
+    float: right;
+}
+
+dl.total-price dd, dl.subtotal-price dd {    
+    color: #54B268;;
+    display: table;
+    float: right;
+}
+
+.tournament-list-delete {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.hidden-mobile {
+    display: none !important;
+}
+.hidden-mobile {
+    display: block !important;
+}
+
+.tournament-list-delete .delete-tournament-item {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    color: #ADADAD;
+    cursor: pointer;
+    font-size: 26px;
+    height: 32px;
+    line-height: 24pt;
+    text-align: center;
+    transition: all 0.1s ease-in-out 0s;
+    width: 32px;
+}
+
+.btn {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E4E4E4;
+    cursor: pointer;
+    font-family: "montserratlight",sans-serif;
+    font-size: 14px;
+    height: 34px;
+    line-height: 12pt;
+    padding: 8px 12px;
+    transition: all 0.1s ease-in-out 0s;
+}
+
+.center {
+    display: table;
+    margin: 0 auto;
+}
+
+.hidden-desktop {
+    display: none !important;
+}
+
+.tournament-list-delete .btn {
+    width: 100%;
+}
+
+.btn.btn-default {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-color: #757575;
+    color: #757575;
+    height: 50px;
+    padding: 10px 20px;
+    transition: all 0.1s ease-in-out 0s;
+}
+
+.shopping-bag-delete .btn {
+    margin: 0 auto;
+    width: auto;
+}
+
+.tournament-list-delete .btn {
+    margin: 0 auto;
+    width: auto;
+}
+
+.tournament-list-delete .delete-tournament-item:hover, .tournament-list-delete .delete-tournament-item:active, .tournament-list-delete .delete-tournament-item:visited {
+    color: #6E357C;
+}
+
 .opcion_facebook{
   padding:  0px 0px 0px 0px;
 }
+
 
 .btnFacebook{
     

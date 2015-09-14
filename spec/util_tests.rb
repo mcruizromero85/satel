@@ -6,13 +6,10 @@
 
   def registrar(minutos_cierre_inscripcion = 60, minutos_confirmacion = 0)
     cierre_inscripcion = Time.new + (minutos_cierre_inscripcion * 60)
-    primera_ronda = cierre_inscripcion + 120
-    segunda_ronda = primera_ronda + 120
-    tercera_ronda = segunda_ronda + 120
     click_link('link_cabecera_registrar_torneo')
     torneo = FactoryGirl.build(:torneo, cierre_inscripcion: cierre_inscripcion)
 
-    fill_in('torneo_titulo', with: torneo.titulo)    
+    fill_in('torneo_titulo', with: torneo.titulo)
     choose 'juego_1'
     fill_in('cierre_inscripcion_fecha', with: cierre_inscripcion.strftime('%d/%m/%Y'))
     fill_in('cierre_inscripcion_hora', with: cierre_inscripcion.strftime('%I:%M %p'))

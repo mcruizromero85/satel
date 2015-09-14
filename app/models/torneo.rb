@@ -8,16 +8,16 @@ class Torneo < ActiveRecord::Base
     too_long: ', el título debe estar entre 30 y 100 caracteres'
   }
   validates :urlstreeming, presence: { message: ', El canal de streeming no se ha definido' }
-  #validates :urlstreeming, format: { with: URI.regexp(%w(http https)), message: ', Debe tener el formato de una url, incluido http / https' }
+  # validates :urlstreeming, format: { with: URI.regexp(%w(http https)), message: ', Debe tener el formato de una url, incluido http / https' }
   validate :fecha_cierre_mayor_que_actual
   validate :fecha_registro_entre_rondas
-  #validate :ronda_numero_uno_mayor_fecha_inscripcion
+  # validate :ronda_numero_uno_mayor_fecha_inscripcion
   validate :cantidad_minima_confirmados
   validates :periodo_confirmacion_en_minutos, numericality: true
   belongs_to :gamer
   belongs_to :juego, autosave: false
   has_many :rondas, -> { order('numero ASC') }, autosave: true
-  has_many :inscripciones, -> { where "(tipo_inscripcion != 0 or tipo_inscripcion is null)" }, autosave: true  
+  has_many :inscripciones, -> { where '(tipo_inscripcion != 0 or tipo_inscripcion is null)' }, autosave: true
   before_save :asignar_valores_por_defectos, if: "estado == 'Creado'"
   has_one :detalle_pago_inscripcion, autosave: true
 
@@ -28,7 +28,7 @@ class Torneo < ActiveRecord::Base
       ronda = Ronda.new
       ronda.inicializar_valores_por_defecto(numero + 1, cierre_inscripcion)
       agregar_ronda(ronda)
-    end    
+    end
   end
 
   def rondas_existentes_por_vacantes
@@ -36,7 +36,7 @@ class Torneo < ActiveRecord::Base
     errors.add(:rondas, ', todas las rondas deben estar definidas')
   end
 
-  def self.obtener_torneos_iniciados(gamer_logeado)
+  def self.obtener_torneos_iniciados(_gamer_logeado)
     Torneo.where('torneos.estado = :estado ', estado_inscripcion: 'Confirmado', estado: 'Iniciado').order(clasificacion: :asc, cierre_inscripcion: :asc)
   end
 
@@ -44,7 +44,7 @@ class Torneo < ActiveRecord::Base
     Torneo.joins(:inscripciones).where('torneos.estado = :estado and inscripciones.gamer_id = :gamer_id and inscripciones.estado = :estado_inscripcion ', gamer_id: gamer_logeado.id, estado_inscripcion: 'Confirmado', estado: 'Creado').order(clasificacion: :asc, cierre_inscripcion: :asc)
   end
 
-  def self.obtener_torneos_ya_inscrito(gamer, flag_pago_inscripciones=0)
+  def self.obtener_torneos_ya_inscrito(gamer, flag_pago_inscripciones = 0)
     Torneo.joins(:inscripciones).where('torneos.flag_pago_inscripciones = :flag_pago_inscripciones and torneos.cierre_inscripcion > :fecha_actual and inscripciones.gamer_id = :gamer_id and inscripciones.estado in(:estado, :estado)', fecha_actual: Time.new, gamer_id: gamer.id, estado: 'Inscrito', flag_pago_inscripciones: flag_pago_inscripciones).order(clasificacion: :asc, cierre_inscripcion: :asc)
   end
 
@@ -64,7 +64,7 @@ class Torneo < ActiveRecord::Base
   def fecha_y_hora_inscripcion(fecha, hora)
     fecha = Date.strptime(fecha, '%d/%m/%Y')
     hora = Time.strptime(hora, '%I:%M %p')
-    self.cierre_inscripcion = Time.new(fecha.year, fecha.month, fecha.day, hora.hour, hora.min, hora.sec,"-05:00")
+    self.cierre_inscripcion = Time.new(fecha.year, fecha.month, fecha.day, hora.hour, hora.min, hora.sec, '-05:00')
     rescue StandardError
       errors.add(:cierre_inscripcion, ', la fecha debe estar en formato dd/mm/yyyy')
       errors.add(:cierre_inscripcion, ', , la hora debe estar en formato hh:mm AM/PM')
@@ -109,12 +109,12 @@ class Torneo < ActiveRecord::Base
       ronda.encuentros.destroy_all
     end
     Inscripcion.destroy_all(tipo_inscripcion: 0, torneo: self)
-    array_inscritos_confirmados = Inscripcion.inscripciones_confirmadas_permitidas_con_free_wins(self,flag_aleatorio)
+    array_inscritos_confirmados = Inscripcion.inscripciones_confirmadas_permitidas_con_free_wins(self, flag_aleatorio)
     rondas.where(numero: 1).first.armar_encuentros_con_confirmados(array_inscritos_confirmados)
     reload
   end
 
-  def arreglo_de_nombres_para_llaves(flag_aleatorio = true)
+  def arreglo_de_nombres_para_llaves(_flag_aleatorio = true)
     array_para_llaves = '['
     contador = 1
     rondas.where(numero: 1).first.encuentros.each do | encuentro |

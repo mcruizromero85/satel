@@ -30,7 +30,7 @@ module TorneosHelper
         if !encuentro.gamerinscrito_ganador.nil?
           array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1] = [encuentro.puntaje_de_inscrito(encuentro.gamerinscritoa), encuentro.puntaje_de_inscrito(encuentro.gamerinscritob), encuentro.id]
         else
-          array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1] = [0, 0, encuentro.id]    
+          array_id_encuentros_ronda[encuentro.posicion_en_ronda - 1] = [0, 0, encuentro.id]
         end
       end
       array_id_encuentros[contador_rondas] = array_id_encuentros_ronda
@@ -73,7 +73,6 @@ module TorneosHelper
   end
 
   def self.formato_cuenta_regresiva(fecha_cierre_inscripcion)
-    
     diferencia_segundos_cierre_inscripcion_y_hoy = fecha_cierre_inscripcion.to_i - Time.new.to_i
     formato_cuenta_regresiva = ''
     diferencia_dias = 0
