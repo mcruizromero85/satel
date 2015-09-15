@@ -87,8 +87,117 @@ nav ul li a:hover{
     padding: 0;
 }
 
+h2 {
+    margin-bottom: 50px;
+    font-size: 2em;
+    font-family: "Open Sans";
+    line-height: 1.25em;
+    margin-top: 0;
+    text-rendering: optimizelegibility;
+    text-align: center;
+}
+
+section#contact .left {
+    float: left;
+    margin-left: 7%;
+    margin-right: 2%;
+}
+section#contact .left, section#contact .right {
+    display: inline-block;
+    vertical-align: top;
+    width: 42%;
+}
+
+section#contact .right {
+    float: right;
+    margin-right: 7%;
+}
+
+section#contact .left, section#contact .right {
+    display: inline-block;
+    vertical-align: top;
+    width: 42%;
+}
+input, label, select {
+    display: block;
+    font-family: "Open Sans";
+    font-size: 1em;
+}
+
+input[type="text"], input[type="email"] {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.35) inset, 0 1px 0 #FFFFFF;
+}
+
+textarea, input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"], select {
+    border: 1px solid #DDDDDD;
+    border-radius: 0.1875em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) inset;
+    font-family: "Open Sans";
+    font-size: 1em;
+    margin-bottom: 0.75em;
+    padding: 0.5em;
+    transition-property: border-color;
+    width: 100%;
+}
+
+form textarea {
+    height: 150px;
+}
+
+
+
+
+button, .cta-button, a.cta-button, input[type="submit"] {
+    background-color: #2ECC71;
+    border: medium none;
+    border-radius: 0.1875em;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0.75em 1em;
+}
+
+section#contact .cta-button {
+    margin-top: 0;
+    width: 100%;
+}
+
+
+button, .cta-button, a.cta-button, input[type="submit"] {
+    background-color: #2ECC71;
+    border: medium none;
+    border-radius: 0.1875em;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0.75em 1em;
+}
+
+.cta-button, a.cta-button {
+    font-size: 1.2em;
+    margin-top: 26px;
+    padding-bottom: 15px;
+    width: 500px;
+}
+.container, .container-medium, .container-small {
+    margin: 0 auto;
+    overflow: hidden;
+}
+.container {
+    padding: 50px 0;
+    max-width: 1280px;
+    background-color: #FFFFFF;
+    color: #414042;
+}
+
 .content-tournament {
-    width: 960px;
+    width: 1280px;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
@@ -110,9 +219,10 @@ nav ul li a:hover{
     background: none repeat scroll 0 0 #FFFFFF;
     display: block;
     overflow: hidden;
+    border-radius: 4px;
 }
 
-#tournament-list ul > li:hover {
+#tournament-list .content-tournament > ul > li:hover {
     border: 1px solid #3b5998;
     box-shadow: 0 0 10px #3b5998;
     cursor: pointer;
@@ -136,14 +246,14 @@ nav ul li a:hover{
 #tournament-list ul > li .tournament-item-image img {
     display: block;
     height: auto;
-     margin: 0 15px 0 0;
-    width: 150px;
+    margin: 0 15px 0 0;
+    width: 250px;
 }
 
 #tournament-list ul .tournament-item-info {
     display: table-cell;
     vertical-align: middle;
-    width: 450px;
+    width: 50%;
 }
 
 #tournament-list ul > li h4 {
@@ -171,7 +281,7 @@ nav ul li a:hover{
     color: #7E7E7E;
     display: block;
     float: left;
-    font-size: 12px;
+    font-size: 90%;
     margin: 0;
     padding: 0 10px 0 0;
     width: 30%;
@@ -184,7 +294,7 @@ nav ul li a:hover{
 
 #tournament-list ul > li ul li strong {
     display: block;
-    font-size: 11px;
+    font-size: 100%;
 }
 
 #tournament-list ul .tournament-item-prize-pool {
@@ -192,7 +302,7 @@ nav ul li a:hover{
     margin: 0;
     padding: 0 30px 0 0;
     vertical-align: middle;
-    width: 250px;
+    width: 25%;
     overflow: hidden;
 }
 
@@ -332,9 +442,31 @@ dl.total-price dd, dl.subtotal-price dd {
     color: #6E357C;
 }
 
+.card {
+    background-color: #F7F7F7;
+    border: 1px solid #DDDDDD;
+    border-radius: 0.1875em;
+    box-shadow: 0 2px 4px #DEDEDE;
+    margin-bottom: 1.5em;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+.card-services .home-service, .card-courses .home-course, .card-professors .professor {
+    float: left;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 26%;
+}
+
+.course-service, .home-service {
+    min-height: 280px;
+    padding: 20px;
+}
+
 .opcion_facebook{
   padding:  0px 0px 0px 0px;
 }
+
 
 
 .btnFacebook{
@@ -1146,10 +1278,7 @@ width: 73%;
   border: 1px solid transparent;
   border-radius: 4px;
   }
-  #message{
-    width: 89%;
-    border-radius: 4px;
-  }
+
   .PostMessage{
     border-color: white;
   border-radius: 4px;

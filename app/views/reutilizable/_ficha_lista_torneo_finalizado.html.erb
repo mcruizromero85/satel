@@ -1,12 +1,50 @@
-<article id="ContenidoTorneo">
-  <a class='estilo_listo' href='/torneos/iniciar/<%=torneo.id%>'><img  src="<%= image_path(torneo.juego.nombre_imagen) %>" ></a>
-  <article>
-  <h2><a href="/torneos/<%= torneo.id %>"><%= torneo.titulo %></a></h2>
-    <p>M&aacute;ximo <b><%= torneo.vacantes %> slots.</b></br>
-    Torneo Finalizado, haz click  <b>	
-	<font color='green'><a class='estilo_listo' href='/torneos/iniciar/<%=torneo.id%>'>aqu&iacute;</a></font></b> para ver el detalle
-  </article>
-  <% if !torneo.detalle_pago_inscripcion.nil? %>
-  <%= render partial: "reutilizable/presentacion_price_pool", object: torneo, as: :torneo %>
-  <% end %>
-</article>
+          <li>
+            <div class="tournament-item">
+              <div class="tournament-item-image">
+                <img alt="Imagen del torneo" src="<%= image_path(torneo.juego.nombre_imagen) %>">
+              </div>
+              <div class="tournament-item-info">
+                <h4><%= torneo.titulo %></h4>
+                <h5><%= torneo.gamer.nick %></h5>
+                <ul>
+                  <li class="avaible-shipping">
+                    <span class="domicilio-small-icon"></span>
+                    <span class="desc-state">
+                      <strong>Vacantes</strong>
+                      <%= torneo.vacantes %>
+                    </span>
+                  </li>
+                  <li class="avaible-shipping">
+                    <span class="tienda-small-icon"></span>
+                    <div class="desc-state">
+                      <strong>Estado</strong>
+                      <%= torneo.estado %>
+                    </div>
+                  </li>
+                  <li class="unavaible-shipping">
+                    <span class="retiro-small-icon"></span>
+                    <span class="desc-state">
+                      <strong>Cierre</strong>
+                      En 3d
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="tournament-item-prize-pool">
+                <div class="tournament-item-prize-pool-inscripcion">
+                  <span>Costo de inscripci&oacute;n</span>
+                  <div class="costo-inscripcion">
+                    Gratuito
+                  </div>
+                </div>
+                <dl class="total-price">
+                  <dt>Prize Pool</dt>
+                  <dd>$ <%= torneo.detalle_pago_inscripcion.total_price_pool %></dd>
+                </dl>
+              </div>
+              <div class="tournament-list-delete">
+                <button class="delete-tournament-item hidden-mobile"><span class="fa fa-trash"></span></button>
+                <button class="btn btn-default center hidden-desktop">Eliminar</button>
+              </div>
+            </div>
+          </li>
