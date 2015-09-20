@@ -2,9 +2,11 @@
     function generarContadorPorTorneo(idTorneo,fecha_limite){
       $('#countdown_'+idTorneo).countdown({until: fecha_limite, format: 'dhmS',expiryText: "<font color='red'><a href='/'>Recarga la p&aacute;gina</a></font>" }); 
       }
-  </script>
+  </script>    
+    <h1>&Uacute;ltimo torneo organizado</h1>
+    <br/>
     <section id="tournament-list">
-      <div class="content-tournament">
+      <div class="content-tournament">        
         <ul>        
           <%= render partial: "reutilizable/ficha_lista_torneo_finalizado", collection: @torneos_finalizados, as: :torneo %>
           <%= render partial: "reutilizable/ficha_lista_torneo_iniciado", collection: @torneos_iniciados, as: :torneo %>
@@ -15,42 +17,64 @@
         </ul>
       </div>
     </section>
-
     <section class="horizontal white home-services">
       <div class="container">
-        <h2>Servicios de desarrollo de software</h2>
+        <h2>Que podemos hacer</h2>
         <div class="card-services">
-          <article class="card home-service" style="height: 280px;">
-            <img alt="Desarrollo web" src="/assets/iconos/desarrollo-web-9c655fe42c9bf8d42abdfbaa1e9c3029.png">
+          <article class="card home-service" style="height: 280px;">            
             <div class="course-data">
-              <h4>Desarrollo web con Ruby on Rails</h4>
-              <span>Desarrollamos aplicaciones web de forma ágil utilizando este popular framework web.</span>
+              <h4>Servicio 1</h4>
+              <span>detalle servicio.</span>
              </div>
           </article>
-          <article class="card home-service gray" style="height: 280px;">
-            <img alt="Desarrollo ios" src="/assets/iconos/desarrollo-ios-4bb54a93d35f938d03c2be0a6dbdff26.png">
+          <article class="card home-service gray" style="height: 280px;">            
             <div class="course-data">
-              <h4>Desarrollo móvil para iOS</h4>
-              <span>Desarrollamos aplicaciones para iPhone/iPad con foco en la experiencia de usuario.</span>
+              <h4>Servicio 2</h4>
+              <span>detalle servicio.</span>
             </div>
           </article>
-          <article class="card home-service gray" style="height: 280px;">
-            <img alt="Mvp" src="/assets/iconos/mvp-5eff1fc709f88275d7c9dc12a001b179.png">
+          <article class="card home-service gray" style="height: 280px;">            
             <div class="course-data">
-              <h4>Desarrollo de MVPs para startups</h4>
-              <span>Validamos rápidamente la idea de negocio de tu startup con un Producto Mínimo Viable.</span>
+              <h4>Servicio 3</h4>
+              <span>detalle servicio.</span>
             </div>
           </article>
         </div>
       </div>
     </section>
     <br/>
+    <!-- Activar cuando sea el momento
+    <section class="horizontal white home-services">
+      <div class="container">
+        <h2>Que podemos hacer</h2>
+        <div class="card-services">
+          <article class="card home-service" style="height: 280px;">            
+            <div class="course-data">
+              <h4>Servicio 1</h4>
+              <span>detalle servicio.</span>
+             </div>
+          </article>
+          <article class="card home-service gray" style="height: 280px;">            
+            <div class="course-data">
+              <h4>Servicio 2</h4>
+              <span>detalle servicio.</span>
+            </div>
+          </article>
+          <article class="card home-service gray" style="height: 280px;">            
+            <div class="course-data">
+              <h4>Servicio 3</h4>
+              <span>detalle servicio.</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    -->
     <section class="horizontal white" id="contact">
       <div class="container">
-        <h2>¿Listo para comenzar?</h2>
+        <h2>¿Quieres organizar un torneo?</h2>
         <article class="left">
-          <img src="/assets/professors/lennon-afda497d58a0cfd9bfe83d45fbeb1fbc.png" alt="Lennon">
-          <p class="info-contact">Soy Lennon, fundador de DevAcademy. Completa este breve formulario y me estaré contactando personalmente contigo.</p>
+          <p class="info-contact">Quieres que sea sencillo y no un dolor de cabeza, entonces escribenos para ayudarte.</p>
         </article>
         <article class="right">
           <form target="_top" method="post" class="form-payment" action="/suscribir" accept-charset="UTF-8"><div style="display:none"><input type="hidden" value="✓" name="utf8"><input type="hidden" value="sPDrBv2h94zVSvRxoHLvjnjeG7rO9WcV1vJh0P4Kc/s=" name="authenticity_token"></div>
@@ -62,3 +86,4 @@
         </article>
       </div>
 </section>
+<br/>

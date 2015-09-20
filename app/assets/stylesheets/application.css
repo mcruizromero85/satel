@@ -193,6 +193,7 @@ button, .cta-button, a.cta-button, input[type="submit"] {
     padding: 50px 0;
     max-width: 1280px;
     background-color: #FFFFFF;
+    border-radius: 4px;
     color: #414042;
 }
 
@@ -372,6 +373,7 @@ dl.total-price dd, dl.subtotal-price dd {
 .tournament-list-delete {
     display: table-cell;
     vertical-align: middle;
+    display: none;
 }
 
 .hidden-mobile {
@@ -692,11 +694,11 @@ font-size: 90% !important;
     margin-left: 15%;
   }
 
-.FrmRegistrarTorneo h1{
+h1{
     text-align: center;
     width: 100%;
     margin-left: 0%;
-      color: white;
+    color: white;
  }  
 
 .FrmRegistrarTorneo textarea {
@@ -803,8 +805,8 @@ table tbody{
    text-align: center; 
 }
 
-footer{
-    background-color:  #2C2143;
+footer{    
+    background: rgb(4, 6, 21) none repeat scroll 0 0;
     height: 200px;
     color: white;
 }

@@ -104,7 +104,7 @@ class Torneo < ActiveRecord::Base
   end
 
   def generar_encuentros(flag_aleatorio = true)
-    return unless estado != 'Iniciado'
+    return unless estado != 'Iniciado' || estado != 'Finalizado'
     rondas.each do | ronda |
       ronda.encuentros.destroy_all
     end
