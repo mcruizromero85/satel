@@ -1,89 +1,44 @@
-  <script type="text/javascript">
-    function generarContadorPorTorneo(idTorneo,fecha_limite){
-      $('#countdown_'+idTorneo).countdown({until: fecha_limite, format: 'dhmS',expiryText: "<font color='red'><a href='/'>Recarga la p&aacute;gina</a></font>" }); 
-      }
-  </script>    
-    <h1>&Uacute;ltimo torneo organizado</h1>
-    <br/>
-    <section id="tournament-list">
-      <div class="content-tournament">        
-        <ul>        
-          <%= render partial: "reutilizable/ficha_lista_torneo_finalizado", collection: @torneos_finalizados, as: :torneo %>
-          <%= render partial: "reutilizable/ficha_lista_torneo_iniciado", collection: @torneos_iniciados, as: :torneo %>
-          <%= render partial: "reutilizable/ficha_lista_torneo_confirmado", collection: @torneos_confirmados, as: :torneo %>
-          <%= render partial: "reutilizable/ficha_lista_torneo_inscrito_con_pago", collection: @torneos_inscrito_con_pago, as: :torneo %>
-          <%= render partial: "reutilizable/ficha_lista_torneo_inscrito", collection: @torneos_inscritos, as: :torneo %>
-          <%= render partial: "reutilizable/ficha_lista_torneo_disponible", collection: @torneos, as: :torneo %>      
-        </ul>
-      </div>
-    </section>
-    <section class="horizontal white home-services">
-      <div class="container">
-        <h2>Que podemos hacer</h2>
-        <div class="card-services">
-          <article class="card home-service" style="height: 280px;">            
-            <div class="course-data">
-              <h4>Servicio 1</h4>
-              <span>detalle servicio.</span>
-             </div>
-          </article>
-          <article class="card home-service gray" style="height: 280px;">            
-            <div class="course-data">
-              <h4>Servicio 2</h4>
-              <span>detalle servicio.</span>
-            </div>
-          </article>
-          <article class="card home-service gray" style="height: 280px;">            
-            <div class="course-data">
-              <h4>Servicio 3</h4>
-              <span>detalle servicio.</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-    <br/>
-    <!-- Activar cuando sea el momento
-    <section class="horizontal white home-services">
-      <div class="container">
-        <h2>Que podemos hacer</h2>
-        <div class="card-services">
-          <article class="card home-service" style="height: 280px;">            
-            <div class="course-data">
-              <h4>Servicio 1</h4>
-              <span>detalle servicio.</span>
-             </div>
-          </article>
-          <article class="card home-service gray" style="height: 280px;">            
-            <div class="course-data">
-              <h4>Servicio 2</h4>
-              <span>detalle servicio.</span>
-            </div>
-          </article>
-          <article class="card home-service gray" style="height: 280px;">            
-            <div class="course-data">
-              <h4>Servicio 3</h4>
-              <span>detalle servicio.</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-    -->
-    <section class="horizontal white" id="contact">
-      <div class="container">
-        <h2>¿Quieres organizar un torneo?</h2>
-        <article class="left">
-          <p class="info-contact">Quieres que sea sencillo y no un dolor de cabeza, entonces escribenos para ayudarte.</p>
-        </article>
-        <article class="right">
-          <form target="_top" method="post" class="form-payment" action="/suscribir" accept-charset="UTF-8"><div style="display:none"><input type="hidden" value="✓" name="utf8"><input type="hidden" value="sPDrBv2h94zVSvRxoHLvjnjeG7rO9WcV1vJh0P4Kc/s=" name="authenticity_token"></div>
-          <input type="text" required="required" placeholder="Tu nombre" name="first_name" id="first_name">
-          <input type="email" required="required" placeholder="Tu email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$" name="email" id="email">
-          <textarea type="text" placeholder="¿En qué te podemos ayudar?" name="message" id="message"></textarea>
-          <input type="submit" value="Solicita más información" name="commit" class="cta-button">
-          </form>
-        </article>
-      </div>
+<header>
+  <img class="logo" src="<%= image_path("logo.png") %>" alt="GG E-sports"/>
+  <nav>
+    <ul>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Menu</a></li>
+    </ul>
+  </nav>
+</header>
+<video class="PortadaAnimacion" loop="" preload="undefined"  poster="http://magmaleague.com/wp-content/uploads/2015/09/video-bg.jpg" autoplay>
+  <source src="http://magmaleague.com/wp-content/uploads/2015/09/intro.mov" type="video/mp4">
+  <source src="http://stormyday.premiumcoding.com/wp-content/uploads/2013/12/StormClouds_converted.webm" type="video/webm">
+  <source src="http://stormyday.premiumcoding.com/wp-content/uploads/2013/12/StormClouds_converted.ogv" type="video/ogg">
+</video>
+
+<section class="ResumenTorneo">
+  <article class="UltimoTorneo">Último Torneo realizado</article>
+  <article class="Organizador">PHOTO ORGANIZADOR</article>
 </section>
-<br/>
+
+<section class="DetalleTorneo"> 
+  <article >Imagen Bracket semifinal</article>
+  <article >Imagen rankeada de los inscritos</article>
+  <article >Resumen de que trato: Por ejm cuando fue.</article>
+</section>
+
+<section class="Etiquetas"> 
+  <article >Semifinal</article>
+  <article >Ranking de los inscritos</article>
+  <article >Resumen del torneo</article>
+</section>
+
+<section class="FormContacto"> 
+  <form class="frm-contacto" action="www.ejemplo.com/contacto" method="post">
+           <h1>¿Quieres organizar un torneo en línea de forma simple y sencilla ? Pues entonces contactanos.</h1>
+           <input type="text" name="txtNombre" placeholder="Nombre" size="12">
+           <input type="text" name="txtcorreo" placeholder="Correo" size="12">
+           <textarea rows="1" cols="12" placeholder="¿En que podemos ayudarte?"></textarea>
+           <input type="submit" value="Solicitar mas información">
+        </form>
+</section>

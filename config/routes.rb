@@ -8,6 +8,8 @@ Satel::Application.routes.draw do
 
   get '/chat' => 'torneos#chat'
 
+  get '/ultimo_torneo_finalizado' => 'torneos#ultimo_finalizado'
+
   resources :datos_inscripcion_registrados
 
   resources :datos_inscripciones

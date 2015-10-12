@@ -3,96 +3,33 @@
 <head>
   <meta charset="utf-8"/>
   <meta property="og:description" content="Simplificando la inscripción y organización de torneos e-sports en línea" />
-  <meta name="viewport" content="width = device-width, initial-scale=1, maximum-scale=1"/>
-  <title>GG E-sports</title>
-  <%= csrf_meta_tags %>
   <%= stylesheet_link_tag "application", media: "all" %>
-  <%= stylesheet_link_tag "jquery-ui", media: "all" %>
-  <%= stylesheet_link_tag "jquery.bracket.min", media: "all" %>
-  <%= javascript_include_tag "jquery.js" %>
-  <%= javascript_include_tag "jquery_ujs.js" %>    
-  <%= javascript_include_tag "jquery-ui.js" %>
-  <%= javascript_include_tag "jquery.bracket.min.js" %>
-  <%= javascript_include_tag "jquery.countdown.js" %>
-  <%= javascript_include_tag "jquery.ui.timepicker.js" %>   
-  <% if request.env['PATH_INFO'].index('/torneos/iniciar/') %>
-    <%= javascript_include_tag "chat.js" %>
-    <script src="/assets/websocket_rails/websocket_rails.js?body=1"></script>
-    <script src="/assets/websocket_rails/event.js?body=1"></script>
-    <script src="/assets/websocket_rails/abstract_connection.js?body=1"></script>
-    <script src="/assets/websocket_rails/http_connection.js?body=1"></script>
-    <script src="/assets/websocket_rails/websocket_connection.js?body=1"></script>
-    <script src="/assets/websocket_rails/channel.js?body=1"></script>
-    <script src="/assets/websocket_rails/main.js?body=1"></script>
-  <% elsif request.env['PATH_INFO'].index('/') %>
-    <%= javascript_include_tag "torneos.js" %>
-  <% end %>
-</head>
-<body data-no-turbolink >
-<script>
-  function goBack() {
-    window.history.back()
-  }  
-
-  var contador = 1;
- 
-  function main(){
-    $('#menu-icon').click(function(){
-      if(contador == 1){
-        $('nav').animate({
-          left: '0'
-        });
-        contador = 0;
-      } else {
-        contador = 1;
-        $('nav').animate({
-          left: '-100%'
-        });
-      }
-   
-    });
-   
-  };
-</script>
-<% if ENV["RAILS_ENV"] == 'production' %>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-58101208-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-<% end %>
-<header >
-  <a id="menu-icon" href="#"></a>
-  <a href="/">
-    <img class="logo" src="<%= image_path("logo.png") %>" alt="GG E-sports"/>
-  </a>  
-     <nav role="navigation">
-      <ul>
-        <li><a id="link_mis_torneos" href="/torneos/mis_torneos">Mis torneos</a></li>
-        <% if @current_gamer == nil %>
-          <li class="opcion_facebook"><a id="autenticarse" href="/auth/facebook" > 
-               <button class="btnFacebook" type="button">Ingrese con Facebook</button>
-            </a> 
-          </li> 
-        <% else %>
-        <li>
-          <img class="Lista_Inscritos_item_UsFb" src="<%= current_gamer.authentications[0].icono %>" height='35px' width='35px'>
-          <b class="WelcomeUSer"> Bienvenid@: <%=@current_gamer.nombres%></b>
-        </li>
-        <li>  
-          <a id="link_cerrar_sesion" href="/cerrar_sesion">Cerrar Sesi&oacute;n</a>
-        </li>  
-        <% end %>
-        </ul>
-      </nav>
-</header>
+  <meta name="viewport" content="width = device-width, initial-scale=1, maximum-scale=1"/>
+  <title>GG-Sports</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600italic,600,400italic,300italic,700italic' rel='stylesheet' type='text/css'/>
+</head>  
+<body>   
 <%= yield %>
-<!--
-<footer>
-</footer>
--->
 </body>
+<footer>
+   <img class="logof" src="<%= image_path("logo.png") %>" alt="GG E-sports"/>
+      <nav>
+      <ul><!--Lista de navegación-->
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Menu</a></li>
+        <li><a href="#">Menu</a></li>
+      </ul>
+      </nav>
+    <section class="RedesSociales">
+      <a href="https://www.facebook.com/ggesports.la" target="_blank">
+      <img class="logo" src="<%= image_path("twitter.png") %>" alt="GG E-sports twitter"/>
+      </a>
+      <a href="https://www.facebook.com/ggesports.la" target="_blank">
+      <img class="logo" src="<%= image_path("facebook.png") %>" alt="GG E-sports facebook"/>
+      </a>
+   </section> 
+     <h2>Copyright © 2015 - Todos los derechos reservados - Lima Perú</h2> 
+</footer>
 </html>
