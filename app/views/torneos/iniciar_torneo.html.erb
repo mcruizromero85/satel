@@ -1,4 +1,4 @@
-<% if @torneo.estado == 'Iniciado' || @current_gamer == @torneo.gamer %>
+<% if @torneo.estado == 'Iniciado' || @torneo.estado == 'Finalizado' || @current_gamer == @torneo.gamer %>
   <script type="text/javascript">
               var minimalData = {              
                 teams : <%=raw @torneo.arreglo_de_nombres_para_llaves %>,
@@ -70,7 +70,7 @@
                 </center>
               <% end %>
           <% end %>    
-        <% if @torneo.estado == 'Iniciado' || @current_gamer == @torneo.gamer %>
+        <% if @torneo.estado == 'Iniciado' || @torneo.estado == 'Finalizado' || @current_gamer == @torneo.gamer %>
         <b>Para ver el detalle sobre este torneo, click <a href="/inscripciones?id_torneo=<%=@torneo.id%>" target='_blank' >aqu&iacute;</a></b>          
           <article id="llaves"></article>
         <% else %>

@@ -4,6 +4,31 @@ class TorneosController < ApplicationController
   before_action :set_torneo, only: [:preparar, :show, :edit, :update, :destroy]
   before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :mis_torneos, :iniciar_torneo]
 
+  def ultimo_finalizado
+
+    torneo = Torneo.where(estado: TORNEO_ESTADO_FINALIZADO).last
+    teams = torneo.arreglo_de_nombres_para_llaves
+    results = TorneosHelper.obtener_array_para_resultado_llaves(torneo)
+    inscripciones = Inscripcion.inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
+
+    json = "{\"detail\": " + torneo.to_json + ",\"teams\": " + teams + " , \"results\": " +  results.to_s + ", \"inscripciones\":" + inscripciones.to_json + " }"
+
+    respond_to do |format|
+      format.json { render json: json, status: :ok }
+    end
+  end
+
+  def data_for_bracket_generator
+    torneo = Torneo.find(params[:id])
+    teams = torneo.arreglo_de_nombres_para_llaves
+    results = TorneosHelper.obtener_array_para_resultado_llaves(torneo)
+    json = "{\"teams\": " + teams + " , \"results\": " +  results.to_s + " }"
+
+    respond_to do |format|
+      format.json { render json: JSON.parse(json).to_json , status: :ok }
+    end
+  end
+
   # GET /torneos GET /torneos.json
   def index
     @torneos_inscritos_y_confirmados = []
@@ -29,6 +54,13 @@ class TorneosController < ApplicationController
     else
       @torneos = Torneo.obtener_torneos_disponibles_para_inscribir(@torneos_inscritos_y_confirmados.map(&:id))
     end
+      @torneo = @torneos_finalizados.last
+
+    respond_to do |format|
+      format.html { render action: 'index' }
+      format.json { render json: @torneos, status: :ok}
+    end
+
   end
 
   # GET /torneos/1
@@ -84,7 +116,7 @@ class TorneosController < ApplicationController
     Chat.destroy_all('id < ' + chat[0].id.to_s) unless chat[0].nil?
     @chats = Chat.all.order(:id)
     @torneo = Torneo.find(params[:id_torneo])
-    @torneo.generar_encuentros if current_gamer == @torneo.gamer
+    #@torneo.generar_encuentros if current_gamer == @torneo.gamer
     return if @torneo.gamer == current_gamer || !current_gamer.esta_confirmado(@torneo)
 
     encuentro_actual = current_gamer.encuentro_actual(@torneo)

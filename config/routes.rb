@@ -10,6 +10,8 @@ Satel::Application.routes.draw do
 
   get '/ultimo_torneo_finalizado' => 'torneos#ultimo_finalizado'
 
+  get '/data_for_bracket_generator/:id' => 'torneos#data_for_bracket_generator'
+
   resources :datos_inscripcion_registrados
 
   resources :datos_inscripciones

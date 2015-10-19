@@ -1,3 +1,4 @@
+
 <header>
   <img class="logo" src="<%= image_path("logo.png") %>" alt="GG E-sports"/>
   <nav>
@@ -16,21 +17,37 @@
   <source src="http://stormyday.premiumcoding.com/wp-content/uploads/2013/12/StormClouds_converted.ogv" type="video/ogg">
 </video>
 
-<section class="ResumenTorneo">
+<section class="ResumenTorneo"  >
   <article class="UltimoTorneo">Último Torneo realizado</article>
-  <article class="Organizador">PHOTO ORGANIZADOR</article>
+  <article class="Organizador">
+    <div class="fb-post" data-href="{{ultimo_torneo_finalizado.post_detalle_torneo}}" data-width="350"></div>  
+  </article>
 </section>
 
-<section class="DetalleTorneo"> 
-  <article >Imagen Bracket semifinal</article>
-  <article >Imagen rankeada de los inscritos</article>
-  <article >Resumen de que trato: Por ejm cuando fue.</article>
+<section class="DetalleTorneo" > 
+  <article >
+    <div class="container">
+      <article id="llaves" ></article>
+    </div>
+  </article>
+  <article >
+    <ul>
+      <li ng-repeat="inscrito in inscripciones">
+        {{inscrito.etiqueta_llave}}
+      </li>
+    </ul>
+  </article>
+  <article >
+    {{ultimo_torneo_finalizado.cierre_inscripcion}}
+    <br/>
+    {{ultimo_torneo_finalizado.vacantes}}
+  </article>  
 </section>
 
 <section class="Etiquetas"> 
   <article >Semifinal</article>
   <article >Ranking de los inscritos</article>
-  <article >Resumen del torneo</article>
+  <article >{{ultimo_torneo_finalizado.titulo}}</article>
 </section>
 
 <section class="FormContacto"> 

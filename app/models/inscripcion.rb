@@ -42,7 +42,7 @@ class Inscripcion < ActiveRecord::Base
   end
 
   def self.inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
-    Inscripcion.where('torneo_id = :torneo_id and estado = :estado and (tipo_inscripcion = 1 )', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
+    Inscripcion.where('torneo_id = :torneo_id and estado = :estado ', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
   end
 
   def inscribir

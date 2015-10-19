@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" ng-app="torneoApp">
 <head>
   <meta charset="utf-8"/>
   <meta property="og:description" content="Simplificando la inscripción y organización de torneos e-sports en línea" />
@@ -7,8 +7,21 @@
   <meta name="viewport" content="width = device-width, initial-scale=1, maximum-scale=1"/>
   <title>GG-Sports</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600italic,600,400italic,300italic,700italic' rel='stylesheet' type='text/css'/>
+  <%= javascript_include_tag "jquery.js" %>
+  <%= stylesheet_link_tag "jquery.bracket.min", media: "all" %>
+   <%= javascript_include_tag "jquery.bracket.min.js" %>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <%= javascript_include_tag "torneo.js" %>
 </head>  
-<body>   
+<body ng-controller="TorneoController as torneoCtrl">
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId=686458234757061";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>   
 <%= yield %>
 </body>
 <footer>
