@@ -1,6 +1,6 @@
 var torneoApp = angular.module('torneoApp', []);
 
-torneoApp.controller('TorneoController', function ($scope, $http){
+torneoApp.controller('TorneoController', [function ($scope, $http){
   $http.get('ultimo_torneo_finalizado.json').success(function(data) {
     $scope.ultimo_torneo_finalizado = data.detail;
     $scope.inscripciones = data.inscripciones;
@@ -9,7 +9,7 @@ torneoApp.controller('TorneoController', function ($scope, $http){
         results: data.results
       }
   });  
-});
+}]);
 
 
 $.ajax({
