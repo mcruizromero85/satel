@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727211335) do
+ActiveRecord::Schema.define(version: 20151020012501) do
 
   create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20150727211335) do
     t.datetime "updated_at"
     t.integer  "flag_inscripciones",              default: 1, null: false
     t.integer  "flag_pago_inscripciones",         default: 0, null: false
+    t.string   "urllogo"
   end
 
   add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"

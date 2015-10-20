@@ -46,26 +46,26 @@ nav ul li a:hover{
 }
 
 .PortadaAnimacion{
- width: 100%;
- margin-bottom: 10px;
- display: block;
-
+  width: 100%;
+  display: block;
+  height: 550px;
+  background-color: black;
 }
 
 .ResumenTorneo{
   margin-bottom: 20px;
   overflow: hidden;
+  background-color: #F7F7F7;
 }
 
 .UltimoTorneo{
-  height: 200px;
-    width: 36%;
-    margin-left: 32%;
-    text-align: center;
-    font-size: 60px;
-    
-    color: #414042;
-    margin-bottom: 20px;
+  width: 55%;
+  margin: auto;
+  text-align: center;
+  font-size: 55px;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  color: #414042;
 }
 .Organizador{  
     width: 30%;
@@ -76,9 +76,12 @@ nav ul li a:hover{
     background-color: #F7F7F7;
   
 }
+.DetalleTorneo{
+  overflow: hidden;
+  margin-bottom: 2%;  
+}
 
 .DetalleTorneo article{
-  height: 200px;
     background-color: #F7F7F7;
     float: left;
     width: 30%;
@@ -92,25 +95,14 @@ nav ul li a:hover{
   margin-right: 0;
 }
 
-.Etiquetas {
-  margin-bottom: 20px;
-}
-
-.Etiquetas article{
+.etiqueta-portada {
   height: 90px;
-    background-color: #164777;
-    float: left;
-    width: 30%;
-    margin-right: 5%;
-   
-    font-size: 34px;
-    text-align: center;
-    color: white;
-    margin-bottom: 20px;
-}
-
-.Etiquetas article:last-child{
-  margin-right: 0;
+  background-color: #164777;
+  float: left;  
+  font-size: 34px;
+  text-align: center;
+  color: white;  
+  width: 100%;
 }
 
 .FormContacto {
