@@ -3,6 +3,7 @@ class TorneosController < ApplicationController
 
   before_action :set_torneo, only: [:preparar, :show, :edit, :update, :destroy]
   before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :mis_torneos, :iniciar_torneo]
+  before_filter :set_access
 
   def ultimo_finalizado
 
@@ -16,6 +17,7 @@ class TorneosController < ApplicationController
     respond_to do |format|
       format.json { render json: json, status: :ok }
     end
+
   end
 
   def data_for_bracket_generator
@@ -203,5 +205,9 @@ class TorneosController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def torneo_params
     params.require(:torneo).permit(:titulo, :urlstreeming, :vacantes, :cierre_inscripcion, :post_detalle_torneo, :periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego)
+  end
+
+  def set_access
+    headers["Access-Control-Allow-Origin"] = "https://localhost:3000,http://localhost:3000,https://ggesports-test.herokuapp.com,http://ggesports-test.herokuapp.com"
   end
 end
