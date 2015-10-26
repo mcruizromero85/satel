@@ -208,6 +208,6 @@ class TorneosController < ApplicationController
   end
 
   def set_access
-    headers["Access-Control-Allow-Origin"] = "https://localhost:3000,http://localhost:3000,https://ggesports-test.herokuapp.com,http://ggesports-test.herokuapp.com"
+    headers["Access-Control-Allow-Origin"] = "*"
   end
 end
