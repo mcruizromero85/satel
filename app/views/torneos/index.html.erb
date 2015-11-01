@@ -17,8 +17,12 @@
   <source src="http://stormyday.premiumcoding.com/wp-content/uploads/2013/12/StormClouds_converted.ogv" type="video/ogg">
 </video>
 
-<section class="ResumenTorneo" >
+<section class="ResumenTorneo">
   <article class="UltimoTorneo">Ayudamos a organizar torneos E-sports de manera sencilla y eficiente</article>
+</section>
+
+<section class="ResumenTorneo">
+  <article class="UltimoTorneo">&Uacute;ltimo torneo organizado</article>
 </section>
 
 <section class="DetalleTorneo" > 
@@ -26,13 +30,9 @@
     <img ng-src="{{ultimo_torneo_finalizado.urllogo}}" />
     <span class="etiqueta-portada">{{ultimo_torneo_finalizado.titulo}}</span>
   </article>
-  <article >
-    <ul>
-      <li ng-repeat="inscrito in inscripciones">
-        {{inscrito.etiqueta_llave}}
-      </li>
-    </ul>
-    <span class="etiqueta-portada">Inscritos</span>
+  <article >    
+      <img ng-src="{{ultimo_torneo_finalizado.urllogoSponsors}}" height="307" />
+      <span class="etiqueta-portada">Organizador</span>
   </article>
   <article >
     
@@ -43,7 +43,7 @@
 
 <section class="FormContacto"> 
   <form class="frm-contacto" action="www.ejemplo.com/contacto" method="post">
-           <h1>¿Quieres organizar un torneo en línea de forma simple y sencilla ? Pues entonces contactanos.</h1>
+           <h1>¿Quieres organizar un torneo en línea de forma simple y sencilla ? entonces contactanos.</h1>
            <input type="text" name="txtNombre" placeholder="Nombre" size="12">
            <input type="text" name="txtcorreo" placeholder="Correo" size="12">
            <textarea rows="1" cols="12" placeholder="¿En que podemos ayudarte?"></textarea>

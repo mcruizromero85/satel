@@ -19,11 +19,14 @@ module TorneosHelper
     end
   end
 
-  def self.obtener_array_para_resultado_llaves(torneo)
-    array_id_encuentros = Array.new(torneo.rondas.count) {}
-    cantidad_de_encuentros_en_ronda = torneo.rondas.first.encuentros.count
+  def self.obtener_array_para_resultado_llaves(torneo,ronda_inicio = 1)
+
+    
     contador_rondas = 0
-    torneo.rondas.each do | ronda |
+    rondas_evaluar = torneo.rondas.where('numero >= ?', ronda_inicio)
+    array_id_encuentros = Array.new(rondas_evaluar.count) {}
+    cantidad_de_encuentros_en_ronda = rondas_evaluar.first.encuentros.count
+    rondas_evaluar.each do | ronda |
       cantidad_de_encuentros_en_ronda /= 2 if ronda.numero != 1
       array_id_encuentros_ronda = Array.new(cantidad_de_encuentros_en_ronda) { [0, 0, '0'] }
       ronda.encuentros.each do | encuentro |

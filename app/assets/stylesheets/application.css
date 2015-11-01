@@ -85,10 +85,12 @@ nav ul li a:hover{
     background-color: #F7F7F7;
     float: left;
     width: 30%;
+    width: 30%;
     margin-right: 5%;
     font-size: 48px;
     text-align: center;
     color: #414042;
+    height: 415px;
 }
 
 .DetalleTorneo article:last-child{
