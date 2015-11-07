@@ -18,27 +18,27 @@
 </video>
 
 <section class="ResumenTorneo">
-  <article class="UltimoTorneo">Ayudamos a organizar torneos E-sports de manera sencilla y eficiente</article>
+  <h1>Ayudamos a organizar torneos E-sports de manera sencilla y eficiente</h1>  
 </section>
 
-<section class="ResumenTorneo">
-  <article class="UltimoTorneo">&Uacute;ltimo torneo organizado</article>
-</section>
-
-<section class="DetalleTorneo" > 
-  <article >    
-    <img ng-src="{{ultimo_torneo_finalizado.urllogo}}" />
-    <span class="etiqueta-portada">{{ultimo_torneo_finalizado.titulo}}</span>
-  </article>
-  <article >    
-      <img ng-src="{{ultimo_torneo_finalizado.urllogoSponsors}}" height="307" />
-      <span class="etiqueta-portada">Organizador</span>
-  </article>
-  <article >
-    
+<section class="DetalleTorneo" >
+  <div class="container">
+    <h2>&Uacute;ltimo torneo organizado</h2>
+    <article >    
+      <img ng-src="{{ultimo_torneo_finalizado.urllogo}}" width="410px" height="220" />
+      <span class="etiqueta-portada">{{ultimo_torneo_finalizado.titulo}}</span>
+    </article>
+    <article >    
+        <img ng-src="{{ultimo_torneo_finalizado.urllogoSponsors}}"  width="410px" height="220" />
+        <span class="etiqueta-portada">Organizador</span>
+    </article>
+    <article>    
     <div id="llaves" ></div>
       <span class="etiqueta-portada">Semifinal</span>
-  </article>  
+    </article>
+  </div>
+
+  
 </section>
 
 <section class="FormContacto"> 

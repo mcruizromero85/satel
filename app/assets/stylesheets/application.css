@@ -1,3 +1,11 @@
+h2{
+  font-size: 2em;
+  line-height: 1.25em;
+  text-rendering: optimizeLegibility;
+  margin-top: 0;
+  color: #414042;
+}
+
 body{
   font-family: "Open Sans";
 }
@@ -85,12 +93,10 @@ nav ul li a:hover{
     background-color: #F7F7F7;
     float: left;
     width: 30%;
-    width: 30%;
     margin-right: 5%;
     font-size: 48px;
     text-align: center;
     color: #414042;
-    height: 415px;
 }
 
 .DetalleTorneo article:last-child{
@@ -98,10 +104,10 @@ nav ul li a:hover{
 }
 
 .etiqueta-portada {
-  height: 90px;
+  height: 70px;
   background-color: #164777;
   float: left;  
-  font-size: 34px;
+  font-size: 25px;
   text-align: center;
   color: white;  
   width: 100%;
@@ -195,5 +201,30 @@ footer h2{
 
 .RedesSociales a{
    margin-right: 5%;
+
+}
+
+#llaves{
+  height: 235px;
+}
+
+.container {
+    margin: 0 auto;
+    overflow: hidden;
+    max-width: 1366px;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+section{
+  text-align: center;
+}
+
+@media only screen and (max-width : 320px){
+  
+.PortadaAnimacion {
+  height: inherit;
+}
+  
 
 }

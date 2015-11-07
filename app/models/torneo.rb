@@ -114,10 +114,10 @@ class Torneo < ActiveRecord::Base
     reload
   end
 
-  def arreglo_de_nombres_para_llaves(_flag_aleatorio = true)
+  def arreglo_de_nombres_para_llaves(ronda_inicio = 1)
     array_para_llaves = '['
     contador = 1
-    rondas.where(numero: 1).first.encuentros.each do | encuentro |
+    rondas.where(numero: ronda_inicio).first.encuentros.each do | encuentro |
       if !encuentro.gamerinscritoa.nil?
         array_para_llaves.concat("[\"" + encuentro.gamerinscritoa.etiqueta_llave + "\",")
       else
@@ -130,7 +130,7 @@ class Torneo < ActiveRecord::Base
         array_para_llaves.concat("\"\"]")
       end
 
-      if rondas.where(numero: 1).first.encuentros.count != contador
+      if rondas.where(numero: ronda_inicio).first.encuentros.count != contador
         array_para_llaves.concat(',')
       end
       contador += 1
