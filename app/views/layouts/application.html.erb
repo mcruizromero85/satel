@@ -13,7 +13,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
   <%= javascript_include_tag "torneo.js" %>
 </head>  
-<body ng-controller="TorneoController as torneoCtrl">
+<body ng-controller="TorneoController as torneoCtrl" id="landings" class="loaded">
   <div id="fb-root"></div>
   <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -21,28 +21,13 @@
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId=686458234757061";
     fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>   
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+  <header>
+  <a id="menu-icon" href="#"></a>
+  <img class="logo" src="<%= image_path("logo.png") %>" alt="GG E-sports"/>
+</header>
 <%= yield %>
 </body>
-<footer>
-   <img class="logof" src="<%= image_path("logo.png") %>" alt="GG E-sports"/>
-      <nav>
-      <ul><!--Lista de navegación-->
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Menu</a></li>
-      </ul>
-      </nav>
-    <section class="RedesSociales">
-      <a href="https://www.facebook.com/ggesports.la" target="_blank">
-      <img class="logo" src="<%= image_path("twitter.png") %>" alt="GG E-sports twitter"/>
-      </a>
-      <a href="https://www.facebook.com/ggesports.la" target="_blank">
-      <img class="logo" src="<%= image_path("facebook.png") %>" alt="GG E-sports facebook"/>
-      </a>
-   </section> 
-     <h2>Copyright © 2015 - Todos los derechos reservados - Lima Perú</h2> 
-</footer>
+
 </html>

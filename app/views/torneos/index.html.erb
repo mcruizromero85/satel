@@ -1,52 +1,68 @@
-
-<header>
-  <img class="logo" src="<%= image_path("logo.png") %>" alt="GG E-sports"/>
-  <nav>
-    <ul>
-      <li><a href="#">Menu</a></li>
-      <li><a href="#">Menu</a></li>
-      <li><a href="#">Menu</a></li>
-      <li><a href="#">Menu</a></li>
-      <li><a href="#">Menu</a></li>
-    </ul>
-  </nav>
-</header>
 <video class="PortadaAnimacion" loop="" preload="undefined"  poster="http://magmaleague.com/wp-content/uploads/2015/09/video-bg.jpg" autoplay>
   <source src="http://magmaleague.com/wp-content/uploads/2015/09/intro.mov" type="video/mp4">
   <source src="http://stormyday.premiumcoding.com/wp-content/uploads/2013/12/StormClouds_converted.webm" type="video/webm">
   <source src="http://stormyday.premiumcoding.com/wp-content/uploads/2013/12/StormClouds_converted.ogv" type="video/ogg">
 </video>
 
-<section class="ResumenTorneo">
-  <h1>Ayudamos a organizar torneos E-sports de manera sencilla y eficiente</h1>  
+<section class="white horizontal">
+  <div class="container">
+    <h2>Torneos e-sports en l&iacute;nea</h2>
+    <div class="card-services">
+      <article class="card home-service" style="height: 290px;">
+        <div class="course-data">
+          <h4>Organización simple</h4>
+          <span>Contamos con herramientas para que organizar un torneo no sea un dolor de cabeza</span>
+         </div>
+      </article>
+      <article class="card home-service gray" style="height: 290px;">
+        <div class="course-data">
+          <h4>Mayor llegada a gamers</h4>
+          <span>Con nuestra fuerte integraci&oacute;n en redes sociales puedes asegurar el alcance de tu torneo.</span>
+        </div>
+      </article>
+      <article class="card home-service gray" style="height: 290px;">
+        <div class="course-data">
+          <h4>Rentabilidad para auspiciadores</h4>
+          <span>a mayor alcance por redes sociales mayor probabilidad de vender sus productos.</span>
+        </div>
+      </article>
+    </div>
+  </div>
 </section>
-
-<section class="DetalleTorneo" >
+<section class="ResumenTorneo gray horizontal">
   <div class="container">
     <h2>&Uacute;ltimo torneo organizado</h2>
-    <article >    
-      <img ng-src="{{ultimo_torneo_finalizado.urllogo}}" width="410px" height="220" />
-      <span class="etiqueta-portada">{{ultimo_torneo_finalizado.titulo}}</span>
-    </article>
-    <article >    
-        <img ng-src="{{ultimo_torneo_finalizado.urllogoSponsors}}"  width="410px" height="220" />
-        <span class="etiqueta-portada">Organizador</span>
-    </article>
-    <article>    
-    <div id="llaves" ></div>
-      <span class="etiqueta-portada">Semifinal</span>
-    </article>
+    <div class="card-services">
+    <article>        
+      <article id="ContenidoTorneo">
+        <a class="estilo_listo" href="/torneos/iniciar/5"><img src="{{ultimo_torneo_finalizado.urllogo}}"></a>
+        <article>
+        <h2><a href="/torneos/5">[Magma League] Torneo Heroes of the storm(Gratuito)</a></h2>
+          <p>Máximo <b>16 slots.</b><br>
+          Torneo iniciado!!!, haz click  <b>  
+        <font color="green"><a class="estilo_listo" href="/torneos/iniciar/5">aquí</a></font></b> para ver las llaves
+        </p></article>
+        <article class="PricePool">
+        <p>Bolsa de premios: <br>$ <u>25.0</u></p>
+          <br>  
+        </article>
+      </article>
+      </article>
+    </div>
   </div>
-
-  
 </section>
-
-<section class="FormContacto"> 
-  <form class="frm-contacto" action="www.ejemplo.com/contacto" method="post">
-           <h1>¿Quieres organizar un torneo en línea de forma simple y sencilla ? entonces contactanos.</h1>
-           <input type="text" name="txtNombre" placeholder="Nombre" size="12">
-           <input type="text" name="txtcorreo" placeholder="Correo" size="12">
-           <textarea rows="1" cols="12" placeholder="¿En que podemos ayudarte?"></textarea>
-           <input type="submit" value="Solicitar mas información">
-        </form>
+<section id="contact" class="horizontal white">
+  <div class="container">
+    <h2>Escribenos para cualquier duda</h2>
+    <article class="left">
+      <p class="info-contact">Cuentamos sobre el torneo que deseas organizar para poder ayudarte.</p>
+    </article>
+    <article class="right">
+      <form accept-charset="UTF-8" action="/suscribir" class="form-payment" method="post" target="_top"><div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="d/6um3AkqJNK9ppbswN/YKz9kUd4nv8gFJ4x+1oO2FI="></div>
+      <input id="first_name" name="first_name" placeholder="Tu nombre" required="required" type="text">
+      <input id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$" placeholder="Tu email" required="required" type="email">
+      <textarea id="message" name="message" placeholder="¿En qué te podemos ayudar?" type="text"></textarea>
+      <input class="cta-button" name="commit" type="submit" value="Solicita más información">
+    </form>    </article>
+  </div>
 </section>
