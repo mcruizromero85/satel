@@ -904,6 +904,32 @@ article.video-thumbnail img {
 .dance3 {
     background-position: -600px center;
 }
+
+.FrmRegistrarTorneo article.Detalle_torneo{
+
+    background-color: white;
+    width: 62%;
+    border-radius: 1%;
+    margin-left: 20%;
+}
+
+.Detalle_torneo img{
+    margin-top: 1%;
+    border-radius: 1%;
+    width: 99%;
+}
+
+#torneo_titulo{
+    font-size: 1.7em;
+    color: #686868;
+    padding: 10px;
+    font-family: fantasy;
+    font-weight: normal;
+}
+
+
+
+
 @media screen and (max-width: 1024px) {
 .member {
     margin: 1.66667%;
@@ -1021,6 +1047,9 @@ header{
 .video-social iframe {
     max-height: 400px;
 }
+
+
+
 }
 @media screen and (max-width: 768px) {
 .card-services .home-service {
@@ -1078,8 +1107,18 @@ footer .partners .partner {
 article.video-embed {
     width: 100%;
 }
+.FrmRegistrarTorneo article.Detalle_torneo{
+    width: 66%;
+    margin-left: 19%;
+}
+
 aside {
     display: none;
+}
+
+.FrmRegistrarTorneo article.Detalle_torneo{
+    width: 97%;
+    margin-left: 2%;
 }
 }
 @media screen and (max-width: 480px) {
@@ -1116,4 +1155,7 @@ section#contact .left, section#contact .right {
     margin-right: 0;
     width: 100%;
 }
+
+
+
 }
