@@ -35,15 +35,15 @@
     <div class="card-services">
     <article>        
       <article id="ContenidoTorneo">
-        <a class="estilo_listo" href="/torneos/iniciar/5"><img src="{{ultimo_torneo_finalizado.urllogo}}"></a>
+        <a class="estilo_listo" href="/torneos/iniciar/{{ultimo_torneo_finalizado.id}}"><img src="{{ultimo_torneo_finalizado.urllogo}}"></a>
         <article>
-        <h2><a href="/torneos/5">[Magma League] Torneo Heroes of the storm(Gratuito)</a></h2>
-          <p>Máximo <b>16 slots.</b><br>
-          Torneo iniciado!!!, haz click  <b>  
-        <font color="green"><a class="estilo_listo" href="/torneos/iniciar/5">aquí</a></font></b> para ver las llaves
+        <h2><a href="/torneos/{{ultimo_torneo_finalizado.id}}">{{ultimo_torneo_finalizado.titulo}}</a></h2>
+          <p>Máximo <b>{{ultimo_torneo_finalizado.vacantes}} slots.</b><br>
+          Para ver detalle, haz click  <b>  
+        <font color="green"><a class="estilo_listo" href="/torneos/{{ultimo_torneo_finalizado.id}}">aquí</a></font></b> para ver las llaves
         </p></article>
         <article class="PricePool">
-        <p>Bolsa de premios: <br>$ <u>25.0</u></p>
+        <p>Bolsa de premios: <br>$ <u>{{ultimo_torneo_finalizado.monto_auspiciado}}</u></p>
           <br>  
         </article>
       </article>

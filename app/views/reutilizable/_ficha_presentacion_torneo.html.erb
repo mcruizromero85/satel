@@ -1,22 +1,23 @@
   <article class="Detalle_torneo">
-  <br/>
+  
+   <img src="/assets/destacado_ligamagma_hots-f3b323190314139b64ee4e8dc3b7e26d.png">
 
-  <label class ="MostrarTorneo_datos" id="torneo_id"><b>Id del torneo:</b> <span id="id_torneo_registrado"><%=torneo.id %></span></label>
-  <br/>
+  <!--<label class ="MostrarTorneo_datos" id="torneo_id"><b>Id del torneo:</b> <span id="id_torneo_registrado"><%=torneo.id %></span></label>
+  <br/>-->
 
-  <label class ="MostrarTorneo_datos" id="torneo_titulo"><b>Titulo del torneo:</b> <%=torneo.titulo%></label>
-  </br>
+  <article class="infoTorneo">
 
+  <label class ="MostrarTorneo_datos" id="torneo_titulo"><!--<b>Titulo del torneo:</b>--> <%=torneo.titulo%></label>
+ 
   <label class ="MostrarTorneo_datos" id="cuadro_de_juegos"><b>Juego:</b> <%=torneo.juego.nombre%><br/>
   </label>
 
   <label class ="MostrarTorneo_datos" id="cuadro_de_vacantes"><b>Vacantes: </b><%=torneo.vacantes%></label>
-  <br>
+ 
  
   <label class ="MostrarTorneo_datos" id="Fecha_inscripcion"><b>Fecha cierre inscripci&oacute;n:</b> <%= torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %></label>
-  <br>
-
-  <div  class="fb-post" data-href="<%=torneo.post_detalle_torneo%>" ></div>
+ 
+   <!--!<div  class="fb-post" data-href="<%=torneo.post_detalle_torneo%>" ></div> -->
   <br/>
-  <br/>  
+  </article>
 </article>

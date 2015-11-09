@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20151020012501) do
     t.integer  "flag_pago_inscripciones",         default: 0, null: false
     t.string   "urllogo"
     t.string   "urllogoSponsors"
+    t.decimal  "monto_auspiciado"
   end
 
   add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"

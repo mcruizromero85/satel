@@ -25,9 +25,31 @@
 
   <header>
   <a id="menu-icon" href="#"></a>
-  <img class="logo" src="<%= image_path("logo.png") %>" alt="GG E-sports"/>
+  <a href="/"><img class="logo" src="<%= image_path("logo.png") %>" alt="GG E-sports"/></a>
+  <nav role="navigation" style="left: 0px;">
+      <ul>
+        <li><a id="link_mis_torneos" href="/torneos/mis_torneos">Mis torneos</a></li>
+        <li>
+          <img class="Lista_Inscritos_item_UsFb" src="http://graph.facebook.com/10152650542088277/picture" height="35px" width="35px">
+          <b class="WelcomeUSer"> Bienvenid@: Mauro</b>
+        </li>
+        <li>  
+          <a id="link_cerrar_sesion" href="/cerrar_sesion">Cerrar Sesión</a>
+        </li>  
+        </ul>
+      </nav>
 </header>
 <%= yield %>
 </body>
-
+<footer>  
+    <section class="RedesSociales">
+      <a href="https://www.facebook.com/ggesports.la" target="_blank">
+      <img class="logo" src="<%= image_path("twitter.png") %>" alt="GG E-sports twitter"/>
+      </a>
+      <a href="https://www.facebook.com/ggesports.la" target="_blank">
+      <img class="logo" src="<%= image_path("facebook.png") %>" alt="GG E-sports facebook"/>
+      </a>
+   </section> 
+     <h2>Copyright © 2015 - Todos los derechos reservados - Lima Perú</h2> 
+</footer>
 </html>
