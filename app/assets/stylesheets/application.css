@@ -363,6 +363,43 @@ iframe {
 .container-small {
     max-width: 46.875em;
 }
+
+nav {
+    float: right;
+    height: 99%;
+    line-height: 29px;
+    margin-right: 2%;
+    font-family: "Lucida Sans Unicode","Lucida Grande",Arial,sans-serif;
+}
+
+nav ul {
+    margin: 0;
+    font-size: 13px;
+    list-style: none;
+    padding: 0px;
+}
+
+nav ul li {
+    font-weight: normal;
+    display: inline-block;
+    float: left;
+    padding: 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.WelcomeUSer {
+    float: right;
+    color: #fff;
+    font-weight: normal;
+    font-size: 14px;
+    padding-left: 10px;
+    vertical-align: middle;
+}
+
 .navigation {
     background-color: white;
     border-bottom: 1px solid #e6e6e6;
@@ -1142,6 +1179,22 @@ aside {
 }
 }
 @media screen and (max-width: 480px) {
+
+header nav ul li {
+    background-color: #111;
+    display: block;
+    float: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+header nav {
+    width: 70%;
+    height: 100%;
+    left: -100%;
+    margin: 0;
+    position: fixed;
+    z-index: 100;
+}    
 .PortadaAnimacion {
   height: inherit;
 }

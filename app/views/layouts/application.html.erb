@@ -21,7 +21,32 @@
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.5&appId=686458234757061";
     fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
+  }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <script>
+
+    var contador = 1;
+   
+    function main(){
+      $('#menu-icon').click(function(){
+        if(contador == 1){
+          $('nav').animate({
+            left: '0'
+          });
+          contador = 0;
+        } else {
+          contador = 1;
+          $('nav').animate({
+            left: '-100%'
+          });
+        }
+     
+      });
+     
+    };
+    $(document).ready(main);
+  </script>
 
   <header>
   <a id="menu-icon" href="#"></a>
