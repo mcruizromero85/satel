@@ -30,6 +30,8 @@ Satel::Application.routes.draw do
 
   resources :inscripcions
 
+  resources :suscriptions
+
   get '/inscripciones/new/:id_torneo' => 'inscripciones#new'
 
   get '/torneos/preparar/:id' => 'torneos#preparar'

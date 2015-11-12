@@ -22,6 +22,7 @@ class TorneosController < ApplicationController
 
   # GET /torneos GET /torneos.json
   def index
+    @suscription = Suscription.new
     @torneos_inscritos_y_confirmados = []
     @torneos_finalizados = Torneo.where(estado: TORNEO_ESTADO_FINALIZADO)
     @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)

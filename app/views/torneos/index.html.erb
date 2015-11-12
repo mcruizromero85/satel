@@ -29,7 +29,7 @@
     </div>
   </div>
 </section>
-<section class="ResumenTorneo gray horizontal">
+<section class="ResumenTorneo gray horizontal" ng-controller="TorneoController as torneoCtrl">
   <div class="container">
     <h2>&Uacute;ltimo torneo organizado</h2>
     <div class="card-services">
@@ -58,11 +58,12 @@
       <p class="info-contact">Cuentamos sobre el torneo que deseas organizar para poder ayudarte.</p>
     </article>
     <article class="right">
-      <form accept-charset="UTF-8" action="/suscribir" class="form-payment" method="post" target="_top"><div style="display:none"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="d/6um3AkqJNK9ppbswN/YKz9kUd4nv8gFJ4x+1oO2FI="></div>
-      <input id="first_name" name="first_name" placeholder="Tu nombre" required="required" type="text">
-      <input id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$" placeholder="Tu email" required="required" type="email">
-      <textarea id="message" name="message" placeholder="¿En qué te podemos ayudar?" type="text"></textarea>
-      <input class="cta-button" name="commit" type="submit" value="Solicita más información">
-    </form>    </article>
+      <%= form_for @suscription, html: {class: "frm-registro", target: "_top", action: "suscribir"  } do %>
+        <input id="suscription_first_name" name="suscription[first_name]" placeholder="Tu nombre" required="required" type="text">
+        <input id="suscription_email" name="suscription[email]" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$" placeholder="Tu email" required="required" type="email">
+        <textarea id="suscription_message" name="suscription[message]" placeholder="¿En qué te podemos ayudar?" type="text"></textarea>
+        <input class="cta-button" name="commit" type="submit" value="Solicita más información">
+      <% end %>
+    </article>
   </div>
 </section>
