@@ -8,9 +8,98 @@
 }(document, 'script', 'facebook-jssdk'));
 </script>
 <section class="FrmRegistrarTorneo">
-  <h1>Detalle del Torneo</h1>
+  <h2>Detalle del Torneo</h2>
   <%= render partial: "reutilizable/ficha_presentacion_torneo", object: @torneo, as: :torneo %>
   <br/>
+
+ <div class="container">
+    <h2>Auspiciado Por</h2>
+    <div class="card-services-dt1">
+      <article class="card home-service-dt1" style="height: 196px">
+        <div class="course-data">
+         <img class="logo_dt1_au" src="<%= image_path("Auspiciador1.png") %>" alt="GG E-sports"/>
+        </div>
+
+      </article>
+
+     <article class="card home-service-dt1" style="height: 196px">
+        <div class="course-data">
+         <img class="logo_dt1_au" src="<%= image_path("Auspiciador2.png") %>" alt="GG E-sports"/>
+        </div>
+
+      </article>
+
+     <article class="card home-service-dt1" style="height: 196px">
+        <div class="course-data">
+         <img class="logo_dt1_au" src="<%= image_path("Auspiciador3.png") %>" alt="GG E-sports"/>
+        </div>
+
+      </article>
+
+    </div>
+  </div>
+
+  <div class="container">
+      <div class="card-services-dt2">
+      <article class="card home-service-dt2" style="height: 290px;">
+        <div class="course-data">
+          <h2>Fecha del torneo</h2>
+          <img class="logo_dt2_au" src="<%= image_path("date.png") %>" alt="GG E-sports"/><br>
+          <b>23/09/2015 GMT-5</b>
+         </div>
+      </article>
+
+      <article class="card home-service-dt2" style="height: 290px;">
+        <div class="course-data">
+          <h2>Rondas</h2>
+          
+        <table class="Rondas_table">
+        <thead>
+         <tr>
+         <td class="Rondas_encabezado">Final<td>
+         <td class="Rondas_contenido">BO5</td>
+         </tr>  
+        <tr>
+         <td class="Rondas_encabezado">Semifinal<td>
+         <td class="Rondas_contenido">BO3</td>
+        </tr>
+        <tr>  
+         <td class="Rondas_encabezado">Anteriores<td>
+         <td class="Rondas_contenido">BO1</td>
+        </tr>
+        <tr>
+         <td class="Rondas_encabezado">Primera ronda<td>
+         <td class="Rondas_contenido">BO1</td>
+        </tr>
+       </thead>
+     </table>
+
+
+         </div>
+      </article>
+
+      <article class="card home-service-dt2" style="height: 290px;">
+        <div class="course-data">
+          <h2>Bolsas de premios</h2>
+            <table>
+            <thead>
+            <tr><td><img class="logo_dt3_au" src="<%= image_path("Puestos.png") %>" alt="GG E-sports"/><br></td></tr>
+            </thead>
+            <tbody>
+            <tr><td><b class="Dt_puestos_pdinero">$25 &nbsp&nbsp $100 &nbsp&nbsp $5</b></td></tr>
+            </tbody>
+            </table>        
+
+         </div>
+      </article>
+     
+     
+
+
+    </div>
+  </div>
+
+
   <article class="Detalle_Torneo_Ver">
     <% if @mensaje_de_guardado.nil? %>
       <center>

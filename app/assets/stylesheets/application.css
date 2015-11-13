@@ -524,6 +524,8 @@ dd {
 }
 h2 {
     margin-bottom: 50px;
+    color: #164777;
+    margin-top: 30px;
 }
 h3 {
     font-size: 1.3rem;
@@ -891,8 +893,10 @@ article.video-thumbnail img {
     min-height: 280px;
     padding: 20px;
 }
+
+
 .course-service img, .home-service img {
-    width: 100px;
+    width: 100%;
 }
 .course-service h4, .home-service h4 {
     color: #164777;
@@ -906,9 +910,91 @@ article.video-thumbnail img {
     margin-right: 2%;
     width: 32%;
 }
+
+.card-services-dt1 .home-service-dt1, .card-courses .home-course, .card-professors .professor {
+    float: left;
+    margin-right: 2%;
+    width: 32%;
+}
+
+.card-services-dt2 .home-service-dt2, .card-courses .home-course, .card-professors .professor {
+    float: left;
+    margin-right: 2%;
+    width: 32%;
+}
+
+.card-services-dt2 .logo_dt2_au{
+    width: 56%;
+
+}
+
+.card-services-dt2 .logo_dt3_au{
+    width: 91%;
+
+}
+
+.card-services-dt2 h2{
+
+    margin-bottom: auto;
+    margin-top: auto;
+    
+}
+
+.card-services-dt2 b{
+
+    font-size: 2em;
+    
+}
+
+.card-services-dt2 .Rondas_table {
+    margin-top: 2%;
+    font-size: 22px;
+    color: #164777;
+    font-weight: bold;
+    width: 100%;
+    margin-left: 0;
+    border-collapse: separate;
+    text-align: left;
+
+}
+
+.card-services-dt2 .Rondas_encabezado{
+    border: 3px solid;
+    border-left-color: white;
+    border-right-color: white;
+    border-top-color: white;
+}
+
+.card-services-dt2 .Rondas_contenido{
+
+    border: 3px solid;
+    border-left-color: white;
+    border-right-color: white;
+    border-top-color: white;
+
+}
+
 .card-services .home-service:nth-child(3n), .card-courses .home-course:nth-child(3n), .card-professors .professor:nth-child(3n) {
     margin-right: 0;
 }
+
+.card-services-dt1 .home-service-dt1:nth-child(3n), .card-courses .home-course:nth-child(3n), .card-professors .professor:nth-child(3n) {
+    margin-right: 0;
+}
+
+.card-services-dt2 .home-service-dt2:nth-child(3n), .card-courses .home-course:nth-child(3n), .card-professors .professor:nth-child(3n) {
+    margin-right: 0;
+}
+
+
+.card-services-dt2 .card{
+    background-color: white;
+}
+
+.card-services-dt1 .card{
+    background-color: white;
+}
+
 .home-courses .card {
     background-color: white;
 }
@@ -959,10 +1045,8 @@ article.video-thumbnail img {
 
 #torneo_titulo{
     font-size: 1.7em;
-    color: #686868;
+    color: #164777;
     padding: 10px;
-    font-family: fantasy;
-    font-weight: normal;
 }
 
 .RedesSociales img{
@@ -1120,6 +1204,23 @@ footer h2 {
     min-height: 0;
     width: 100%;
 }
+
+
+
+.card-services-dt1 .home-service-dt1 {
+    margin-right: 0;
+    min-height: 0;
+    width: 100%;
+}
+
+.card-services-dt2 .home-service-dt2 {
+    margin-right: 0;
+    min-height: 0;
+    width: 100%;
+}
+
+
+
 .video img {
     width: 100%;
 }
