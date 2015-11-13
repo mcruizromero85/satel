@@ -1062,14 +1062,13 @@ h2 + .tagline {
 .PortadaAnimacion{
   width: 100%;
   display: block;
-  height: 550px;
   background-color: black;
 }
 
 header{
-  background: #000000;
+  background: #164777;
   width: 100%;
-  height: 51.4px;
+  height: 50px;
   top: 0;
   left: 0;
   z-index: 100;
@@ -1111,7 +1110,9 @@ footer h2 {
     max-height: 400px;
 }
 
-
+.PortadaAnimacion {
+  height: inherit;
+}
 
 }
 @media screen and (max-width: 768px) {
@@ -1183,6 +1184,11 @@ aside {
     width: 97%;
     margin-left: 2%;
 }
+
+.PortadaAnimacion {
+  height: inherit;
+}
+
 }
 @media screen and (max-width: 480px) {
 

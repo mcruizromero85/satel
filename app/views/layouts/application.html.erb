@@ -53,13 +53,20 @@
   <a href="/"><img class="logo" src="<%= image_path("logo.png") %>" alt="GG E-sports"/></a>
   <nav role="navigation">
       <ul>
+        <% if @current_gamer == nil %>
+          <li class="opcion_facebook"><a id="autenticarse" href="/auth/facebook" > 
+               <button class="btnFacebook" type="button">Ingrese con Facebook</button>
+            </a> 
+          </li> 
+        <% else %>
         <li>
-          <img class="Lista_Inscritos_item_UsFb" src="http://graph.facebook.com/10152650542088277/picture" height="35px" width="35px">
-          <b class="WelcomeUSer"> Bienvenid@: Mauro</b>
+          <img class="Lista_Inscritos_item_UsFb" src="<%= current_gamer.authentications[0].icono %>" height='35px' width='35px'>
+          <b class="WelcomeUSer"> Bienvenid@: <%=@current_gamer.nombres%></b>
         </li>
         <li>  
-          <a id="link_cerrar_sesion" href="/cerrar_sesion">Cerrar Sesión</a>
+          <a id="link_cerrar_sesion" href="/cerrar_sesion">Cerrar Sesi&oacute;n</a>
         </li>  
+        <% end %>
         </ul>
       </nav>
 </header>
@@ -77,3 +84,5 @@
      <h2>Copyright © 2015 - Todos los derechos reservados - Lima Perú</h2> 
 </footer>
 </html>
+
+
