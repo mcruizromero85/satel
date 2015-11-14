@@ -811,8 +811,7 @@ section#contact .cta-button {
 section.horizontal {
     padding: 75px 0;
 }
-.cta-button, a.cta-button {
-    font-size: 1.2em;
+.cta-button, a.cta-button {    
     margin-top: 26px;
     padding-bottom: 15px;
     width: 500px;
