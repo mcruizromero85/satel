@@ -6,8 +6,7 @@ class TorneosController < ApplicationController
   before_filter :set_access
 
   def ultimo_finalizado
-
-    torneo = Torneo.where(estado: TORNEO_ESTADO_FINALIZADO).last
+    torneo = Torneo.last
     teams = torneo.arreglo_de_nombres_para_llaves(3)
     results = TorneosHelper.obtener_array_para_resultado_llaves(torneo,3)
     inscripciones = Inscripcion.inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
@@ -88,7 +87,6 @@ class TorneosController < ApplicationController
     @torneo.estado = 'Creado'
     respond_to do |format|
       if @torneo.save
-        DetallePagoInscripcion.create(monto_inscripcion: 0.0, monto_auspiciado: 0.0, torneo_id: @torneo.id)
         @mensaje_de_guardado = 'Torneo creado correctamente'
         format.html { render action: 'show' }
         format.json { render json: @torneo, status: :created }

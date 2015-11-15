@@ -31,7 +31,7 @@
 </section>
 <section class="ResumenTorneo gray horizontal" ng-controller="TorneoController as torneoCtrl">
   <div class="container">
-    <h2>&Uacute;ltimo torneo organizado</h2>
+    <h2>&Uacute;ltimo torneo</h2>
     <div class="card-services">
     <article>        
       <article id="ContenidoTorneo">
@@ -39,12 +39,11 @@
         <article>
         <h2><a href="/torneos/{{ultimo_torneo_finalizado.id}}">{{ultimo_torneo_finalizado.titulo}}</a></h2>
           <p>Máximo <b>{{ultimo_torneo_finalizado.vacantes}} slots.</b><br>
-          Para ver detalle, haz click  <b>  
-        <font color="green"><a class="estilo_listo" href="/torneos/{{ultimo_torneo_finalizado.id}}">aquí</a></font></b> para ver las llaves
+          <p>Estado <b>{{ultimo_torneo_finalizado.estado}}</b><br>
         </p></article>
-        <article class="PricePool">
-        <p>Bolsa de premios: <br>$ <u>{{ultimo_torneo_finalizado.monto_auspiciado}}</u></p>
+        <p> <font color="green">Bolsa de premios: $<u>{{ultimo_torneo_finalizado.monto_auspiciado}}</u></font></p>
           <br>  
+          <a href="/torneos/{{ultimo_torneo_finalizado.id}}" class="cta-button">Ver detalle </a>
         </article>
       </article>
       </article>

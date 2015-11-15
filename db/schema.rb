@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109130343) do
+ActiveRecord::Schema.define(version: 20151114212736) do
 
   create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20151109130343) do
     t.date     "fecha_ultimo_login"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "battletag"
   end
 
   create_table "hots_formularios", force: true do |t|
@@ -122,6 +123,13 @@ ActiveRecord::Schema.define(version: 20151109130343) do
     t.datetime "updated_at"
   end
 
+  create_table "sc2_forms", force: true do |t|
+    t.integer  "inscripcion_id"
+    t.string   "race"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "suscriptions", force: true do |t|
     t.string   "first_name"
     t.string   "email"
@@ -166,6 +174,8 @@ ActiveRecord::Schema.define(version: 20151109130343) do
   add_foreign_key "partidas", "encuentros", name: "partidas_encuentro_id_fk"
 
   add_foreign_key "rondas", "torneos", name: "rondas_torneo_id_fk"
+
+  add_foreign_key "sc2_forms", "inscripciones", name: "sc2_forms_inscripcion_id_fk"
 
   add_foreign_key "torneos", "gamers", name: "torneos_gamer_id_fk"
   add_foreign_key "torneos", "juegos", name: "torneos_juego_id_fk"
