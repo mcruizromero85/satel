@@ -922,6 +922,12 @@ article.video-thumbnail img {
     width: 32%;
 }
 
+.card-services-dt3 .home-service-dt3, .card-courses .home-course, .card-professors .professor {
+    float: left;
+    margin-right: 2%;
+    width: 32%;
+}
+
 .card-services-dt2 .logo_dt2_au{
     width: 56%;
 
@@ -964,6 +970,8 @@ article.video-thumbnail img {
     border-top-color: white;
 }
 
+
+
 .card-services-dt2 .Rondas_contenido{
 
     border: 3px solid;
@@ -971,6 +979,35 @@ article.video-thumbnail img {
     border-right-color: white;
     border-top-color: white;
 
+}
+
+.card-services-dt3 .LogoEquipo{
+    width: 18%;
+    height: 45px;
+
+    margin-top: 1%;
+
+}
+
+.card-services-dt3 .Team{
+    float: right;
+    width: 78%;
+    margin-left: -9%;
+    margin-right: 9%;
+    font-size: 2em;
+    color: #164777;
+}
+
+.card-services-dt3 .Table_Detalle_Team{
+    margin-bottom: 0;
+    font-size: 0.8em;
+    float: right;
+    width: 84%;
+    margin-right: 0%;
+    background-color: #EFEFFB;
+    height: 175px;
+    border-radius: 1%;
+    color: #164777;
 }
 
 .card-services .home-service:nth-child(3n), .card-courses .home-course:nth-child(3n), .card-professors .professor:nth-child(3n) {
@@ -985,6 +1022,13 @@ article.video-thumbnail img {
     margin-right: 0;
 }
 
+.card-services-dt3 .home-service-dt3:nth-child(3n), .card-courses .home-course:nth-child(3n), .card-professors .professor:nth-child(3n) {
+    margin-right: 0;
+}
+
+.card-services-dt3 .card{
+    background-color: white;
+}
 
 .card-services-dt2 .card{
     background-color: white;
@@ -1197,7 +1241,54 @@ footer h2 {
   height: inherit;
 }
 
+.card-services-dt2 .logo_dt2_au {
+    width: 40%;
 }
+
+.card-services-dt2 .logo_dt3_au {
+    width: 69%;
+}
+
+.card-services-dt3 .Table_Detalle_Team {
+        font-size: 0.76em;
+
+}
+
+
+.card-services-dt3 .Team{
+        font-size: 1.6em;
+        width: 76%;
+        margin-right: 0;
+}
+
+.card-services-dt3 .Table_Detalle_Team {
+    width: 91%;
+    }
+
+.card-services-dt3 .LogoEquipo {
+    width: 24%;
+    margin-right: 8%;
+}
+
+
+
+}
+
+@media screen and (max-width: 890px) {
+
+    .card-services-dt3 .LogoEquipo {
+    width: 11%;
+    margin-right: 0;
+ 
+}
+
+.card-services-dt3 .Team {
+    font-size: 2em;
+    width: 97%;
+}
+}
+
+
 @media screen and (max-width: 768px) {
 .card-services .home-service {
     margin-right: 0;
@@ -1218,6 +1309,14 @@ footer h2 {
     min-height: 0;
     width: 100%;
 }
+
+.card-services-dt3 .home-service-dt3 {
+    margin-right: 0;
+    min-height: 0;
+    width: 100%;
+}
+
+
 
 
 
@@ -1290,7 +1389,8 @@ aside {
 }
 
 }
-@media screen and (max-width: 480px) {
+
+@media screen and (max-width: 530px) {
 
 header nav ul li {
     background-color: #111;
@@ -1349,5 +1449,19 @@ section#contact .left, section#contact .right {
 .RedesSociales img{
     width: 30%
 }
+
+.card-services-dt3 .LogoEquipo {
+    width: 17%;
+}
+
+.card-services-dt3 .Team {
+    font-size: 1.6em;
+    width: 87%;
+}
+.card-services-dt3 .Table_Detalle_Team{
+    width: 90%;
+}
+
+
 
 }
