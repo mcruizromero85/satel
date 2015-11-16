@@ -6,7 +6,7 @@ class TorneosController < ApplicationController
   before_filter :set_access
 
   def ultimo_finalizado
-    torneo = Torneo.last
+    torneo = Torneo.where(estado: TORNEO_ESTADO_FINALIZADO).last
     teams = torneo.arreglo_de_nombres_para_llaves(3)
     results = TorneosHelper.obtener_array_para_resultado_llaves(torneo,3)
     inscripciones = Inscripcion.inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
@@ -16,7 +16,13 @@ class TorneosController < ApplicationController
     respond_to do |format|
       format.json { render json: json, status: :ok }
     end
+  end
 
+  def ultimo_creado
+    torneo = Torneo.where(estado: TORNEO_ESTADO_CREADO).last
+    respond_to do |format|
+      format.json { render json: torneo.to_json, status: :ok }
+    end
   end
 
   # GET /torneos GET /torneos.json

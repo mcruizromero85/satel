@@ -5,6 +5,7 @@ FLAG_INSCRIPCIONES_DISPONIBLES = 0
 ID_JUEGO_HOTS = 6
 ID_JUEGO_SC2 = 8
 TORNEO_ESTADO_FINALIZADO = 'Finalizado'
+TORNEO_ESTADO_CREADO = 'Creado'
 if ENV["RAILS_ENV"] == 'production'
 	URL_CANCELAR_PAYPAL = "http://www.ggesports.la/" 
 	URL_RETORNO_PAYPAL = "http://www.ggesports.la/inscripciones/confirmar/"
