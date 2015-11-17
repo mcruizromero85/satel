@@ -27,3 +27,5 @@ Inscripcion.all.each do | inscripcion |
   	inscripcion.save
   end
 end
+
+ Juego.create(nombre: "Starcraft 2", nombre_imagen:"starcraft2.jpg", descripcion: "Starcraft 2", tipo_juego: 0)

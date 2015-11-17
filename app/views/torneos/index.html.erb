@@ -31,20 +31,22 @@
 </section>
 <section class="ResumenTorneo gray horizontal" ng-controller="TorneoController as torneoCtrl">
   <div class="container">
-    <h2>&Uacute;ltimo torneo organizado</h2>
+    <h2>&Uacute;ltimo torneo Creado</h2>
     <div class="card-services">
     <article>        
       <article id="ContenidoTorneo">
-        <a class="estilo_listo" href="/torneos/iniciar/{{ultimo_torneo_finalizado.id}}"><img src="{{ultimo_torneo_finalizado.urllogo}}"></a>
+        <a class="estilo_listo" href="/torneos/iniciar/{{ultimo_torneo_creado.id}}"><img src="{{ultimo_torneo_creado.urllogo}}"></a>
         <article>
-        <h2><a href="/torneos/{{ultimo_torneo_finalizado.id}}">{{ultimo_torneo_finalizado.titulo}}</a></h2>
-          <p>Máximo <b>{{ultimo_torneo_finalizado.vacantes}} slots.</b><br>
-          Para ver detalle, haz click  <b>  
-        <font color="green"><a class="estilo_listo" href="/torneos/{{ultimo_torneo_finalizado.id}}">aquí</a></font></b> para ver las llaves
+        <h2><a href="/torneos/{{ultimo_torneo_creado.id}}">{{ultimo_torneo_creado.titulo}}</a></h2>
+          <p>Máximo <b>{{ultimo_torneo_creado.vacantes}} slots.</b><br>
+          <p>Estado <b>{{ultimo_torneo_creado.estado}}</b><br>
         </p></article>
-        <article class="PricePool">
-        <p>Bolsa de premios: <br>$ <u>{{ultimo_torneo_finalizado.monto_auspiciado}}</u></p>
+        <p> <font color="green">Bolsa de premios: $<u>{{ultimo_torneo_creado.monto_auspiciado}}</u></font></p>
           <br>  
+          <a href="/torneos/{{ultimo_torneo_creado.id}}" class="cta-button">Ver detalle </a>
+          <br/>
+          <br/>
+          <a href="/torneos/{{ultimo_torneo_finalizado.id}}" class="estilo_listo"><b>&Uacute;ltimo Torneo Finalizado<b></a>
         </article>
       </article>
       </article>

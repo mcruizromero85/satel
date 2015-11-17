@@ -9,7 +9,12 @@ torneoApp.controller('TorneoController', function ($scope, $http){
         teams : data.teams,
         results: data.results
       }
-  });  
+  });
+
+  $http.get('ultimo_torneo_creado.json').success(function(data) {
+    $scope.ultimo_torneo_creado = data;
+  });
+
 });
 
 

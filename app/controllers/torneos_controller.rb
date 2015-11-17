@@ -6,7 +6,6 @@ class TorneosController < ApplicationController
   before_filter :set_access
 
   def ultimo_finalizado
-
     torneo = Torneo.where(estado: TORNEO_ESTADO_FINALIZADO).last
     teams = torneo.arreglo_de_nombres_para_llaves(3)
     results = TorneosHelper.obtener_array_para_resultado_llaves(torneo,3)
@@ -17,7 +16,13 @@ class TorneosController < ApplicationController
     respond_to do |format|
       format.json { render json: json, status: :ok }
     end
+  end
 
+  def ultimo_creado
+    torneo = Torneo.where(estado: TORNEO_ESTADO_CREADO).last
+    respond_to do |format|
+      format.json { render json: torneo.to_json, status: :ok }
+    end
   end
 
   # GET /torneos GET /torneos.json
@@ -88,7 +93,6 @@ class TorneosController < ApplicationController
     @torneo.estado = 'Creado'
     respond_to do |format|
       if @torneo.save
-        DetallePagoInscripcion.create(monto_inscripcion: 0.0, monto_auspiciado: 0.0, torneo_id: @torneo.id)
         @mensaje_de_guardado = 'Torneo creado correctamente'
         format.html { render action: 'show' }
         format.json { render json: @torneo, status: :created }
@@ -194,7 +198,7 @@ class TorneosController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def torneo_params
-    params.require(:torneo).permit(:titulo, :urlstreeming, :vacantes, :cierre_inscripcion, :post_detalle_torneo, :periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego)
+    params.require(:torneo).permit(:titulo, :urlstreeming, :vacantes, :cierre_inscripcion, :post_detalle_torneo, :periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego, :urllogo, :urllogoSponsors,:monto_auspiciado)
   end
 
   def set_access

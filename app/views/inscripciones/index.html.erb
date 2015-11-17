@@ -7,23 +7,12 @@
   <% if @inscripciones.size > 0 %>
   <Section class="Lista_Inscritos" >
   <h1>Lista de inscritos</h1>
-        <script>
-      $(function() {
-        $( "#accordion" ).accordion({
-          collapsible: true     
-        });        
-      });
-      $( ".selector" ).accordion( "option", "header", "article .Lista_Inscritos_Item" );
-      $( ".selector" ).accordion( "option", "active", false );
-      </script>
-  <% if !@mensaje_inscripcion.nil? %>
-  <script>
-  </script>
-  <div id="dialog-confirm" title="Inscripción confirmada">
-    <span class="ui-icon ui-icon-alert" style="float:left;"></span>
-    <p><%=@mensaje_inscripcion%></p>
-  </div>
-  <% end %>
+    <% if !@mensaje_inscripcion.nil? %>
+      <div id="dialog-confirm" title="Inscripción confirmada">
+        <span class="ui-icon ui-icon-alert" style="float:left;"></span>
+        <p><%=@mensaje_inscripcion%></p>
+      </div>
+    <% end %>
   <article class="Team_Inscritos">
     <article id="accordion" class="lista_Inscritos_contenido">
        <% @inscripciones.each do |inscripcion| %>       
@@ -42,11 +31,6 @@
               <% end %>  
               </article>
            </article>
-           <article class="miembros_equipo2">
-           <article class="miembros_equipo">
-             <%= render partial: "hots_formularios/show", object: inscripcion, as: :inscripcion %>
-           </article>
-         </article>
         <% end %>
       <br/>
     </article>

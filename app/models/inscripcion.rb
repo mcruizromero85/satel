@@ -3,8 +3,12 @@ class Inscripcion < ActiveRecord::Base
   belongs_to :gamer
   belongs_to :torneo, autosave: false
   has_one :hots_formulario, dependent: :delete
+  has_one :sc2_form, dependent: :delete
   accepts_nested_attributes_for :hots_formulario
-  validates_associated :hots_formulario
+  accepts_nested_attributes_for :sc2_form
+  validates_associated :hots_formulario, if: "torneo.juego.id == " + ID_JUEGO_HOTS.to_s
+  validates_associated :sc2_form, if: "torneo.juego.id == " + ID_JUEGO_SC2.to_s
+  validates_associated :gamer
   validates :etiqueta_llave, presence: { message: ', La etiqueta a mostrar en las llaves no se generó correctamente' }
   validates :etiqueta_chat, presence: { message: ', La etiqueta a mostrar en el chat no se generó correctamente' }
 
@@ -46,12 +50,11 @@ class Inscripcion < ActiveRecord::Base
   end
 
   def inscribir
-    if gamer.nick.nil?
-      errors.add(:gamer, ', Debes colocar tu nick')
+    if !gamer.valid?
+      puts gamer.errors
+      errors.add(:gamer,  "El battle tag no tiene el formato nick#1234")
       return
     end
-    self.etiqueta_llave = hots_formulario.nombre_equipo
-    self.etiqueta_chat = hots_formulario.capitan_nick + '(' + hots_formulario.nombre_equipo + ')'
     self.estado = 'Inscrito'
     save
   end

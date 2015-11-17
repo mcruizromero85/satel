@@ -4,7 +4,7 @@ class InscripcionesController < ApplicationController
   # GET /inscripciones
   # GET /inscripciones.json
   def index
-    @inscripciones = Inscripcion.where(torneo_id:  params[:id_torneo], tipo_inscripcion: nil).order(:created_at)
+    @inscripciones = Inscripcion.where(torneo_id:  params[:id_torneo]).order(:created_at)
     @torneo = Torneo.find(params[:id_torneo])
     @mensaje_inscripcion = params[:mensaje_inscripcion]
   end
@@ -29,22 +29,36 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones.json
   def create
     @torneo = Torneo.find(params[:id_torneo])
-    gamer_params = params.require(:gamer).permit(:correo)
-    hots_formulario = HotsFormulario.new(hots_formulario_params)
-    current_gamer.nick = hots_formulario.capitan_nick
-    current_gamer.correo = gamer_params[:correo]
-    current_gamer.save
-    @inscripcion = Inscripcion.new
-    @inscripcion.gamer = current_gamer
-    @inscripcion.nick = hots_formulario.nombre_equipo
-    @inscripcion.torneo = @torneo
-    @inscripcion.hots_formulario = hots_formulario
 
-    if  @torneo.flag_pago_inscripciones == 1
-      inscribir_y_cobrar
+    if @torneo.juego.id == ID_JUEGO_HOTS 
+      gamer_params = params.require(:gamer).permit(:correo)
+      hots_formulario = HotsFormulario.new(hots_formulario_params)
+      current_gamer.nick = hots_formulario.capitan_nick
+      current_gamer.correo = gamer_params[:correo]
+      current_gamer.save
+      @inscripcion = Inscripcion.new
+      @inscripcion.gamer = current_gamer
+      @inscripcion.nick = hots_formulario.nombre_equipo
+      @inscripcion.torneo = @torneo
+      @inscripcion.hots_formulario = hots_formulario
+      @inscripcion.etiqueta_llave = hots_formulario.nombre_equipo
+      @inscripcion.etiqueta_chat = hots_formulario.capitan_nick + '(' + hots_formulario.nombre_equipo + ')'
     else
-      inscribir
+      gamer_params = params.require(:gamer).permit(:correo,:battletag)
+      sc2_form = Sc2Form.new(sc2_forms_params)
+      current_gamer.nick = gamer_params[:battletag]
+      current_gamer.battletag = gamer_params[:battletag]
+      current_gamer.correo = gamer_params[:correo]      
+      current_gamer.save
+      @inscripcion = Inscripcion.new
+      @inscripcion.gamer = current_gamer
+      @inscripcion.nick = gamer_params[:battletag]
+      @inscripcion.torneo = @torneo
+      @inscripcion.sc2_form = sc2_form
+      @inscripcion.etiqueta_llave = current_gamer.battletag
+      @inscripcion.etiqueta_chat = current_gamer.battletag
     end
+    inscribir
   end
 
   def confirmar
@@ -141,5 +155,9 @@ class InscripcionesController < ApplicationController
 
   def hots_formulario_params
     params.require(:hots_formulario).permit(:capitan_nick, :nombre_equipo, :titular_numero1, :titular_numero2, :titular_numero3, :titular_numero4, :suplente_numero1, :suplente_numero2)
+  end
+
+  def sc2_forms_params
+    params.require(:sc2_form).permit(:race)
   end
 end

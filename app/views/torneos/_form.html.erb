@@ -1,15 +1,4 @@
-<script type="text/javascript">
-
-    $(function() {
-      $( "#cuadro_de_vacantes" ).buttonset();
-    });
-
-    $(function() {
-      $( "#cuadro_de_juegos" ).buttonset();
-    });
-
-</script>
- <h1>Registra tu torneo</h1>
+<h1>Registra tu torneo</h1>
         <br/>
 <span id="mensajeError"></span>
 <%= form_for @torneo,  html: {class: "frm-registro"} do |f| %>
@@ -66,6 +55,11 @@
  <% end %>  
  </label>     
 <br>
+<label id="torneo_urllogo_label">Url logo<input type="text" name="torneo[urllogo]" id="torneo_urllogo" value="<%=@torneo.urllogo%>" /></label>
+<br>
+<label id="torneo_urlspon_label">Monto auspiciado<input type="text" name="torneo[monto_auspiciado]" id="torneo_monto_auspiciado" value="<%=@torneo.monto_auspiciado%>" /></label>
+<br>
+<label id="torneo_urllogo_label">Url logo sponsor<input type="text" name="torneo[urllogoSponsors]" id="torneo_urllogo" value="<%=@torneo.urllogoSponsors%>" /></label>
 <br>
 <label id="Confirmacion_torneo">Periodo de confirmaci&oacute;n:
 
