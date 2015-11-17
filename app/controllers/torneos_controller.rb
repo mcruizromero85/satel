@@ -198,7 +198,7 @@ class TorneosController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def torneo_params
-    params.require(:torneo).permit(:titulo, :urlstreeming, :vacantes, :cierre_inscripcion, :post_detalle_torneo, :periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego)
+    params.require(:torneo).permit(:titulo, :urlstreeming, :vacantes, :cierre_inscripcion, :post_detalle_torneo, :periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego, :urllogo, :urllogoSponsors,:monto_auspiciado)
   end
 
   def set_access
