@@ -18,20 +18,3 @@ torneoApp.controller('TorneoController', function ($scope, $http){
 });
 
 
-$.ajax({
-  url: 'ultimo_torneo_finalizado.json',
-  data: {
-    format: 'json'
-  },
-  error: function() {
-    console.log('Se jodio');
-  },
-  success: function(data) {
-    var minimalData = {
-      teams : data.teams,
-      results: data.results
-    }
-    $('#llaves').bracket({init: minimalData, skipConsolationRound: true });
-    console.log(data); 
-  }
-});
