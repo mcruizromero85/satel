@@ -389,17 +389,20 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+    color: #164777;
     text-decoration: none;
+    font-family: "Open Sans";
+    font-weight: bold;
 }
 
 .WelcomeUSer {
     float: right;
-    color: #fff;
-    font-weight: normal;
+    color: #164777;
+   
     font-size: 14px;
     padding-left: 10px;
     vertical-align: middle;
+        font-family: "Open Sans";
 }
 
 .navigation {
