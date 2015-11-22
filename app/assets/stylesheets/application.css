@@ -385,7 +385,7 @@ nav ul li {
     font-weight: normal;
     display: inline-block;
     float: left;
-    padding: 6px;
+    padding: 10px;
 }
 
 nav ul li a {
@@ -892,13 +892,19 @@ article.video-thumbnail img {
 }
 .course-service, .home-service {
     min-height: 280px;
-    padding: 20px;
+    padding: 12px;
+}
+
+.home-service .logo_dt1_or{
+    width: 47%;
 }
 
 
 .course-service img, .home-service img {
     width: 100%;
 }
+
+
 .course-service h4, .home-service h4 {
     color: #164777;
     margin: 10px;
@@ -1198,7 +1204,7 @@ header{
  /* background: #164777;*/
  background-color: #F7F7F7;
   width: 100%;
-  height: 50px;
+  height: 63px;
   top: 0;
   left: 0;
   z-index: 100;
@@ -1216,12 +1222,13 @@ footer h2 {
     display: hidden;
     width: 40px;
     height: 40px;
-    background: #000 url(../assets/menu-icon.png) center;
+    background: #000 url(../assets/Product.png) center;
+    
 }
 
 .logo {
-   /* width: 150px;*/
-   width: 125px;
+    width: 120px;
+   
     margin-left: 5%;
    /* margin-top: 10px;*/
    margin-top: -6px;
@@ -1275,11 +1282,14 @@ footer h2 {
     margin-right: 8%;
 }
 
+.home-service .logo_dt1_or {
+    width: 66%;
+}
 
 
 }
 
-@media screen and (max-width: 890px) {
+@media screen and (max-width: 800px) {
 
     .card-services-dt3 .LogoEquipo {
     width: 11%;
@@ -1291,6 +1301,16 @@ footer h2 {
     font-size: 2em;
     width: 97%;
 }
+
+ .course-service, .home-service {
+    padding: 15px;
+ }
+
+ .home-service .logo_dt1_or {
+  width: 40%;
+ }
+
+
 }
 
 
@@ -1320,9 +1340,6 @@ footer h2 {
     min-height: 0;
     width: 100%;
 }
-
-
-
 
 
 .video img {
@@ -1393,12 +1410,15 @@ aside {
   height: inherit;
 }
 
+
+
+
 }
 
 @media screen and (max-width: 530px) {
 
 header nav ul li {
-    background-color: #111;
+    background-color: #F7F7F7;
     display: block;
     float: none;
     border-bottom: 1px solid rgba(255,255,255,0.3);
@@ -1467,6 +1487,18 @@ section#contact .left, section#contact .right {
     width: 90%;
 }
 
+.home-service .logo_dt1_or {
+  width: 52%;
+ }
+
+
+}
+
+@media screen and (max-width: 400px) {
+
+ .home-service .logo_dt1_or {
+  width: 61%;
+ }
 
 
 }
