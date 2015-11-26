@@ -79,11 +79,11 @@ fieldset {
 input, label, select {
     display: block;
     font-family: "Open Sans";
-    font-size: 1em;
+    font-size: 0.67em;
 }
 label {
     font-weight: bold;
-    margin-bottom: 0.375em;
+    /*margin-bottom: 0.375em;**/
 }
 textarea, input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"], select {
     border: 1px solid #ddd;
@@ -929,9 +929,11 @@ article.video-thumbnail img {
 
 .card-services-dt2 .home-service-dt2, .card-courses .home-course, .card-professors .professor {
     float: left;
-    margin-right: 2%;
-    width: 32%;
+    margin-right: 0%;
+    width: 42%;
+    height: 205px;
 }
+
 
 .card-services-dt3 .home-service-dt3, .card-courses .home-course, .card-professors .professor {
     float: left;
@@ -940,12 +942,18 @@ article.video-thumbnail img {
 }
 
 .card-services-dt2 .logo_dt2_au{
-    width: 56%;
+    width: 24%;
 
 }
 
+.card-services-dt2 b{
+    font-size: 2em;
+}
+
+
+
 .card-services-dt2 .logo_dt3_au{
-    width: 91%;
+    width: 47%;
 
 }
 
@@ -964,7 +972,7 @@ article.video-thumbnail img {
 
 .card-services-dt2 .Rondas_table {
     margin-top: 2%;
-    font-size: 22px;
+    font-size: 17px;
     color: #164777;
     font-weight: bold;
     width: 100%;
@@ -1029,7 +1037,7 @@ article.video-thumbnail img {
     margin-right: 0;
 }
 
-.card-services-dt2 .home-service-dt2:nth-child(3n), .card-courses .home-course:nth-child(3n), .card-professors .professor:nth-child(3n) {
+.card-services-dt2 .home-service-dt2:nth-child(4n), .card-courses .home-course:nth-child(4n), .card-professors .professor:nth-child(4n) {
     margin-right: 0;
 }
 
@@ -1084,11 +1092,14 @@ article.video-thumbnail img {
 }
 
 .FrmRegistrarTorneo article.Detalle_torneo{
-
-    background-color: white;
-    width: 62%;
-    border-radius: 1%;
-    margin-left: 20%;
+   
+   background-color: white; 
+    width: 54%;
+    float:left;
+    margin-right: 2%;
+    border-radius:1%;
+    margin-left: 1%;
+    height: 663px;
 }
 
 .Detalle_torneo img{
@@ -1109,6 +1120,19 @@ article.video-thumbnail img {
     margin-left: 1%;
 }
 
+
+.Detalle_Torneo_Ver .dt_reg{
+    color: #164777;
+    text-decoration: none;
+
+}
+
+
+
+.Detalle_Torneo_Ver a:hover{
+    text-decoration: underline;
+
+}
 
 @media screen and (max-width: 1024px) {
 .member {
@@ -1292,9 +1316,64 @@ footer h2 {
 
 }
 
-@media screen and (max-width: 800px) {
 
-    .card-services-dt3 .LogoEquipo {
+
+
+@media screen and (max-width: 980px) {
+
+
+.FrmRegistrarTorneo .card-services-dt2 .Detalle_torneo {
+    margin-right: 0;
+    width: 100%;
+    height: 274px;
+    margin-left: 0;
+}
+
+
+.Detalle_torneo img {
+    margin: 0.4%;
+    border-radius: 1%;
+    width: 52%;
+    float: left;
+    height: 266px;
+}
+
+.FrmRegistrarTorneo .card-services-dt2 .infoTorneo {
+    float: right;
+    width: 47%;
+}
+
+#torneo_titulo {
+    background-color: #f7f7f7;
+    margin: 1%;
+}
+
+.FrmRegistrarTorneo .card-services-dt2 .MostrarTorneo_datos {
+    font-size: 0.6em;
+    text-align: center;
+    margin-left: 1.5%;
+    margin-bottom: 0;
+}
+
+.card-services-dt2 .home-service-dt2, .card-courses .home-course,.card-professors .professor {
+    float: left;
+    margin-right: 2%;
+    width: 32%;
+    margin-top: 2%;
+    height: 240px;
+}
+
+.card-services-dt2 .logo_dt2_au {
+    width: 60%;
+}
+
+
+
+.card-services-dt2 b{
+   font-size:  1.5em;
+}
+
+.card-services-dt3 .LogoEquipo {
     width: 11%;
     margin-right: 0;
  
@@ -1318,6 +1397,8 @@ footer h2 {
 
 
 @media screen and (max-width: 768px) {
+
+
 .card-services .home-service {
     margin-right: 0;
     min-height: 0;
@@ -1337,6 +1418,15 @@ footer h2 {
     min-height: 0;
     width: 100%;
 }
+
+.card-services-dt2 .logo_dt2_au {
+    width: 28%;
+}
+
+.card-services-dt2 .logo_dt3_au {
+    width: 48%;
+}
+
 
 .card-services-dt3 .home-service-dt3 {
     margin-right: 0;
@@ -1418,7 +1508,7 @@ aside {
 
 }
 
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 550px) {
 
 header nav ul li {
     background-color: #F7F7F7;
@@ -1494,14 +1584,30 @@ section#contact .left, section#contact .right {
   width: 52%;
  }
 
+.FrmRegistrarTorneo .card-services-dt2 .Detalle_torneo {
+    height: 550px;
+}
+
+.FrmRegistrarTorneo .card-services-dt2 .infoTorneo{
+    width: 100%;
+}
+
+.Detalle_torneo img{
+    width: 99%;
+}
+
+
+.card-services-dt2 .logo_dt2_au {
+    width: 49.5%;
+    margin-bottom: -0.5%;
+}
+
+.card-services-dt2 .logo_dt3_au {
+    width: 87%;
+}
+
+
 
 }
 
-@media screen and (max-width: 400px) {
 
- .home-service .logo_dt1_or {
-  width: 61%;
- }
-
-
-}
