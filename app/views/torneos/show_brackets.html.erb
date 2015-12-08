@@ -1,0 +1,13 @@
+<section class="white horizontal">
+  <div class="container">
+    <center><div id="llaves" ></div></center>
+  </div>
+</section>
+
+<script type="text/javascript">
+	var minimalData = {
+      teams : <%= raw @teams %>,
+      results: <%= raw @results %>
+    }
+    $('#llaves').bracket({init: minimalData, skipConsolationRound: true });	
+</script>
