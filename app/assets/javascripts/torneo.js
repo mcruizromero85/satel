@@ -18,3 +18,25 @@ torneoApp.controller('TorneoController', function ($scope, $http){
 });
 
 
+    var contador = 1;
+    function goBack() {
+      window.history.back()
+    } 
+    function main(){
+      $('#menu-icon').click(function(){
+        if(contador == 1){
+          $('nav').animate({
+            left: '0'
+          });
+          contador = 0;
+        } else {
+          contador = 1;
+          $('nav').animate({
+            left: '-100%'
+          });
+        }
+     
+      });
+     
+    };
+    $(document).ready(main);
