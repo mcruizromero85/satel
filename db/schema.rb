@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151114212736) do
+ActiveRecord::Schema.define(version: 20151208202757) do
 
   create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
@@ -130,6 +130,14 @@ ActiveRecord::Schema.define(version: 20151114212736) do
     t.datetime "updated_at"
   end
 
+  create_table "sponsors", force: true do |t|
+    t.integer  "torneo_id"
+    t.string   "html"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "logo"
+  end
+
   create_table "suscriptions", force: true do |t|
     t.string   "first_name"
     t.string   "email"
@@ -157,6 +165,8 @@ ActiveRecord::Schema.define(version: 20151114212736) do
     t.integer  "flag_pago_inscripciones",         default: 0, null: false
     t.string   "urllogo"
     t.string   "urllogoSponsors"
+    t.decimal  "monto_auspiciado"
+    t.string   "link_rules"
   end
 
   add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"

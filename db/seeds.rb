@@ -20,12 +20,17 @@ if Juego.count == 0
 	end
 end
 
-Inscripcion.all.each do | inscripcion |	
-	if !inscripcion.hots_formulario.nil?
-		inscripcion.etiqueta_llave = inscripcion.hots_formulario.nombre_equipo
-  	inscripcion.etiqueta_chat = inscripcion.hots_formulario.capitan_nick + '(' + inscripcion.hots_formulario.nombre_equipo + ')'
-  	inscripcion.save
-  end
-end
+#Inscripcion.all.each do | inscripcion |	
+#	if !inscripcion.hots_formulario.nil?
+#		inscripcion.etiqueta_llave = inscripcion.hots_formulario.nombre_equipo
+#  	inscripcion.etiqueta_chat = inscripcion.hots_formulario.capitan_nick + '(' + inscripcion.hots_formulario.nombre_equipo + ')'
+#  	inscripcion.save
+#  end
+#end
 
- Juego.create(nombre: "Starcraft 2", nombre_imagen:"starcraft2.jpg", descripcion: "Starcraft 2", tipo_juego: 0)
+#Datos para nuevo torneo Starcraft2
+Juego.create(nombre: "Starcraft 2", nombre_imagen:"starcraft2.jpg", descripcion: "Starcraft 2", tipo_juego: 0)
+
+Sponsor.create(torneo_id: Torneo.maximum('id'),logo: 'Auspiciador1.png' )
+Sponsor.create(torneo_id: Torneo.maximum('id'),logo: 'Auspiciador2.png' )
+Sponsor.create(torneo_id: Torneo.maximum('id'),logo: 'Auspiciador3.png' )

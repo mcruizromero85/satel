@@ -1,7 +1,7 @@
 class TorneosController < ApplicationController
   require_relative '../../app/helpers/torneos_helper'
 
-  before_action :set_torneo, only: [:preparar, :show, :edit, :update, :destroy]
+  before_action :set_torneo, only: [:preparar, :show, :edit, :update, :destroy, :show_brackets]
   before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :mis_torneos, :iniciar_torneo]
   before_filter :set_access
 
@@ -182,6 +182,11 @@ class TorneosController < ApplicationController
   end
 
   def chat
+  end
+
+  def show_brackets
+    @teams = @torneo.arreglo_de_nombres_para_llaves()
+    @results = TorneosHelper.obtener_array_para_resultado_llaves(@torneo)
   end
 
   private

@@ -17,6 +17,7 @@ class Torneo < ActiveRecord::Base
   belongs_to :gamer
   belongs_to :juego, autosave: false
   has_many :rondas, -> { order('numero ASC') }, autosave: true
+  has_many :sponsors
   has_many :inscripciones, -> { where '(tipo_inscripcion != 0 or tipo_inscripcion is null)' }, autosave: true
   before_save :asignar_valores_por_defectos, if: "estado == 'Creado'"
   has_one :detalle_pago_inscripcion, autosave: true
@@ -26,7 +27,7 @@ class Torneo < ActiveRecord::Base
     rondas.destroy_all
     numero_de_rondas_totales.times do | numero |
       ronda = Ronda.new
-      ronda.inicializar_valores_por_defecto(numero + 1, cierre_inscripcion)
+      ronda.inicializar_valores_por_defecto(numero + 1, cierre_inscripcion)      
       agregar_ronda(ronda)
     end
   end
@@ -58,6 +59,14 @@ class Torneo < ActiveRecord::Base
       rondas[rondas.size - 1].ronda_siguiente = ronda
       rondas[rondas.size - 1].save
     end
+    if vacantes == 16 && ronda.numero == 4
+      ronda.modo_ganar = 5
+    elsif vacantes == 16 && ronda.numero == 3
+      ronda.modo_ganar = 3
+    elsif vacantes == 16 && ronda.numero == 2
+      ronda.modo_ganar = 3
+    end
+
     rondas << ronda
   end
 

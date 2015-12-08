@@ -416,6 +416,10 @@ nav ul li a {
     padding-right: 0;
 }
 
+#llaves{
+    margin: auto
+}
+
 @media screen and (min-width: 53.75em) {
 .navigation .container {
     padding-right: 1em;
@@ -1102,8 +1106,7 @@ article.video-thumbnail img {
     height: 663px;
 }
 
-.Detalle_torneo img{
-    margin-top: 1%;
+.Detalle_torneo img{    
     border-radius: 1%;
     width: 99%;
 }

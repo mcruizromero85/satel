@@ -38,6 +38,7 @@ Satel::Application.routes.draw do
   get '/torneos/preparar/:id' => 'torneos#preparar'
 
   get '/torneos/simular_llaves/:id' => 'torneos#simular_llaves'
+  get '/torneos/:id/brackets/' => 'torneos#show_brackets'
 
   get '/inscripciones/confirmar/:id_torneo' => 'inscripciones#confirmar'
 
