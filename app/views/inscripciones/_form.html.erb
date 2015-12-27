@@ -18,9 +18,10 @@
 
   <% if @torneo.juego.id == ID_JUEGO_HOTS %>
     <%= render partial: "reutilizable/ficha_inscripcion_hots", object: @torneo, as: :torneo %>
-  <% end %>
-  <% if @torneo.juego.id == ID_JUEGO_SC2 %>
+  <% elsif @torneo.juego.id == ID_JUEGO_SC2 %>     
     <%= render partial: "reutilizable/ficha_inscripcion_sc2", object: @torneo, as: :torneo %>
+  <% else %>
+    <%= render partial: "reutilizable/ficha_inscripcion_hearthstone", object: @torneo, as: :torneo %>
   <% end %>
   <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
     <%= f.submit "Inscribirme" %>

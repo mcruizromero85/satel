@@ -43,7 +43,7 @@ class InscripcionesController < ApplicationController
       @inscripcion.hots_formulario = hots_formulario
       @inscripcion.etiqueta_llave = hots_formulario.nombre_equipo
       @inscripcion.etiqueta_chat = hots_formulario.capitan_nick + '(' + hots_formulario.nombre_equipo + ')'
-    else
+    elsif @torneo.juego.id == ID_JUEGO_SC2 
       gamer_params = params.require(:gamer).permit(:correo,:battletag)
       sc2_form = Sc2Form.new(sc2_forms_params)
       current_gamer.nick = gamer_params[:battletag]
@@ -55,6 +55,14 @@ class InscripcionesController < ApplicationController
       @inscripcion.nick = gamer_params[:battletag]
       @inscripcion.torneo = @torneo
       @inscripcion.sc2_form = sc2_form
+      @inscripcion.etiqueta_llave = current_gamer.battletag
+      @inscripcion.etiqueta_chat = current_gamer.battletag
+    else
+      gamer_params = params.require(:gamer).permit(:correo,:battletag)
+      @inscripcion = Inscripcion.new
+      @inscripcion.gamer = current_gamer
+      @inscripcion.nick = gamer_params[:battletag]
+      @inscripcion.torneo = @torneo
       @inscripcion.etiqueta_llave = current_gamer.battletag
       @inscripcion.etiqueta_chat = current_gamer.battletag
     end

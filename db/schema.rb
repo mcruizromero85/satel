@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208202757) do
+ActiveRecord::Schema.define(version: 20151227025409) do
+
+  create_table "asociados", force: true do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.integer  "juego_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authentications", force: true do |t|
     t.integer  "gamer_id"
@@ -31,26 +39,20 @@ ActiveRecord::Schema.define(version: 20151208202757) do
     t.datetime "updated_at"
   end
 
-  create_table "detalle_pago_inscripciones", force: true do |t|
-    t.decimal "monto_inscripcion", default: 2.0, null: false
-    t.integer "torneo_id",                       null: false
-    t.decimal "monto_auspiciado"
-  end
-
   create_table "encuentros", force: true do |t|
-    t.integer  "gamerinscritoa_id"
-    t.integer  "gamerinscritob_id"
+    t.integer  "gamera_id"
+    t.integer  "gamerb_id"
     t.integer  "posicion_en_ronda"
     t.integer  "ronda_id"
-    t.integer  "gamerinscrito_ganador_id"
+    t.string   "flag_ganador"
     t.string   "descripcion"
     t.integer  "encuentro_anterior_a_id"
     t.string   "encuentro_anterior_b_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "flag_listo_gamera",        default: false
-    t.boolean  "flag_listo_gamerb",        default: false
-    t.string   "estado",                   default: "Pendiente"
+    t.boolean  "flag_listo_gamera",       default: false
+    t.boolean  "flag_listo_gamerb",       default: false
+    t.string   "estado",                  default: "Pendiente"
   end
 
   create_table "gamers", force: true do |t|
@@ -62,6 +64,12 @@ ActiveRecord::Schema.define(version: 20151208202757) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "battletag"
+  end
+
+  create_table "hearthstone_forms", force: true do |t|
+    t.integer  "inscripcion_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "hots_formularios", force: true do |t|
@@ -80,13 +88,12 @@ ActiveRecord::Schema.define(version: 20151208202757) do
 
   create_table "inscripciones", force: true do |t|
     t.integer  "torneo_id"
-    t.integer  "gamer_id",                        null: false
+    t.integer  "gamer_id"
     t.string   "estado"
-    t.integer  "tipo_inscripcion",    default: 1
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "nick"
     t.string   "id_transaccion_pago"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "etiqueta_llave"
     t.string   "etiqueta_chat"
   end
@@ -94,7 +101,7 @@ ActiveRecord::Schema.define(version: 20151208202757) do
   create_table "juegos", force: true do |t|
     t.string   "nombre"
     t.string   "descripcion"
-    t.string   "nombre_imagen"
+    t.string   "nombre_juego"
     t.integer  "tipo_juego"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -116,7 +123,7 @@ ActiveRecord::Schema.define(version: 20151208202757) do
     t.integer  "numero"
     t.date     "inicio_fecha"
     t.time     "inicio_tiempo"
-    t.string   "modo_ganar"
+    t.integer  "modo_ganar"
     t.integer  "torneo_id"
     t.integer  "ronda_siguiente_id"
     t.datetime "created_at"
@@ -156,37 +163,26 @@ ActiveRecord::Schema.define(version: 20151208202757) do
     t.string   "tipo_torneo"
     t.string   "tipo_generacion"
     t.integer  "clasificacion"
+    t.integer  "flag_inscripciones",              default: 1, null: false
     t.integer  "gamer_id"
     t.integer  "juego_id"
     t.string   "estado"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "flag_inscripciones",              default: 1, null: false
-    t.integer  "flag_pago_inscripciones",         default: 0, null: false
     t.string   "urllogo"
     t.string   "urllogoSponsors"
     t.decimal  "monto_auspiciado"
     t.string   "link_rules"
   end
 
-  add_foreign_key "authentications", "gamers", name: "authentications_gamer_id_fk"
-
-  add_foreign_key "detalle_pago_inscripciones", "torneos", name: "detalle_pago_inscripciones"
-
-  add_foreign_key "encuentros", "rondas", name: "encuentros_ronda_id_fk"
+  add_foreign_key "hearthstone_forms", "inscripciones", name: "hearthstone_forms_inscripcion_id_fk"
 
   add_foreign_key "hots_formularios", "inscripciones", name: "hots_formularios_inscripcion_id_fk"
 
-  add_foreign_key "inscripciones", "gamers", name: "inscripciones_gamer_id_fk"
-  add_foreign_key "inscripciones", "torneos", name: "inscripciones_torneo_id_fk"
-
   add_foreign_key "partidas", "encuentros", name: "partidas_encuentro_id_fk"
-
-  add_foreign_key "rondas", "torneos", name: "rondas_torneo_id_fk"
 
   add_foreign_key "sc2_forms", "inscripciones", name: "sc2_forms_inscripcion_id_fk"
 
-  add_foreign_key "torneos", "gamers", name: "torneos_gamer_id_fk"
-  add_foreign_key "torneos", "juegos", name: "torneos_juego_id_fk"
+  add_foreign_key "sponsors", "torneos", name: "sponsors_torneo_id_fk"
 
 end
