@@ -27,10 +27,12 @@ class InscripcionesController < ApplicationController
 
   # POST /inscripciones
   # POST /inscripciones.json
-  def create
-    @torneo = Torneo.find(params[:id_torneo])
-
-    if @torneo.juego.id == ID_JUEGO_HOTS 
+  def create    
+    puts params[:inscripcion]
+    @inscripcion = Inscripcion.new.from_json(params[:inscripcion])
+    puts @inscripcion.to_json
+    
+    if @inscripcion.torneo.juego.id == ID_JUEGO_HOTS 
       gamer_params = params.require(:gamer).permit(:correo)
       hots_formulario = HotsFormulario.new(hots_formulario_params)
       current_gamer.nick = hots_formulario.capitan_nick
@@ -43,7 +45,7 @@ class InscripcionesController < ApplicationController
       @inscripcion.hots_formulario = hots_formulario
       @inscripcion.etiqueta_llave = hots_formulario.nombre_equipo
       @inscripcion.etiqueta_chat = hots_formulario.capitan_nick + '(' + hots_formulario.nombre_equipo + ')'
-    elsif @torneo.juego.id == ID_JUEGO_SC2 
+    elsif @inscripcion.torneo.juego.id == ID_JUEGO_SC2 
       gamer_params = params.require(:gamer).permit(:correo,:battletag)
       sc2_form = Sc2Form.new(sc2_forms_params)
       current_gamer.nick = gamer_params[:battletag]
@@ -58,13 +60,9 @@ class InscripcionesController < ApplicationController
       @inscripcion.etiqueta_llave = current_gamer.battletag
       @inscripcion.etiqueta_chat = current_gamer.battletag
     else
-      gamer_params = params.require(:gamer).permit(:correo,:battletag)
-      @inscripcion = Inscripcion.new
       @inscripcion.gamer = current_gamer
-      @inscripcion.nick = gamer_params[:battletag]
-      @inscripcion.torneo = @torneo
-      @inscripcion.etiqueta_llave = current_gamer.battletag
-      @inscripcion.etiqueta_chat = current_gamer.battletag
+      @inscripcion.etiqueta_llave = gamer_params[:battletag]
+      @inscripcion.etiqueta_chat = gamer_params[:battletag]
     end
     inscribir
   end
@@ -133,10 +131,12 @@ class InscripcionesController < ApplicationController
       if @inscripcion.inscribir
         mensaje_inscripcion = 'Inscripción realizada con éxito'
         format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: mensaje_inscripcion }
+        format.json { render json: @inscripcion, status: :created }
       else
         @torneo = Torneo.find(params[:id_torneo])
-        @mensaje_inscripcion = @inscripcion.mensaje_inscripcion
-        format.html { render action: 'new', id_torneo: params[:id_torneo] }
+        @mensaje_inscripcion = @inscripcion.mensaje_inscripcion        
+        format.html { render action: 'new', id_torneo: params[:id_torneo] }        
+        format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
       end
     end
   end
@@ -168,4 +168,5 @@ class InscripcionesController < ApplicationController
   def sc2_forms_params
     params.require(:sc2_form).permit(:race)
   end
+  
 end

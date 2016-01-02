@@ -2,8 +2,7 @@ class Gamer < ActiveRecord::Base
   has_many :torneos
   has_many :inscripciones
   has_many :authentications, autosave: true
-  #validates :battletag, format: { with: /\A\D.{2,11}#\d{4}\Z/, message: ', El battle tag tiene formato nick#1234' }  
-
+  
   def self.buscar_o_crear_free_win(nick_free_win)
     gamer = Gamer.find_by(nick: nick_free_win)
     if gamer.nil?

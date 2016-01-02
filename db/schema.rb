@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227025409) do
+ActiveRecord::Schema.define(version: 20160101181539) do
 
   create_table "asociados", force: true do |t|
     t.string   "nombre"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20151227025409) do
     t.integer  "inscripcion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "battletag"
   end
 
   create_table "hots_formularios", force: true do |t|

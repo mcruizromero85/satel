@@ -23,7 +23,6 @@ class ApplicationController < ActionController::Base
 
   def revisa_si_existe_gamer_en_sesion
     return unless current_gamer.nil?
-    puts params
     session[:last_params] = params
     redirect_to '/auth/facebook'
   end
