@@ -1,10 +1,11 @@
 class Inscripcion < ActiveRecord::Base
   validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
   belongs_to :gamer
-  belongs_to :torneo, autosave: false
+  belongs_to :torneo, autosave: false  
   has_one :hots_formulario, dependent: :delete
   has_one :sc2_form, dependent: :delete
   has_one :hearthstone_form, dependent: :delete
+  accepts_nested_attributes_for :gamer
   accepts_nested_attributes_for :hots_formulario
   accepts_nested_attributes_for :sc2_form
   accepts_nested_attributes_for :hearthstone_form

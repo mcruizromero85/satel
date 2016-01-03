@@ -27,10 +27,8 @@ class InscripcionesController < ApplicationController
 
   # POST /inscripciones
   # POST /inscripciones.json
-  def create    
-    puts params[:inscripcion]
+  def create        
     @inscripcion = Inscripcion.new.from_json(params[:inscripcion])
-    puts @inscripcion.to_json
     
     if @inscripcion.torneo.juego.id == ID_JUEGO_HOTS 
       gamer_params = params.require(:gamer).permit(:correo)
@@ -61,8 +59,8 @@ class InscripcionesController < ApplicationController
       @inscripcion.etiqueta_chat = current_gamer.battletag
     else
       @inscripcion.gamer = current_gamer
-      @inscripcion.etiqueta_llave = gamer_params[:battletag]
-      @inscripcion.etiqueta_chat = gamer_params[:battletag]
+      @inscripcion.etiqueta_llave = @inscripcion.hearthstone_form.battletag
+      @inscripcion.etiqueta_chat = @inscripcion.hearthstone_form.battletag
     end
     inscribir
   end
@@ -133,7 +131,7 @@ class InscripcionesController < ApplicationController
         format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: mensaje_inscripcion }
         format.json { render json: @inscripcion, status: :created }
       else
-        @torneo = Torneo.find(params[:id_torneo])
+        @torneo = Torneo.find(@inscripcion.torneo.id)        
         @mensaje_inscripcion = @inscripcion.mensaje_inscripcion        
         format.html { render action: 'new', id_torneo: params[:id_torneo] }        
         format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
