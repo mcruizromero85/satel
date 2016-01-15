@@ -17,6 +17,19 @@ torneoApp.controller('TorneoController', function ($scope, $http){
 
 });
 
+torneoApp.controller('InscripcionController', function ($scope, $http){
+    var inscripcionController = this;
+    $scope.formData = {};
+    inscripcionController.inscribir = function() {
+      $http.post('/inscripciones',$scope.formData).success(function(data) {
+          alert(data);          
+          //$scope.countries = data;
+        });
+      //inscripcionController.todos.push({text:inscripcionController.todoText, done:false});
+      //inscripcionController.todoText = '';
+    };
+
+});
 
     var contador = 1;
     function goBack() {

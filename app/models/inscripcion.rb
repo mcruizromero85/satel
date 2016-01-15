@@ -64,7 +64,7 @@ class Inscripcion < ActiveRecord::Base
     if !gamer.valid?
       errors.add(:gamer,  "El battle tag no tiene el formato nick#1234")
       return
-    end
+    end    
     self.estado = 'Inscrito'
     self.save
   end

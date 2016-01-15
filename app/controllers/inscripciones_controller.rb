@@ -12,6 +12,15 @@ class InscripcionesController < ApplicationController
   # GET /inscripciones/1
   # GET /inscripciones/1.json
   def show
+    @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
+    respond_to do |format|
+      if !@inscripcion.nil?
+        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo]}
+        format.json { render json: @inscripcion, status: :ok }
+      else        
+        format.json { render json: params[:id_torneo].to_json , status: :not_found }
+      end
+    end
   end
 
   # GET /inscripciones/new
@@ -66,14 +75,8 @@ class InscripcionesController < ApplicationController
   end
 
   def confirmar
-    @torneo = Torneo.find(params[:id_torneo])
-    @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
-
-    if  @torneo.flag_pago_inscripciones == 1
-      confirmar_y_cerrar_pago
-    else
-      solo_confirmar
-    end
+    @inscripcion = Inscripcion.find(params[:id_inscripcion])
+    solo_confirmar
   end
   # DELETE /gamers/1
   # DELETE /gamers/1.json
@@ -92,9 +95,11 @@ class InscripcionesController < ApplicationController
     respond_to do |format|
       if @inscripcion.confirmar
         format.html { redirect_to action: 'iniciar_torneo', controller: 'torneos', id_torneo: params[:id_torneo], mensaje_inscripcion: @inscripcion.mensaje_inscripcion }
+        format.json { render json: @inscripcion, status: :created }
       else
         @torneo = Torneo.find(params[:id_torneo])
         format.html { render action: 'new' }
+        format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
       end
     end
   end

@@ -1,30 +1,19 @@
 <br/>
 <h1>Inscribete</h1>
-<section class="Frm_Inscripcion2">
+<section class="Frm_Inscripcion2" ng-controller="InscripcionController as inscripcionController">
 <span id="mensajeError"></span>
-<%= @mensaje_inscripcion_error if !@mensaje_inscripcion_error.nil? %>
-<%= form_for @inscripcion,  html: {class: "frm-registro"} do |f| %>
-  <% if @inscripcion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@inscripcion.errors.count, "error") %> No permiten registrar la inscripcion:</h2>
-      <ul>
-      <% @inscripcion.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <br/>
-
-  <% if @torneo.juego.id == ID_JUEGO_HOTS %>
-    <%= render partial: "reutilizable/ficha_inscripcion_hots", object: @torneo, as: :torneo %>
-  <% elsif @torneo.juego.id == ID_JUEGO_SC2 %>     
-    <%= render partial: "reutilizable/ficha_inscripcion_sc2", object: @torneo, as: :torneo %>
-  <% else %>
-    <%= render partial: "reutilizable/ficha_inscripcion_hearthstone", object: @torneo, as: :torneo %>
-  <% end %>
-  <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
-    <%= f.submit "Inscribirme" %>
+<form accept-charset="UTF-8" class="frm-registro" id="new_inscripcion" method="post" ng-submit="inscripcionController.inscribir()">
+    <% if @torneo.juego.id == ID_JUEGO_HOTS %>
+      <%= render partial: "reutilizable/ficha_inscripcion_hots", object: @torneo, as: :torneo %>
+    <% elsif @torneo.juego.id == ID_JUEGO_SC2 %>     
+      <%= render partial: "reutilizable/ficha_inscripcion_sc2", object: @torneo, as: :torneo %>
+    <% else %>
+      <%= render partial: "reutilizable/ficha_inscripcion_hearthstone", object: @torneo, as: :torneo %>
     <% end %>
+    <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
+    <input name="commit" type="submit" value="Inscribirme">
+  </form>
   </article>
 </section>   
+
+
