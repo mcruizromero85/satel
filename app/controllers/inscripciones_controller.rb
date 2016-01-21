@@ -36,8 +36,10 @@ class InscripcionesController < ApplicationController
 
   # POST /inscripciones
   # POST /inscripciones.json
-  def create        
-    @inscripcion = Inscripcion.new.from_json(params[:inscripcion])
+  def create
+    @inscripcion = Inscripcion.new(inscripcion_params)
+    current_gamer.correo = params.require(:gamer).permit(:correo)[:correo]
+    current_gamer.save
     
     if @inscripcion.torneo.juego.id == ID_JUEGO_HOTS 
       gamer_params = params.require(:gamer).permit(:correo)
@@ -68,8 +70,10 @@ class InscripcionesController < ApplicationController
       @inscripcion.etiqueta_chat = current_gamer.battletag
     else
       @inscripcion.gamer = current_gamer
-      @inscripcion.etiqueta_llave = @inscripcion.hearthstone_form.battletag
-      @inscripcion.etiqueta_chat = @inscripcion.hearthstone_form.battletag
+      hearthstone_form = HearthstoneForm.new(hearthstone_form_params)
+      @inscripcion.hearthstone_form = hearthstone_form
+      @inscripcion.etiqueta_llave = hearthstone_form.battletag
+      @inscripcion.etiqueta_chat = hearthstone_form.battletag
     end
     inscribir
   end
@@ -170,6 +174,14 @@ class InscripcionesController < ApplicationController
 
   def sc2_forms_params
     params.require(:sc2_form).permit(:race)
+  end
+
+  def inscripcion_params
+    params.require(:inscripcion).permit(:torneo_id, hearthstone_form_attributes: [:battletag, :correo, :_destroy])
+  end
+
+  def hearthstone_form_params
+    params.require(:hearthstone_form).permit(:battletag, :correo)
   end
   
 end

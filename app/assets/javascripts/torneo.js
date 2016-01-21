@@ -19,11 +19,24 @@ torneoApp.controller('TorneoController', function ($scope, $http){
 
 torneoApp.controller('InscripcionController', function ($scope, $http){
     var inscripcionController = this;
-    $scope.formData = {};
     inscripcionController.inscribir = function() {
-      $http.post('/inscripciones',$scope.formData).success(function(data) {
-          alert(data);          
+      var dataObj = {
+          inscripcion: {
+            torneo_id: $('#id_torneo').val(),            
+          },
+          hearthstone_form: {
+              battletag: $scope.hearthstone_form.battletag
+          },
+          gamer: {
+            correo: $scope.gamer.correo
+          }
+      };
+
+      $http.post('/inscripciones.json',dataObj).success(function(data) {
+          alert(data);
           //$scope.countries = data;
+        }).error(function (data, status, headers, config) {
+          alert("error");
         });
       //inscripcionController.todos.push({text:inscripcionController.todoText, done:false});
       //inscripcionController.todoText = '';
@@ -37,7 +50,7 @@ torneoApp.controller('InscripcionController', function ($scope, $http){
     } 
     function main(){
       $('#menu-icon').click(function(){
-        if(contador == 1){
+        if(contador == 1){ 
           $('nav').animate({
             left: '0'
           });
