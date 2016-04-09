@@ -33,13 +33,16 @@ torneoApp.controller('InscripcionController', function ($scope, $http){
       };
 
       $http.post('/inscripciones.json',dataObj).success(function(data) {
-          alert(data);
-          //$scope.countries = data;
+          document.location.href='/torneos/'+ $('#id_torneo').val();
         }).error(function (data, status, headers, config) {
-          alert("error");
-        });
-      //inscripcionController.todos.push({text:inscripcionController.todoText, done:false});
-      //inscripcionController.todoText = '';
+          var keepGoing = true;
+          angular.forEach(data, function(value, key){
+            if (keepGoing){
+              $scope.mensaje_error = value;
+              keepGoing = false;  
+            }
+          });
+        });      
     };
 
 });

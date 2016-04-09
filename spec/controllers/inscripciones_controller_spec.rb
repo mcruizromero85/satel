@@ -10,35 +10,36 @@ describe InscripcionesController do
   end
 
   it 'Inscribirme a un torneo' do        
-    inscripcion = Inscripcion.new(torneo: @torneo, gamer: @gamer, hearthstone_form: HearthstoneForm.new(battletag: 'Kripty#1269'))
-    post 'create', inscripcion: inscripcion.to_json(:include => :hearthstone_form).gsub('hearthstone_form','hearthstone_form_attributes') , id_torneo: @torneo.id
+    inscripcion = Inscripcion.new(torneo: @torneo)
+    post 'create', inscripcion: inscripcion.attributes, hearthstone_form: HearthstoneForm.new(battletag: 'Kripty#1269').attributes, gamer: Gamer.new(correo: @gamer.correo).attributes
     expect(response.status).to eq(201)
   end
 
   it 'Inscribirme a un torneo, donde ya me inscribí' do
-    inscripcion = Inscripcion.new(torneo: @torneo, gamer: @gamer, hearthstone_form: HearthstoneForm.new(battletag: 'Kripty#1269'))
-    post 'create', inscripcion: inscripcion.to_json(:include => :hearthstone_form).gsub('hearthstone_form','hearthstone_form_attributes') , id_torneo: @torneo.id
+    inscripcion = Inscripcion.new(torneo: @torneo)
+    post 'create', inscripcion: inscripcion.attributes, hearthstone_form: HearthstoneForm.new(battletag: 'Kripty#1269').attributes, gamer: Gamer.new(correo: @gamer.correo).attributes
     expect(response.status).to eq(201)
-    post 'create', inscripcion: inscripcion.to_json(:include => :hearthstone_form).gsub('hearthstone_form','hearthstone_form_attributes') , id_torneo: @torneo.id    
+    post 'create', inscripcion: inscripcion.attributes, hearthstone_form: HearthstoneForm.new(battletag: 'Kripty#1269').attributes, gamer: Gamer.new(correo: @gamer.correo).attributes
     expect(response.status).to eq(406)
   end
 
   it 'Inscribirme a un torneo sin battletag' do    
-    inscripcion = Inscripcion.new(torneo: @torneo, gamer: @gamer, hearthstone_form: HearthstoneForm.new)
-    post 'create', inscripcion: inscripcion.to_json(:include => :hearthstone_form).gsub('hearthstone_form','hearthstone_form_attributes') , id_torneo: @torneo.id
+    inscripcion = Inscripcion.new(torneo: @torneo)
+    post 'create', inscripcion: inscripcion.attributes, hearthstone_form: HearthstoneForm.new.attributes, gamer: Gamer.new(correo: @gamer.correo).attributes
     expect(response.status).to eq(406)
   end
 
   it 'Inscribirme a un torneo con battletag errado' do
-    inscripcion = Inscripcion.new(torneo: @torneo, gamer: @gamer, hearthstone_form: HearthstoneForm.new(battletag: 'aaaa'))
-    post 'create', inscripcion: inscripcion.to_json(:include => :hearthstone_form).gsub('hearthstone_form','hearthstone_form_attributes') , id_torneo: @torneo.id
+    inscripcion = Inscripcion.new(torneo: @torneo)
+    post 'create', inscripcion: inscripcion.attributes, hearthstone_form: HearthstoneForm.new(battletag: 'aaaa').attributes, gamer: Gamer.new(correo: @gamer.correo).attributes
     expect(response.status).to eq(406)
   end
 
   describe 'Tests de consultas y confirmacion' do
     before do
-      @inscripcion = Inscripcion.new(torneo: @torneo, gamer: @gamer, hearthstone_form: HearthstoneForm.new(battletag: 'Kripty#1269'))
-      post 'create', inscripcion: @inscripcion.to_json(:include => :hearthstone_form).gsub('hearthstone_form','hearthstone_form_attributes') , id_torneo: @torneo.id      
+      inscripcion = Inscripcion.new(torneo: @torneo)
+      post 'create', inscripcion: inscripcion.attributes, hearthstone_form: HearthstoneForm.new(battletag: 'Kripty#1269').attributes, gamer: Gamer.new(correo: @gamer.correo).attributes
+
     end
 
     it 'Consultar inscripcion por torneo y gamer en sesion' do

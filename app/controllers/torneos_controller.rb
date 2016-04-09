@@ -207,6 +207,7 @@ class TorneosController < ApplicationController
   end
 
   def set_access
-    headers["Access-Control-Allow-Origin"] = "*"
+    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || '*'                                                                                                                                                                                                     
+    response.headers['Access-Control-Allow-Credentials'] = 'true'          
   end
 end
