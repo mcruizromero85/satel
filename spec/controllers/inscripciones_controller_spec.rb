@@ -36,25 +36,24 @@ describe InscripcionesController do
   end
 
   describe 'Tests de consultas y confirmacion' do
-    before do
+    before :each do
+      request.env["HTTP_ACCEPT"] = 'application/json'
       inscripcion = Inscripcion.new(torneo: @torneo)
       post 'create', inscripcion: inscripcion.attributes, hearthstone_form: HearthstoneForm.new(battletag: 'Kripty#1269').attributes, gamer: Gamer.new(correo: @gamer.correo).attributes
-
     end
 
     it 'Consultar inscripcion por torneo y gamer en sesion' do
-      get :show, id_torneo: @torneo.id    
+      get :show_by_tournament, id_torneo: @torneo.id    
       expect(response.status).to eq 200
     end
 
     it 'Consultar inscripcion inexistente por torneo y gamer en sesion' do
-      get :show, id_torneo: -99
+      get :show_by_tournament, id_torneo: -99
       expect(response.status).to eq 404
     end
 
     it 'Confirmar un torneo' do
-      get :show, id_torneo: @torneo.id
-      post 'confirmar', id_inscripcion: Inscripcion.new(JSON.parse(response.body)).id
+      post 'confirmar', id_torneo: @torneo.id
       expect(response.status).to eq(201)
     end
   end

@@ -66,7 +66,6 @@ class Inscripcion < ActiveRecord::Base
       return
     end    
     self.estado = 'Inscrito'
-    puts self
     self.save
   end
 

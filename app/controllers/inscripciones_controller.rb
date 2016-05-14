@@ -11,7 +11,7 @@ class InscripcionesController < ApplicationController
 
   # GET /inscripciones/1
   # GET /inscripciones/1.json
-  def show
+  def show_by_tournament
     @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
     respond_to do |format|
       if !@inscripcion.nil?
@@ -37,6 +37,8 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones
   # POST /inscripciones.json
   def create
+    puts params
+    puts inscripcion_params
     @inscripcion = Inscripcion.new(inscripcion_params)
     current_gamer.correo = params.require(:gamer).permit(:correo)[:correo]
     current_gamer.save
@@ -79,7 +81,7 @@ class InscripcionesController < ApplicationController
   end
 
   def confirmar
-    @inscripcion = Inscripcion.find(params[:id_inscripcion])
+    @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
     solo_confirmar
   end
   # DELETE /gamers/1
