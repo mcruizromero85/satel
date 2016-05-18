@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(version: 20160101181539) do
     t.string   "link_rules"
   end
 
+  Foreigner.load
   add_foreign_key "hearthstone_forms", "inscripciones", name: "hearthstone_forms_inscripcion_id_fk"
 
   add_foreign_key "hots_formularios", "inscripciones", name: "hots_formularios_inscripcion_id_fk"

@@ -48,6 +48,12 @@ Satel::Application.routes.draw do
   get '/inscripciones/:id/eliminar' => 'inscripciones#destroy'
   get '/torneo_relampago/:id_torneo' => 'torneos#formulario_torneo_relampago'
 
+
+  get '/torneos/:id_torneo/inscripciones' => 'inscripciones#show_by_tournament'
+  post '/torneos/:id_torneo/confirmar' => 'inscripciones#confirmar'
+  
+  match '/inscripciones' => 'inscripciones#options', :constraints => {:method => 'OPTIONS'}, via: [:options]  
+  
   resources :rondas
 
   resources :torneos

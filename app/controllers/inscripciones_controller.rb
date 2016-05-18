@@ -1,5 +1,7 @@
 class InscripcionesController < ApplicationController
   before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :index]
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+  before_filter :set_headers 
 
   # GET /inscripciones
   # GET /inscripciones.json
@@ -11,7 +13,7 @@ class InscripcionesController < ApplicationController
 
   # GET /inscripciones/1
   # GET /inscripciones/1.json
-  def show
+  def show_by_tournament
     @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
     respond_to do |format|
       if !@inscripcion.nil?
@@ -37,8 +39,10 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones
   # POST /inscripciones.json
   def create
-    @inscripcion = Inscripcion.new(inscripcion_params)
+    puts params    
+    @inscripcion = Inscripcion.new
     current_gamer.correo = params.require(:gamer).permit(:correo)[:correo]
+    current_gamer.battletag = params.require(:gamer).permit(:battletag)[:battletag]
     current_gamer.save
     
     if @inscripcion.torneo.juego.id == ID_JUEGO_HOTS 
@@ -70,16 +74,12 @@ class InscripcionesController < ApplicationController
       @inscripcion.etiqueta_chat = current_gamer.battletag
     else
       @inscripcion.gamer = current_gamer
-      hearthstone_form = HearthstoneForm.new(hearthstone_form_params)
-      @inscripcion.hearthstone_form = hearthstone_form
-      @inscripcion.etiqueta_llave = hearthstone_form.battletag
-      @inscripcion.etiqueta_chat = hearthstone_form.battletag
     end
     inscribir
   end
 
   def confirmar
-    @inscripcion = Inscripcion.find(params[:id_inscripcion])
+    @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
     solo_confirmar
   end
   # DELETE /gamers/1
@@ -93,7 +93,22 @@ class InscripcionesController < ApplicationController
     end
   end
 
+  def options
+    set_headers
+    render :text => '', :content_type => 'text/plain'
+  end
+
   private
+
+
+  # Set CORS
+  def set_headers
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Expose-Headers'] = 'Etag'
+    headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD'
+    headers['Access-Control-Allow-Headers'] = '*, x-requested-with, Content-Type, If-Modified-Since, If-None-Match'
+    headers['Access-Control-Max-Age'] = '86400'
+  end
 
   def solo_confirmar
     respond_to do |format|
