@@ -1,5 +1,5 @@
 class InscripcionesController < ApplicationController
-  before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :index]
+  before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :create, :index]
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
   before_filter :set_headers 
 
