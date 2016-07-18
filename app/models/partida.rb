@@ -21,5 +21,7 @@ class Partida < ActiveRecord::Base
     #self.field1 = response_partida_creada.body.scan(/value="(.*)"/)[0][0].to_s
     #self.field2 = response_partida_creada.body.scan(/value="(.*)"/)[1][0].to_s
     #self.field3 = response_partida_creada.body.scan(/value="(.*)"/)[2][0].to_s
+
+    #EAACEdEose0cBADK02EJunfPPet3lEsyer2elo7n8pMT6ZBYMKE394Q79Mosjwe6XxGF0AJwVbSwixVZCZBfaxjNOYa8Bj8NnfElC6y7b1czR2bf63eM7d6PXSQljZCxqMOLBWO8lhghORAjuktJ1AGshMdHFZBL3vBvPCVKDwZCgZDZD
   end
 end

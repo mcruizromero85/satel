@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160101181539) do
+ActiveRecord::Schema.define(version: 20160626182902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20160101181539) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "battletag"
+    t.string   "facebook_token"
+    t.string   "facebook_id"
   end
 
   create_table "hearthstone_forms", force: true do |t|

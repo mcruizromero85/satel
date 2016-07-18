@@ -9,20 +9,13 @@ class Inscripcion < ActiveRecord::Base
   accepts_nested_attributes_for :hots_formulario
   accepts_nested_attributes_for :sc2_form
   accepts_nested_attributes_for :hearthstone_form
-  validates_associated :hots_formulario, if: "torneo.juego.id == " + ID_JUEGO_HOTS.to_s
-  validates_associated :sc2_form, if: "torneo.juego.id == " + ID_JUEGO_SC2.to_s
-  validates_associated :hearthstone_form, if: "torneo.juego.id == " + ID_JUEGO_HEARTHSTONE.to_s
+  #validates_associated :hots_formulario, if: "torneo.juego.id == " + ID_JUEGO_HOTS.to_s
+  #validates_associated :sc2_form, if: "torneo.juego.id == " + ID_JUEGO_SC2.to_s
+  #validates_associated :hearthstone_form, if: "torneo.juego.id == " + ID_JUEGO_HEARTHSTONE.to_s
   validates_associated :gamer
-  validates :etiqueta_llave, presence: { message: ', La etiqueta a mostrar en las llaves no se generó correctamente' }
-  validates :etiqueta_chat, presence: { message: ', La etiqueta a mostrar en el chat no se generó correctamente' }
-  validate :unless_one_form_associated
-
-  def unless_one_form_associated
-    if self.hots_formulario.nil? and self.sc2_form.nil? and self.hearthstone_form.nil?
-        errors.add(:gamer, "No has completado todo el formulario")
-    end
-  end
-
+  #validates :etiqueta_llave, presence: { message: ', La etiqueta a mostrar en las llaves no se generó correctamente' }
+  #validates :etiqueta_chat, presence: { message: ', La etiqueta a mostrar en el chat no se generó correctamente' }
+  
   def self.inscripciones_confirmadas_permitidas_con_free_wins(torneo, _flag_aleatorio)
     array_inscritos_confirmados = inscripciones_permitidas_y_confirmadas_en_el_torneo(torneo)
     cantidad_slots_correctos_para_las_llaves = TorneosHelper.obtener_cantidad_de_slots_segun_gamers_confirmados(array_inscritos_confirmados.count)
@@ -64,9 +57,9 @@ class Inscripcion < ActiveRecord::Base
     if !gamer.valid?
       errors.add(:gamer,  "El battle tag no tiene el formato nick#1234")
       return
-    end    
-    self.estado = 'Inscrito'
-    self.save
+    end
+    estado = 'Inscrito'    
+    save
   end
 
   def confirmar(id_transaccion = nil)
