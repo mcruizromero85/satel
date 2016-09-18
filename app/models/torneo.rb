@@ -7,11 +7,8 @@ class Torneo < ActiveRecord::Base
     too_short: ', el título debe estar entre 30 y 100 caracteres',
     too_long: ', el título debe estar entre 30 y 100 caracteres'
   }
-  validates :urlstreeming, presence: { message: ', El canal de streeming no se ha definido' }
-  # validates :urlstreeming, format: { with: URI.regexp(%w(http https)), message: ', Debe tener el formato de una url, incluido http / https' }
   validate :fecha_cierre_mayor_que_actual
   validate :fecha_registro_entre_rondas
-  # validate :ronda_numero_uno_mayor_fecha_inscripcion
   validate :cantidad_minima_confirmados
   validates :periodo_confirmacion_en_minutos, numericality: true
   belongs_to :gamer

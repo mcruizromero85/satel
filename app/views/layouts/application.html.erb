@@ -1,55 +1,77 @@
-<!DOCTYPE html>
-<html lang="es" ng-app="torneoApp">
-<head>
-  <meta charset="utf-8"/>
-  <meta property="og:description" content="Simplificando la inscripción y organización de torneos e-sports en línea" />
-  <%= stylesheet_link_tag "application", media: "all" %>
-  <meta name="viewport" content="width = device-width, initial-scale=1, maximum-scale=1"/>
-  <title>GG-Sports</title>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600italic,600,400italic,300italic,700italic' rel='stylesheet' type='text/css'/>
-  <%= javascript_include_tag "jquery.js" %>
-  <%= stylesheet_link_tag "jquery.bracket.min", media: "all" %>
-  <%= javascript_include_tag "jquery.bracket.min.js" %>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-  <%= javascript_include_tag "torneo.js" %>
-</head>  
-<body id="landings" class="loaded">
-  <header>
-  
-  <a id="menu-icon" href="#"></a>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>GG-Sports</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <%= stylesheet_link_tag "bootstrap.css", media: "all" %>    
+  </head>
 
-  <a href="/"><img class="logo" src="<%= image_path("logo2.png") %>" alt="GG E-sports"/></a>
+  <body ng-app="ggesportsWebApp">  
+    <!-- Add your site or application content here -->
+    <div class="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
 
-  <nav role="navigation">
-      <ul>
-        <% if @current_gamer == nil %>
-          <li class="opcion_facebook"><a id="autenticarse" href="/auth/facebook" > 
-               <button class="btnFacebook" type="button">Ingrese con Facebook</button>
-            </a> 
-          </li> 
-        <% else %>
-        <li>
-          <img class="Lista_Inscritos_item_UsFb" src="<%= current_gamer.authentications[0].icono %>" height='35px' width='35px'>
-          <b class="WelcomeUSer"> Bienvenid@: <%=@current_gamer.nombres%></b>
-        </li>
-        <li>  
-          <a id="link_cerrar_sesion" href="/cerrar_sesion">Cerrar Sesi&oacute;n</a>
-        </li>  
-        <% end %>
-        </ul>
-      </nav>
-</header>
-<%= yield %>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="#/">GG-esports</a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#/">Home</a></li>
+              <li><a ng-href="#/about">Quienes somos</a></li>
+              <li>
+                <!--
+                  Below we include the Login Button social plugin. This button uses
+                  the JavaScript SDK to present a graphical Login button that triggers
+                  the FB.login() function when clicked.
+                -->
+                <div id="status" style="padding-right: 5px;padding-botton: 15px;padding-top: 15px;">
+                </div>
+              </li>
+              <li>
+                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" autologoutlink="true" style="padding-botton: 15px;padding-top: 15px;">
+                </fb:login-button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <%= yield %>
+      
+    </div>
+
+    <div class="footer">
+      <div class="container">
+        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+      </div>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
 </body>
-<footer>  
-    <section class="RedesSociales gray">
-      <a href="https://www.facebook.com/ggesports.la" target="_blank">
-        <img src="<%= image_path("facebook.png") %>" alt="GG E-sports facebook"/>
-      </a>
-      <a href="https://www.twitter.com/ggesports.la" target="_blank">
-        <img src="<%= image_path("twitter.png") %>" alt="GG E-sports twitter"/>
-      </a>
-   </section> 
-     <h2>Copyright © 2015 - Todos los derechos reservados - Lima Perú</h2> 
-</footer>
 </html>
+

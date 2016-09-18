@@ -19,7 +19,7 @@ class TorneosController < ApplicationController
   end
 
   def ultimo_creado
-    torneo = Torneo.where(estado: TORNEO_ESTADO_CREADO).last
+    @torneo = Torneo.where(estado: TORNEO_ESTADO_CREADO).last
     respond_to do |format|
       format.json { render json: torneo.to_json, status: :ok }
     end
@@ -27,31 +27,8 @@ class TorneosController < ApplicationController
 
   # GET /torneos GET /torneos.json
   def index
-    @suscription = Suscription.new
-    @torneos_inscritos_y_confirmados = []
-    @torneos_finalizados = Torneo.where(estado: TORNEO_ESTADO_FINALIZADO)
-    @torneos_iniciados = Torneo.obtener_torneos_iniciados(current_gamer)
-    if !current_gamer.nil?
-      @torneos_inscritos_y_confirmados.concat(@torneos_iniciados) if @torneos_iniciados.size > 0
-      @torneos_confirmados = Torneo.obtener_torneos_ya_confirmados(current_gamer)
-      if @torneos_confirmados.size > 0
-        @torneos_inscritos_y_confirmados.concat(@torneos_confirmados)
-      end
-      @torneos_inscritos = Torneo.obtener_torneos_ya_inscrito(current_gamer)
-      @torneos_inscrito_con_pago = Torneo.obtener_torneos_ya_inscrito(current_gamer, 1)
-      @torneos_inscritos_y_confirmados.concat(@torneos_inscritos)
-      @torneos_inscritos_y_confirmados.concat(@torneos_inscrito_con_pago)
-    else
-      @torneos_confirmados = []
-      @torneos_inscritos = []
-      @torneos_inscrito_con_pago = []
-    end
-    if @torneos_inscritos_y_confirmados.size == 0
-      @torneos = Torneo.obtener_torneos_disponibles_para_inscribir
-    else
-      @torneos = Torneo.obtener_torneos_disponibles_para_inscribir(@torneos_inscritos_y_confirmados.map(&:id))
-    end
-      @torneo = @torneos_finalizados.last
+    @torneo = Torneo.where(estado: TORNEO_ESTADO_CREADO).last
+    @torneos = Torneo.all
 
     respond_to do |format|
       format.html { render action: 'index' }
@@ -89,6 +66,7 @@ class TorneosController < ApplicationController
     @torneo = Torneo.new(torneo_params)
     @torneo.fecha_y_hora_inscripcion(params['cierre_inscripcion_fecha'], params['cierre_inscripcion_hora'])
     @torneo.gamer = current_gamer
+    @torneo.periodo_confirmacion_en_minutos = 30
     @torneo.juego = Juego.find(params['juego'].permit(:id)[:id])
     @torneo.estado = 'Creado'
     respond_to do |format|

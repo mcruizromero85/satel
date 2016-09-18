@@ -14,18 +14,14 @@
     </div>
   <% end %>
 
-<label id="torneo_titulo_label">Titulo del torneo <input type="text" name="torneo[titulo]" id="torneo_titulo" placeholder="<%=@torneo.titulo%>"size="12" /></label>
-<label id="torneo_paginaweb_label">Post de facebook con informaci&oacute;n del torneo<input type="text" name="torneo[post_detalle_torneo]" id="torneo_post_detalle_torneo" placeholder="Link del post facebook con el detalle de tu torneo" value="<%=@torneo.post_detalle_torneo%>" size="12"/></label>
+<label id="torneo_titulo_label">Titulo del torneo <input type="text" name="torneo[titulo]" id="torneo_titulo" placeholder="<%=@torneo.titulo%>"size="100" /></label>
+<br/>
+<label >Seleccione el juego: </label>
 
-<label id="torneo_urlstreeming_label">Url de canal twitch para transmitir el torneo<input type="text" name="torneo[urlstreeming]" id="torneo_urlstreeming" placeholder="Link del canal twitch para transmitir el torneo" value="<%=@torneo.urlstreeming%>" size="12"/></label>
-
-
-<label >Seleccione el juego: </label> 
   <p id="cuadro_de_juegos">
               <% Juego.juegos_disponibles.each do | juego | %>   
                 <input type="radio" class="Radio_juego" id='juego_<%=juego.id%>' name='juego[id]' value="<%=juego.id%>" checked='checked'>
-                <label for="juego_<%=juego.id%>"><%= juego.nombre %></label>
-          
+                <label for="juego_<%=juego.id%>"><%= juego.nombre %></label>          
               <% end %>
             </p>
 
@@ -45,7 +41,7 @@
 <label id="Fecha_inscripcion">Fecha cierre inscripci&oacute;n:
 
 <br>
- <% if @torneo.cierre_inscripcion.nil?  %>       
+  <% if @torneo.cierre_inscripcion.nil?  %>       
         <input type="text" id="cierre_inscripcion_fecha" name='cierre_inscripcion_fecha' placeholder="Fecha inicio check-in"  />   
      
         <input type="text" id="cierre_inscripcion_hora"  name='cierre_inscripcion_hora' placeholder="Hora Inicio check-in"  />
@@ -59,17 +55,6 @@
 <br>
 <label id="torneo_urlspon_label">Monto auspiciado<input type="text" name="torneo[monto_auspiciado]" id="torneo_monto_auspiciado" value="<%=@torneo.monto_auspiciado%>" /></label>
 <br>
-<label id="torneo_urllogo_label">Url logo sponsor<input type="text" name="torneo[urllogoSponsors]" id="torneo_urllogo" value="<%=@torneo.urllogoSponsors%>" /></label>
-<br>
-<label id="Confirmacion_torneo">Periodo de confirmaci&oacute;n:
-
- <select id='torneo_periodo_confirmacion_en_minutos' name='torneo[periodo_confirmacion_en_minutos]' class='string required form-control input-lg-Periodo' >
-          <option value='0'>Sin confirmaci&oacute;n</option>          
-          <option <% if @torneo.periodo_confirmacion_en_minutos == 10 then %> selected <% end %>value='10'>10 minutos antes de cerrar inscripci&oacute;n</option>
-          <option <% if @torneo.periodo_confirmacion_en_minutos == 20 then %> selected <% end %>value='20'>20 minutos antes de cerrar inscripci&oacute;n</option>
-          <option <% if @torneo.periodo_confirmacion_en_minutos == 30 then %> selected <% end %>value='30'>30 minutos antes de cerrar inscripci&oacute;n</option>
-        </select>
-</label>
       <center> <%= f.submit "Registrar" %></center>
       <br/>
       <center><a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>
