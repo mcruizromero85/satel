@@ -1,20 +1,40 @@
-<br/>
-<h1>Inscribete</h1>
-<section class="Frm_Inscripcion2" ng-controller="InscripcionController as inscripcionController">
-<span id="mensajeError"></span>
-<form accept-charset="UTF-8" class="frm-registro" id="new_inscripcion" method="post" ng-submit="inscripcionController.inscribir()">
-    <% if @torneo.juego.id == ID_JUEGO_HOTS %>
-      <%= render partial: "reutilizable/ficha_inscripcion_hots", object: @torneo, as: :torneo %>
-    <% elsif @torneo.juego.id == ID_JUEGO_SC2 %>     
-      <%= render partial: "reutilizable/ficha_inscripcion_sc2", object: @torneo, as: :torneo %>
-    <% else %>
-      <%= render partial: "reutilizable/ficha_inscripcion_hearthstone", object: @torneo, as: :torneo %>
-    <% end %>
-    <input type='hidden' id='id_torneo' name='id_torneo' value='<%=@torneo.id%>' /> 
-    <p class="alert alert-error">{{mensaje_error}}</p>
-    <input name="commit" type="submit" value="Inscribirme">
-  </form>
-  </article>
-</section>   
+<div class="jumbotron" style="background-color: #fff;border-color: #e7e7e7;border-style: solid;"> 
+      <div class="row">
+        <div class="col-sm-12">          
+            <div class="container text-center">
+              <h2 class="text-primary"><%=@torneo.titulo%></h2>
+              <br/>
 
-
+              <%= form_for @inscripcion,  html: {class: "form-horizontal"} do |f| %>
+                <% if @inscripcion.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@inscripcion.errors.count, "error") %> No permiten registrar la inscripcion:</h2>
+                    <ul>
+                    <% @inscripcion.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+                <br/>
+                <div class="form-group" ng-class="{ 'has-error': myForm.email.$invalid && !myForm.email.$error.required, 'has-success': myForm.email.$valid }">
+                  <label for="email" class="col-sm-2 control-label ">Email</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" ng-model="email" required my-directive-email>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': myForm.battletag.$invalid && !myForm.battletag.$error.required, 'has-success': myForm.battletag.$valid }" >
+                  <label for="inputPassword3" class="col-sm-2 control-label">Battle tag</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control"  name="battletag" id="battletag" placeholder="Battle tag" ng-model="battletag" required my-directive>
+                  </div>
+                </div>
+                <input type='hidden' id='torneo_id' name='torneo[id]' value='<%=@torneo.id%>' /> 
+                <div class="form-group">                  
+                   <%= f.submit 'Inscribirme', :class => 'btn btn-primary btn-block' %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+      </div>
+  </div>

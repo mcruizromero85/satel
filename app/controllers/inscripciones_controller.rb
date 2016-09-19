@@ -42,11 +42,11 @@ class InscripcionesController < ApplicationController
     @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: Torneo.new(torneo_params))
     respond_to do |format|
       if @inscripcion.inscribir
-        mensaje_inscripcion = 'Inscripción realizada con éxito'
-        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: mensaje_inscripcion }
+        format.html { render action: 'index' }
         format.json { render json: @inscripcion, status: :created }
       else
-        @torneo = Torneo.find(@inscripcion.torneo.id)        
+        @torneo = Torneo.find(@inscripcion.torneo.id)
+        format.html { render action: 'new' }
         format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
       end
     end
@@ -125,11 +125,12 @@ class InscripcionesController < ApplicationController
   def inscribir
     respond_to do |format|
       if @inscripcion.inscribir
+        @torneo = Torneo.find(@inscripcion.torneo.id)
         mensaje_inscripcion = 'Inscripción realizada con éxito'
-        format.html { redirect_to action: 'index', id_torneo: params[:id_torneo], mensaje_inscripcion: mensaje_inscripcion }
+        format.html { redirect_to action: 'index' }
         format.json { render json: @inscripcion, status: :created }
       else
-        @torneo = Torneo.find(@inscripcion.torneo.id)        
+        @torneo = Torneo.find(@inscripcion.torneo.id)
         @mensaje_inscripcion = @inscripcion.mensaje_inscripcion        
         format.html { render action: 'new', id_torneo: params[:id_torneo] }        
         format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }

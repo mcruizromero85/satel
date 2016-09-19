@@ -16,13 +16,20 @@
           <p><b><%= torneo.titulo %></b></p>
           <b>Capacidad: </b> <%= torneo.vacantes %> 
           <br/>
-          <b>Cierre de Inscripci&oacute;n: </b> <%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %> GMT-5
+          <b>Cierre de Inscripci&oacute;n: </b> <%= torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %> GMT-5
           <br/>
           <b>Faltan: </b> 30 Horas
-          <br/>        
+          <br/>
+          <br/>
+          <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
+            <button type="button" class="btn btn-primary btn-block" >Inscribirme</button>
+          </a>
         </div>
-        <div class="col-sm-2">
-          <img class="logo_dt3_au" src="<%= image_path("cofre.jpg") %>" alt="GG E-sports" style="height: 80px;"/>
+        <div class="col-sm-2" style="text-align: center" >
+          <img class="logo_dt3_au" src="<%= image_path("cofre.jpg") %>" alt="GG E-sports" style="height: 80px"/>
+          <br/>
+          <br/>
+          <b> <%= number_to_currency(torneo.monto_auspiciado, precision: 2, locale: :en) %></b>          
         </div>
       </div>
       <br/>

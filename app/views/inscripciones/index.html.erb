@@ -1,6 +1,6 @@
 <section class="FrmRegistrarTorneo">
-  <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
-  <% if !@current_gamer.esta_inscrito_o_confirmado(@torneo) %>
+  <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @inscripcion.torneo, as: :torneo %>
+  <% if !@current_gamer.esta_inscrito_o_confirmado(@inscripcion.torneo) %>
     <center><a  href="/inscripciones/new/<%=@torneo.id%>"><button class="link_button" type="button">Inscribirme al torneo</button></a></center>
   <% end %>
   
