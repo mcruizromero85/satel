@@ -26,8 +26,7 @@ class TorneosController < ApplicationController
   end
 
   # GET /torneos GET /torneos.json
-  def index
-    @torneo = Torneo.where(estado: TORNEO_ESTADO_CREADO).last
+  def index    
     @torneos = Torneo.all
 
     respond_to do |format|

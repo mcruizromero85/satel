@@ -1,51 +1,26 @@
 require 'spec_helper'
 
 describe TorneosController do
+  render_views
   before :each do
-    request.env["HTTP_ACCEPT"] = 'application/json'
+    torneo = Torneo.new
+    torneo.titulo = "Torneo Magma Hearthstone League Bronce 1"
+    torneo.vacantes = 16
+    torneo.cierre_inscripcion = Time.new + (60 * 60 * 24 * 2) + 10
+    torneo.periodo_confirmacion_en_minutos = 20
+    torneo.gamer_id = 17
+    torneo.juego_id = 1
+    torneo.urllogo = "https://scontent-gru2-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/11210452_898572773514979_2891540801757655343_n.png?oh=9cb48e90902af1c10548d1de3e5ce198&oe=5704F5D8"
+    torneo.monto_auspiciado = 10.00    
+    torneo.estado="Creado"
+    torneo.save
+
   end
 
-  it 'Crear un torneo' do
-    # gamer = Gamer.new(correo: "mcruizromero@gmail.com", nombres: "Mauro")
-    # gamer.save
-    # authentication = Authentication.new(provider: 'developer', uid: 'mcruizromero@gmail.com', gamer: gamer)
-    # authentication.save
-    # session[:gamer_id] = gamer.id
-    # post 'create', :torneo
-    # expect(response.status).to eq(200)
-  end
-
-  it 'has a 200 status code' do
+  it 'Dado que existe más de 3 torneos registrados, 1 que cerró inscripciones ayer y 2 que cierran mañana, debe mostrarse solo los 2 que cierran mañana.' do
   	get :index
+    #puts response.body    
     expect(response.status).to eq 200
   end
 
-  describe 'Tests Show' do  	
-  	before do
-  	  @torneo = FactoryGirl.create(:torneo, vacantes: 8)
-  	end 
-
-	it 'has a 200 status code' do	  
-	  get :show, id: @torneo.id
-	  expect(response.status).to eq 200
-	end
-
-	it 'has a 401 status code' do	  
-	  get :show, id: -1
-	  expect(response.status).to eq 404
-	end
-
-	it 'has a 200 status code' do	  
-	  get :show, id: @torneo.id
-	  json = JSON.parse(response.body)
-	  expect(json['estado']).to eq 'Creado'
-	end
-
-  end
-
-  it 'has a 200 status code' do
-  	torneo = FactoryGirl.build(:torneo, vacantes: 8)
-  	post :create, torneo: FactoryGirl.attributes_for(:torneo), juego: FactoryGirl.attributes_for(:juego)    
-    expect(response.status).to eq(201)
-  end
 end

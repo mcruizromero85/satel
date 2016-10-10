@@ -10,7 +10,7 @@
     <% @torneos.each do |torneo| %>
       <div class="row">
         <div class="col-sm-4">
-          <img src="<%= @torneo.urllogo %>" alt="" style="width:100%;height: 180px;" >
+          <img src="<%= torneo.urllogo %>" alt="" style="width:100%;height: 180px;" >
         </div>
         <div class="col-sm-6">        
           <p><b><%= torneo.titulo %></b></p>
@@ -58,14 +58,4 @@
       <br/>
       <p>a mayor alcance por redes sociales mayor probabilidad de vender sus productos.</p>      
     </div>
-  </div>
-
-  <div class="container text-center">
-    <h2>&Uacute;ltimo torneo creado</h2>
-    <p>
-      <center><a href="#/tournaments/<%= @torneo.id %>"><img src="<%= @torneo.urllogo %>" class="img-responsive margin" style="width:80%" alt="Image"></a></center>
-    </p>
-
-    <h4><%= @torneo.titulo %></h4>
-    
   </div>
