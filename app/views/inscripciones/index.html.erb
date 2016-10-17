@@ -4,39 +4,7 @@
     <center><a  href="/inscripciones/new/<%=@torneo.id%>"><button class="link_button" type="button">Inscribirme al torneo</button></a></center>
   <% end %>
   
-  <% if @inscripciones.size > 0 %>
-  <Section class="Lista_Inscritos" >
-  <h1>Lista de inscritos</h1>
-    <% if !@mensaje_inscripcion.nil? %>
-      <div id="dialog-confirm" title="Inscripción confirmada">
-        <span class="ui-icon ui-icon-alert" style="float:left;"></span>
-        <p><%=@mensaje_inscripcion%></p>
-      </div>
-    <% end %>
-  <article class="Team_Inscritos">
-    <article id="accordion" class="lista_Inscritos_contenido">
-       <% @inscripciones.each do |inscripcion| %>       
-           <article class = "Lista_Inscritos_Item">
-             <article class="Team_nick">
-              <p class="Lista_Inscritos_item_nick"><b><%= inscripcion.nick %></b></p>
-             </article>
-             <article class="Team_estado">
-                <p class="Lista_Inscritos_item_nick">
-                  <b><%= inscripcion.estado %></b>
-                  </p>              
-              </article>
-             <article class="Team_check">
-              <% if inscripcion.estado == "Confirmado" %>
-                <img class="confirmacion_check" src="<%= image_path('check_confirmado.png')%>" height='35px' width='35px' > 
-              <% end %>  
-              </article>
-           </article>
-        <% end %>
-      <br/>
-    </article>
-  </article>
-  </section>
-   <% end %>
+
       <center>
         <% if @mensaje_inscripcion.nil? %>
           <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>
@@ -53,7 +21,7 @@
       <div class="card-services-dt3">
 
         <article class="card home-service-dt3" style="height: 201px">
-          <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team"></img>
+          <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team" height="100px" with="100px"></img>
             <article class="Team">FKC Vultures</article>
               <article class="IntegrantesTeam">
                 <table class="Table_Detalle_Team">
@@ -84,7 +52,7 @@
             </article>
 
         <article class="card home-service-dt3" style="height: 201px">
-            <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team"></img>
+            <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team"  height="100px" with="100px"></img>
               <article class="Team">FKC Vultures</article>
                 <article class="IntegrantesTeam">
                     <table class="Table_Detalle_Team">
@@ -115,7 +83,7 @@
               </article>
 
         <article class="card home-service-dt3" style="height: 201px">
-            <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team"></img>
+            <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team" height="100px" with="100px"></img>
               <article class="Team">FKC Vultures</article>
                 <article class="IntegrantesTeam">
                     <table class="Table_Detalle_Team">
