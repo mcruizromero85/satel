@@ -42,6 +42,7 @@ class InscripcionesController < ApplicationController
     @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: Torneo.new(torneo_params))
     respond_to do |format|
       if @inscripcion.inscribir
+        @torneo = Torneo.find(@inscripcion.torneo.id)
         format.html { render action: 'index' }
         format.json { render json: @inscripcion, status: :created }
       else

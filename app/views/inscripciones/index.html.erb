@@ -1,52 +1,8 @@
 <section class="FrmRegistrarTorneo">
-  <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @inscripcion.torneo, as: :torneo %>
-  <% if !@current_gamer.esta_inscrito_o_confirmado(@inscripcion.torneo) %>
+  <%= render partial: "reutilizable/ficha_presentacion_torneo_resumido", object: @torneo, as: :torneo %>
+  <% if !@current_gamer.esta_inscrito_o_confirmado(@torneo) %>
     <center><a  href="/inscripciones/new/<%=@torneo.id%>"><button class="link_button" type="button">Inscribirme al torneo</button></a></center>
   <% end %>
-  
-  <% if @inscripciones.size > 0 %>
-  <Section class="Lista_Inscritos" >
-  <h1>Lista de inscritos</h1>
-    <% if !@mensaje_inscripcion.nil? %>
-      <div id="dialog-confirm" title="Inscripción confirmada">
-        <span class="ui-icon ui-icon-alert" style="float:left;"></span>
-        <p><%=@mensaje_inscripcion%></p>
-      </div>
-    <% end %>
-  <article class="Team_Inscritos">
-    <article id="accordion" class="lista_Inscritos_contenido">
-       <% @inscripciones.each do |inscripcion| %>       
-           <article class = "Lista_Inscritos_Item">
-             <article class="Team_nick">
-              <p class="Lista_Inscritos_item_nick"><b><%= inscripcion.nick %></b></p>
-             </article>
-             <article class="Team_estado">
-                <p class="Lista_Inscritos_item_nick">
-                  <b><%= inscripcion.estado %></b>
-                  </p>              
-              </article>
-             <article class="Team_check">
-              <% if inscripcion.estado == "Confirmado" %>
-                <img class="confirmacion_check" src="<%= image_path('check_confirmado.png')%>" height='35px' width='35px' > 
-              <% end %>  
-              </article>
-           </article>
-        <% end %>
-      <br/>
-    </article>
-  </article>
-  </section>
-   <% end %>
-      <center>
-        <% if @mensaje_inscripcion.nil? %>
-          <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>
-        <% else %>
-          <a class="Enlace_detalle_registrarTorneo" href="/">Volver</a>
-        <% end %>
-      </center>
-    <br/>
-</section>
-
 
 <div class="container">
    <h2>Listas de Inscritos</h2>
