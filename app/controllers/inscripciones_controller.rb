@@ -39,17 +39,38 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones
   # POST /inscripciones.json
   def create
-    @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: Torneo.new(torneo_params))
-    respond_to do |format|
-      if @inscripcion.inscribir
-        format.html { render action: 'index' }
-        format.json { render json: @inscripcion, status: :created }
-      else
+
+    @torneo_tmp = Torneo.new(torneo_params)
+    if @torneo_tmp.estado != 'Creado'
+    #if @torneo_tmp.estado.eql?('Creado')
+
+      @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: @torneo_tmp)
+      respond_to do |format|
+        if @inscripcion.inscribir
+          format.html { render action: 'index' }
+          format.json { render json: @inscripcion, status: :created }
+        else
+          @torneo = Torneo.find(@inscripcion.torneo.id)
+          format.html { render action: 'new' }
+          format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
+        end
+      end
+
+    else
+
+      respond_to do |format|
+        #@torneo = @torneo_tmp
+        @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: @torneo_tmp)
         @torneo = Torneo.find(@inscripcion.torneo.id)
         format.html { render action: 'new' }
+        #format.json { render json: { mensaje_inscripcion_error: "El torneo esta en Estado Creado. No puedes insccrivirte",
+        #                             status: 400 } , status: :not_acceptable }
         format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
+        #envair mensaje indicando que 
       end
+
     end
+
   end
 
   def confirmar

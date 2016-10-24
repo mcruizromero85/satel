@@ -1,5 +1,9 @@
 class Inscripcion < ActiveRecord::Base
+  
   validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estas inscrito en este torneo' }
+  #validates :torneo, uniqueness: { scope: :gamer, message: ', El torneo esta en Checkin' }
+  #validates :torneo, acceptance: { accept: ['TRUE', 'accepted'] }
+  
   belongs_to :gamer
   belongs_to :torneo, autosave: false  
   has_one :hots_formulario, dependent: :delete

@@ -26,9 +26,11 @@ class TorneosController < ApplicationController
   end
 
   # GET /torneos GET /torneos.json
-  def index    
-    @torneos = Torneo.all
-
+  # GET /
+  def index
+    #@torneos = Torneo.all
+    @torneos = Torneo.where( "cierre_inscripcion >= ?", Date.today ).order(cierre_inscripcion: :desc)
+ 
     respond_to do |format|
       format.html { render action: 'index' }
       format.json { render json: @torneos, status: :ok}

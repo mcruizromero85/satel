@@ -16,6 +16,8 @@ FactoryGirl.define do
     estado 'Creado'
     cierre_inscripcion Time.new + (60 * 60 * 24 * 2)
     periodo_confirmacion_en_minutos '20'
+    juego
+    #association :juego, strategy: :build
   end
 
   factory :juego do

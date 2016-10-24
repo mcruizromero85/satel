@@ -11,11 +11,14 @@ class Torneo < ActiveRecord::Base
   validate :fecha_registro_entre_rondas
   validate :cantidad_minima_confirmados
   validates :periodo_confirmacion_en_minutos, numericality: true
+  
   belongs_to :gamer
   belongs_to :juego, autosave: false
+  
   has_many :rondas, -> { order('numero ASC') }, autosave: true
   has_many :sponsors
   has_many :inscripciones, -> { where '(tipo_inscripcion != 0 or tipo_inscripcion is null)' }, autosave: true
+  
   before_save :asignar_valores_por_defectos, if: "estado == 'Creado'"
   has_one :detalle_pago_inscripcion, autosave: true
 

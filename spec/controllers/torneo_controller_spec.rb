@@ -15,6 +15,9 @@ describe TorneosController do
     torneo.estado="Creado"
     torneo.save
 
+    @torneo = FactoryGirl.create(:torneo, vacantes: 16, cierre_inscripcion: Time.new + 10, juego: Juego.find_by(nombre: "Hearthstone"))
+    @gamer = Gamer.create(correo: "ecampos1@gmail.com", nombres: "Elvis", facebook_token: "EAAJwVIM8X8UBAJKlyMLZBFVIlpa9sVLcLZAcFxMqgj7eisCedrJ4xc7QoqDmRTHsZAASZAZCHAQkzrlZBvyKZA6A5fUIkZBTbXJBErThGg2nRlVKdACyYufZCo0GpCgjHZB2KGOHdTaopt3nCLF6HZBdceHCr9weyoQQcLKNZBZAe632A7wZDZD", facebook_id:"124308354666199")
+
   end
 
   it 'Dado que existe más de 3 torneos registrados, 1 que cerró inscripciones ayer y 2 que cierran mañana, debe mostrarse solo los 2 que cierran mañana.' do
@@ -22,5 +25,16 @@ describe TorneosController do
     #puts response.body    
     expect(response.status).to eq 200
   end
+
+ # it 'Dado que se mostraban dos torneos y registro uno que las inscripciones cierran mañana, deben mostrarse 3' do
+  it "crear torneo" do 
+    #torneo_params = FactoryGirl.attributes_for(:torneo)
+    #expect { post :create, :torneo => torneo_params }.to change(Torneo, :count).by(1) 
+
+    post 'create', torneo: @torneo.attributes, juego: Juego.find_by(id: "6")
+    expect(response.status).to eq(406)
+
+  end
+
 
 end
