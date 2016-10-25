@@ -3,13 +3,24 @@
   <% if !@current_gamer.esta_inscrito_o_confirmado(@torneo) %>
     <center><a  href="/inscripciones/new/<%=@torneo.id%>"><button class="link_button" type="button">Inscribirme al torneo</button></a></center>
   <% end %>
+  
+
+      <center>
+        <% if @mensaje_inscripcion.nil? %>
+          <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a></center>
+        <% else %>
+          <a class="Enlace_detalle_registrarTorneo" href="/">Volver</a>
+        <% end %>
+      </center>
+    <br/>
+</section>
 
 <div class="container">
    <h2>Listas de Inscritos</h2>
       <div class="card-services-dt3">
 
         <article class="card home-service-dt3" style="height: 201px">
-          <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team"></img>
+          <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team" height="100px" with="100px"></img>
             <article class="Team">FKC Vultures</article>
               <article class="IntegrantesTeam">
                 <table class="Table_Detalle_Team">
@@ -40,7 +51,7 @@
             </article>
 
         <article class="card home-service-dt3" style="height: 201px">
-            <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team"></img>
+            <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team"  height="100px" with="100px"></img>
               <article class="Team">FKC Vultures</article>
                 <article class="IntegrantesTeam">
                     <table class="Table_Detalle_Team">
@@ -71,7 +82,7 @@
               </article>
 
         <article class="card home-service-dt3" style="height: 201px">
-            <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team"></img>
+            <img class="LogoEquipo" src="<%= image_path("Team.png") %>" alt="Team" height="100px" with="100px"></img>
               <article class="Team">FKC Vultures</article>
                 <article class="IntegrantesTeam">
                     <table class="Table_Detalle_Team">
