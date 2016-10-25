@@ -20,12 +20,36 @@
           <br/>
           <b>Cierre de Inscripci&oacute;n: </b> <%= torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %> GMT-5
           <br/>
-          <b>Faltan: </b> 30 Horas
           <br/>
-          <br/>
-          <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
-            <button type="button" class="btn btn-primary btn-block" >Inscribirme</button>
-          </a>
+          
+          <% torneo.inscripciones do |inscripcion| %>
+          ....<%= inscripcion %>...
+          <% end %>
+
+          <% if Time.now >= torneo.cierre_inscripcion - ( torneo.periodo_confirmacion_en_minutos * 60) and  
+            Time.now <= torneo.cierre_inscripcion  %>
+            <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
+              <button type="button" class="btn btn-success btn-block" >Check-In</button>
+            </a>
+          <% else %>
+
+            <% if torneo.estado == "Creado" %>
+              <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
+                <button type="button" class="btn btn-primary btn-block" >Inscribir</button>
+              </a>
+              <!-- Si es que ya estoy inscrito, aparece este boton...
+              <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
+                <button type="button" class="btn btn-primary btn-block" >Inscrito, espera el Check-In</button>
+              </a> -->
+            <% end %>
+            <% if torneo.estado == 'En Curso' || torneo.estado == 'Finalizado' %>
+              <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
+                <button type="button" class="btn btn-success btn-block" >Ver detalle</button>
+              </a>
+            <% end %>
+
+          <% end %>
+
         </div>
         <div class="col-sm-2" style="text-align: center" >
           <img class="logo_dt3_au" src="<%= image_path("cofre.jpg") %>" alt="GG E-sports" style="height: 80px"/>
