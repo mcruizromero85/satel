@@ -22,8 +22,9 @@ describe TorneosController do
 
   it 'Dado que existe más de 3 torneos registrados, 1 que cerró inscripciones ayer y 2 que cierran mañana, debe mostrarse solo los 2 que cierran mañana.' do
   	get :index
-    #puts response.body    
-    expect(response.status).to eq 200
+    puts response.body
+
+    expect(response.body).to match /Torneoooooooooooooooooo/im
   end
 
  # it 'Dado que se mostraban dos torneos y registro uno que las inscripciones cierran mañana, deben mostrarse 3' do

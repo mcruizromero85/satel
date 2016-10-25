@@ -66,6 +66,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'tilt'
   gem 'coffee-rails-source-maps'
+  gem 'capybara'
 end
 gem 'omniauth'
 gem 'omniauth-facebook'
