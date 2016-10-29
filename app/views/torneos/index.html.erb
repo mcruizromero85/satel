@@ -12,7 +12,7 @@
         <div class="col-sm-4">
           <img src="<%= torneo.urllogo %>" alt="" style="width:100%;height: 180px;" >
         </div>
-        <div class="col-sm-6">        
+        <div class="col-sm-6">
           <p><b><%= torneo.titulo %></b></p>
           <b>Capacidad: </b> <%= torneo.vacantes %> 
           <br/>
@@ -22,29 +22,21 @@
           <br/>
           <br/>
           
-          <% torneo.inscripciones do |inscripcion| %>
-          ....<%= inscripcion %>...
-          <% end %>
-
           <% if Time.now >= torneo.cierre_inscripcion - ( torneo.periodo_confirmacion_en_minutos * 60) and  
             Time.now <= torneo.cierre_inscripcion  %>
             <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
-              <button type="button" class="btn btn-success btn-block" >Check-In</button>
+              <button type="button" class="btn btn-success btn-block" id="checkin_torneo_<%=torneo.id%>" >Check-In</button>
             </a>
           <% else %>
 
             <% if torneo.estado == "Creado" %>
               <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
-                <button type="button" class="btn btn-primary btn-block" >Inscribir</button>
+                <button type="button" class="btn btn-primary btn-block" id="inscribir_torneo_<%=torneo.id%>" >Inscribir</button>
               </a>
-              <!-- Si es que ya estoy inscrito, aparece este boton...
-              <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
-                <button type="button" class="btn btn-primary btn-block" >Inscrito, espera el Check-In</button>
-              </a> -->
             <% end %>
             <% if torneo.estado == 'En Curso' || torneo.estado == 'Finalizado' %>
               <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
-                <button type="button" class="btn btn-success btn-block" >Ver detalle</button>
+                <button type="button" class="btn btn-success btn-block" id="ver_detalle_torneo_<%=torneo.id%>">Ver detalle</button>
               </a>
             <% end %>
 

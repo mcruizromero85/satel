@@ -57,11 +57,7 @@ class Inscripcion < ActiveRecord::Base
     Inscripcion.where('torneo_id = :torneo_id and estado = :estado ', torneo_id: torneo.id, estado: 'Confirmado').limit(torneo.vacantes).order('inscripciones.id')
   end
 
-  def inscribir
-    if !gamer.valid?
-      errors.add(:gamer,  "El battle tag no tiene el formato nick#1234")
-      return
-    end
+  def inscribir    
     estado = 'Inscrito'    
     save
   end

@@ -2,7 +2,9 @@ class Gamer < ActiveRecord::Base
   has_many :torneos
   has_many :inscripciones
   has_many :authentications, autosave: true
-  #validates :battletag, format: { with: /\A\D.{2,11}#\d{4}\Z/, message: ', El battle tag tiene formato nick#1234' }
+  validates :battletag, format: { with: /\A\D.{2,11}#\d{4}\Z/, message: ', El battle tag debe tener el formato nick#1234' }, :unless => :force_submit
+  validates :correo, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, message: ', Tu correo no tiene el formato correcto' }, :unless => :force_submit
+  attr_accessor :force_submit
   
   def self.buscar_o_crear_free_win(nick_free_win)
     gamer = Gamer.find_by(nick: nick_free_win)

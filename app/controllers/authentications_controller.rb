@@ -7,7 +7,7 @@ class AuthenticationsController < ApplicationController
     @auth = Authentication.where('uid = ? AND provider = ?', auth['uid'], auth['provider']).first
     facebook_gamer = auth['info']    
     unless @auth
-      gamer = Gamer.new(correo: facebook_gamer.email, apellidos: facebook_gamer.last_name)
+      gamer = Gamer.new(correo: facebook_gamer.email, apellidos: facebook_gamer.last_name, force_submit: true )
       if params[:provider] == 'developer'
         gamer.nombres = facebook_gamer.name
         link_cuenta = 'www.google.com'

@@ -39,30 +39,20 @@ class InscripcionesController < ApplicationController
   # POST /inscripciones
   # POST /inscripciones.json
   def create
-    @torneo = Torneo.new(torneo_params)
-    if @torneo.estado != 'Creado'
-      @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: @torneo_tmp)
-      respond_to do |format|
-        if @inscripcion.inscribir
-          format.html { render action: 'index' }
-          format.json { render json: @inscripcion, status: :created }
-        else          
-          format.html { render action: 'new' }
-          format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
-        end
-      end
-
-    else
-
-      respond_to do |format|
-        @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: @torneo_tmp)
-        @torneo = Torneo.find(@inscripcion.torneo.id)
+    @torneo = Torneo.find_by(torneo_params)
+    @current_gamer.correo = params[:email]
+    @current_gamer.battletag = params[:battletag]
+    @current_gamer.save
+    @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: @torneo)
+    respond_to do |format|
+      if @inscripcion.inscribir
+        format.html { render action: 'index' }
+        format.json { render json: @inscripcion, status: :created }
+      else          
         format.html { render action: 'new' }
         format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
       end
-
     end
-
   end
 
   def confirmar
