@@ -4,6 +4,11 @@ require 'util_tests'
 feature 'Inscribirse a un torneo' do
   before :each do
     @torneo = FactoryGirl.create(:torneo, vacantes: 16, cierre_inscripcion: Time.new + 10, juego: Juego.find_by(nombre: "Hearthstone"))
+    @torneo_con_inscritos = FactoryGirl.create(:torneo, vacantes: 16, cierre_inscripcion: Time.new + 10, juego: Juego.find_by(nombre: "Hearthstone"))
+    16.times do
+      inscripcion = FactoryGirl.create(:inscripcion, torneo: @torneo_con_inscritos)
+    end
+
   end
 
   scenario 'Dado que el usuario ingresó su battletag y correo correctamente, entonces debe aparecer el mensaje “Tu inscripción se guardó satisfactoriamente” en la pantalla de ficha de torneo' do
@@ -39,8 +44,14 @@ feature 'Inscribirse a un torneo' do
   	expect(page).to have_content('Tu correo no tiene el formato correcto')
   end
 
-  #scenario 'Dado que un torneo ya cubrió todas sus vacantes, entonces al inscribirse el mensaje que debe salir es “Tu inscripción se guardó satisfactoriamente, pero estás en cola, tu posición es “x” en la pantalla de ficha de producto. X representa la posición que obtuvo' do
-  #end
+  scenario 'Dado que un torneo ya cubrió todas sus vacantes, entonces al inscribirse el mensaje que debe salir es “Tu inscripción se guardó satisfactoriamente, pero estás en cola, tu posición es “x” en la pantalla de ficha de producto. X representa la posición que obtuvo' do
+  	autenticarse_como_gamer
+  	visit "/inscripciones/new?id_torneo=" + @torneo_con_inscritos.id.to_s
+  	fill_in 'email', with: 'user@example.com'
+    fill_in 'battletag', with: 'Kripty#1234'
+    click_button('Inscribirme')
+    expect(page).to have_content('Tu inscripción se guardó satisfactoriamente, pero estás en cola, tu posición es “17” en la pantalla de ficha de producto')
+  end
 end
 
 

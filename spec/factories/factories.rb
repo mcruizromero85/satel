@@ -37,10 +37,7 @@ FactoryGirl.define do
 
   factory :inscripcion do
     estado 'No Confirmado'
-    nick 'Matt'
     association :gamer, strategy: :build
-    etiqueta_llave 'Matt'
-    etiqueta_chat 'Matt'
     torneo
   end
 end
