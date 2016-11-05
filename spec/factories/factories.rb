@@ -30,7 +30,7 @@ FactoryGirl.define do
 
   factory :gamer do
     nombres 'Matt'
-    nick 'Matt'
+    battletag 'Kripty#1234'    
     apellidos 'Horner'
     correo 'matt@gmail.com'
   end

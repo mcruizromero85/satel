@@ -7,9 +7,8 @@ class Torneo < ActiveRecord::Base
     too_short: ', el título debe estar entre 30 y 100 caracteres',
     too_long: ', el título debe estar entre 30 y 100 caracteres'
   }
-  validate :fecha_cierre_mayor_que_actual
-  validate :fecha_registro_entre_rondas
-  validate :cantidad_minima_confirmados
+  validate :fecha_cierre_mayor_que_actual, :unless => :force_submit
+  validate :fecha_registro_entre_rondas  
   validates :periodo_confirmacion_en_minutos, numericality: true
   
   belongs_to :gamer
@@ -17,10 +16,12 @@ class Torneo < ActiveRecord::Base
   
   has_many :rondas, -> { order('numero ASC') }, autosave: true
   has_many :sponsors
-  has_many :inscripciones, -> { where '(tipo_inscripcion != 0 or tipo_inscripcion is null)' }, autosave: true
+  #has_many :inscripciones, -> { where '(tipo_inscripcion != 0 or tipo_inscripcion is null)' }, autosave: true
+  has_many :inscripciones, autosave: true
   
   before_save :asignar_valores_por_defectos, if: "estado == 'Creado'"
-  has_one :detalle_pago_inscripcion, autosave: true
+  has_one :detalle_pago_inscripcion, autosave: true  
+  attr_accessor :force_submit
 
   def asignar_valores_por_defectos
     numero_de_rondas_totales = TorneosHelper.obtener_rondas_por_vacantes(vacantes)
@@ -77,12 +78,6 @@ class Torneo < ActiveRecord::Base
     rescue StandardError
       errors.add(:cierre_inscripcion, ', la fecha debe estar en formato dd/mm/yyyy')
       errors.add(:cierre_inscripcion, ', , la hora debe estar en formato hh:mm AM/PM')
-  end
-
-  def cantidad_minima_confirmados
-    cantidad_confirmados = Inscripcion.inscripciones_permitidas_y_confirmadas_en_el_torneo(self).size
-    return unless estado == 'Iniciado' && cantidad_confirmados < 4
-    errors.add(:vacantes, ', El Torneo debe tener como mínimo 4 gamers confirmados')
   end
 
   def inicio_fecha_hora_confirmacion
