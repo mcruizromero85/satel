@@ -13,7 +13,7 @@ describe Inscripcion do
   
   it 'Inscripción a un torneo con cantidad de inscritos igual a la cantidad de vacantes del torneo' do
     @inscripcion = Inscripcion.new(gamer: @gamer, torneo: @torneo_con_inscritos)
-    @inscripcion.inscribir    
+    @inscripcion.inscribir
     expect(@inscripcion.mensaje_inscripcion).to eq 'Tu inscripción se guardó satisfactoriamente, pero estás en cola, tu posición es "17"'
   end
 

@@ -24,15 +24,9 @@ feature 'Inscribirse a un torneo' do
   	autenticarse_como_gamer
   	visit "/inscripciones/new?id_torneo=" + @torneo.id.to_s
   	fill_in 'email', with: 'user@example.com'
-	fill_in 'battletag', with: '1234'
+    fill_in 'battletag', with: '1234'
   	click_button('Inscribirme')
   	expect(page).to have_content('El battle tag debe tener el formato nick#1234')
-  	#find("#inscribir_torneo_" + @torneo.id.to_s).click
-    #click_button('Inscribirme')    
-    #autenticarse_como_organizador
-    #registrar_torneo    
-    #inscribirme_al_torneo
-    #expect(page).to have_content('Tu Inscripción se realizó con éxito')
   end
 
   scenario 'Dado que el usuario ingresó un correo incorrecto, entonces le debe aparecer el mensaje “Tu correo no tiene el formato correcto"' do
@@ -62,17 +56,17 @@ feature 'Inscribirse a un torneo' do
     expect(page).to have_content('Las inscripciones ya cerraron para el torneo, volver')
   end
 
-  scenario 'Dado que un Gamer ya se inscribió a un torneo, entonces al intentar inscribirse nuevamente, el sistema mostrará el mensaje “Ya estás inscrito al torneo, espera la fase de confirmación”.' do
+  scenario 'Dado que un Gamer ya se inscribió a un torneo, entonces al intentar inscribirse nuevamente, el sistema mostrará el mensaje “Ya estás inscrito al torneo, espera la fase de check-in”.' do
     autenticarse_como_gamer
     visit "/inscripciones/new?id_torneo=" + @torneo.id.to_s
     fill_in 'email', with: 'user@example.com'
     fill_in 'battletag', with: 'Kripty#1234'
     click_button('Inscribirme')
     visit "/inscripciones/new?id_torneo=" + @torneo.id.to_s
-	fill_in 'email', with: 'user@example.com'
+  	fill_in 'email', with: 'user@example.com'
     fill_in 'battletag', with: 'Kripty#1234'
     click_button('Inscribirme')
-    expect(page).to have_content('Ya estás inscrito al torneo, espera la fase de confirmación')
+    expect(page).to have_content('Ya estás inscrito al torneo, espera la fase de check-in')
   end
 end
 

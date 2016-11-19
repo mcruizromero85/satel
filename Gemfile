@@ -63,10 +63,11 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'database_cleaner', '~> 1.3.0'
   gem 'simplecov', :require => false
-  gem 'rubocop', require: false
+  gem 'rubocop', '~> 0.45.0', require: false
   gem 'tilt'
   gem 'coffee-rails-source-maps'
   gem 'capybara'
+  gem 'rb-readline'
 end
 gem 'omniauth'
 gem 'omniauth-facebook'

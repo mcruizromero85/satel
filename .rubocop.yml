@@ -1,5 +1,6 @@
 AllCops:
-  RunRailsCops: true
+  Rails:
+    Enabled: true	
   Include:
   - '**/Rakefile'
   - '**/config.ru'
@@ -17,8 +18,6 @@ LineLength:
 HasAndBelongsToMany:
   Enabled: false
 AbcSize:
-  Enabled: false
-DefaultScope:
   Enabled: false
 Documentation:
   Enabled: false

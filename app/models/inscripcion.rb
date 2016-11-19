@@ -1,11 +1,12 @@
 class Inscripcion < ActiveRecord::Base
   
-  validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estás inscrito al torneo, espera la fase de confirmación' }
+  validates :torneo, uniqueness: { scope: :gamer, message: ', Ya estás inscrito al torneo, espera la fase de check-in' }
+
   #validates :torneo, uniqueness: { scope: :gamer, message: ', El torneo esta en Checkin' }
   #validates :torneo, acceptance: { accept: ['TRUE', 'accepted'] }
   
   belongs_to :gamer
-  belongs_to :torneo, autosave: false  
+  belongs_to :torneo
   has_one :hots_formulario, dependent: :delete
   has_one :sc2_form, dependent: :delete
   has_one :hearthstone_form, dependent: :delete
@@ -37,8 +38,8 @@ class Inscripcion < ActiveRecord::Base
     end
   end
 
-  def inscribir    
-    estado = 'No Confirmado'
+  def inscribir
+    self.estado = 'No Confirmado'
     if save
       self.mensaje_inscripcion = "Tu inscripción se guardó satisfactoriamente"
       self.mensaje_inscripcion = 'Tu inscripción se guardó satisfactoriamente, pero estás en cola, tu posición es ' + torneo.inscripciones.count.to_s  if torneo.inscripciones.count > torneo.vacantes
@@ -50,9 +51,8 @@ class Inscripcion < ActiveRecord::Base
     errors.add(:torneo, ', Las inscripciones ya cerraron para el torneo, volver') if (torneo.cierre_inscripcion - Time.new) < 0   
   end
 
-  def confirmar(id_transaccion = nil)
+  def confirmar
     self.estado = 'Confirmado'
-    self.id_transaccion_pago = id_transaccion unless id_transaccion.nil?
     save
   end
 

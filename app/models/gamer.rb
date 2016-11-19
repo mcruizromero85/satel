@@ -66,7 +66,7 @@ class Gamer < ActiveRecord::Base
   end
 
   def esta_inscrito(torneo)
-    true if inscripcion_en_torneo(torneo)
+    true if Inscripcion.find_by(torneo_id: torneo.id, gamer_id: id, estado: 'No Confirmado')
   end
 
   def esta_confirmado(torneo)
@@ -116,4 +116,5 @@ class Gamer < ActiveRecord::Base
   def esta_inscrito_o_confirmado(torneo)
     Inscripcion.find_by(torneo_id: torneo.id, gamer_id: id)
   end
+
 end

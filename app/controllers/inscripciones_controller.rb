@@ -43,7 +43,7 @@ class InscripcionesController < ApplicationController
     @current_gamer.correo = params[:email]
     @current_gamer.battletag = params[:battletag]
     @current_gamer.save
-    @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: @torneo)
+    @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: @torneo)    
     respond_to do |format|
       if @inscripcion.inscribir
         format.html { render action: 'index' }
@@ -57,7 +57,16 @@ class InscripcionesController < ApplicationController
 
   def confirmar
     @inscripcion = Inscripcion.find_by(torneo_id: params[:id_torneo], gamer_id: current_gamer.id)
-    solo_confirmar
+    respond_to do |format|
+      if @inscripcion.confirmar
+        format.html { redirect_to action: 'show', controller: 'torneos', id_torneo: params[:id_torneo]}
+        format.json { render json: @inscripcion, status: :created }
+      else
+        @torneo = Torneo.find(params[:id_torneo])
+        format.html { render action: 'new' }
+        format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
+      end
+    end
   end
   # DELETE /gamers/1
   # DELETE /gamers/1.json

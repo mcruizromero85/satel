@@ -26,10 +26,10 @@
     find('button').click
   end
 
-  def autenticarse_como_gamer
+  def autenticarse_como_gamer correo = 'mcruizromero85@gmail.com'
     visit '/auth/developer'
     fill_in('name', with: 'Mauro')
-    fill_in('email', with: 'mcruizromero85@gmail.com')
+    fill_in('email', with: correo)
     find('button').click
   end
 

@@ -15,7 +15,7 @@ FactoryGirl.define do
     vacantes '8'
     estado 'Creado'
     cierre_inscripcion Time.new + (60 * 60 * 24 * 2)
-    periodo_confirmacion_en_minutos '20'
+    periodo_confirmacion_en_minutos '30'
     juego
     #association :juego, strategy: :build
   end
@@ -40,4 +40,11 @@ FactoryGirl.define do
     association :gamer, strategy: :build
     torneo
   end
+
+  factory :authentication do    
+    uid 'matt@gmail.com'
+    provider 'developer'
+    association :gamer, strategy: :create
+  end
+
 end
