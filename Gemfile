@@ -5,6 +5,7 @@ gem 'rails', '4.1.9'
 gem 'eventmachine', '~>1.0.4'
 gem 'thin'
 gem 'websocket-rails'
+gem 'faye-websocket', '0.10.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'

@@ -15,8 +15,6 @@ class Torneo < ActiveRecord::Base
   belongs_to :juego, autosave: false
   
   has_many :rondas, -> { order('numero ASC') }, autosave: true
-  has_many :sponsors
-  #has_many :inscripciones, -> { where '(tipo_inscripcion != 0 or tipo_inscripcion is null)' }, autosave: true
   has_many :inscripciones, autosave: true
   
   before_save :asignar_valores_por_defectos, if: "estado == 'Creado'"
@@ -80,8 +78,8 @@ class Torneo < ActiveRecord::Base
       errors.add(:cierre_inscripcion, ', , la hora debe estar en formato hh:mm AM/PM')
   end
 
-  def inicio_fecha_hora_confirmacion
-    cierre_inscripcion - (periodo_confirmacion_en_minutos * 60)
+  def es_periodo_de_checkin    
+    Time.new - (cierre_inscripcion - (periodo_confirmacion_en_minutos * 60)) > 0
   end
 
   def fecha_cierre_mayor_que_actual

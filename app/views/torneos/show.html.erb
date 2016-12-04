@@ -1,8 +1,12 @@
 <section class="FrmRegistrarTorneo">
+  Check-in realizado correctamente
   <h2>Detalle del Torneo</h2>
 <!--Inicio del cambio-->
  <!--div class="container">-->
  <article article class="container">
+
+  <%= render partial: "reutilizable/chat" %>
+
  <div class="card-services-dt2">
   <!--detalle del torneo-->
         <%= render partial: "reutilizable/ficha_presentacion_torneo", object: @torneo, as: :torneo %>
@@ -53,20 +57,6 @@
      </div>
   </article>             
 
-  <% if @torneo.sponsors.size > 0 %>
-    <div class="container">
-       <h2>Auspiciado Por</h2>
-          <div class="card-services-dt1">
-            <% @torneo.sponsors.each do | sponsor | %>
-              <article class="card home-service-dt1" style="height: 196px">
-                <div class="course-data">
-                  <img class="logo_dt1_au" src="<%= image_path(sponsor.logo) %>" alt="GG E-sports"/>
-                </div>
-              </article>
-            <% end %>        
-          </div>
-    </div>
-  <% end %>
 
   <article class="Detalle_Torneo_Ver">
     <% if @mensaje_de_guardado.nil? %>
@@ -90,4 +80,12 @@
     <% end %>
     <br/>
   </article>
+   <aside>
+    <article id="tabs_chat-2" >
+      <h3>Participantes confirmados</h3>
+      <ul class="nav nav-list" id="user-list">
+        <li class="nav-header">Active</li>
+      </ul>
+    </article> 
+  </aside>
 </section>

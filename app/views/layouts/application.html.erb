@@ -6,6 +6,24 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <%= stylesheet_link_tag "bootstrap.css", media: "all" %>    
+    <% if request.env['PATH_INFO'].index('/torneos/') %>     
+      <%= javascript_include_tag "jquery.js" %>
+      <%= javascript_include_tag "jquery_ujs.js" %>    
+      <%= javascript_include_tag "jquery-ui.js" %>
+      <%= javascript_include_tag "jquery.bracket.min.js" %>
+      <%= javascript_include_tag "jquery.countdown.js" %>
+      <%= javascript_include_tag "jquery.ui.timepicker.js" %> 
+      <%= javascript_include_tag "chat.js" %>
+
+      <script src="/assets/websocket_rails/websocket_rails.js?body=1"></script>
+      <script src="/assets/websocket_rails/event.js?body=1"></script>
+      <script src="/assets/websocket_rails/abstract_connection.js?body=1"></script>
+      <script src="/assets/websocket_rails/http_connection.js?body=1"></script>
+      <script src="/assets/websocket_rails/websocket_connection.js?body=1"></script>
+      <script src="/assets/websocket_rails/channel.js?body=1"></script>
+      <script src="/assets/websocket_rails/main.js?body=1"></script>
+
+    <% end %> 
   </head>
 
   <body ng-app="ggesportsWebApp">  
@@ -28,7 +46,7 @@
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
 
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
+              <li class="active"><a href="/">Home</a></li>
               <li><a ng-href="#/about">Quienes somos</a></li>
               <li>
                 <!--

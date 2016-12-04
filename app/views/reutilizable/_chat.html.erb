@@ -1,8 +1,5 @@
-<input type="hidden" name="nombre_chat" id="nombre_chat" value="<%=current_gamer.etiqueta_para_chat(@torneo) %>" />
+<input type="hidden" name="nombre_chat" id="nombre_chat" value="<%=current_gamer.battletag %>" />
   <input type="hidden" name="torneo_id" id="torneo_id" value="<%=@torneo.id %>" />
-<% if current_gamer.esta_confirmado(@torneo) %>  
-  <input type="hidden" name="flag_gamer_confirmado" id="flag_gamer_confirmado" value="<%=current_gamer.esta_confirmado(@torneo) %>" />
-<% end %>
 <br/>
 <br/>
 <article id="tabs_chat">
@@ -19,7 +16,6 @@
             </div>
           <% end %>
         </div>
-        <% if @current_gamer.esta_confirmado(@torneo) %>
           <div class="form-inline well">
             <fieldset class="PostMessage">
               <input type="hidden" class="input-medium" id="user_name" >
@@ -27,7 +23,6 @@
               <button id="send" class="btn btn-primary">Send</button>
             </fieldset>
           </div>
-        <% end %>
       <% end %>
     </div>
   </article> 

@@ -3,7 +3,6 @@ class TorneosController < ApplicationController
 
   before_action :set_torneo, only: [:preparar, :show, :edit, :update, :destroy, :show_brackets]
   before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :mis_torneos, :iniciar_torneo]
-  before_filter :set_access
 
   def ultimo_finalizado
     torneo = Torneo.where(estado: TORNEO_ESTADO_FINALIZADO).last
@@ -41,6 +40,9 @@ class TorneosController < ApplicationController
   # GET /torneos/1
   # GET /torneos/1.json
   def show
+    chat = Chat.limit(1).offset(49)
+    Chat.destroy_all('id < ' + chat[0].id.to_s) unless chat[0].nil?
+    @chats = Chat.all.order(:id)
     respond_to do |format|
         format.html { render action: 'show' }
         format.json { render json: Torneo.find(params[:id]), status: :ok }
@@ -82,90 +84,7 @@ class TorneosController < ApplicationController
     end
   end
 
-  def mis_torneos
-    @torneos = Torneo.all.where('gamer_id = :gamer_id ', gamer_id: current_gamer.id).order(cierre_inscripcion: :asc)
-  end
-
-  def iniciar_torneo
-    chat = Chat.limit(1).offset(49)
-    Chat.destroy_all('id < ' + chat[0].id.to_s) unless chat[0].nil?
-    @chats = Chat.all.order(:id)
-    @torneo = Torneo.find(params[:id_torneo])
-    #@torneo.generar_encuentros if current_gamer == @torneo.gamer
-    return if @torneo.gamer == current_gamer || !current_gamer.esta_confirmado(@torneo)
-
-    encuentro_actual = current_gamer.encuentro_actual(@torneo)
-    return if encuentro_actual.nil?
-
-    if encuentro_actual.estado == 'Pendiente'
-      if encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && current_gamer.esta_listo_en_encuentro_actual(@torneo) && !current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
-        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
-        encuentro_actual.registrar_ganador(true)
-      elsif encuentro_actual.updated_at.to_i + TIME_OUT_LISTO_GAMER_EN_SEGUNDOS <= Time.new.to_i && !current_gamer.esta_listo_en_encuentro_actual(@torneo) && current_gamer.esta_listo_contrincante_en_encuentro_actual(@torneo)
-        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.contrincante_inscrito_actual(@torneo).id)
-        encuentro_actual.registrar_ganador(true)
-      end
-    elsif encuentro_actual.estado == 'Iniciado'
-      if encuentro_actual.partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS <= Time.new.to_i && current_gamer.reporto_ganar_partida_actual(@torneo) && !current_gamer.reporto_ganar_partida_actual_el_contrincante(@torneo)
-        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.inscripcion_en_torneo(@torneo).id)
-        encuentro_actual.registrar_ganador
-      elsif encuentro_actual.partida_actual.updated_at.to_i + TIME_OUT_LIMITE_PARA_DEBATE_DE_PARTIDA_EN_SEGUNDOS <= Time.new.to_i && !current_gamer.reporto_ganar_partida_actual(@torneo) && current_gamer.reporto_ganar_partida_actual_el_contrincante(@torneo)
-        encuentro_actual.gamerinscrito_ganador = Inscripcion.new(id: current_gamer.contrincante_inscrito_actual(@torneo).id)
-        encuentro_actual.registrar_ganador
-      end
-    end
-  end
-
-  def comenzar
-    @torneo = Torneo.find_by(id: params[:id_torneo], gamer_id: current_gamer.id)
-    @torneo.estado = params['estado']
-    respond_to do |format|
-      if @torneo.save
-        @torneo.generar_encuentros
-        format.html { redirect_to action: 'iniciar_torneo', id_torneo: @torneo.id }
-      else
-        @torneo.estado = 'Creado'
-        format.html { render action: 'iniciar_torneo', notice: 'Error' }
-      end
-    end
-  end
-
-  def formulario_torneo_relampago
-    @torneo = Torneo.find(params[:id_torneo])
-  end
-
-  def agregar_gamers_temporales
-    torneo = Torneo.find_by(id: params[:id_torneo], gamer_id: current_gamer.id, estado: 'Creado')
-    gamers_array = params['gamers']
-
-    gamers_array.each_line do | gamer_temporal_nick |
-      gamer_temporal_nick = gamer_temporal_nick.strip
-      gamer = Gamer.new(correo: gamer_temporal_nick + '@temporal.com', apellidos: gamer_temporal_nick)
-      gamer.nombres = gamer_temporal_nick + '_temporal'
-      gamer.nick = gamer_temporal_nick
-      gamer.save
-
-      authentication = Authentication.new(provider: 'temporal', uid: gamer.correo, gamer: gamer)
-      authentication.save
-
-      inscripcion = Inscripcion.new
-      inscripcion.gamer = gamer
-      inscripcion.nick = gamer_temporal_nick
-      inscripcion.torneo = torneo
-      inscripcion.estado = 'Confirmado'
-      inscripcion.save
-    end
-    respond_to do |format|
-      format.html { redirect_to action: 'iniciar_torneo', id_torneo: torneo.id }
-    end
-  end
-
   def chat
-  end
-
-  def show_brackets
-    @teams = @torneo.arreglo_de_nombres_para_llaves()
-    @results = TorneosHelper.obtener_array_para_resultado_llaves(@torneo)
   end
 
   private
@@ -185,8 +104,4 @@ class TorneosController < ApplicationController
     params.require(:torneo).permit(:titulo, :urlstreeming, :vacantes, :cierre_inscripcion, :post_detalle_torneo, :periodo_confirmacion_en_minutos, :tipo_generacion, :estado, :juego, :urllogo, :urllogoSponsors,:monto_auspiciado)
   end
 
-  def set_access
-    response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || '*'                                                                                                                                                                                                     
-    response.headers['Access-Control-Allow-Credentials'] = 'true'          
-  end
 end

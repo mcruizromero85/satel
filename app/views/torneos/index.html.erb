@@ -10,7 +10,9 @@
     <% @torneos.each do |torneo| %>
       <div class="row" id="seccion_torneo_<%=torneo.id%>">
         <div class="col-sm-4">
-          <img src="<%= torneo.urllogo %>" alt="" style="width:100%;height: 180px;" >
+          <a href="/torneos/<%=torneo.id%>">
+            <img src="<%= torneo.urllogo %>" alt="" style="width:100%;height: 180px;" >
+          </a>
         </div>
         <div class="col-sm-6">
           <p><b><%= torneo.titulo %></b></p>
@@ -24,7 +26,7 @@
           
           <% if torneo.estado == "Creado" %>          
 
-            <% if @current_gamer.esta_confirmado(torneo) %>
+            <% if @current_gamer.esta_inscrito(torneo) and  torneo.es_periodo_de_checkin  %>
               <a href="/inscripciones/confirmar/<%=torneo.id%>">
                 <button type="button" class="btn btn-success btn-block" id="checkin_torneo_<%=torneo.id%>" >Check-In</button>
               </a>
