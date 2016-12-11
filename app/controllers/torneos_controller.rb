@@ -40,9 +40,10 @@ class TorneosController < ApplicationController
   # GET /torneos/1
   # GET /torneos/1.json
   def show
+    puts "id de torneo = " + params[:id]
     chat = Chat.limit(1).offset(49)
     Chat.destroy_all('id < ' + chat[0].id.to_s) unless chat[0].nil?
-    @chats = Chat.all.order(:id)
+    @chats = Chat.where(" torneo_id = :torneo_id " , { torneo_id: params[:id] }).order(:id)
     respond_to do |format|
         format.html { render action: 'show' }
         format.json { render json: Torneo.find(params[:id]), status: :ok }

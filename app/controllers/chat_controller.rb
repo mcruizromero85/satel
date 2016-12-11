@@ -6,6 +6,7 @@
   end
 
   def system_msg(ev, msg)
+    puts "metodo system_msg()"
     Chat.create(user_name: 'system', received: Time.now.to_s(:short), msg_body: msg.dup) if msg.dup != '/reiniciar' && msg.dup.index('connected').to_i == 0
     broadcast_message ev,
       user_name: 'system',

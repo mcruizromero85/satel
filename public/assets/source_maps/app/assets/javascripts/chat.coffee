@@ -67,6 +67,7 @@ class Chat.Controller
     @dispatcher.trigger 'change_username', @user.serialize()
 
   appendMessage: (message) ->
+    console.debug("appendMessage()");
     if message.msg_body.toString() == '/reiniciar' && message.user_name.indexOf('(Admin)') > 0
       location.reload()
     return if message.msg_body.indexOf('connected') > 0
