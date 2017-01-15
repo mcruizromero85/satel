@@ -8,6 +8,8 @@ Satel::Application.routes.draw do
 
   get '/chat' => 'torneos#chat'
 
+  get '/contactenos' => 'torneos#contactenos'
+
   get '/ultimo_torneo_finalizado' => 'torneos#ultimo_finalizado'
   get '/ultimo_torneo_creado' => 'torneos#ultimo_creado'  
 

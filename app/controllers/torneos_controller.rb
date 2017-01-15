@@ -4,6 +4,9 @@ class TorneosController < ApplicationController
   before_action :set_torneo, only: [:preparar, :show, :edit, :update, :destroy, :show_brackets]
   before_action :revisa_si_existe_gamer_en_sesion, only: [:new, :mis_torneos, :iniciar_torneo]
 
+  def contactenos
+  end
+
   def ultimo_finalizado
     torneo = Torneo.where(estado: TORNEO_ESTADO_FINALIZADO).last
     teams = torneo.arreglo_de_nombres_para_llaves(3)

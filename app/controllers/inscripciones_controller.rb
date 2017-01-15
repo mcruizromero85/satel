@@ -29,11 +29,12 @@ class InscripcionesController < ApplicationController
     @current_gamer.battletag = params[:battletag]
     @current_gamer.save
     @inscripcion = Inscripcion.new(gamer: current_gamer, torneo: @torneo)    
-    respond_to do |format|
-      if @inscripcion.inscribir
-        format.html { render action: 'index' }
-        format.json { render json: @inscripcion, status: :created }
-      else          
+    
+    if @inscripcion.inscribir
+      flash[:notice] = @inscripcion.mensaje_inscripcion
+      redirect_to controller: 'torneos', action: 'show', id: @torneo.id
+    else          
+      respond_to do |format|
         format.html { render action: 'new' }
         format.json { render json: @inscripcion.errors.full_messages.to_json , status: :not_acceptable }
       end
@@ -45,6 +46,7 @@ class InscripcionesController < ApplicationController
     @inscripcion.estado = 'Confirmado'
     respond_to do |format|
       if @inscripcion.save
+        flash[:notice] = "Check-in realizado correctamente"
         format.html { redirect_to action: 'show', controller: 'torneos', id: params[:id_torneo]}
         format.json { render json: @inscripcion, status: :created }
       else

@@ -30,4 +30,5 @@ class ApplicationController < ActionController::Base
       redirect_to '/auth/facebook'
     end
   end
+
 end
