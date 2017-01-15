@@ -24,9 +24,12 @@
           <br/>
           <br/>
           
-          <% if torneo.estado == "Creado" %>          
-
-            <% if @current_gamer.esta_inscrito(torneo) and  torneo.es_periodo_de_checkin  %>
+          <% if torneo.estado == "Creado" %>
+						<% if @current_gamer.nil? %>
+              <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
+                <button type="button" class="btn btn-primary btn-block" id="checkin_torneo_<%=torneo.id%>" >Inscribir</button>
+              </a>
+            <% elsif @current_gamer.esta_inscrito(torneo) and  torneo.es_periodo_de_checkin  %>
               <a href="/inscripciones/confirmar/<%=torneo.id%>">
                 <button type="button" class="btn btn-success btn-block" id="checkin_torneo_<%=torneo.id%>" >Check-In</button>
               </a>

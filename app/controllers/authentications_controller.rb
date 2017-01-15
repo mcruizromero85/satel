@@ -28,7 +28,7 @@ class AuthenticationsController < ApplicationController
     end
     self.current_gamer = @auth.gamer
     if !session[:last_params].nil?
-      redirect_to session[:last_params]
+      redirect_to url_for(session[:last_params])
     else
       redirect_to action: 'index', controller: 'torneos'
     end

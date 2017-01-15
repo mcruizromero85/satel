@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+7<html>
   <head>
     <meta charset="utf-8">
     <title>GG-Sports</title>
@@ -32,28 +32,19 @@
       <div class="navbar navbar-default" role="navigation">
         <div class="container">
           <div class="navbar-header">
-
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-
-            <a class="navbar-brand" href="#/">GG-esports</a>
+            <a class="navbar-brand" href="/">GG-esports</a>
           </div>
-
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
             <ul class="nav navbar-nav">
               <li class="active"><a href="/">Home</a></li>
               <li><a ng-href="#/about">Quienes somos</a></li>
               <li>
-                <!--
-                  Below we include the Login Button social plugin. This button uses
-                  the JavaScript SDK to present a graphical Login button that triggers
-                  the FB.login() function when clicked.
-                -->
                 <div id="status" style="padding-right: 5px;padding-botton: 15px;padding-top: 15px;">
                 </div>
               </li>
@@ -61,6 +52,11 @@
                 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" autologoutlink="true" style="padding-botton: 15px;padding-top: 15px;">
                 </fb:login-button>
               </li>
+              <% if !@current_gamer.nil? %>
+              <li>
+                <a id="link_cerrar_sesion" href="/cerrar_sesion">Cerrar Sesi&oacute;n</a>
+              </li>
+              <%  end %>
             </ul>
           </div>
         </div>
