@@ -6,6 +6,7 @@
   end
 
   def system_msg(ev, msg)
+    puts "metodo system_msg()"
     Chat.create(user_name: 'system', received: Time.now.to_s(:short), msg_body: msg.dup) if msg.dup != '/reiniciar' && msg.dup.index('connected').to_i == 0
     broadcast_message ev,
       user_name: 'system',
@@ -13,8 +14,9 @@
       msg_body: msg
   end
 
-  def user_msg(ev, msg)
-    Chat.create(user_name: connection_store[:user][:user_name], received: Time.now.to_s(:short), msg_body: msg)
+  def user_msg(ev, msg, torneo)
+    puts "metodo user_msg()"
+    Chat.create(user_name: connection_store[:user][:user_name], received: Time.now.to_s(:short), msg_body: msg, torneo_id: torneo)
     broadcast_message ev,
       user_name:  connection_store[:user][:user_name],
       received:   Time.now.to_s(:short),
@@ -26,7 +28,8 @@
   end
 
   def new_message
-    user_msg :new_message, message[:msg_body].dup
+    puts "metodo new_message() INI..."
+    user_msg :new_message, message[:msg_body].dup, message[:torneo_id]
   end
 
   def new_user
