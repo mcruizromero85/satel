@@ -19,6 +19,27 @@ module TorneosHelper
     end
   end
 
+  def self.obtener_array_aleatorio_de_inscritos(torneo)
+    obtener_array_aleatorio_de_inscritos = '['
+    contador = 1
+    maxima_cantidad = torneo.inscripciones.size
+
+    torneo.inscripciones.each do | inscrito |       
+
+        if contador % 2 != 0
+          obtener_array_aleatorio_de_inscritos.concat("[\"" + inscrito.gamer.battletag + "\",")
+        else          
+          obtener_array_aleatorio_de_inscritos.concat("\"" + inscrito.gamer.battletag + "\"]")
+          if contador < maxima_cantidad
+            obtener_array_aleatorio_de_inscritos.concat(",")
+          end
+        end
+        contador += 1      
+    end
+    obtener_array_aleatorio_de_inscritos.concat(']')
+    obtener_array_aleatorio_de_inscritos
+  end
+
   def self.obtener_array_para_resultado_llaves(torneo,ronda_inicio = 1)
 
     

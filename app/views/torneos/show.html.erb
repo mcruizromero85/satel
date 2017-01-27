@@ -3,6 +3,36 @@
 <!--Inicio del cambio-->
  <!--div class="container">-->
  <article article class="container">
+  
+  <% if @torneo.gamer == @current_gamer %>
+    <%=raw TorneosHelper.obtener_array_aleatorio_de_inscritos(@torneo) %>
+
+      <script type="text/javascript">
+              var minimalData = {              
+                teams : <%=raw TorneosHelper.obtener_array_aleatorio_de_inscritos(@torneo) %>,
+                //results: <%=raw TorneosHelper.obtener_array_para_resultado_llaves(@torneo) %>
+                results : [
+                  [[1,2], [3,4]],       /* first round */
+                  [[4,6], [2,1]]        /* second round */
+                ]
+              }
+            $(function() {
+              $('#llaves').bracket({
+                init: minimalData,
+                skipConsolationRound: true
+              })
+            })
+    </script> 
+    Inscritos:
+    <br/>
+    <% @torneo.inscripciones.each do |inscripcion| %>
+      <%= inscripcion.gamer.id %>,<%= inscripcion.gamer.battletag %> <br/>
+    <% end %>
+
+    <center><div id="llaves" ></div></center>
+
+  <% end %>
+    
   <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>
   <% end %>
@@ -54,6 +84,9 @@
             </table>        
           </div>
         </article>
+
+
+
    
      </div>
   </article>             
