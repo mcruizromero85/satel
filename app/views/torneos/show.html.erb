@@ -1,125 +1,67 @@
-<section class="FrmRegistrarTorneo">  
-  <h2>Detalle del Torneo</h2>
-<!--Inicio del cambio-->
- <!--div class="container">-->
- <article article class="container">
-  
-  <% if @torneo.gamer == @current_gamer %>
-    <%=raw TorneosHelper.obtener_array_aleatorio_de_inscritos(@torneo) %>
-
-      <script type="text/javascript">
-              var minimalData = {              
-                teams : <%=raw TorneosHelper.obtener_array_aleatorio_de_inscritos(@torneo) %>,
-                //results: <%=raw TorneosHelper.obtener_array_para_resultado_llaves(@torneo) %>
-                results : [
-                  [[1,2], [3,4]],       /* first round */
-                  [[4,6], [2,1]]        /* second round */
-                ]
-              }
-            $(function() {
-              $('#llaves').bracket({
-                init: minimalData,
-                skipConsolationRound: true
-              })
-            })
-    </script> 
-    Inscritos:
-    <br/>
-    <% @torneo.inscripciones.each do |inscripcion| %>
-      <%= inscripcion.gamer.id %>,<%= inscripcion.gamer.battletag %> <br/>
-    <% end %>
-
-    <center><div id="llaves" ></div></center>
-
-  <% end %>
-    
-  <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
-  <%= render partial: "reutilizable/chat" %>
-
- <div class="card-services-dt2">
-  <!--detalle del torneo-->
-        <%= render partial: "reutilizable/ficha_presentacion_torneo", object: @torneo, as: :torneo %>
-
-        <article class="card home-service-dt2">
-          <div class="course-data">
-            <h2>Fecha del torneo</h2>
-              <img class="logo_dt2_au" src="<%= image_path("date.png") %>" alt="GG E-sports"/><br>
-                <b><%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %> GMT-5</b>
+<div class="col-sm-9">
+      <div class="well">
+        <h4>Dashboard</h4>
+        <p>Some text..</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Users</h4>
+            <p>1 Million</p> 
           </div>
-        </article>
-        <article class="card home-service-dt2">
-          <div class="course-data">
-            <h2>Rondas</h2>
-            <table class="Rondas_table">
-            <thead>
-            <tr>
-            <td class="Rondas_encabezado">Final<td>
-            <td class="Rondas_contenido"><%= RondasHelper.win_format_final(@torneo) %></td>
-            </tr>  
-            <tr>
-            <td class="Rondas_encabezado">Semifinal<td>
-            <td class="Rondas_contenido"><%= RondasHelper.win_format_semifinal(@torneo) %></td>
-            </tr>
-            <tr>  
-            <td class="Rondas_encabezado">Anteriores<td>
-            <td class="Rondas_contenido"><%= RondasHelper.win_format_others_rounds(@torneo) %></td>
-            </tr>
-            </thead>
-            </table>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Pages</h4>
+            <p>100 Million</p> 
           </div>
-        </article>
-
-        <article class="card home-service-dt2">
-          <div class="course-data">
-            <h2>Bolsas de premios</h2>
-            <table>
-            <thead>
-            <tr><td><img class="logo_dt3_au" src="<%= image_path("Puestos.png") %>" alt="GG E-sports"/><br></td></tr>
-            </thead>
-            <tbody>
-            <tr><td><b class="Dt_puestos_pdinero"> <%= number_to_currency(@torneo.monto_auspiciado, precision: 2, locale: :en) %> </b></td></tr>
-            </tbody>
-            </table>        
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Sessions</h4>
+            <p>10 Million</p> 
           </div>
-        </article>
-
-
-
-   
-     </div>
-  </article>             
-
-
-  <article class="Detalle_Torneo_Ver">
-    <% if @mensaje_de_guardado.nil? %>
-      <center>
-        <br/>
-       <h4><a class ="dt_reg" href="<%=@torneo.link_rules%>"> Reglamento(enlace pdf)</a></h4>
-        <% if @torneo.estado == 'Creado' %> 
-          <a href="/inscripciones/new/<%=@torneo.id%>" class="cta-button">Inscribirme</a>
-        <% else %>
-          <a href="/torneos/<%=@torneo.id%>/brackets" class="cta-button">Ver llaves</a>
-        <% end %>
-        <br/>
-        <br/>
-        <a class="Enlace_detalle_registrarTorneo" href="javascript:goBack();">Volver</a>
-      </center>
-      <br/>
-    <% else %>
-      <center>
-        <a class="Enlace_detalle_registrarTorneo" href="/">Volver</a>
-      </center>
-    <% end %>
-    <br/>
-  </article>
-   <aside>
-    <article id="tabs_chat-2" >
-      <h3>Participantes confirmados</h3>
-      <ul class="nav nav-list" id="user-list">
-        <li class="nav-header">Active</li>
-      </ul>
-    </article> 
-  </aside>
-</section>
+        </div>
+        <div class="col-sm-3">
+          <div class="well">
+            <h4>Bounce</h4>
+            <p>30%</p> 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+            <p>Text</p> 
+            <p>Text</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+            <p>Text</p> 
+            <p>Text</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+            <p>Text</p> 
+            <p>Text</p> 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="well">
+            <p>Text</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <p>Text</p> 
+          </div>
+        </div>
+      </div>
+    </div>
