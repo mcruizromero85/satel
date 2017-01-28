@@ -6,8 +6,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <%= stylesheet_link_tag "bootstrap.css", media: "all" %>    
-    <% if request.env['PATH_INFO'].index('/torneos/') %>     
-      <%= javascript_include_tag "jquery.js" %>
+    <%= javascript_include_tag "jquery.js" %> 
+    <%= javascript_include_tag "bootstrap.js" %>
+    <% if request.env['PATH_INFO'].index('/torneos/') %>
       <%= javascript_include_tag "jquery_ujs.js" %>    
       <%= javascript_include_tag "jquery-ui.js" %>
       <%= javascript_include_tag "jquery.bracket.min.js" %>
