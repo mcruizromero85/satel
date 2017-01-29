@@ -32,9 +32,13 @@
             <% elsif @current_gamer.esta_inscrito(torneo) and  torneo.es_periodo_de_checkin  %>
               <a href="/inscripciones/confirmar/<%=torneo.id%>">
                 <button type="button" class="btn btn-success btn-block" id="checkin_torneo_<%=torneo.id%>" >Check-In</button>
-              </a>
+              </a>            
             <% elsif @current_gamer.esta_inscrito(torneo) %>
                 <button type="button" class="btn btn-success btn-block disabled" id="checkin_torneo_<%=torneo.id%>" >Inscrito, Espera la fase de Check-In</button>
+            <% elsif @current_gamer.esta_confirmado(torneo) %>
+              <a href="/torneos/<%=torneo.id%>">
+                <button type="button" class="btn btn-success btn-block" id="ver_detalle_torneo_<%=torneo.id%>">Ir al torneo</button>
+              </a>  
             <% else %>
               <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
                 <button type="button" class="btn btn-primary btn-block" id="checkin_torneo_<%=torneo.id%>" >Inscribir</button>
@@ -42,7 +46,7 @@
             <% end %>
           <% else %>  
             <a href="/inscripciones/new?id_torneo=<%=torneo.id%>">
-              <button type="button" class="btn btn-success btn-block" id="ver_detalle_torneo_<%=torneo.id%>">Ver detalle</button>
+              <button type="button" class="btn btn-success btn-block" id="ver_detalle_torneo_<%=torneo.id%>">Ir al torneo</button>
             </a>
           <% end %>          
         </div>

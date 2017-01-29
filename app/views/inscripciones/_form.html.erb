@@ -3,17 +3,12 @@
         <div class="col-sm-12">          
             <div class="container text-center">
               <h2 class="text-primary"><%=@torneo.titulo%></h2>
-              <br/>
-
+              <br/>              
               <%= form_for @inscripcion,  html: {class: "form-horizontal"} do |f| %>
                 <% if @inscripcion.errors.any? %>
-                  <div id="error_explanation">
-                    <h2><%= pluralize(@inscripcion.errors.count, "error") %> No permiten registrar la inscripcion:</h2>
+                  <div class="alert alert-danger" role="alert">                    
                     <ul>
-                    <%= @inscripcion.gamer.errors.full_messages %>
-                    <% @inscripcion.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                    <% end %>
+                    <%= @inscripcion.gamer.errors.full_messages %>                    
                     </ul>
                   </div>
                 <% end %>

@@ -70,11 +70,7 @@ class Gamer < ActiveRecord::Base
   end
 
   def esta_confirmado(torneo)
-    if inscripcion_en_torneo(torneo) || torneo.gamer == self
-      true
-    else
-      false
-    end
+    true if Inscripcion.find_by(torneo_id: torneo.id, gamer_id: id, estado: 'Confirmado')
   end
 
   def etiqueta_para_chat(torneo)

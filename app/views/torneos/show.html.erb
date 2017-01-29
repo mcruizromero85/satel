@@ -1,3 +1,9 @@
+<% if flash[:notice] %>  
+  <div class="container-fluid">
+    <div class="alert alert-success" role="alert"><%= flash[:notice] %></div>
+  </div>
+<% end %>
+
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-9">
@@ -21,7 +27,7 @@
       </div>
     </div>
     <div class="col-sm-3">
-      Logo
+      <img src="<%= @torneo.urllogo %>" alt="" style="width:100%;height: 75px;" >
     </div>
   </div>
 </div>
@@ -50,8 +56,28 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Detalle Torneo</h4>
       </div>
-      <div class="modal-body">
-        ...
+        <div class="row" id="seccion_torneo_<%=@torneo.id%>">
+        <div class="col-sm-4">
+          <a href="/torneos/<%=@torneo.id%>">
+            <img src="<%= @torneo.urllogo %>" alt="" style="width:100%;height: 180px;" >
+          </a>
+        </div>
+        <div class="container-fluid" >
+          <div class="row content">
+            <a href="/torneos/<%=@torneo.id%>"><p><b><%= @torneo.titulo %></b></p></a>
+            <b>Capacidad: </b> <%= @torneo.vacantes %> 
+            <br/>
+            <b>Estado: </b> <%= @torneo.estado %> 
+            <br/>
+            <b>Cierre de Inscripci&oacute;n: </b> <%= @torneo.cierre_inscripcion.strftime("%d/%m/%Y %I:%M %p") %> GMT-5          
+          </div>
+          <div class="col-sm-2" style="text-align: center" >
+            <img class="logo_dt3_au" src="<%= image_path("cofre.jpg") %>" alt="GG E-sports" style="height: 80px"/>
+            <br/>
+            <br/>
+            <b> <%= number_to_currency(@torneo.monto_auspiciado, precision: 2, locale: :en) %></b>          
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
